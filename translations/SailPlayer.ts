@@ -8,15 +8,4 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>FirstPage</name>
-    <message>
-        <source>UI Template</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hello Sailors</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
 </TS>
