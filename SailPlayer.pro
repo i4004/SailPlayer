@@ -18,13 +18,13 @@ SOURCES += src/SailPlayer.cpp
 
 OTHER_FILES += qml/SailPlayer.qml \
     qml/cover/CoverPage.qml \
+    qml/pages/SecondPage.qml \
+    rpm/SailPlayer.changes.in \
     rpm/SailPlayer.spec \
     rpm/SailPlayer.yaml \
     translations/*.ts \
     SailPlayer.desktop \
-    rpm/SailPlayer.changes \
-    qml/CoverPage.qml \
-    qml/Pages/DefaultPage.qml
+    qml/pages/DefaultPage.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

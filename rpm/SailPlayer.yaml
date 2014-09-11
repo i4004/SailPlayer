@@ -1,5 +1,5 @@
 Name: SailPlayer
-Summary: Sail Player
+Summary: SailPlayer
 Version: 0.1
 Release: 1
 # The contents of the Group field should be one of the groups listed here:
@@ -12,7 +12,7 @@ License: LICENSE
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |
-  Short description of my SailfishOS Application
+  SailfishOS audio player
 Configure: none
 # The qtc5 builder inserts macros to allow QtCreator to have fine
 # control over qmake/make execution

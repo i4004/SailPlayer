@@ -12,7 +12,7 @@ Name:       SailPlayer
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-Summary:    Sail Player
+Summary:    SailPlayer
 Version:    0.1
 Release:    1
 Group:      Qt/Qt
@@ -28,7 +28,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my SailfishOS Application
+SailfishOS audio player
 
 
 %prep
