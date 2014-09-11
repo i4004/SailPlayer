@@ -2,19 +2,24 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 
-Page {
+Page
+{
     id: page
-    SilicaListView {
+	SilicaListView
+	{
         id: listView
         model: 20
         anchors.fill: parent
-        header: PageHeader {
+		header: PageHeader
+		{
             title: qsTr("Nested Page")
         }
-        delegate: BackgroundItem {
+		delegate: BackgroundItem
+		{
             id: delegate
 
-            Label {
+			Label
+			{
                 x: Theme.paddingLarge
                 text: qsTr("Item") + " " + index
                 anchors.verticalCenter: parent.verticalCenter
@@ -22,6 +27,7 @@ Page {
             }
             onClicked: console.log("Clicked " + index)
         }
+
         VerticalScrollDecorator {}
     }
 }
