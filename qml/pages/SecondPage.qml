@@ -8,7 +8,7 @@ Page
 	SilicaListView
 	{
         id: listView
-        model: 20
+		model: 20
         anchors.fill: parent
 		header: PageHeader
 		{

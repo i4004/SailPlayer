@@ -24,7 +24,8 @@ OTHER_FILES += qml/SailPlayer.qml \
     rpm/SailPlayer.yaml \
     translations/*.ts \
     SailPlayer.desktop \
-    qml/pages/DefaultPage.qml
+    qml/pages/DefaultPage.qml \
+    qml/controls/Playlist.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
