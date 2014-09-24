@@ -17,6 +17,13 @@
     </message>
 </context>
 <context>
+    <name>Playlist</name>
+    <message>
+        <source>test</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SecondPage</name>
     <message>
         <source>Nested Page</source>

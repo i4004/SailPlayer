@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 X-Nemo-Application-Type=silica-qt5
-Icon=SailPlayer
-Exec=SailPlayer
+Icon=harbour-sail-player
+Exec=harbour-sail-player
 
 Name=SailPlayer
 Name[de]=SailPlayer
