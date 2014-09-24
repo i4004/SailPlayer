@@ -12,15 +12,15 @@
     <name>DefaultPage</name>
     <message>
         <source>Show Page 2</source>
-        <translation type="unfinished">Zur Seite 2</translation>
+        <translation type="obsolete">Zur Seite 2</translation>
     </message>
     <message>
         <source>UI Template</source>
-        <translation type="unfinished">UI-Vorlage</translation>
+        <translation type="obsolete">UI-Vorlage</translation>
     </message>
     <message>
         <source>Hello Sailors</source>
-        <translation type="unfinished">Hallo Matrosen</translation>
+        <translation type="obsolete">Hallo Matrosen</translation>
     </message>
 </context>
 <context>

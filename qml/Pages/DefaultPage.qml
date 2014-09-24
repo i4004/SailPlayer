@@ -5,19 +5,12 @@ Page
 {
     id: page
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
-	SilicaFlickable
+    SilicaFlickable
 	{
         anchors.fill: parent
 
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-		PullDownMenu
+        PullDownMenu
 		{
-			MenuItem
-			{
-                text: qsTr("Show Page 2")
-                onClicked: pageStack.push(Qt.resolvedUrl("SecondPage.qml"))
-            }
         }
 
         // Tell SilicaFlickable the height of its content.
@@ -30,18 +23,6 @@ Page
             id: column
 
             width: page.width
-            spacing: Theme.paddingLarge
-			PageHeader
-			{
-                title: qsTr("UI Template")
-            }
-			Label
-			{
-                x: Theme.paddingLarge
-                text: qsTr("Hello Sailors")
-                color: Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeExtraLarge
-            }
         }
     }
 }

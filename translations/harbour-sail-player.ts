@@ -2,21 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
-    <name>DefaultPage</name>
-    <message>
-        <source>Show Page 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>UI Template</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hello Sailors</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Playlist</name>
     <message>
         <source>test</source>
