@@ -5,5 +5,5 @@ import "pages"
 ApplicationWindow
 {
 	initialPage: Component { DefaultPage { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    cover: Qt.resolvedUrl("/usr/share/harbour-sail-player/qml/cover/CoverPage.qml")
 }
