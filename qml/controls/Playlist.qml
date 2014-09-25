@@ -8,9 +8,10 @@ Rectangle
 
 	Label
 	{
-		x: Theme.paddingLarge
+		x: Theme.padddingLarge
 		text: qsTr("test")
 		anchors.verticalCenter: parent.verticalCenter
-		color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+		anchors.left: parent.left
+		color: Theme.primaryColor
 	}
 }

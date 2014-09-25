@@ -5,18 +5,18 @@ CoverBackground
 {
 	CoverActionList
 	{
-        id: coverAction
+		id: coverAction
 
 		CoverAction
 		{
-            iconSource: "image://theme/icon-cover-next"
-        }
+			iconSource: "image://theme/icon-cover-next"
+		}
 
 		CoverAction
 		{
-            iconSource: "image://theme/icon-cover-pause"
-        }
-    }
+			iconSource: "image://theme/icon-cover-pause"
+		}
+	}
 }
 
 

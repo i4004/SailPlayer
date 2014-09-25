@@ -5,21 +5,15 @@ Page
 {
     id: page
 
-    SilicaFlickable
+	SilicaListView
 	{
-		anchors.fill: parent
-
-		PullDownMenu
+		model: ListModel
 		{
-		}
-
-		contentHeight: column.height
-
-		Column
-		{
-			id: column
-
-			width: page.width
+			ListElement { fruit: "jackfruit" }
+			ListElement { fruit: "orange" }
+			ListElement { fruit: "lemon" }
+			ListElement { fruit: "lychee" }
+			ListElement { fruit: "apricots" }
 		}
 	}
 }
