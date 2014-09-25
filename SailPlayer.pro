@@ -15,7 +15,8 @@ OTHER_FILES += \
     rpm/SailPlayer.yaml \
     translations/*.ts \
     harbour-sail-player.desktop \
-    qml/Main.qml
+    qml/Main.qml \
+    qml/CoverPage.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line

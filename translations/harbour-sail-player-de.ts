@@ -49,11 +49,11 @@
     <name>SecondPage</name>
     <message>
         <source>Nested Page</source>
-        <translation>Unterseite</translation>
+        <translation type="obsolete">Unterseite</translation>
     </message>
     <message>
         <source>Item</source>
-        <translation>Element</translation>
+        <translation type="obsolete">Element</translation>
     </message>
 </context>
 </TS>
