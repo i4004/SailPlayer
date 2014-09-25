@@ -1,29 +1,14 @@
-#include <QGuiApplication>
-#include <QQuickView>
+#include <QApplication>
+#include <QDeclarativeView>
 
-#include <QGuiApplication>
-#include <QQmlContext>
-#include <QQmlEngine>
-#include <QtQml>
-#include <QTimer>
-#include <QTranslator>
-#include <QDir>
-#include <QScreen>
+#include "sailfishapplication.h"
 
 int main(int argc, char *argv[])
 {
-	// Initialization
+	QScopedPointer<QApplication> app(Sailfish::createApplication(argc, argv));
+	QScopedPointer<QDeclarativeView> view(Sailfish::createView("qml/Main.qml"));
 
-	QScopedPointer<QGuiApplication> app(new QGuiApplication(argc, argv));
-	QScopedPointer<QQuickView> view(new QQuickView);
-
-	// Starting up
-
-	//QQuickWindow::setDefaultAlphaBuffer(true);
-
-	view->setSource(QUrl::fromLocalFile("/usr/share/harbour-sail-player/qml/harbour-sail-player.qml"));
-
-	view->showFullScreen();
+	Sailfish::showView(view.data());
 
 	return app->exec();
 }

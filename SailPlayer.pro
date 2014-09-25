@@ -5,19 +5,19 @@ CONFIG += sailfishapp
 SOURCES += \
     src/harbour-sail-player.cpp
 
+include(sailfishapplication/sailfishapplication.pri)
+
 OTHER_FILES += \
+    qml/controls/Playlist.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/SecondPage.qml \
+    qml/pages/DefaultPage.qml \
     rpm/SailPlayer.changes.in \
     rpm/SailPlayer.yaml \
     translations/*.ts \
-    qml/pages/DefaultPage.qml \
-    qml/controls/Playlist.qml \
     harbour-sail-player.desktop \
-    qml/harbour-sail-player.qml
+    qml/Main.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-sail-player-de.ts
-
