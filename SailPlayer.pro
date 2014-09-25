@@ -18,7 +18,4 @@ OTHER_FILES += \
     qml/Main.qml \
     qml/CoverPage.qml
 
-# to disable building translations every time, comment out the
-# following CONFIG line
-CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-sail-player-de.ts
