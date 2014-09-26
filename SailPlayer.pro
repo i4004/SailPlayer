@@ -23,7 +23,7 @@ OTHER_FILES += \
     rpm/SailPlayer.yaml \
     translations/*.ts \
     harbour-sail-player.desktop \
-    qml/Main.qml \
-    qml/CoverPage.qml
+    qml/CoverPage.qml \
+    qml/Main.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
