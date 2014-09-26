@@ -43,17 +43,37 @@ Page
 		{
 			width: parent.width
 
+//			Label
+//			{
+//				width: parent.width
+//				x: Theme.paddingMedium
+//				text: artist + " - [" + year + "] " + album
+//				wrapMode: Text.WordWrap
+//				color: Theme.highlightColor
+//			}
+
 			Label
 			{
 				width: parent.width
 				x: Theme.paddingMedium
-				text: artist + " - [" + year + "] " + album
+				text: artist
 				wrapMode: Text.WordWrap
 				color: Theme.highlightColor
 			}
 
+			Label
+			{
+				width: parent.width
+				x: Theme.paddingMedium
+				text: "[" + year + "] " + album
+				wrapMode: Text.WordWrap
+				color: Theme.secondaryColor
+				font.pixelSize: Theme.fontSizeTiny
+			}
+
 			Repeater
 			{
+				id: songsList
 				width: parent.width
 
 				model: ListModel
@@ -77,12 +97,19 @@ Page
 					}
 				}
 
-				Label
+				BackgroundItem
 				{
-					width: parent.width
-					x: Theme.paddingLarge
-					text: trackNumber + " " + songName
-					color: Theme.primaryColor
+					id: item
+
+					Label
+					{
+						width: parent.width
+						height: Theme.itemSizeSmall
+						x: Theme.paddingLarge + 10
+						anchors.verticalCenter: parent.verticalCenter
+						text: trackNumber + " " + songName
+						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
+					}
 				}
 			}
 		}
