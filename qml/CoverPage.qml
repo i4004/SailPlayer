@@ -3,13 +3,6 @@ import Sailfish.Silica 1.0
 
 CoverBackground
 {
-	Label
-	{
-		id: label
-		anchors.centerIn: parent
-		text: "test"
-	}
-
 	CoverActionList
 	{
 		id: coverAction

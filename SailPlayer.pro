@@ -24,6 +24,6 @@ OTHER_FILES += \
     translations/*.ts \
     harbour-sail-player.desktop \
     qml/CoverPage.qml \
-    qml/Main.qml
+    qml/harbour-sail-player.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts

@@ -1,18 +1,22 @@
 #include <QApplication>
 #include <QtQuick>
 
+#include <sailfishapp.h>
+
 int main(int argc, char *argv[])
 {
-	QScopedPointer<QApplication> app(new QApplication(argc, argv));
+//	QGuiApplication *app = application(argc, argv);
 
-	QQuickWindow::setDefaultAlphaBuffer(true);
+//	QQuickWindow::setDefaultAlphaBuffer(true);
 
-	QScopedPointer<QQuickView> view(new QQuickView);
+//	QScopedPointer<QQuickView> view(new QQuickView);
 
-	QString path = QString(DEPLOYMENT_PATH);
+//	QString path = QString(DEPLOYMENT_PATH);
 
-	view->setSource(QUrl::fromLocalFile(path + "qml/Main.qml"));
-	view->show();
+//	view->setSource(QUrl::fromLocalFile(path + "qml/Main.qml"));
+//	view->show();
 
-	return app->exec();
+//	return app->exec();
+
+	return SailfishApp::main(argc, argv);
 }
