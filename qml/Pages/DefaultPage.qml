@@ -43,15 +43,6 @@ Page
 		{
 			width: parent.width
 
-//			Label
-//			{
-//				width: parent.width
-//				x: Theme.paddingMedium
-//				text: artist + " - [" + year + "] " + album
-//				wrapMode: Text.WordWrap
-//				color: Theme.highlightColor
-//			}
-
 			Label
 			{
 				width: parent.width
@@ -59,6 +50,7 @@ Page
 				text: artist
 				wrapMode: Text.WordWrap
 				color: Theme.highlightColor
+				font.pixelSize: Theme.fontSizeLarge
 			}
 
 			Label
@@ -82,33 +74,46 @@ Page
 					{
 						songName: "A Nightmare To Remember"
 						trackNumber: "01"
+						duration: "16:11"
 					}
 
 					ListElement
 					{
 						songName: "A Rite Of Passage"
 						trackNumber: "02"
+						duration: "8:36"
 					}
 
 					ListElement
 					{
 						songName: "Wither"
 						trackNumber: "03"
+						duration: "5:26"
 					}
 				}
 
 				BackgroundItem
 				{
 					id: item
+					height: label.height + Theme.paddingSmall
 
 					Label
 					{
+						id: label
 						width: parent.width
-						height: Theme.itemSizeSmall
 						x: Theme.paddingLarge + 10
 						anchors.verticalCenter: parent.verticalCenter
 						text: trackNumber + " " + songName
 						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
+					}
+
+					Label
+					{
+						anchors.verticalCenter: parent.verticalCenter
+						anchors.right: parent.right
+						anchors.rightMargin: Theme.paddingMedium
+						text: duration
+						color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
 					}
 				}
 			}
