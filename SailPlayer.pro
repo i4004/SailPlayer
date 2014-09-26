@@ -1,11 +1,19 @@
 TARGET = harbour-sail-player
 
 CONFIG += sailfishapp
+QT += declarative
+
+TARGETPATH = /usr/bin
+target.path = $$TARGETPATH
+
+DEPLOYMENT_PATH = /usr/share/$$TARGET
+qml.path = $$DEPLOYMENT_PATH
+desktop.path = /usr/share/applications
+
+DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${DEPLOYMENT_PATH}/\"\\\"\"
 
 SOURCES += \
     src/harbour-sail-player.cpp
-
-include(sailfishapplication/sailfishapplication.pri)
 
 OTHER_FILES += \
     qml/controls/Playlist.qml \

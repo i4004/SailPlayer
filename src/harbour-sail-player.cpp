@@ -1,14 +1,16 @@
 #include <QApplication>
-#include <QDeclarativeView>
-
-#include "sailfishapplication.h"
+#include <QtQuick>
 
 int main(int argc, char *argv[])
 {
-	QScopedPointer<QApplication> app(Sailfish::createApplication(argc, argv));
-	QScopedPointer<QDeclarativeView> view(Sailfish::createView("qml/Main.qml"));
+	QScopedPointer<QApplication> app(new QApplication(argc, argv));
+	QScopedPointer<QQuickView> view(new QQuickView);
 
-	Sailfish::showView(view.data());
+	QString path = QString(DEPLOYMENT_PATH);
+
+	view->setSource(QUrl::fromLocalFile(path + "qml/Main.qml"));
+	view->setDefaultAlphaBuffer(true);
+	view->showFullScreen();
 
 	return app->exec();
 }
