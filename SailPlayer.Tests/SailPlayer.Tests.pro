@@ -1,9 +1,17 @@
-#TEMPLATE=app
+TEMPLATE=app
 TARGET = SailPlayer.Tests
 
-#CONFIG += testcase
+#TARGETPATH = tests/$$TARGET
+#target.path = $$TARGETPATH
 
-#QT += testlib
+#DEPLOYMENT_PATH = tests/$$TARGET
+
+target.path = /tests/$$TARGET
+INSTALLS += target
+
+INCLUDEPATH += $$PWD/../include
 
 SOURCES += \
     src/Main.cpp
+
+HEADERS +=
