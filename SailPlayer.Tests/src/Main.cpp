@@ -1,23 +1,7 @@
-//#include <QApplication>
-//#include <QTest>
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
 
-// class TestQString: public QObject
-// {
-//	 Q_OBJECT
-// private slots:
-//	 void toUpper();
-// };
-
-// void TestQString::toUpper()
-// {
-//	 QString str = "Hello";
-//	 QCOMPARE(str.toUpper(), QString("HELLO"));
-// }
-
-// QTEST_MAIN(TestQString)
-// #include "testqstring.moc"
-
-int main()
+TEST_CASE( "String are equal", "[test]" )
 {
-	return 0;
+	REQUIRE("test" == "test");
 }
