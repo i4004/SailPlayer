@@ -14,8 +14,7 @@ desktop.path = /usr/share/applications
 DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${DEPLOYMENT_PATH}/\"\\\"\"
 
 SOURCES += \
-    src/Main.cpp \
-    src/Test.cpp
+    src/Main.cpp
 
 OTHER_FILES += \
     qml/controls/Playlist.qml \
@@ -29,5 +28,4 @@ OTHER_FILES += \
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
-HEADERS += \
-    src/Test.h
+HEADERS +=
