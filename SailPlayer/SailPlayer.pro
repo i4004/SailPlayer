@@ -17,7 +17,8 @@ SOURCES += \
     src/Main.cpp \
     src/Artist.cpp \
     src/Album.cpp \
-    src/Track.cpp
+    src/Track.cpp \
+    src/FilesListModel.cpp
 
 OTHER_FILES += \
     qml/controls/Playlist.qml \
@@ -34,6 +35,7 @@ TRANSLATIONS += translations/harbour-sail-player-de.ts
 HEADERS += \
     include/Artist.h \
     include/Album.h \
-    include/Track.h
+    include/Track.h \
+    include/FilesListModel.h
 
 INCLUDEPATH += $$PWD/include
