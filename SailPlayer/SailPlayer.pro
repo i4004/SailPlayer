@@ -18,7 +18,8 @@ SOURCES += \
     src/Artist.cpp \
     src/Album.cpp \
     src/Track.cpp \
-    src/FilesListModel.cpp
+    src/FilesListModel.cpp \
+    src/FileInfo.cpp
 
 OTHER_FILES += \
     qml/controls/Playlist.qml \
@@ -36,6 +37,7 @@ HEADERS += \
     include/Artist.h \
     include/Album.h \
     include/Track.h \
-    include/FilesListModel.h
+    include/FilesListModel.h \
+    include/FileInfo.h
 
 INCLUDEPATH += $$PWD/include

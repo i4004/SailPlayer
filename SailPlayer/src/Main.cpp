@@ -16,11 +16,9 @@ int main(int argc, char *argv[])
 	view->setSource(SailfishApp::pathTo("qml/Main.qml"));
 	view->show();
 
-	QList<Track>* tracks = new QList<Track>();
-
-	Track track("test", "01", "03:14");
-
-	tracks->append(track);
+//	QList<Track>* tracks = new QList<Track>();
+//	Track track("test", "01", "03:14");
+//	tracks->append(track);
 
 	return app->exec();
 }
