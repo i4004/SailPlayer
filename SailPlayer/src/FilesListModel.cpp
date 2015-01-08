@@ -12,7 +12,7 @@ int FilesListModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
 
-	return filesList.count();
+	return _filesList.count();
 }
 
 QVariant FilesListModel::data(const QModelIndex &index, int role) const

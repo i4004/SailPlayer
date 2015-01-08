@@ -10,6 +10,7 @@ public:
 
 private:
 	QFileInfo _fileInfo;
+
 };
 
 #endif // FILEINFO_H

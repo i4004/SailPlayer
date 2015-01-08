@@ -28,7 +28,7 @@ signals:
 
 private:
 	QString _directoryName;
-	QList<FileInfo> filesList;
+	QList<FileInfo> _filesList;
 
 	void ReadDirectory();
 };

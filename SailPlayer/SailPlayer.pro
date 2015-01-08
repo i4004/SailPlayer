@@ -38,6 +38,7 @@ HEADERS += \
     include/Album.h \
     include/Track.h \
     include/FilesListModel.h \
-    include/FileInfo.h
+    include/FileInfo.h \
+    include/FileInfoFactory.h
 
 INCLUDEPATH += $$PWD/include
