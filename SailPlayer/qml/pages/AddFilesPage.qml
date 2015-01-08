@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.FilesListModel 1.0
 
-Rectangle
+Page
 {
 	id: page
 
@@ -18,9 +18,11 @@ Rectangle
 
 		model: filesListModel
 
-		header: PageHeader
+		DialogHeader
 		{
-			title: "Add File"
+			id: dialogHeader
+			title: qsTr("Add Files To Playlist")
+			acceptText: qsTr("Add")
 		}
 	}
 }
