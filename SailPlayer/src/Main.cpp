@@ -4,7 +4,7 @@
 #include <sailfishapp.h>
 
 #include "FilesListModel.h"
-#include "Artist.h"
+#include "Entities/Artist.h"
 
 int main(int argc, char *argv[])
 {

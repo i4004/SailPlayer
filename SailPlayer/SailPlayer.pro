@@ -15,11 +15,12 @@ DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${DEPLOYMENT_PATH}/\"\\\"\"
 
 SOURCES += \
     src/Main.cpp \
-    src/Artist.cpp \
-    src/Album.cpp \
-    src/Track.cpp \
     src/FilesListModel.cpp \
-    src/FileInfo.cpp
+    src/FileInfoFactory.cpp \
+    src/Entities/Track.cpp \
+    src/Entities/FileInfo.cpp \
+    src/Entities/Artist.cpp \
+    src/Entities/Album.cpp
 
 OTHER_FILES += \
     qml/controls/Playlist.qml \
@@ -27,18 +28,19 @@ OTHER_FILES += \
     qml/pages/DefaultPage.qml \
     translations/*.ts \
     harbour-sail-player.desktop \
-    qml/CoverPage.qml \
     qml/pages/AddFilesPage.qml \
-    qml/Main.qml
+    qml/Main.qml \
+    qml/Cover.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
 HEADERS += \
-    include/Artist.h \
-    include/Album.h \
-    include/Track.h \
-    include/FilesListModel.h \
-    include/FileInfo.h \
-    include/FileInfoFactory.h
+    src/Entities/Track.h \
+    src/Entities/Track.h \
+    src/Entities/FileInfo.h \
+    src/Entities/Artist.h \
+    src/Entities/Album.h \
+    src/FilesListModel.h \
+    src/FileInfoFactory.h
 
 INCLUDEPATH += $$PWD/include

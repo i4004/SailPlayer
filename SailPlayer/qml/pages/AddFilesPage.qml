@@ -38,13 +38,13 @@ Page
 			Label
 			{
 				id: listLabel
-				anchors.left: listIcon.right
+				anchors.left: parent.left//listIcon.right
 				anchors.leftMargin: 10
 				anchors.right: parent.right
 				anchors.rightMargin: Theme.paddingLarge
 				anchors.top: parent.top
 				anchors.topMargin: 5
-				text: filename
+				text: "Test File name "//filename
 				elide: Text.ElideRight
 				color: /*fileItem.highlighted || isSelected ? Theme.highlightColor :*/ Theme.primaryColor
 			}

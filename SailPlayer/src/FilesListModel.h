@@ -4,7 +4,10 @@
 #include <QAbstractListModel>
 #include <QDir>
 
-#include "FileInfo.h"
+#include "Entities/FileInfo.h"
+#include "FileInfoFactory.h"
+
+using namespace Entities;
 
 class FilesListModel : public QAbstractListModel
 {
@@ -29,6 +32,8 @@ signals:
 private:
 	QString _directoryName;
 	QList<FileInfo> _filesList;
+
+	FileInfoFactory _fileInfoFactory;
 
 	void ReadDirectory();
 };
