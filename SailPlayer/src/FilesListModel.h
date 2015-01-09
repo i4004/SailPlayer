@@ -22,6 +22,7 @@ public:
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+	QHash<int, QByteArray> roleNames() const;
 
 	QString GetDirectory() const { return _directoryName; }
 	void SetDirectory(QString directoryName);
@@ -36,6 +37,7 @@ private:
 	FileInfoFactory _fileInfoFactory;
 
 	void ReadDirectory();
+	void Cleanup();
 };
 
 #endif // FILESLISTMODEL_H

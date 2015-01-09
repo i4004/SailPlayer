@@ -10,9 +10,9 @@ namespace Entities
 	public:
 		explicit FileInfo(const QFileInfo& fileInfo);
 
-		QString Name() const { return _fileInfo.fileName(); }
+		QString GetFileName() const { return _fileInfo.fileName(); }
 
-//	private:
+	private:
 		QFileInfo _fileInfo;
 	};
 }

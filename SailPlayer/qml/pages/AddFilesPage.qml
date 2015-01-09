@@ -35,19 +35,19 @@ Dialog
 			width: ListView.view.width
 //			contentHeight: listLabel.height//+listSize.height + 13
 
-//			Label
-//			{
-//				id: listLabel
+			Label
+			{
+				id: listLabel
 //				anchors.left: parent.left//listIcon.right
 //				anchors.leftMargin: 10
 //				anchors.right: parent.right
 //				anchors.rightMargin: Theme.paddingLarge
 //				anchors.top: parent.top
 //				anchors.topMargin: 5
-//				text: "Test File name "//filename
+				text: fileName
 //				elide: Text.ElideRight
 //				color: /*fileItem.highlighted || isSelected ? Theme.highlightColor :*/ Theme.primaryColor
-//			}
+			}
 
 //			Label
 //			{
