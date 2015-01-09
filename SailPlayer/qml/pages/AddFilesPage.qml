@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.FilesListModel 1.0
 
-Page
+Dialog
 {
 	id: page
 
@@ -31,23 +31,23 @@ Page
 		delegate: ListItem
 		{
 			id: fileItem
-			menu: contextMenu
+//			menu: contextMenu
 			width: ListView.view.width
-			contentHeight: listLabel.height//+listSize.height + 13
+//			contentHeight: listLabel.height//+listSize.height + 13
 
-			Label
-			{
-				id: listLabel
-				anchors.left: parent.left//listIcon.right
-				anchors.leftMargin: 10
-				anchors.right: parent.right
-				anchors.rightMargin: Theme.paddingLarge
-				anchors.top: parent.top
-				anchors.topMargin: 5
-				text: "Test File name "//filename
-				elide: Text.ElideRight
-				color: /*fileItem.highlighted || isSelected ? Theme.highlightColor :*/ Theme.primaryColor
-			}
+//			Label
+//			{
+//				id: listLabel
+//				anchors.left: parent.left//listIcon.right
+//				anchors.leftMargin: 10
+//				anchors.right: parent.right
+//				anchors.rightMargin: Theme.paddingLarge
+//				anchors.top: parent.top
+//				anchors.topMargin: 5
+//				text: "Test File name "//filename
+//				elide: Text.ElideRight
+//				color: /*fileItem.highlighted || isSelected ? Theme.highlightColor :*/ Theme.primaryColor
+//			}
 
 //			Label
 //			{
