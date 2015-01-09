@@ -13,11 +13,14 @@ int FilesListModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
 
-	_filesList.count();
+	return _filesList.count();
 }
 
 QVariant FilesListModel::data(const QModelIndex &index, int role) const
 {
+	Q_UNUSED(index);
+	Q_UNUSED(role);
+
 	// TODO
 	return QVariant();
 }
@@ -36,5 +39,5 @@ void FilesListModel::SetDirectory(QString directoryName)
 
 void FilesListModel::ReadDirectory()
 {
-	_filesList = _fileInfoFactory.CreateList(_directoryName);
+//	_filesList = _fileInfoFactory.CreateList(_directoryName);
 }
