@@ -14,12 +14,9 @@ Dialog
 		dir: page.dir
 	}
 
-	SilicaListView
+	Column
 	{
-		id: filesList
-		anchors.fill: parent
-
-		model: filesListModel
+//		anchors.fill: parent
 
 		DialogHeader
 		{
@@ -28,37 +25,52 @@ Dialog
 			acceptText: qsTr("Add")
 		}
 
-		delegate: ListItem
+		SilicaListView
 		{
-			id: fileItem
-//			menu: contextMenu
-			width: ListView.view.width
-//			contentHeight: listLabel.height//+listSize.height + 13
+			id: filesList
+			anchors.fill: parent
+//			anchors.left: parent.left
+//			anchors.right: parent.right
+//			anchors.bottom: parent.bottom
+//			anchors.top: dialogHeader.height
 
-			Label
+			model: filesListModel
+
+			VerticalScrollDecorator { flickable: fileList }
+
+			delegate: ListItem
 			{
-				id: listLabel
-//				anchors.left: parent.left//listIcon.right
-//				anchors.leftMargin: 10
-//				anchors.right: parent.right
-//				anchors.rightMargin: Theme.paddingLarge
-//				anchors.top: parent.top
-//				anchors.topMargin: 5
-				text: fileName
-//				elide: Text.ElideRight
-//				color: /*fileItem.highlighted || isSelected ? Theme.highlightColor :*/ Theme.primaryColor
-			}
+				id: fileItem
+	//			menu: contextMenu
+				width: ListView.view.width
+	//			contentHeight: listLabel.height//+listSize.height + 13
 
-//			Label
-//			{
-//                id: listSize
-//                anchors.left: listIcon.right
-//                anchors.leftMargin: 10
-//                anchors.top: listLabel.bottom
-//                text: !(isLink && isDir) ? size : Functions.unicodeArrow()+" "+symLinkTarget
-//                color: fileItem.highlighted || isSelected ? Theme.secondaryHighlightColor : Theme.secondaryColor
-//                font.pixelSize: Theme.fontSizeExtraSmall
-//            }
+				Label
+				{
+					id: listLabel
+					anchors.left: parent.left//listIcon.right
+					anchors.leftMargin: Theme.paddingLarge
+					anchors.right: parent.right
+					anchors.rightMargin: Theme.paddingLarge
+	//				anchors.top: parent.top
+	//				anchors.topMargin: dialogHeader.height + Theme.paddingLarge
+					text: fileName
+	//				height: contentHeight
+	//				elide: Text.ElideRight
+	//				color: /*fileItem.highlighted || isSelected ? Theme.highlightColor :*/ Theme.primaryColor
+				}
+
+	//			Label
+	//			{
+	//                id: listSize
+	//                anchors.left: listIcon.right
+	//                anchors.leftMargin: 10
+	//                anchors.top: listLabel.bottom
+	//                text: !(isLink && isDir) ? size : Functions.unicodeArrow()+" "+symLinkTarget
+	//                color: fileItem.highlighted || isSelected ? Theme.secondaryHighlightColor : Theme.secondaryColor
+	//                font.pixelSize: Theme.fontSizeExtraSmall
+	//            }
+			}
 		}
 	}
 }
