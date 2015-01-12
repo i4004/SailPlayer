@@ -5,7 +5,7 @@ using namespace Entities;
 
 FileInfo* FileInfoFactory::Create(QString fileName)
 {
-	return new FileInfo(*new QFileInfo(fileName));
+	return new FileInfo(QFileInfo(fileName));
 }
 
 QList<FileInfo> FileInfoFactory::CreateList(QString directoryName)\
