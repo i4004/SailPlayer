@@ -28,9 +28,9 @@ OTHER_FILES += \
     qml/pages/DefaultPage.qml \
     translations/*.ts \
     harbour-sail-player.desktop \
-    qml/pages/AddFilesPage.qml \
     qml/Main.qml \
-    qml/Cover.qml
+    qml/Cover.qml \
+    qml/pages/AddFilesDialog.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 

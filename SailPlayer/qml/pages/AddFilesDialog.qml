@@ -17,32 +17,51 @@ Dialog
 	SilicaListView
 	{
 		id: filesList
+
 		anchors.fill: parent
 
 		model: filesListModel
 
 		VerticalScrollDecorator { flickable: filesList }
 
-		DialogHeader
+		header: DialogHeader
 		{
 			id: dialogHeader
-			title: qsTr("Add Files To Playlist")
+
+			title: dialog.dir
 			acceptText: qsTr("Add")
 		}
 
 		delegate: ListItem
 		{
-			id: fileItem
-			contentHeight: listLabel.height
+			id: listItem
+
+			contentHeight: listItemLabel.height + Theme.paddingMedium
+
+			Image
+			{
+				id: listItemIcon
+
+				anchors.left: parent.left
+				anchors.leftMargin: Theme.paddingLarge
+
+				anchors.verticalCenter: parent.verticalCenter
+
+				source: 'image://theme/icon-m-folder'
+			}
 
 			Label
 			{
-				id: listLabel
-				anchors.left: parent.left
-				anchors.top: parent.top
-				//anchors.topMargin: dialogHeader.height
-				anchors.leftMargin: Theme.paddingLarge
+				id: listItemLabel
+
+				anchors.left: listItemIcon.right
+				anchors.right: parent.right
+
+				anchors.leftMargin: Theme.paddingMedium
 				anchors.rightMargin: Theme.paddingLarge
+
+				anchors.verticalCenter: parent.verticalCenter
+
 				text: fileName
 			}
 		}
