@@ -47,7 +47,7 @@ Dialog
 
 				anchors.verticalCenter: parent.verticalCenter
 
-				source: 'image://theme/icon-m-folder'
+				source: "../images/icons/small-" + fileIconName + ".png"
 			}
 
 			Label

@@ -1,8 +1,13 @@
 #include "FilesListModel.h"
+#include "Util/FileIconHelper.h"
+
+using namespace Util;
 
 enum
 {
-	FilenameRole = Qt::UserRole + 1
+	FileNameRole = Qt::UserRole + 1,
+	IsDirectoryRole = Qt::UserRole + 2,
+	FileIconNameRole = Qt::UserRole + 3
 };
 
 FilesListModel::FilesListModel(QObject *parent)
@@ -31,19 +36,28 @@ QVariant FilesListModel::data(const QModelIndex &index, int role) const
 
 	switch (role)
 	{
-	case Qt::DisplayRole:
-	case FilenameRole:
-		return info->GetFileName();
+		case Qt::DisplayRole:
 
-	default:
-		return QVariant();
+		case FileNameRole:
+			return info->GetFileName();
+
+		case IsDirectoryRole:
+			return info->IsDirectory();
+
+		case FileIconNameRole:
+			return FileIconHelper::GetFileIconName(*info);
+
+		default:
+			return QVariant();
 	}
 }
 
 QHash<int, QByteArray> FilesListModel::roleNames() const
 {
 	QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
-	roles.insert(FilenameRole, QByteArray("fileName"));
+	roles.insert(FileNameRole, QByteArray("fileName"));
+	roles.insert(IsDirectoryRole, QByteArray("isDirectory"));
+	roles.insert(FileIconNameRole, QByteArray("fileIconName"));
 	return roles;
 }
 

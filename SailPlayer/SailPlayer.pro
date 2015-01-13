@@ -20,7 +20,9 @@ SOURCES += \
     src/Entities/Track.cpp \
     src/Entities/FileInfo.cpp \
     src/Entities/Artist.cpp \
-    src/Entities/Album.cpp
+    src/Entities/Album.cpp \
+    src/Util/FileIconHelper.cpp \
+    src/Util/FileHelper.cpp
 
 OTHER_FILES += \
     qml/controls/Playlist.qml \
@@ -41,6 +43,11 @@ HEADERS += \
     src/Entities/Artist.h \
     src/Entities/Album.h \
     src/FilesListModel.h \
-    src/FileInfoFactory.h
+    src/FileInfoFactory.h \
+    src/FileIconHelper.h \
+    src/FileType.h \
+    src/Entities/FileType.h \
+    src/Util/FileIconHelper.h \
+    src/Util/FileHelper.h
 
 INCLUDEPATH += $$PWD/include
