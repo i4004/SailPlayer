@@ -7,7 +7,8 @@ enum
 {
 	FileNameRole = Qt::UserRole + 1,
 	IsDirectoryRole = Qt::UserRole + 2,
-	FileIconNameRole = Qt::UserRole + 3
+	FileIconNameRole = Qt::UserRole + 3,
+	AbsolutePathRole = Qt::UserRole + 4
 };
 
 FilesListModel::FilesListModel(QObject *parent)
@@ -47,6 +48,9 @@ QVariant FilesListModel::data(const QModelIndex &index, int role) const
 		case FileIconNameRole:
 			return FileIconHelper::GetFileIconName(*info);
 
+		case AbsolutePathRole:
+			return info->GetAbsolutePath();
+
 		default:
 			return QVariant();
 	}
@@ -58,6 +62,7 @@ QHash<int, QByteArray> FilesListModel::roleNames() const
 	roles.insert(FileNameRole, QByteArray("fileName"));
 	roles.insert(IsDirectoryRole, QByteArray("isDirectory"));
 	roles.insert(FileIconNameRole, QByteArray("fileIconName"));
+	roles.insert(AbsolutePathRole, QByteArray("absolutePath"));
 	return roles;
 }
 
@@ -78,6 +83,11 @@ void FilesListModel::ReadDirectory()
 {
 	_filesList = _fileInfoFactory.CreateList(_directoryName);
 }
+
+//void FilesListModel::DirectoryChanged()
+//{
+//	SetD
+//}
 
 void FilesListModel::Cleanup()
 {

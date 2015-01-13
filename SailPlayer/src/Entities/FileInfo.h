@@ -14,6 +14,7 @@ namespace Entities
 		QString GetFileName() const { return _fileInfo.fileName(); }
 		bool IsDirectory() const { return _fileInfo.isDir(); }
 		FileType GetFileType() const { return _fileType; }
+		QString GetAbsolutePath() const { return _fileInfo.absolutePath(); }
 
 	private:
 		QFileInfo _fileInfo;
