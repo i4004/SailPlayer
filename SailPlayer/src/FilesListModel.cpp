@@ -27,13 +27,13 @@ QVariant FilesListModel::data(const QModelIndex &index, int role) const
 	if (!index.isValid() || index.row() > _filesList.size() - 1)
 		return QVariant();
 
-	FileInfo info = _filesList.at(index.row());
+	FileInfo* info = _filesList.at(index.row());
 
 	switch (role)
 	{
 	case Qt::DisplayRole:
 	case FilenameRole:
-		return info.GetFileName();
+		return info->GetFileName();
 
 	default:
 		return QVariant();
@@ -69,5 +69,9 @@ void FilesListModel::Cleanup()
 {
 //	foreach (FileInfo fileInfo, _filesList)
 //		delete fileInfo;
-	_filesList.clear();
+
+	while (!_filesList.isEmpty())
+		 delete _filesList.takeFirst();
+
+//	_filesList.clear();
 }

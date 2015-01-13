@@ -32,7 +32,7 @@ signals:
 
 private:
 	QString _directoryName;
-	QList<FileInfo> _filesList;
+	QList<FileInfo*> _filesList;
 
 	FileInfoFactory _fileInfoFactory;
 

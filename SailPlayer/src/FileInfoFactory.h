@@ -9,7 +9,7 @@ class FileInfoFactory
 {
 public:
 	FileInfo* Create(QString fileName);
-	QList<FileInfo> CreateList(QString directoryName);
+	QList<FileInfo*> CreateList(QString directoryName);
 };
 
 #endif // FILEINFOFACTORY_H

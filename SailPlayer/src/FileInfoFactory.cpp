@@ -8,9 +8,9 @@ FileInfo* FileInfoFactory::Create(QString fileName)
 	return new FileInfo(QFileInfo(fileName));
 }
 
-QList<FileInfo> FileInfoFactory::CreateList(QString directoryName)\
+QList<FileInfo*> FileInfoFactory::CreateList(QString directoryName)\
 {
-	QList<FileInfo> filesList;
+	QList<FileInfo*> filesList;
 	QDir directory(directoryName);
 
 	directory.setFilter(QDir::NoDotAndDotDot);
@@ -19,7 +19,7 @@ QList<FileInfo> FileInfoFactory::CreateList(QString directoryName)\
 	QStringList filesNamesList = directory.entryList();
 
 	foreach (QString fileName, filesNamesList)
-		filesList.append(*Create(directory.absoluteFilePath(fileName)));
+		filesList.append(Create(directory.absoluteFilePath(fileName)));
 
 	return filesList;
 }
