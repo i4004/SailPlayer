@@ -12,6 +12,10 @@ QList<FileInfo> FileInfoFactory::CreateList(QString directoryName)\
 {
 	QList<FileInfo> filesList;
 	QDir directory(directoryName);
+
+	directory.setFilter(QDir::NoDotAndDotDot);
+	directory.setSorting(QDir::Name | QDir::DirsFirst);
+
 	QStringList filesNamesList = directory.entryList();
 
 	foreach (QString fileName, filesNamesList)
