@@ -67,11 +67,6 @@ void FilesListModel::ReadDirectory()
 
 void FilesListModel::Cleanup()
 {
-//	foreach (FileInfo fileInfo, _filesList)
-//		delete fileInfo;
-
 	while (!_filesList.isEmpty())
 		 delete _filesList.takeFirst();
-
-//	_filesList.clear();
 }

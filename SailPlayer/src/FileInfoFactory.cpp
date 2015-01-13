@@ -13,7 +13,7 @@ QList<FileInfo*> FileInfoFactory::CreateList(QString directoryName)\
 	QList<FileInfo*> filesList;
 	QDir directory(directoryName);
 
-	directory.setFilter(QDir::NoDotAndDotDot);
+	directory.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot | QDir::System);
 	directory.setSorting(QDir::Name | QDir::DirsFirst);
 
 	QStringList filesNamesList = directory.entryList();
