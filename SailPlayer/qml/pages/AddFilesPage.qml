@@ -4,61 +4,57 @@ import harbour.sail.player.FilesListModel 1.0
 
 Dialog
 {
-	id: page
+	id: dialog
 
 	property string dir: "/"
 
 	FilesListModel
 	{
 		id: filesListModel
-		dir: page.dir
+		dir: dialog.dir
 	}
 
-	Column
-	{
+//	Column
+//	{
 //		anchors.fill: parent
-
-		DialogHeader
-		{
-			id: dialogHeader
-			title: qsTr("Add Files To Playlist")
-			acceptText: qsTr("Add")
-		}
 
 		SilicaListView
 		{
 			id: filesList
 			anchors.fill: parent
-//			anchors.left: parent.left
-//			anchors.right: parent.right
-//			anchors.bottom: parent.bottom
-//			anchors.top: dialogHeader.height
 
 			model: filesListModel
 
-			VerticalScrollDecorator { flickable: fileList }
+			VerticalScrollDecorator { flickable: filesList }
 
-			delegate: ListItem
-			{
-				id: fileItem
+//			DialogHeader
+//			{
+//				id: dialogHeader
+//				title: qsTr("Add Files To Playlist")
+//				acceptText: qsTr("Add")
+//			}
+
+//			delegate: ListItem
+//			{
+//				id: fileItem
 	//			menu: contextMenu
-				width: ListView.view.width
+//				width: ListView.view.width
 	//			contentHeight: listLabel.height//+listSize.height + 13
 
-				Label
-				{
-					id: listLabel
-					anchors.left: parent.left//listIcon.right
-					anchors.leftMargin: Theme.paddingLarge
-					anchors.right: parent.right
-					anchors.rightMargin: Theme.paddingLarge
+//				Label
+//				{
+//					id: listLabel
+//					anchors.left: parent.left//listIcon.right
+//					anchors.leftMargin: Theme.paddingLarge
+//					anchors.right: parent.right
+//					anchors.rightMargin: Theme.paddingLarge
 	//				anchors.top: parent.top
 	//				anchors.topMargin: dialogHeader.height + Theme.paddingLarge
-					text: fileName
+//					text: fileName
 	//				height: contentHeight
 	//				elide: Text.ElideRight
 	//				color: /*fileItem.highlighted || isSelected ? Theme.highlightColor :*/ Theme.primaryColor
-				}
+//				}
 
 	//			Label
 	//			{
@@ -70,7 +66,7 @@ Dialog
 	//                color: fileItem.highlighted || isSelected ? Theme.secondaryHighlightColor : Theme.secondaryColor
 	//                font.pixelSize: Theme.fontSizeExtraSmall
 	//            }
-			}
+//			}
 		}
-	}
+//	}
 }
