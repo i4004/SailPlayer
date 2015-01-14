@@ -1,36 +1,31 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sail.player.FilesListModel 1.0
+import harbour.sail.player.FsRecordsListModel 1.0
+import Qt.labs.folderlistmodel 2.1
 
 Dialog
 {
-	id: dialog
-
-	property string dir: "/"
-
-	FilesListModel
-	{
-		id: filesListModel
-		dir: dialog.dir
-	}
-
 	SilicaListView
 	{
-		id: filesList
+		id: itemsList
 
 		anchors.fill: parent
 
-		model: filesListModel
-
-		VerticalScrollDecorator { flickable: filesList }
+		model: FsRecordsListModel
+		{
+			id: fsRecordsListModel
+			directory: "/"
+		}
 
 		header: DialogHeader
 		{
 			id: dialogHeader
 
-			title: dialog.dir
+			title: fsRecordsListModel.directory
 			acceptText: qsTr("Add")
 		}
+
+		VerticalScrollDecorator { flickable: itemsList }
 
 		delegate: ListItem
 		{
@@ -47,7 +42,7 @@ Dialog
 
 				anchors.verticalCenter: parent.verticalCenter
 
-				source: "../images/icons/small-" + fileIconName + ".png"
+				source: "../images/icons/small-" + iconName + ".png"
 			}
 
 			Label
@@ -62,7 +57,13 @@ Dialog
 
 				anchors.verticalCenter: parent.verticalCenter
 
-				text: fileName
+				text: name
+			}
+
+			onClicked:
+			{
+				if(isDirectory)
+					fsRecordsListModel.directory = model.filePath
 			}
 		}
 	}

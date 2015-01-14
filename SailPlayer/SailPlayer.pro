@@ -15,14 +15,14 @@ DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${DEPLOYMENT_PATH}/\"\\\"\"
 
 SOURCES += \
     src/Main.cpp \
-    src/FilesListModel.cpp \
-    src/FileInfoFactory.cpp \
     src/Entities/Track.cpp \
-    src/Entities/FileInfo.cpp \
     src/Entities/Artist.cpp \
     src/Entities/Album.cpp \
-    src/Util/FileIconHelper.cpp \
-    src/Util/FileHelper.cpp
+    src/Util/FsRecordIconHelper.cpp \
+    src/FsRecordsListModel.cpp \
+    src/IO/FsRecordsInfoFactory.cpp \
+    src/IO/FsRecordInfo.cpp \
+    src/IO/FileHelper.cpp
 
 OTHER_FILES += \
     qml/controls/Playlist.qml \
@@ -39,15 +39,13 @@ TRANSLATIONS += translations/harbour-sail-player-de.ts
 HEADERS += \
     src/Entities/Track.h \
     src/Entities/Track.h \
-    src/Entities/FileInfo.h \
     src/Entities/Artist.h \
     src/Entities/Album.h \
-    src/FilesListModel.h \
-    src/FileInfoFactory.h \
-    src/FileIconHelper.h \
-    src/FileType.h \
-    src/Entities/FileType.h \
-    src/Util/FileIconHelper.h \
-    src/Util/FileHelper.h
+    src/Util/FsRecordIconHelper.h \
+    src/FsRecordsListModel.h \
+    src/IO/FsRecordsInfoFactory.h \
+    src/IO/FsRecordInfo.h \
+    src/IO/FileType.h \
+    src/IO/FileHelper.h
 
 INCLUDEPATH += $$PWD/include

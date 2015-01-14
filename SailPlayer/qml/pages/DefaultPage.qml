@@ -132,7 +132,7 @@ Page
 			MenuItem
 			{
 				text: qsTr("Add")
-				onClicked: pageStack.push(Qt.resolvedUrl("AddFilesDialog.qml"))
+				onClicked: pageStack.push("AddFilesDialog.qml")
 			}
 		}
 	}

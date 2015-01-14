@@ -1,7 +1,7 @@
 #ifndef FILETYPE_H
 #define FILETYPE_H
 
-namespace Entities
+namespace IO
 {
 	enum FileType
 	{

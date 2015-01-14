@@ -1,15 +1,15 @@
-#include "FileIconHelper.h"
+#include "FsRecordIconHelper.h"
 
 namespace Util
 {
-	QString FileIconHelper::GetFileIconName(const FileInfo& info)
+	QString FsRecordIconHelper::GetFsRecordIconName(const FsRecordInfo& info)
 	{
 		if (info.IsDirectory()) return "folder";
 
 		return GetFileIconName(info.GetFileType());
 	}
 
-	QString FileIconHelper::GetFileIconName(FileType fileType)
+	QString FsRecordIconHelper::GetFileIconName(FileType fileType)
 	{
 		switch (fileType)
 		{

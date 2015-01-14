@@ -1,6 +1,6 @@
 #include "FileHelper.h"
 
-namespace Util
+namespace IO
 {
 	FileType FileHelper::GetFileType(QString fileNameSuffix)
 	{

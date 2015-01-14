@@ -2,11 +2,9 @@
 #define FILEHELPER_H
 
 #include <QString>
-#include "../Entities/FileType.h"
+#include "FileType.h"
 
-using namespace Entities;
-
-namespace Util
+namespace IO
 {
 	class FileHelper
 	{

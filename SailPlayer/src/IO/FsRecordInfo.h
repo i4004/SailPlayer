@@ -4,17 +4,19 @@
 #include <QFileInfo>
 #include "FileType.h"
 
-namespace Entities
+namespace IO
 {
-	class FileInfo
+	class FsRecordInfo
 	{
 	public:
-		explicit FileInfo(const QFileInfo& fileInfo);
+		explicit FsRecordInfo(const QFileInfo& fileInfo);
 
-		QString GetFileName() const { return _fileInfo.fileName(); }
+		QString GetName() const { return _fileInfo.fileName(); }
 		bool IsDirectory() const { return _fileInfo.isDir(); }
 		FileType GetFileType() const { return _fileType; }
 		QString GetAbsolutePath() const { return _fileInfo.absolutePath(); }
+		QString GetFilePath() const { return _fileInfo.filePath(); }
+		QString GetDirPath() const;
 
 	private:
 		QFileInfo _fileInfo;

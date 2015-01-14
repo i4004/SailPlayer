@@ -4,19 +4,19 @@
 #include <QAbstractListModel>
 #include <QDir>
 
-#include "Entities/FileInfo.h"
-#include "FileInfoFactory.h"
+#include "IO/FsRecordInfo.h"
+#include "IO/FsRecordsInfoFactory.h"
 
-using namespace Entities;
+using namespace IO;
 
-class FilesListModel : public QAbstractListModel
+class FsRecordsListModel : public QAbstractListModel
 {
 	Q_OBJECT
-	Q_PROPERTY(QString dir READ GetDirectory() WRITE SetDirectory(QString) NOTIFY DirectoryChanged())
+	Q_PROPERTY(QString directory READ GetDirectory() WRITE SetDirectory(QString) NOTIFY DirectoryChanged())
 
 public:
-	explicit FilesListModel(QObject *parent = 0);
-	~FilesListModel();
+	explicit FsRecordsListModel(QObject *parent = 0);
+	~FsRecordsListModel();
 
 	// List View methods
 
@@ -30,11 +30,14 @@ public:
 signals:
 	void DirectoryChanged();
 
+public slots:
+	Q_INVOKABLE void refresh();
+
 private:
 	QString _directoryName;
-	QList<FileInfo*> _filesList;
+	QList<FsRecordInfo*> _filesList;
 
-	FileInfoFactory _fileInfoFactory;
+	FsRecordsInfoFactory _fileInfoFactory;
 
 	void ReadDirectory();
 	void Cleanup();
