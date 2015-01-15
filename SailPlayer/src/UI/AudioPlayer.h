@@ -2,6 +2,7 @@
 #define AUDIOPLAYER_H
 
 #include <QObject>
+#include <QtMultimedia/QMediaPlayer>
 
 namespace UI
 {
@@ -11,8 +12,12 @@ namespace UI
 
 	public:
 		AudioPlayer();
+		~AudioPlayer();
 
 		Q_INVOKABLE void play();
+
+	private:
+		QMediaPlayer* _player;
 	};
 }
 

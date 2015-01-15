@@ -3,6 +3,7 @@ TARGET = harbour-sail-player
 
 CONFIG += sailfishapp
 QT += declarative
+QT += multimedia
 
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH
