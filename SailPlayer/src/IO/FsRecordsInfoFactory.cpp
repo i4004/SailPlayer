@@ -14,9 +14,9 @@ namespace IO
 		QDir directory(directoryName);
 
 		if(directoryName == "/")
-			directory.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot | QDir::System);
+			directory.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot | QDir::System | QDir::Readable);
 		else
-			directory.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDot | QDir::System);
+			directory.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDot | QDir::System | QDir::Readable);
 
 		directory.setSorting(QDir::Name | QDir::DirsFirst);
 
