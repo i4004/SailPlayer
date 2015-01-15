@@ -3,22 +3,24 @@
 
 #include <sailfishapp.h>
 
-#include "FsRecordsListModel.h"
+#include "UI/FsRecordsListModel.h"
+#include "UI/AudioPlayer.h"
 #include "Entities/Artist.h"
+
+#include <QtMultimedia/qmediaplayer.h>
+
+using namespace UI;
 
 int main(int argc, char *argv[])
 {
 	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
+	qmlRegisterType<AudioPlayer>("harbour.sail.player.AudioPlayer", 1, 0, "AudioPlayer");
 
 	QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 	QScopedPointer<QQuickView> view(SailfishApp::createView());
 
 	view->setSource(SailfishApp::pathTo("qml/Main.qml"));
 	view->show();
-
-//	QList<Track>* tracks = new QList<Track>();
-//	Track track("test", "01", "03:14");
-//	tracks->append(track);
 
 	return app->exec();
 }

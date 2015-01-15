@@ -19,20 +19,21 @@ SOURCES += \
     src/Entities/Artist.cpp \
     src/Entities/Album.cpp \
     src/Util/FsRecordIconHelper.cpp \
-    src/FsRecordsListModel.cpp \
     src/IO/FsRecordsInfoFactory.cpp \
     src/IO/FsRecordInfo.cpp \
-    src/IO/FileHelper.cpp
+    src/IO/FileHelper.cpp \
+    src/UI/FsRecordsListModel.cpp \
+    src/UI/AudioPlayer.cpp
 
 OTHER_FILES += \
-    qml/controls/Playlist.qml \
     qml/cover/CoverPage.qml \
     qml/pages/DefaultPage.qml \
     translations/*.ts \
     harbour-sail-player.desktop \
     qml/Main.qml \
     qml/Cover.qml \
-    qml/pages/AddFilesDialog.qml
+    qml/pages/AddFilesDialog.qml \
+    qml/widgets/Playlist.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
@@ -46,6 +47,8 @@ HEADERS += \
     src/IO/FsRecordsInfoFactory.h \
     src/IO/FsRecordInfo.h \
     src/IO/FileType.h \
-    src/IO/FileHelper.h
+    src/IO/FileHelper.h \
+    src/UI/FsRecordsListModel.h \
+    src/UI/AudioPlayer.h
 
 INCLUDEPATH += $$PWD/include

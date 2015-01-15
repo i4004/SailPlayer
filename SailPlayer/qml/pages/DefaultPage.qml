@@ -1,9 +1,20 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.sail.player.AudioPlayer 1.0
 
 Page
 {
     id: page
+
+	AudioPlayer
+	{
+		id: player
+	}
+
+	Component.onCompleted:
+	{
+		player.play();
+	}
 
 	SilicaListView
 	{
