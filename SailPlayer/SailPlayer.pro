@@ -2,8 +2,7 @@ TEMPLATE=app
 TARGET = harbour-sail-player
 
 CONFIG += sailfishapp
-QT += declarative
-QT += multimedia
+QT += core quick qml multimedia
 
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH
@@ -44,7 +43,6 @@ HEADERS += \
     src/Entities/Artist.h \
     src/Entities/Album.h \
     src/Util/FsRecordIconHelper.h \
-    src/FsRecordsListModel.h \
     src/IO/FsRecordsInfoFactory.h \
     src/IO/FsRecordInfo.h \
     src/IO/FileType.h \

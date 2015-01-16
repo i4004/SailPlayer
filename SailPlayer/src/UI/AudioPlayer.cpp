@@ -14,9 +14,9 @@ namespace UI
 
 	void AudioPlayer::play()
 	{
-		_player->setMedia(QUrl::fromLocalFile("/home/nemo/Music/Ringtones/01 - Pull Me Under.mp3"));
+//		_player->setMedia(QUrl::fromLocalFile("/home/nemo/Music/Ringtones/01 - Pull Me Under.mp3"));
 		//	player->setVolume(50);
-		_player->play();
+//		_player->play();
 	}
 }
 
