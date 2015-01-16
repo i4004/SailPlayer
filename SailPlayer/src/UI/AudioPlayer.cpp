@@ -4,24 +4,21 @@ namespace UI
 {
 	AudioPlayer::AudioPlayer()
 	{
-		_player = new QMediaPlayer();
+		gst_init(NULL, NULL);
 	}
 
 	AudioPlayer::~AudioPlayer()
 	{
-		delete _player;
+		gst_object_unref (gstream.bus);
+		gst_element_set_state (gstream.pipeline, GST_STATE_NULL);
+		gst_object_unref (gstream.pipeline);
 	}
 
 	void AudioPlayer::play()
-	{
-//		_player->setMedia(QUrl::fromLocalFile("/home/nemo/Music/Ringtones/01 - Pull Me Under.mp3"));
-		//	player->setVolume(50);
-//		_player->play();
+	{\
+//		gstream.pipeline = gst_parse_launch ("filesrc location=/home/nemo/Music/Ringtones/01 - Pull Me Under.mp3", NULL);
+//		gstream.bus = gst_element_get_bus (gstream.pipeline);
+
+//		gst_element_set_state (gstream.pipeline, GST_STATE_PLAYING);
 	}
 }
-
-////	connect(player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
-
-//	QList<Track>* tracks = new QList<Track>();
-//	Track track("test", "01", "03:14");
-//	tracks->append(track);

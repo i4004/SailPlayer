@@ -2,10 +2,16 @@
 #define AUDIOPLAYER_H
 
 #include <QObject>
-#include <QtMultimedia/QMediaPlayer>
+#include <gst/gst.h>
 
 namespace UI
 {
+	typedef struct _gstream
+	{
+		GstElement* pipeline;
+		GstBus* bus;
+	} GStream;
+
 	class AudioPlayer : public QObject
 	{
 		Q_OBJECT
@@ -17,7 +23,7 @@ namespace UI
 		Q_INVOKABLE void play();
 
 	private:
-		QMediaPlayer* _player;
+		GStream gstream;
 	};
 }
 

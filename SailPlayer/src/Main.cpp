@@ -7,8 +7,6 @@
 #include "UI/AudioPlayer.h"
 #include "Entities/Artist.h"
 
-#include <QtMultimedia/qmediaplayer.h>
-
 using namespace UI;
 
 int main(int argc, char *argv[])

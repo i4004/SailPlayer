@@ -1,16 +1,15 @@
 TEMPLATE=app
 TARGET = harbour-sail-player
 
-CONFIG += sailfishapp
+CONFIG += link_pkgconfig sailfishapp
 QT += core quick qml multimedia
+PKGCONFIG += gstreamer-0.10 glib-2.0
 
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH
-
 DEPLOYMENT_PATH = /usr/share/$$TARGET
 qml.path = $$DEPLOYMENT_PATH
 desktop.path = /usr/share/applications
-
 DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${DEPLOYMENT_PATH}/\"\\\"\"
 
 SOURCES += \
