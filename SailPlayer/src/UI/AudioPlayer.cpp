@@ -1,4 +1,5 @@
 #include "AudioPlayer.h"
+#include <QDebug>
 
 namespace UI
 {
@@ -9,16 +10,94 @@ namespace UI
 
 	AudioPlayer::~AudioPlayer()
 	{
-		gst_object_unref (gstream.bus);
-		gst_element_set_state (gstream.pipeline, GST_STATE_NULL);
-		gst_object_unref (gstream.pipeline);
+		gst_element_set_state(_pipeline, GST_STATE_NULL);
+
+		gst_object_unref(GST_OBJECT(_pipeline));
+	}
+
+	void AudioPlayer::OnPadAdded(GstElement* element, GstPad* pad, gpointer data)
+	{
+		Q_UNUSED(element);
+
+		GstElement* sink = (GstElement*) data;
+
+		GstPad* sinkpad = gst_element_get_static_pad(sink, "sink");
+		gst_pad_link(pad, sinkpad);
+		gst_object_unref(sinkpad);
+	}
+
+	gboolean AudioPlayer::OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data)
+	{
+		switch (GST_MESSAGE_TYPE (msg))
+		{
+			case GST_MESSAGE_EOS:
+			  qDebug() << "End of stream\n";
+			  break;
+
+			case GST_MESSAGE_ERROR:
+			{
+				gchar  *debug;
+				GError *error;
+
+				gst_message_parse_error (msg, &error, &debug);
+				g_free (debug);
+
+				qDebug() << "Error:" << error->message;
+				g_error_free (error);
+				break;
+			}
+
+			default:
+				break;
+		}
+
+		return TRUE;
+	}
+
+	bool AudioPlayer::Init()
+	{
+		_pipeline = gst_pipeline_new("audio-player");
+		_source = gst_element_factory_make("filesrc", NULL);
+		_decoder = gst_element_factory_make("decodebin", NULL);
+		_convert = gst_element_factory_make("audioconvert", NULL);
+//		_volume = gst_element_factory_make("volume", NULL);
+		_sink = gst_element_factory_make("autoaudiosink", NULL);
+
+		if (!_pipeline || !_source || !_decoder || !_convert || !_sink)
+		{
+			g_warning("Failed to initialize elements!");
+			return false;
+		}
+
+		GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(_pipeline));
+		gst_bus_add_watch(bus, OnBusCall, NULL);
+		gst_object_unref(bus);
+
+		gst_bin_add_many(GST_BIN(_pipeline), _source, _decoder, _convert, _volume, _sink, NULL);
+
+		if (!gst_element_link(_source, _decoder) || !gst_element_link_many(_convert, _sink, NULL))
+		{
+			g_warning("Failed to link elements!");
+			return false;
+		}
+
+		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _convert);
+
+		return true;
 	}
 
 	void AudioPlayer::play()
 	{\
-//		gstream.pipeline = gst_parse_launch ("filesrc location=/home/nemo/Music/Ringtones/01 - Pull Me Under.mp3", NULL);
-//		gstream.bus = gst_element_get_bus (gstream.pipeline);
+		Init();
 
-//		gst_element_set_state (gstream.pipeline, GST_STATE_PLAYING);
+//		g_object_set(G_OBJECT(_volume), "volume", 1, NULL);
+		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
+
+		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
+	}
+
+	void AudioPlayer::stop()
+	{
+		gst_element_set_state (_pipeline, GST_STATE_READY);
 	}
 }

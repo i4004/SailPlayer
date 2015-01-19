@@ -3,15 +3,10 @@
 
 #include <QObject>
 #include <gst/gst.h>
+#include <QtMultimedia/QMediaPlayer>
 
 namespace UI
 {
-	typedef struct _gstream
-	{
-		GstElement* pipeline;
-		GstBus* bus;
-	} GStream;
-
 	class AudioPlayer : public QObject
 	{
 		Q_OBJECT
@@ -21,9 +16,19 @@ namespace UI
 		~AudioPlayer();
 
 		Q_INVOKABLE void play();
+		Q_INVOKABLE void stop();
 
 	private:
-		GStream gstream;
+		GstElement* _pipeline;
+		GstElement* _source;
+		GstElement* _decoder;
+		GstElement* _volume;
+		GstElement* _convert;
+		GstElement* _sink;
+
+		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
+		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data);
+		bool Init();
 	};
 }
 
