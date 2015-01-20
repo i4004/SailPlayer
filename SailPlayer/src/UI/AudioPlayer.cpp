@@ -1,11 +1,15 @@
 #include "AudioPlayer.h"
 #include <QDebug>
 
+using namespace Audio;
+
 namespace UI
 {
 	AudioPlayer::AudioPlayer()
 	{
 		gst_init(NULL, NULL);
+
+		AudioResource::Init();
 	}
 
 	AudioPlayer::~AudioPlayer()
@@ -13,6 +17,8 @@ namespace UI
 		gst_element_set_state(_pipeline, GST_STATE_NULL);
 
 		gst_object_unref(GST_OBJECT(_pipeline));
+
+		AudioResource::Free();
 	}
 
 	void AudioPlayer::OnPadAdded(GstElement* element, GstPad* pad, gpointer data)
@@ -31,7 +37,6 @@ namespace UI
 		switch (GST_MESSAGE_TYPE (msg))
 		{
 			case GST_MESSAGE_EOS:
-			  qDebug() << "End of stream\n";
 			  break;
 
 			case GST_MESSAGE_ERROR:
@@ -59,11 +64,10 @@ namespace UI
 		_pipeline = gst_pipeline_new("audio-player");
 		_source = gst_element_factory_make("filesrc", NULL);
 		_decoder = gst_element_factory_make("decodebin", NULL);
-		_convert = gst_element_factory_make("audioconvert", NULL);
 //		_volume = gst_element_factory_make("volume", NULL);
 		_sink = gst_element_factory_make("autoaudiosink", NULL);
 
-		if (!_pipeline || !_source || !_decoder || !_convert || !_sink)
+		if (!_pipeline || !_source || !_decoder || !_sink)
 		{
 			g_warning("Failed to initialize elements!");
 			return false;
@@ -73,15 +77,15 @@ namespace UI
 		gst_bus_add_watch(bus, OnBusCall, NULL);
 		gst_object_unref(bus);
 
-		gst_bin_add_many(GST_BIN(_pipeline), _source, _decoder, _convert, _volume, _sink, NULL);
+		gst_bin_add_many(GST_BIN(_pipeline), _source, _decoder, _sink, NULL);
 
-		if (!gst_element_link(_source, _decoder) || !gst_element_link_many(_convert, _sink, NULL))
+		if (!gst_element_link(_source, _decoder))
 		{
 			g_warning("Failed to link elements!");
 			return false;
 		}
 
-		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _convert);
+		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _sink);
 
 		return true;
 	}
@@ -93,11 +97,15 @@ namespace UI
 //		g_object_set(G_OBJECT(_volume), "volume", 1, NULL);
 		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
 
+		AudioResource::Acquire();
+
 		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
 	}
 
 	void AudioPlayer::stop()
 	{
 		gst_element_set_state (_pipeline, GST_STATE_READY);
+
+		AudioResource::Release();
 	}
 }

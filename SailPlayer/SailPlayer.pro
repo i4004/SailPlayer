@@ -2,8 +2,8 @@ TEMPLATE=app
 TARGET = harbour-sail-player
 
 CONFIG += link_pkgconfig sailfishapp
-QT += core quick qml multimedia
-PKGCONFIG += gstreamer-0.10 glib-2.0
+QT += core quick qml
+PKGCONFIG += gstreamer-0.10 glib-2.0 audioresource
 
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH
@@ -22,7 +22,8 @@ SOURCES += \
     src/IO/FsRecordInfo.cpp \
     src/IO/FileHelper.cpp \
     src/UI/FsRecordsListModel.cpp \
-    src/UI/AudioPlayer.cpp
+    src/UI/AudioPlayer.cpp \
+    src/Audio/AudioResource.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -47,6 +48,7 @@ HEADERS += \
     src/IO/FileType.h \
     src/IO/FileHelper.h \
     src/UI/FsRecordsListModel.h \
-    src/UI/AudioPlayer.h
+    src/UI/AudioPlayer.h \
+    src/Audio/AudioResource.h
 
 INCLUDEPATH += $$PWD/include

@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <gst/gst.h>
-#include <QtMultimedia/QMediaPlayer>
+#include "../Audio/AudioResource.h"
 
 namespace UI
 {
@@ -23,7 +23,6 @@ namespace UI
 		GstElement* _source;
 		GstElement* _decoder;
 		GstElement* _volume;
-		GstElement* _convert;
 		GstElement* _sink;
 
 		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
