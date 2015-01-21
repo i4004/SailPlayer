@@ -34,6 +34,9 @@ namespace UI
 
 	gboolean AudioPlayer::OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data)
 	{
+		Q_UNUSED(bus);
+		Q_UNUSED(user_data);
+
 		switch (GST_MESSAGE_TYPE (msg))
 		{
 			case GST_MESSAGE_EOS:
