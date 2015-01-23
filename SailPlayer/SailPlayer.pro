@@ -49,6 +49,7 @@ HEADERS += \
     src/IO/FileHelper.h \
     src/UI/FsRecordsListModel.h \
     src/Audio/AudioResource.h \
-    src/Audio/AudioPlayer.h
+    src/Audio/AudioPlayer.h \
+    src/Audio/AudioPlayerState.h
 
 INCLUDEPATH += $$PWD/include
