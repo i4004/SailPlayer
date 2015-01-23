@@ -6,6 +6,7 @@ namespace Audio
 	audioresource_t* AudioResource::Resource = NULL;
 	bool AudioResource::AudioResourceGotReply = false;
 	bool AudioResource::AudioResourceAcquired = false;
+	AudioResource::OnResourceStateChangedDelegate AudioResource::OnResourceStateChanged = NULL;
 
 	void AudioResource::Init()
 	{
@@ -19,13 +20,16 @@ namespace Audio
 		audioresource_free(Resource);
 	}
 
-	void AudioResource::OnAudioResourceCallback(audioresource_t* audioResource, bool aquired, void* userData)
+	void AudioResource::OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData)
 	{
 		Q_UNUSED(audioResource);
 		Q_UNUSED(userData);
 
 		AudioResourceGotReply = true;
-		AudioResourceAcquired = aquired;
+		AudioResourceAcquired = acquired;
+
+		if(OnResourceStateChanged != NULL)
+			OnResourceStateChanged(acquired);
 	}
 
 	void AudioResource::WaitForAnAudioResourceCallback()
@@ -55,5 +59,10 @@ namespace Audio
 		WaitForAnAudioResourceCallback();
 
 		return AudioResourceAcquired;
+	}
+
+	void AudioResource::SubscribeToResourceStateChange(OnResourceStateChangedDelegate onResourceStateChanged)
+	{
+		OnResourceStateChanged = onResourceStateChanged;
 	}
 }
