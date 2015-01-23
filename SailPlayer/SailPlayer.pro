@@ -22,8 +22,8 @@ SOURCES += \
     src/IO/FsRecordInfo.cpp \
     src/IO/FileHelper.cpp \
     src/UI/FsRecordsListModel.cpp \
-    src/UI/AudioPlayer.cpp \
-    src/Audio/AudioResource.cpp
+    src/Audio/AudioResource.cpp \
+    src/Audio/AudioPlayer.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -48,7 +48,7 @@ HEADERS += \
     src/IO/FileType.h \
     src/IO/FileHelper.h \
     src/UI/FsRecordsListModel.h \
-    src/UI/AudioPlayer.h \
-    src/Audio/AudioResource.h
+    src/Audio/AudioResource.h \
+    src/Audio/AudioPlayer.h
 
 INCLUDEPATH += $$PWD/include

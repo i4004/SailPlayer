@@ -1,9 +1,7 @@
 #include "AudioPlayer.h"
 #include <QDebug>
 
-using namespace Audio;
-
-namespace UI
+namespace Audio
 {
 	AudioPlayer::AudioPlayer()
 	{

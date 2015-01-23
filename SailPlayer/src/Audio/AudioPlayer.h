@@ -3,9 +3,9 @@
 
 #include <QObject>
 #include <gst/gst.h>
-#include "../Audio/AudioResource.h"
+#include "AudioResource.h"
 
-namespace UI
+namespace Audio
 {
 	class AudioPlayer : public QObject
 	{

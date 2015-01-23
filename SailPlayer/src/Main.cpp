@@ -4,9 +4,10 @@
 #include <sailfishapp.h>
 
 #include "UI/FsRecordsListModel.h"
-#include "UI/AudioPlayer.h"
+#include "Audio/AudioPlayer.h"
 #include "Entities/Artist.h"
 
+using namespace Audio;
 using namespace UI;
 
 int main(int argc, char *argv[])
