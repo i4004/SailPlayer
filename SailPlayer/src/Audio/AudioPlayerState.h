@@ -5,9 +5,9 @@ namespace Audio
 {
 	enum AudioPlayerState
 	{
-		Stop,
-		Play,
-		Pause
+		Ready,
+		Playing,
+		Paused
 	};
 }
 

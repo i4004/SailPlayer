@@ -5,9 +5,14 @@ namespace Audio
 {
 	AudioPlayer::AudioPlayer()
 	{
-		gst_init(NULL, NULL);
+		_pausedByResourceBlock = false;
+		_currentState = Ready;
 
+		gst_init(NULL, NULL);
 		AudioResource::Init();
+
+		// TODO
+//		AudioResource::SubscribeToResourceStateChange(&AudioResource::OnAudioResourceStateChanged);
 	}
 
 	AudioPlayer::~AudioPlayer()
@@ -60,6 +65,21 @@ namespace Audio
 		return TRUE;
 	}
 
+	void AudioPlayer::OnAudioResourceStateChanged(bool acquired)
+	{
+		if(acquired)
+		{
+			if(_currentState == Paused && _pausedByResourceBlock)
+				play();
+		}
+		else if(_currentState == Playing)
+		{
+			pause();
+
+			_pausedByResourceBlock = true;
+		}
+	}
+
 	bool AudioPlayer::Init()
 	{
 		_pipeline = gst_pipeline_new("audio-player");
@@ -99,14 +119,19 @@ namespace Audio
 		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
 
 		AudioResource::Acquire();
-
 		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
 	}
 
 	void AudioPlayer::stop()
 	{
 		gst_element_set_state (_pipeline, GST_STATE_READY);
+		AudioResource::Release();
+	}
 
+	void AudioPlayer::pause()
+	{
+		_pausedByResourceBlock = false;
+		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
 		AudioResource::Release();
 	}
 }

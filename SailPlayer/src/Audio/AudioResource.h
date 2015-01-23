@@ -26,6 +26,7 @@ namespace Audio
 		static audioresource_t* Resource;
 		static bool AudioResourceGotReply;
 		static bool AudioResourceAcquired;
+
 		static OnResourceStateChangedDelegate OnResourceStateChanged;
 	};
 }
