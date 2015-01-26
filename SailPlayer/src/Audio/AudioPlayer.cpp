@@ -4,6 +4,8 @@
 
 namespace Audio
 {
+	int AudioPlayer::EqualizerBandsNumber = 5;
+
 	AudioPlayer::AudioPlayer()
 	{
 		_pausedByResourceBlock = false;
@@ -90,10 +92,10 @@ namespace Audio
 		_pipeline = gst_pipeline_new("audio-player");
 		_source = gst_element_factory_make("filesrc", NULL);
 		_decoder = gst_element_factory_make("decodebin", NULL);
-//		_volume = gst_element_factory_make("volume", NULL);
+		_equalizer = gst_element_factory_make("equalizer-nbands", NULL);
 		_sink = gst_element_factory_make("autoaudiosink", NULL);
 
-		if (!_pipeline || !_source || !_decoder || !_sink)
+		if (!_pipeline || !_source || !_decoder || !_equalizer || !_sink)
 		{
 			g_warning("Failed to initialize elements!");
 			return false;
@@ -103,18 +105,20 @@ namespace Audio
 		gst_bus_add_watch(bus, OnBusCall, NULL);
 		gst_object_unref(bus);
 
-		gst_bin_add_many(GST_BIN(_pipeline), _source, _decoder, _sink, NULL);
+		gst_bin_add_many(GST_BIN(_pipeline), _source, _decoder, _equalizer, _sink, NULL);
 
-		if (!gst_element_link(_source, _decoder))
+		if (!gst_element_link(_source, _decoder) || !gst_element_link(_equalizer, _sink))
 		{
 			g_warning("Failed to link elements!");
 			return false;
 		}
 
-		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _sink);
+		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _equalizer);
 
 		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
-		//		g_object_set(G_OBJECT(_volume), "volume", 1, NULL);
+		g_object_set (G_OBJECT (_equalizer), "num-bands", EqualizerBandsNumber, NULL);
+
+		SetEqualizerData();
 
 		return true;
 	}
@@ -142,5 +146,26 @@ namespace Audio
 		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
 		_currentState = Paused;
 		_needToAcquire = false;
+	}
+
+	void AudioPlayer::SetEqualizerData()
+	{
+		gint i;
+		GstObject *band;
+		GstEqualizerBandState equalizerData[] = {
+			{ 120.0,	5.0,	0 },
+			{ 500.0,	2.0,	0 },
+			{ 1503.0,	2.0,	0 },
+			{ 6000.0,	2.0,	0 },
+			{ 3000.0,	120.0,	0 }
+		};
+
+		for (i = 0; i < EqualizerBandsNumber; i++)
+		{
+			band = gst_child_proxy_get_child_by_index(GST_CHILD_PROXY(_equalizer), i);
+			g_object_set(G_OBJECT(band), "freq", equalizerData[i].freq, "bandwidth", equalizerData[i].width, "gain", equalizerData[i].gain, NULL);
+
+			g_object_unref(G_OBJECT(band));
+		}
 	}
 }

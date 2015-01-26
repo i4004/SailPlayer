@@ -8,6 +8,13 @@
 
 namespace Audio
 {
+	typedef struct
+	{
+	  gfloat freq;
+	  gfloat width;
+	  gfloat gain;
+	} GstEqualizerBandState;
+
 	class AudioPlayer : public QObject
 	{
 		Q_OBJECT
@@ -15,6 +22,8 @@ namespace Audio
 	public:
 		AudioPlayer();
 		~AudioPlayer();
+
+		// Player controls
 
 		Q_INVOKABLE bool Init();
 		Q_INVOKABLE void play();
@@ -25,20 +34,31 @@ namespace Audio
 		void OnAudioResourceAquireStateChanged(bool acquired);
 
 	private:
+		// Audio resoure and modules
+
 		AudioResource* _audioResource;
 
 		GstElement* _pipeline;
 		GstElement* _source;
 		GstElement* _decoder;
-		GstElement* _volume;
+		GstElement* _equalizer;
 		GstElement* _sink;
 
 		AudioPlayerState _currentState;
 		bool _pausedByResourceBlock;
 		bool _needToAcquire;
 
+		// Equalizer
+
+		static int EqualizerBandsNumber;
+		GstEqualizerBandState _equalizerData[];
+
+		// Callbacks
+
 		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
 		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data);
+
+		void SetEqualizerData();
 	};
 }
 
