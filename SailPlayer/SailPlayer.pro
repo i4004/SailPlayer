@@ -23,7 +23,8 @@ SOURCES += \
     src/IO/FileHelper.cpp \
     src/UI/FsRecordsListModel.cpp \
     src/Audio/AudioResource.cpp \
-    src/Audio/AudioPlayer.cpp
+    src/Audio/AudioPlayer.cpp \
+    src/SailPlayerSettings.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -50,6 +51,7 @@ HEADERS += \
     src/UI/FsRecordsListModel.h \
     src/Audio/AudioResource.h \
     src/Audio/AudioPlayer.h \
-    src/Audio/AudioPlayerState.h
+    src/Audio/AudioPlayerState.h \
+    src/SailPlayerSettings.h
 
 INCLUDEPATH += $$PWD/include

@@ -1,10 +1,15 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.FsRecordsListModel 1.0
-import Qt.labs.folderlistmodel 2.1
+import harbour.sail.player.SailPlayerSettings 1.0
 
 Dialog
-{
+{	
+	SailPlayerSettings
+	{
+		id: settings
+	}
+
 	SilicaListView
 	{
 		id: itemsList
@@ -14,7 +19,7 @@ Dialog
 		model: FsRecordsListModel
 		{
 			id: fsRecordsListModel
-			directory: "/"
+			directory: settings.lastAddFilesDirectoryPath
 		}
 
 		header: DialogHeader
@@ -66,5 +71,10 @@ Dialog
 					fsRecordsListModel.directory = model.filePath
 			}
 		}
+	}
+
+	onAccepted:
+	{
+		settings.lastAddFilesDirectoryPath = fsRecordsListModel.directory
 	}
 }
