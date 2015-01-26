@@ -1,4 +1,5 @@
 #include "AudioPlayer.h"
+#include <QObject>
 #include <QDebug>
 
 namespace Audio
@@ -9,19 +10,35 @@ namespace Audio
 		_currentState = Ready;
 
 		gst_init(NULL, NULL);
-		AudioResource::Init();
 
-		// TODO
-//		AudioResource::SubscribeToResourceStateChange(&AudioResource::OnAudioResourceStateChanged);
+		_audioResource = new AudioResource();
+		_audioResource->Init();
+
+		QObject::connect(_audioResource, SIGNAL(OnAquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
 	}
 
 	AudioPlayer::~AudioPlayer()
 	{
 		gst_element_set_state(_pipeline, GST_STATE_NULL);
-
 		gst_object_unref(GST_OBJECT(_pipeline));
 
-		AudioResource::Free();
+		_audioResource->Free();
+		delete _audioResource;
+	}
+
+	void AudioPlayer::OnAudioResourceAquireStateChanged(bool acquired)
+	{
+		if(acquired)
+		{
+			if(_currentState == Paused && _pausedByResourceBlock)
+				play();
+		}
+		else if(_currentState == Playing)
+		{
+			pause();
+
+			_pausedByResourceBlock = true;
+		}
 	}
 
 	void AudioPlayer::OnPadAdded(GstElement* element, GstPad* pad, gpointer data)
@@ -65,21 +82,6 @@ namespace Audio
 		return TRUE;
 	}
 
-	void AudioPlayer::OnAudioResourceStateChanged(bool acquired)
-	{
-		if(acquired)
-		{
-			if(_currentState == Paused && _pausedByResourceBlock)
-				play();
-		}
-		else if(_currentState == Playing)
-		{
-			pause();
-
-			_pausedByResourceBlock = true;
-		}
-	}
-
 	bool AudioPlayer::Init()
 	{
 		_pipeline = gst_pipeline_new("audio-player");
@@ -118,20 +120,20 @@ namespace Audio
 //		g_object_set(G_OBJECT(_volume), "volume", 1, NULL);
 		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
 
-		AudioResource::Acquire();
+		_audioResource->Acquire();
 		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
 	}
 
 	void AudioPlayer::stop()
 	{
 		gst_element_set_state (_pipeline, GST_STATE_READY);
-		AudioResource::Release();
+		_audioResource->Release();
 	}
 
 	void AudioPlayer::pause()
 	{
 		_pausedByResourceBlock = false;
 		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
-		AudioResource::Release();
+		_audioResource->Release();
 	}
 }

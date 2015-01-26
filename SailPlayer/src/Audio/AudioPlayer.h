@@ -20,7 +20,12 @@ namespace Audio
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
 
+	public slots:
+		void OnAudioResourceAquireStateChanged(bool acquired);
+
 	private:
+		AudioResource* _audioResource;
+
 		GstElement* _pipeline;
 		GstElement* _source;
 		GstElement* _decoder;
@@ -32,7 +37,6 @@ namespace Audio
 
 		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
 		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data);
-		void OnAudioResourceStateChanged(bool acquired);
 		bool Init();
 	};
 }

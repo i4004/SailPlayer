@@ -3,38 +3,23 @@
 
 namespace Audio
 {
-	audioresource_t* AudioResource::Resource = NULL;
-	bool AudioResource::AudioResourceGotReply = false;
-	bool AudioResource::AudioResourceAcquired = false;
-	AudioResource::OnResourceStateChangedDelegate AudioResource::OnResourceStateChanged = NULL;
-
 	void AudioResource::Init()
 	{
-		Resource = audioresource_init(AUDIO_RESOURCE_MEDIA, OnAudioResourceCallback, NULL);
+		_audioResourceGotReply = false;
+		_audioResourceAcquired = false;
+		_resource = audioresource_init(AUDIO_RESOURCE_MEDIA, OnAudioResourceCallback, this);
 	}
 
 	void AudioResource::Free()
 	{
 		Release();
 
-		audioresource_free(Resource);
-	}
-
-	void AudioResource::OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData)
-	{
-		Q_UNUSED(audioResource);
-		Q_UNUSED(userData);
-
-		AudioResourceGotReply = true;
-		AudioResourceAcquired = acquired;
-
-		if(OnResourceStateChanged != NULL)
-			OnResourceStateChanged(acquired);
+		audioresource_free(_resource);
 	}
 
 	void AudioResource::WaitForAnAudioResourceCallback()
 	{
-		 while (!AudioResourceGotReply)
+		 while (!_audioResourceGotReply)
 		 {
 			 g_main_context_iteration(NULL, false);
 			 usleep(1000);
@@ -43,26 +28,37 @@ namespace Audio
 
 	bool AudioResource::Acquire()
 	{
-		AudioResourceGotReply = false;
+		_audioResourceGotReply = false;
 
-		audioresource_acquire(Resource);
+		audioresource_acquire(_resource);
 		WaitForAnAudioResourceCallback();
 
-		return AudioResourceAcquired;
+		return _audioResourceAcquired;
 	}
 
 	bool AudioResource::Release()
 	{
-		AudioResourceGotReply = false;
+		_audioResourceGotReply = false;
 
-		audioresource_release(Resource);
+		audioresource_release(_resource);
 		WaitForAnAudioResourceCallback();
 
-		return AudioResourceAcquired;
+		return _audioResourceAcquired;
 	}
 
-	void AudioResource::SubscribeToResourceStateChange(OnResourceStateChangedDelegate onResourceStateChanged)
+	void AudioResource::SetAcquireState(bool acquired)
 	{
-		OnResourceStateChanged = onResourceStateChanged;
+		_audioResourceGotReply = true;
+		_audioResourceAcquired = acquired;
+
+		emit OnAquireStateChanged(acquired);
+	}
+
+	void AudioResource::OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData)
+	{
+		Q_UNUSED(audioResource);
+
+		AudioResource* resource = static_cast<AudioResource* >(userData);
+		resource->SetAcquireState(acquired);
 	}
 }

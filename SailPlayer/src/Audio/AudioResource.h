@@ -6,28 +6,31 @@
 
 namespace Audio
 {
-	class AudioResource
+	class AudioResource : public QObject
 	{
-		typedef void (*OnResourceStateChangedDelegate)(bool);
+		Q_OBJECT
 
 	public:
-		static void Init();
-		static void Free();
+		void Init();
+		void Free();
 
-		static void OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData);
-		static void WaitForAnAudioResourceCallback();
+		void WaitForAnAudioResourceCallback();
 
-		static bool Acquire();
-		static bool Release();
+		bool Acquire();
+		bool Release();
 
-		static void SubscribeToResourceStateChange(OnResourceStateChangedDelegate onResourceStateChanged);
+	public slots:
+		void SetAcquireState(bool acquired);
+
+	signals:
+		void OnAquireStateChanged(bool acquired);
 
 	private:
-		static audioresource_t* Resource;
-		static bool AudioResourceGotReply;
-		static bool AudioResourceAcquired;
+		audioresource_t* _resource;
+		bool _audioResourceGotReply;
+		bool _audioResourceAcquired;
 
-		static OnResourceStateChangedDelegate OnResourceStateChanged;
+		static void OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData);
 	};
 }
 
