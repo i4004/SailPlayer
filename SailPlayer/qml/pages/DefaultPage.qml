@@ -11,6 +11,8 @@ Page
 		id: player
 	}
 
+	allowedOrientations: Orientation.All
+
 	Component.onCompleted:
 	{
 		player.Init();

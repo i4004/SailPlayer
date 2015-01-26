@@ -10,6 +10,8 @@ Dialog
 		id: settings
 	}
 
+	allowedOrientations: Orientation.All
+
 	SilicaListView
 	{
 		id: itemsList
