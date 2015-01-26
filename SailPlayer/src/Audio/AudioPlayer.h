@@ -16,7 +16,8 @@ namespace Audio
 		AudioPlayer();
 		~AudioPlayer();
 
-		Q_INVOKABLE void play();	
+		Q_INVOKABLE bool Init();
+		Q_INVOKABLE void play();
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
 
@@ -34,10 +35,10 @@ namespace Audio
 
 		AudioPlayerState _currentState;
 		bool _pausedByResourceBlock;
+		bool _needToAcquire;
 
 		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
 		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data);
-		bool Init();
 	};
 }
 

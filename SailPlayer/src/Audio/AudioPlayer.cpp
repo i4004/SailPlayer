@@ -8,6 +8,7 @@ namespace Audio
 	{
 		_pausedByResourceBlock = false;
 		_currentState = Ready;
+		_needToAcquire = true;
 
 		gst_init(NULL, NULL);
 
@@ -20,9 +21,11 @@ namespace Audio
 	AudioPlayer::~AudioPlayer()
 	{
 		gst_element_set_state(_pipeline, GST_STATE_NULL);
-		gst_object_unref(GST_OBJECT(_pipeline));
 
 		_audioResource->Free();
+
+		gst_object_unref(GST_OBJECT(_pipeline));
+
 		delete _audioResource;
 	}
 
@@ -110,23 +113,26 @@ namespace Audio
 
 		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _sink);
 
+		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
+		//		g_object_set(G_OBJECT(_volume), "volume", 1, NULL);
+
 		return true;
 	}
 
 	void AudioPlayer::play()
 	{\
-		Init();
+		if(_needToAcquire)
+			_audioResource->Acquire();
 
-//		g_object_set(G_OBJECT(_volume), "volume", 1, NULL);
-		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
-
-		_audioResource->Acquire();
+		_currentState = Playing;
 		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
 	}
 
 	void AudioPlayer::stop()
 	{
 		gst_element_set_state (_pipeline, GST_STATE_READY);
+		_currentState = Ready;
+		_needToAcquire = true;
 		_audioResource->Release();
 	}
 
@@ -134,6 +140,7 @@ namespace Audio
 	{
 		_pausedByResourceBlock = false;
 		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
-		_audioResource->Release();
+		_currentState = Paused;
+		_needToAcquire = false;
 	}
 }
