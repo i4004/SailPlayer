@@ -64,6 +64,7 @@ Dialog
 				anchors.verticalCenter: parent.verticalCenter
 
 				text: name
+				wrapMode: Text.WordWrap
 			}
 
 			onClicked:

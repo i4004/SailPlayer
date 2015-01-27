@@ -116,7 +116,7 @@ namespace Audio
 
 		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _equalizer);
 
-		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
+//		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
 		g_object_set (G_OBJECT (_equalizer), "num-bands", EqualizerBandsNumber, NULL);
 
 		SetEqualizerData();
