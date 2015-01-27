@@ -15,5 +15,7 @@ QString SailPlayerSettings::GetLastAddFilesDirectoryPath()
 
 void SailPlayerSettings::SetLastAddFilesDirectoryPath(QString value)
 {
-	return settings.setValue("AddFilesDialog/CurrentPath", value);
+	settings.setValue("AddFilesDialog/CurrentPath", value);
+
+	emit LastAddFilesDirectoryPathChanged();
 }
