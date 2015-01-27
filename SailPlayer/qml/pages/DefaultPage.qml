@@ -6,10 +6,7 @@ Page
 {
     id: page
 
-	AudioPlayer
-	{
-		id: player
-	}
+	AudioPlayer { id: player }
 
 	allowedOrientations: Orientation.All
 
@@ -21,7 +18,7 @@ Page
 	SilicaListView
 	{
 		anchors.fill: parent
-		header: PageHeader { title: "Default Playlist"}
+		header: PageHeader { title: "Default Playlist" }
 
 		model: ListModel
 		{
@@ -148,9 +145,10 @@ Page
 
 				onClicked:
 				{
-					var dlg = pageStack.push(Qt.resolvedUrl("AddFilesDialog.qml"));
+					var dialog = pageStack.push("AddFilesDialog.qml");
+			pageStack.b
 
-					dlg.accepted.connect(function()
+					dialog.accepted.connect(function()
 					{
 						// TODO
 					})
