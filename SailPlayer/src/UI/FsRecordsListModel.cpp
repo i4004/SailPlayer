@@ -79,7 +79,7 @@ namespace UI
 		return _rolesNames;
 	}
 
-	void FsRecordsListModel::SetDirectory(QString directoryName)
+	void FsRecordsListModel::SetDirectoryPath(QString directoryName)
 	{
 		if (directoryName == _directoryName)
 			return;
@@ -106,7 +106,7 @@ namespace UI
 
 		endResetModel();
 
-		emit DirectoryChanged();
+		emit DirectoryPathChanged();
 	}
 
 	void FsRecordsListModel::ReadDirectory()

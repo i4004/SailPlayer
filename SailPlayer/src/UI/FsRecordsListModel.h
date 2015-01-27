@@ -1,5 +1,5 @@
-#ifndef FILESLISTMODEL_H
-#define FILESLISTMODEL_H
+#ifndef FSRECORDSLISTMODEL_H
+#define FSRECORDSLISTMODEL_H
 
 #include <QAbstractListModel>
 #include <QDir>
@@ -14,7 +14,7 @@ namespace UI
 	class FsRecordsListModel : public QAbstractListModel
 	{
 		Q_OBJECT
-		Q_PROPERTY(QString directory READ GetDirectory() WRITE SetDirectory(QString) NOTIFY DirectoryChanged())
+		Q_PROPERTY(QString directoryPath READ GetDirectoryPath() WRITE SetDirectoryPath(QString) NOTIFY DirectoryPathChanged())
 
 	public:
 		explicit FsRecordsListModel(QObject *parent = 0);
@@ -26,11 +26,11 @@ namespace UI
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 		QHash<int, QByteArray> roleNames() const;
 
-		QString GetDirectory() const { return _directoryName; }
-		void SetDirectory(QString directoryName);
+		QString GetDirectoryPath() const { return _directoryName; }
+		void SetDirectoryPath(QString directoryName);
 
 	signals:
-		void DirectoryChanged();
+		void DirectoryPathChanged();
 
 	private:
 		QString _directoryName;
@@ -44,4 +44,4 @@ namespace UI
 	};
 }
 
-#endif // FILESLISTMODEL_H
+#endif // FSRECORDSLISTMODEL_H

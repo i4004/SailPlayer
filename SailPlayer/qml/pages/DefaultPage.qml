@@ -145,7 +145,16 @@ Page
 			MenuItem
 			{
 				text: qsTr("Add")
-				onClicked: pageStack.push("AddFilesDialog.qml")
+
+				onClicked:
+				{
+					var dlg = pageStack.push(Qt.resolvedUrl("AddFilesDialog.qml"));
+
+					dlg.accepted.connect(function()
+					{
+						// TODO
+					})
+				}
 			}
 		}
 	}

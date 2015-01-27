@@ -9,6 +9,8 @@ Dialog
 	SailPlayerSettings { id: settings }
 	FsHelper{ id: fsHelper }
 
+	property string directoryPath: '';
+
 	allowedOrientations: Orientation.All
 
 	SilicaListView
@@ -20,14 +22,14 @@ Dialog
 		model: FsRecordsListModel
 		{
 			id: fsRecordsListModel
-			directory: fsHelper.exists(settings.lastAddFilesDirectoryPath) ? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
+			directoryPath: fsHelper.exists(settings.lastAddFilesDirectoryPath) ? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
 		}
 
 		header: DialogHeader
 		{
 			id: dialogHeader
 
-			title: fsRecordsListModel.directory
+			title: fsRecordsListModel.directoryPath
 			acceptText: qsTr("Add")
 		}
 
@@ -70,13 +72,13 @@ Dialog
 			onClicked:
 			{
 				if(isDirectory)
-					fsRecordsListModel.directory = model.filePath
+					fsRecordsListModel.directoryPath = model.filePath
 			}
 		}
 	}
 
 	onAccepted:
 	{
-		settings.lastAddFilesDirectoryPath = fsRecordsListModel.directory
+		settings.lastAddFilesDirectoryPath = fsRecordsListModel.directoryPath
 	}
 }
