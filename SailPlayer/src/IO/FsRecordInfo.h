@@ -2,6 +2,7 @@
 #define FILEINFO_H
 
 #include <QFileInfo>
+
 #include "FileType.h"
 
 namespace IO

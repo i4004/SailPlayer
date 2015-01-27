@@ -1,11 +1,11 @@
+#include "FsHelper.h"
 #include "FsRecordInfo.h"
-#include "FileHelper.h"
 
 namespace IO
 {
 	FsRecordInfo::FsRecordInfo(const QFileInfo& fileInfo) : _fileInfo(fileInfo)
 	{
-		_fileType = FileHelper::GetFileType(fileInfo.suffix());
+		_fileType = FsHelper::GetFileType(fileInfo.suffix());
 	}
 
 	QString FsRecordInfo::GetDirPath() const

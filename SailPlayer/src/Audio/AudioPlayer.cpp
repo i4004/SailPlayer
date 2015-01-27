@@ -1,6 +1,7 @@
-#include "AudioPlayer.h"
 #include <QObject>
 #include <QDebug>
+
+#include "AudioPlayer.h"
 
 namespace Audio
 {
@@ -154,6 +155,8 @@ namespace Audio
 	{
 		gint i;
 		GstObject *band;
+
+		// TODO
 		GstEqualizerBandState equalizerData[] = {
 			{ 120.0,	5.0,	0 },
 			{ 500.0,	2.0,	0 },

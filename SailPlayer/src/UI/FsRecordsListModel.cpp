@@ -1,6 +1,5 @@
-#include "FsRecordsListModel.h"
 #include "../Util/FsRecordIconHelper.h"
-#include <QDebug>
+#include "FsRecordsListModel.h"
 
 using namespace Util;
 

@@ -1,8 +1,10 @@
-#include "FileHelper.h"
+#include <QFileInfo>
+
+#include "FsHelper.h"
 
 namespace IO
 {
-	FileType FileHelper::GetFileType(QString fileNameSuffix)
+	FileType FsHelper::GetFileType(QString fileNameSuffix)
 	{
 		QString suffix = fileNameSuffix.toLower();
 
@@ -31,5 +33,10 @@ namespace IO
 			return Cue;
 
 		return Undefined;
+	}
+
+	bool FsHelper::exists(const QString& filePath) const
+	{
+		return QFileInfo(filePath).exists();
 	}
 }

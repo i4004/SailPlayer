@@ -1,4 +1,5 @@
 #include <QList>
+
 #include "Artist.h"
 
 namespace Entities

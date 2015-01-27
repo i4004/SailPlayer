@@ -20,11 +20,11 @@ SOURCES += \
     src/Util/FsRecordIconHelper.cpp \
     src/IO/FsRecordsInfoFactory.cpp \
     src/IO/FsRecordInfo.cpp \
-    src/IO/FileHelper.cpp \
     src/UI/FsRecordsListModel.cpp \
     src/Audio/AudioResource.cpp \
     src/Audio/AudioPlayer.cpp \
-    src/SailPlayerSettings.cpp
+    src/SailPlayerSettings.cpp \
+    src/IO/FsHelper.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -47,11 +47,11 @@ HEADERS += \
     src/IO/FsRecordsInfoFactory.h \
     src/IO/FsRecordInfo.h \
     src/IO/FileType.h \
-    src/IO/FileHelper.h \
     src/UI/FsRecordsListModel.h \
     src/Audio/AudioResource.h \
     src/Audio/AudioPlayer.h \
     src/Audio/AudioPlayerState.h \
-    src/SailPlayerSettings.h
+    src/SailPlayerSettings.h \
+    src/IO/FsHelper.h
 
 INCLUDEPATH += $$PWD/include
