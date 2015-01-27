@@ -11,12 +11,10 @@ namespace Audio
 	{
 		_pausedByResourceBlock = false;
 		_currentState = Ready;
-		_needToAcquire = true;
 
 		gst_init(NULL, NULL);
 
 		_audioResource = new AudioResource();
-		_audioResource->Init();
 
 		QObject::connect(_audioResource, SIGNAL(OnAquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
 
@@ -27,7 +25,7 @@ namespace Audio
 	{
 		gst_element_set_state(_pipeline, GST_STATE_NULL);
 
-		_audioResource->Free();
+		_audioResource->Disconnect();
 
 		gst_object_unref(GST_OBJECT(_pipeline));
 
@@ -118,7 +116,7 @@ namespace Audio
 
 		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _equalizer);
 
-//		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
+		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
 		g_object_set (G_OBJECT (_equalizer), "num-bands", EqualizerBandsNumber, NULL);
 
 		SetEqualizerData();
@@ -128,8 +126,7 @@ namespace Audio
 
 	void AudioPlayer::play()
 	{\
-		if(_needToAcquire)
-			_audioResource->Acquire();
+		_audioResource->Connect();
 
 		_currentState = Playing;
 		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
@@ -139,8 +136,8 @@ namespace Audio
 	{
 		gst_element_set_state (_pipeline, GST_STATE_READY);
 		_currentState = Ready;
-		_needToAcquire = true;
-		_audioResource->Release();
+
+		_audioResource->Disconnect();
 	}
 
 	void AudioPlayer::pause()
@@ -148,7 +145,6 @@ namespace Audio
 		_pausedByResourceBlock = false;
 		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
 		_currentState = Paused;
-		_needToAcquire = false;
 	}
 
 	void AudioPlayer::SetEqualizerData()

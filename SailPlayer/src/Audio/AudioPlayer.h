@@ -45,7 +45,6 @@ namespace Audio
 
 		AudioPlayerState _currentState;
 		bool _pausedByResourceBlock;
-		bool _needToAcquire;
 
 		// Equalizer
 

@@ -11,13 +11,15 @@ namespace Audio
 		Q_OBJECT
 
 	public:
-		void Init();
-		void Free();
+		AudioResource();
+		~AudioResource();
 
 		void WaitForAnAudioResourceCallback();
 
-		bool Acquire();
-		bool Release();
+		bool Connect();
+		bool Disconnect();
+
+		bool IsConnected() { return _isConnected; }
 
 	public slots:
 		void SetAcquireState(bool acquired);
@@ -29,6 +31,7 @@ namespace Audio
 		audioresource_t* _resource;
 		bool _audioResourceGotReply;
 		bool _audioResourceAcquired;
+		bool _isConnected;
 
 		static void OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData);
 	};

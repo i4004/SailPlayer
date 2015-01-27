@@ -3,17 +3,16 @@
 
 namespace Audio
 {
-	void AudioResource::Init()
+	AudioResource::AudioResource()
 	{
 		_audioResourceGotReply = false;
 		_audioResourceAcquired = false;
+		_isConnected = false;
 		_resource = audioresource_init(AUDIO_RESOURCE_MEDIA, OnAudioResourceCallback, this);
 	}
 
-	void AudioResource::Free()
+	AudioResource::~AudioResource()
 	{
-		Release();
-
 		audioresource_free(_resource);
 	}
 
@@ -26,22 +25,32 @@ namespace Audio
 		 }
 	}
 
-	bool AudioResource::Acquire()
+	bool AudioResource::Connect()
 	{
+		if(_isConnected)
+			return _audioResourceAcquired;
+
 		_audioResourceGotReply = false;
 
 		audioresource_acquire(_resource);
 		WaitForAnAudioResourceCallback();
 
+		_isConnected = true;
+
 		return _audioResourceAcquired;
 	}
 
-	bool AudioResource::Release()
+	bool AudioResource::Disconnect()
 	{
+		if(!_isConnected)
+			return _audioResourceAcquired;
+
 		_audioResourceGotReply = false;
 
 		audioresource_release(_resource);
 		WaitForAnAudioResourceCallback();
+
+		_isConnected = false;
 
 		return _audioResourceAcquired;
 	}
