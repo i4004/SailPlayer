@@ -15,8 +15,7 @@ Page
 
 	Component.onCompleted:
 	{
-		player.Init();
-		player.play();
+//		player.play();
 	}
 
 	SilicaListView

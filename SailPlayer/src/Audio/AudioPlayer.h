@@ -25,7 +25,6 @@ namespace Audio
 
 		// Player controls
 
-		Q_INVOKABLE bool Init();
 		Q_INVOKABLE void play();
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
@@ -52,6 +51,8 @@ namespace Audio
 
 		static int EqualizerBandsNumber;
 		GstEqualizerBandState _equalizerData[];
+
+		bool Init();
 
 		// Callbacks
 
