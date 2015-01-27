@@ -35,6 +35,7 @@ namespace UI
 	private:
 		QString _directoryName;
 		QList<FsRecordInfo*> _filesList;
+		QHash<int, QByteArray> _rolesNames;
 
 		FsRecordsInfoFactory _fileInfoFactory;
 

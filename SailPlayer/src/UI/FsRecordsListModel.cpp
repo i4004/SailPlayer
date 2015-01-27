@@ -6,7 +6,7 @@ using namespace Util;
 
 namespace UI
 {
-	enum
+	enum FsRecordsListModelRoles
 	{
 		RecordNameRole = Qt::UserRole + 1,
 		IsDirectoryRole = Qt::UserRole + 2,
@@ -19,6 +19,14 @@ namespace UI
 	FsRecordsListModel::FsRecordsListModel(QObject *parent)
 	{
 		Q_UNUSED(parent);
+
+		_rolesNames = QAbstractListModel::roleNames();
+		_rolesNames.insert(RecordNameRole, QByteArray("name"));
+		_rolesNames.insert(IsDirectoryRole, QByteArray("isDirectory"));
+		_rolesNames.insert(RecordIconNameRole, QByteArray("iconName"));
+		_rolesNames.insert(AbsolutePathRole, QByteArray("absolutePath"));
+		_rolesNames.insert(FilePathRole, QByteArray("filePath"));
+		_rolesNames.insert(DirPathRole, QByteArray("dirPath"));
 	}
 
 	FsRecordsListModel::~FsRecordsListModel()
@@ -69,14 +77,7 @@ namespace UI
 
 	QHash<int, QByteArray> FsRecordsListModel::roleNames() const
 	{
-		QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
-		roles.insert(RecordNameRole, QByteArray("name"));
-		roles.insert(IsDirectoryRole, QByteArray("isDirectory"));
-		roles.insert(RecordIconNameRole, QByteArray("iconName"));
-		roles.insert(AbsolutePathRole, QByteArray("absolutePath"));
-		roles.insert(FilePathRole, QByteArray("filePath"));
-		roles.insert(DirPathRole, QByteArray("dirPath"));
-		return roles;
+		return _rolesNames;
 	}
 
 	void FsRecordsListModel::SetDirectory(QString directoryName)
@@ -84,7 +85,7 @@ namespace UI
 		if (directoryName == _directoryName)
 			return;
 
-		// Processing ".." file name to correctly handle directory up functioality
+		// Processing ".." file name to correctly handle directory-up functionality
 
 		if(directoryName.endsWith("/.."))
 		{
