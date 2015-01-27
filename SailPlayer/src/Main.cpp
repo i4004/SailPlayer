@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<AudioPlayer>("harbour.sail.player.AudioPlayer", 1, 0, "AudioPlayer");
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
 
-	QCoreApplication::setOrganizationName("Alexander Krylkov");
-	QCoreApplication::setApplicationName("Sail Player");
+	QCoreApplication::setOrganizationName("alexander-krylkov");
+	QCoreApplication::setApplicationName("harbour-sail-player");
 
 	QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 	QScopedPointer<QQuickView> view(SailfishApp::createView());
