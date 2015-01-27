@@ -1,5 +1,7 @@
 #include "SailPlayerSettings.h"
 
+QString SailPlayerSettings::DefaultAddFilesDirectoryPath = "/home/nemo";
+
 SailPlayerSettings& SailPlayerSettings::Default()
 {
 	static SailPlayerSettings settings;
@@ -8,7 +10,7 @@ SailPlayerSettings& SailPlayerSettings::Default()
 
 QString SailPlayerSettings::GetLastAddFilesDirectoryPath()
 {
-	return settings.value("AddFilesDialog/CurrentPath", "/home/nemo").toString();
+	return settings.value("AddFilesDialog/CurrentPath", DefaultAddFilesDirectoryPath).toString();
 }
 
 void SailPlayerSettings::SetLastAddFilesDirectoryPath(QString value)
