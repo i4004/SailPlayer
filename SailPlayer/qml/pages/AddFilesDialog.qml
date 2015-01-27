@@ -2,13 +2,12 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.FsRecordsListModel 1.0
 import harbour.sail.player.SailPlayerSettings 1.0
+import harbour.sail.player.FsHelper 1.0
 
 Dialog
 {	
-	SailPlayerSettings
-	{
-		id: settings
-	}
+	SailPlayerSettings { id: settings }
+	FsHelper{ id: fsHelper }
 
 	allowedOrientations: Orientation.All
 
@@ -21,7 +20,7 @@ Dialog
 		model: FsRecordsListModel
 		{
 			id: fsRecordsListModel
-			directory: settings.lastAddFilesDirectoryPath
+			directory: fsHelper.exists(settings.lastAddFilesDirectoryPath) ? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
 		}
 
 		header: DialogHeader
