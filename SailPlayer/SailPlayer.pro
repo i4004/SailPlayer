@@ -14,9 +14,6 @@ DEFINES += DEPLOYMENT_PATH=\"\\\"\"$${DEPLOYMENT_PATH}/\"\\\"\"
 
 SOURCES += \
     src/Main.cpp \
-    src/Entities/Track.cpp \
-    src/Entities/Artist.cpp \
-    src/Entities/Album.cpp \
     src/Util/FsRecordIconHelper.cpp \
     src/IO/FsRecordsInfoFactory.cpp \
     src/IO/FsRecordInfo.cpp \
@@ -24,7 +21,9 @@ SOURCES += \
     src/Audio/AudioResource.cpp \
     src/Audio/AudioPlayer.cpp \
     src/SailPlayerSettings.cpp \
-    src/IO/FsHelper.cpp
+    src/IO/FsHelper.cpp \
+    src/Playlist/Track.cpp \
+    src/Playlist/TracksListFactory.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -38,10 +37,6 @@ OTHER_FILES += \
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
 HEADERS += \
-    src/Entities/Track.h \
-    src/Entities/Track.h \
-    src/Entities/Artist.h \
-    src/Entities/Album.h \
     src/Util/FsRecordIconHelper.h \
     src/IO/FsRecordsInfoFactory.h \
     src/IO/FsRecordInfo.h \
@@ -51,6 +46,8 @@ HEADERS += \
     src/Audio/AudioPlayer.h \
     src/Audio/AudioPlayerState.h \
     src/SailPlayerSettings.h \
-    src/IO/FsHelper.h
+    src/IO/FsHelper.h \
+    src/Playlist/Track.h \
+    src/Playlist/TracksListFactory.h
 
 INCLUDEPATH += $$PWD/include
