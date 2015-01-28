@@ -136,7 +136,7 @@ Page
 			MenuItem
 			{
 				text: qsTr("Settings")
-				onClicked: pageStack.push(Qt.resolvedUrl("Settings.qml"))
+				onClicked: pageStack.push(Qt.resolvedUrl("../Pages/Settings.qml"))
 			}
 
 			MenuItem
@@ -145,8 +145,7 @@ Page
 
 				onClicked:
 				{
-					var dialog = pageStack.push("AddFilesDialog.qml");
-			pageStack.b
+					var dialog = pageStack.push(Qt.resolvedUrl("../Pages/AddFilesDialog.qml"));
 
 					dialog.accepted.connect(function()
 					{

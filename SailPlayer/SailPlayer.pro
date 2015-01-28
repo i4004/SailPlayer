@@ -28,13 +28,12 @@ SOURCES += \
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
-    qml/pages/DefaultPage.qml \
     translations/*.ts \
     harbour-sail-player.desktop \
     qml/Main.qml \
     qml/Cover.qml \
-    qml/pages/AddFilesDialog.qml \
-    qml/widgets/Playlist.qml
+    qml/Pages/AddFilesDialog.qml \
+    qml/Pages/DefaultPage.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 

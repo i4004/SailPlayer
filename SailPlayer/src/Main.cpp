@@ -19,8 +19,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
 
-	QCoreApplication::setOrganizationName("alexander-krylkov");
-	QCoreApplication::setApplicationName("harbour-sail-player");
+	QCoreApplication::setOrganizationName("Alexander Krylkov");
+	QCoreApplication::setApplicationName("Sail Player");
 
 	QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 	QScopedPointer<QQuickView> view(SailfishApp::createView());
