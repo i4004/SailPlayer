@@ -1,25 +1,26 @@
 #include <QFile>
-#include <QDir>
 
 #include "TracksListFactory.h"
+//#include "DirectoryRecursiveMultimediaFilesListFactory.h"
 
 namespace Playlist
 {
 	TracksListFactory::TracksListFactory()
 	{
+//		_filesListFactory = new DirectoryRecursiveMultimediaFilesListFactory();
 	}
 
-	QList<Track> TracksListFactory::Build(QString directoryPath)
+	TracksListFactory::~TracksListFactory()
 	{
-		QList<Track> tracks;
-		QDir directory(directoryPath);
+//		delete _filesListFactory;
+	}
 
-		directory.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot | QDir::System | QDir::Readable);
-		directory.setSorting(QDir::Name | QDir::DirsFirst);
+	QList<Track> TracksListFactory::Build(QList<QFileInfo> filesInfo)
+	{
+		Q_UNUSED(filesInfo);
 
-//		QStringList entries = directory.entryList();
+		QList<Track> tracksList;
 
-//		foreach (QString name, names)
-//			items.append(Create(directory.absoluteFilePath(name)));
+		return tracksList;
 	}
 }
