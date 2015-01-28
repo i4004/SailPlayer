@@ -17,7 +17,6 @@ SOURCES += \
     src/Util/FsRecordIconHelper.cpp \
     src/IO/FsRecordsInfoFactory.cpp \
     src/IO/FsRecordInfo.cpp \
-    src/UI/FsRecordsListModel.cpp \
     src/Audio/AudioResource.cpp \
     src/Audio/AudioPlayer.cpp \
     src/SailPlayerSettings.cpp \
@@ -25,7 +24,9 @@ SOURCES += \
     src/Playlist/Track.cpp \
     src/Playlist/TracksListFactory.cpp \
     src/Playlist/TracksFactory.cpp \
-    src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.cpp
+    src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.cpp \
+    src/Models/FsRecordsListModel.cpp \
+    src/Models/PlaylistModel.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -43,7 +44,6 @@ HEADERS += \
     src/IO/FsRecordsInfoFactory.h \
     src/IO/FsRecordInfo.h \
     src/IO/FileType.h \
-    src/UI/FsRecordsListModel.h \
     src/Audio/AudioResource.h \
     src/Audio/AudioPlayer.h \
     src/Audio/AudioPlayerState.h \
@@ -53,6 +53,8 @@ HEADERS += \
     src/Playlist/TracksListFactory.h \
     src/Playlist/TracksFactory.h \
     src/Playlist/IMultimediaFilesListFactory.h \
-    src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.h
+    src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.h \
+    src/Models/FsRecordsListModel.h \
+    src/Models/PlaylistModel.h
 
 INCLUDEPATH += $$PWD/include

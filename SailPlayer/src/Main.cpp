@@ -5,13 +5,13 @@
 
 #include "Audio/AudioPlayer.h"
 #include "IO/FsHelper.h"
-#include "UI/FsRecordsListModel.h"
+#include "Models/FsRecordsListModel.h"
 #include "SailPlayerSettings.h"
 #include "Playlist/TracksListFactory.h"
 
 using namespace Audio;
 using namespace IO;
-using namespace UI;\
+using namespace Models;\
 using namespace Playlist;
 
 int main(int argc, char *argv[])

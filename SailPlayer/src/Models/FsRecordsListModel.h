@@ -9,7 +9,7 @@
 
 using namespace IO;
 
-namespace UI
+namespace Models
 {
 	class FsRecordsListModel : public QAbstractListModel
 	{

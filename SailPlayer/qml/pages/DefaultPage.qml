@@ -1,12 +1,14 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.AudioPlayer 1.0
+import harbour.sail.player.TracksListFactory 1.0
 
 Page
 {
     id: page
 
 	AudioPlayer { id: player }
+	TracksListFactory {}
 
 	allowedOrientations: Orientation.All
 
@@ -20,35 +22,6 @@ Page
 		anchors.fill: parent
 		header: PageHeader { title: "Default Playlist" }
 
-		model: ListModel
-		{
-			ListElement
-			{
-				artist: "Dream Theater"
-				album: "Black Clouds & Silver Linings"
-				year: "2009"
-
-				songs:
-				[
-					ListElement { songName: "A Nightmare To Remember" },
-					ListElement { songName: "A Rite Of Passage" }
-				]
-			}
-
-			ListElement
-			{
-				artist: "Communic"
-				album: "The Bottom Deep"
-				year: "2011"
-
-				songs:
-				[
-					ListElement { songName: "Facing Tomorrow" },
-					ListElement { songName: "Denial" }
-				]
-			}
-		}
-
 		delegate: Column
 		{
 			width: parent.width
@@ -57,7 +30,7 @@ Page
 			{
 				width: parent.width
 				x: Theme.paddingMedium
-				text: artist
+//				text: artist
 				wrapMode: Text.WordWrap
 				color: Theme.highlightColor
 				font.pixelSize: Theme.fontSizeLarge
@@ -67,7 +40,7 @@ Page
 			{
 				width: parent.width
 				x: Theme.paddingMedium
-				text: "[" + year + "] " + album
+//				text: "[" + year + "] " + album
 				wrapMode: Text.WordWrap
 				color: Theme.secondaryColor
 				font.pixelSize: Theme.fontSizeTiny
@@ -77,30 +50,6 @@ Page
 			{
 				id: songsList
 				width: parent.width
-
-				model: ListModel
-				{
-					ListElement
-					{
-						songName: "A Nightmare To Remember"
-						trackNumber: "01"
-						duration: "16:11"
-					}
-
-					ListElement
-					{
-						songName: "A Rite Of Passage"
-						trackNumber: "02"
-						duration: "8:36"
-					}
-
-					ListElement
-					{
-						songName: "Wither"
-						trackNumber: "03"
-						duration: "5:26"
-					}
-				}
 
 				BackgroundItem
 				{
@@ -113,7 +62,7 @@ Page
 						width: parent.width
 						x: Theme.paddingLarge + 10
 						anchors.verticalCenter: parent.verticalCenter
-						text: trackNumber + " " + songName
+//						text: trackNumber + " " + songName
 						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
 					}
 
@@ -122,7 +71,7 @@ Page
 						anchors.verticalCenter: parent.verticalCenter
 						anchors.right: parent.right
 						anchors.rightMargin: Theme.paddingMedium
-						text: duration
+//						text: duration
 						color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
 					}
 				}

@@ -3,7 +3,7 @@
 
 using namespace Util;
 
-namespace UI
+namespace Models
 {
 	enum FsRecordsListModelRoles
 	{
