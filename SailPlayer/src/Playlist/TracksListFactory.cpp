@@ -8,8 +8,8 @@ namespace Playlist
 	{
 	}
 
-	QList<Track> TracksListFactory::Build(string folderName)
+	QList<Track> TracksListFactory::Build(QString folderName)
 	{
-
+		Q_UNUSED(folderName);
 	}
 }

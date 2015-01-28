@@ -12,7 +12,7 @@ namespace Playlist
 	public:
 		TracksListFactory();
 
-		QList<Track> Build(string folderName);
+		QList<Track> Build(QString folderName);
 	};
 }
 
