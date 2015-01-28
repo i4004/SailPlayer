@@ -3,7 +3,7 @@
 
 #include <QList>
 
-#include "Track.h"
+#include "TracksFactory.h"
 
 namespace Playlist
 {
@@ -12,7 +12,12 @@ namespace Playlist
 	public:
 		TracksListFactory();
 
-		QList<Track> Build(QString folderName);
+		QList<Track> Build(QString directoryPath);
+
+	private:
+		TracksFactory _tracksFactory;
+
+		QList<Track> BuildCueSheetTracks();
 	};
 }
 
