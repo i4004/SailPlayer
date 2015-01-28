@@ -1,12 +1,12 @@
-#include "MultimediaFilesListFactory.h"
+#include "DirectoryRecursiveMultimediaFilesListFactory.h"
 
 namespace Playlist
 {
-	MultimediaFilesListFactory::MultimediaFilesListFactory()
+	DirectoryRecursiveMultimediaFilesListFactory::MultimediaFilesListFactory()
 	{
 	}
 
-	QList<QFileInfo> MultimediaFilesListFactory::MultimediaFilesListFactory::Build(QString directoryPath)
+	QList<QFileInfo> DirectoryRecursiveMultimediaFilesListFactory::MultimediaFilesListFactory::Build(QString directoryPath)
 	{
 		Q_UNUSED(directoryPath);
 
