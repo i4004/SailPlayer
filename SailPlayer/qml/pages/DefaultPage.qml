@@ -135,6 +135,12 @@ Page
 		{
 			MenuItem
 			{
+				text: qsTr("About")
+				onClicked: pageStack.push(Qt.resolvedUrl("../Pages/About.qml"))
+			}
+
+			MenuItem
+			{
 				text: qsTr("Settings")
 				onClicked: pageStack.push(Qt.resolvedUrl("../Pages/Settings.qml"))
 			}
