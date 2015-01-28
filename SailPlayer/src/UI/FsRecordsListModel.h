@@ -37,7 +37,7 @@ namespace UI
 		QList<FsRecordInfo*> _filesList;
 		QHash<int, QByteArray> _rolesNames;
 
-		FsRecordsInfoFactory _fileInfoFactory;
+		FsRecordsInfoFactory _fsRecordsInfoFactory;
 
 		void ReadDirectory();
 		void Cleanup();

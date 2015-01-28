@@ -111,7 +111,7 @@ namespace UI
 
 	void FsRecordsListModel::ReadDirectory()
 	{
-		_filesList = _fileInfoFactory.CreateList(_directoryName);
+		_filesList = _fsRecordsInfoFactory.CreateList(_directoryName);
 	}
 
 	void FsRecordsListModel::Cleanup()
