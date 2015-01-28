@@ -1,5 +1,8 @@
 #include "PlaylistModel.h"
 
-PlaylistModel::PlaylistModel()
+namespace Models
 {
+	PlaylistModel::PlaylistModel()
+	{
+	}
 }

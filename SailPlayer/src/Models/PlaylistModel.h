@@ -1,10 +1,13 @@
 #ifndef PLAYLISTMODEL_H
 #define PLAYLISTMODEL_H
 
-class PlaylistModel
+namespace Models
 {
-public:
-	PlaylistModel();
-};
+	class PlaylistModel
+	{
+	public:
+		PlaylistModel();
+	};
+}
 
 #endif // PLAYLISTMODEL_H
