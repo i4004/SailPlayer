@@ -1,3 +1,6 @@
+#ifndef TRACK_H
+#define TRACK_H
+
 #include <QString>
 
 namespace Playlist
@@ -12,3 +15,5 @@ namespace Playlist
 		QString _sourceFileName;
 	};
 }
+
+#endif // TRACK_H
