@@ -24,7 +24,7 @@ namespace Models
 
 		int rowCount(const QModelIndex &parent = QModelIndex()) const;
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
-		QHash<int, QByteArray> roleNames() const;
+		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
 
 		QString GetDirectoryPath() const { return _directoryName; }
 		void SetDirectoryPath(QString directoryName);
@@ -34,7 +34,7 @@ namespace Models
 
 	private:
 		QString _directoryName;
-		QList<FsRecordInfo*> _filesList;
+		QList<FsRecordInfo*> _fsRecordsList;
 		QHash<int, QByteArray> _rolesNames;
 
 		FsRecordsInfoFactory _fsRecordsInfoFactory;

@@ -8,7 +8,7 @@ namespace Playlist
 
 	Track* CreateTrack(QString trackName)
 	{
-		Track* track = new Track(trackName, NULL);
+		Track* track = new Track("2", trackName, "12:04" , NULL);
 
 		return track;
 	}

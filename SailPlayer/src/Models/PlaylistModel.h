@@ -3,9 +3,7 @@
 
 #include <QAbstractListModel>
 
-#include "../Playlist/Track.h"
-
-using namespace Playlist;
+#include "AlbumModel.h"
 
 namespace Models
 {
@@ -21,9 +19,13 @@ namespace Models
 
 		int rowCount(const QModelIndex &parent = QModelIndex()) const;
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
+
+		Q_INVOKABLE AlbumModel* getAlbumModel(int index);
 
 	private:
-		QList<Track*> _tracksList;
+		QList<AlbumModel*> _albumsList;
+		QHash<int, QByteArray> _rolesNames;
 
 		void Cleanup();
 	};

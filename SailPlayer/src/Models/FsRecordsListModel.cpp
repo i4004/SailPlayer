@@ -37,46 +37,41 @@ namespace Models
 	{
 		Q_UNUSED(parent);
 
-		return _filesList.count();
+		return _fsRecordsList.count();
 	}
 
 	QVariant FsRecordsListModel::data(const QModelIndex &index, int role) const
 	{
-		if (!index.isValid() || index.row() > _filesList.size() - 1)
+		if (!index.isValid() || index.row() > _fsRecordsList.size() - 1)
 			return QVariant();
 
-		FsRecordInfo* info = _filesList.at(index.row());
+		FsRecordInfo* item = _fsRecordsList.at(index.row());
 
 		switch (role)
 		{
 			case Qt::DisplayRole:
 
 			case RecordNameRole:
-				return info->GetName();
+				return item->GetName();
 
 			case IsDirectoryRole:
-				return info->IsDirectory();
+				return item->IsDirectory();
 
 			case RecordIconNameRole:
-				return FsRecordIconHelper::GetFsRecordIconName(*info);
+				return FsRecordIconHelper::GetFsRecordIconName(*item);
 
 			case AbsolutePathRole:
-				return info->GetAbsolutePath();
+				return item->GetAbsolutePath();
 
 			case FilePathRole:
-				return info->GetFilePath();
+				return item->GetFilePath();
 
 			case DirPathRole:
-				return info->GetDirPath();
+				return item->GetDirPath();
 
 			default:
 				return QVariant();
 		}
-	}
-
-	QHash<int, QByteArray> FsRecordsListModel::roleNames() const
-	{
-		return _rolesNames;
 	}
 
 	void FsRecordsListModel::SetDirectoryPath(QString directoryName)
@@ -111,12 +106,12 @@ namespace Models
 
 	void FsRecordsListModel::ReadDirectory()
 	{
-		_filesList = _fsRecordsInfoFactory.CreateList(_directoryName);
+		_fsRecordsList = _fsRecordsInfoFactory.CreateList(_directoryName);
 	}
 
 	void FsRecordsListModel::Cleanup()
 	{
-		while (!_filesList.isEmpty())
-			 delete _filesList.takeFirst();
+		while (!_fsRecordsList.isEmpty())
+			 delete _fsRecordsList.takeFirst();
 	}
 }
