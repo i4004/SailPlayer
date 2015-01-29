@@ -12,7 +12,7 @@ namespace Playlist
 	public:
 		virtual ~ITracksFactory(){}
 
-		virtual QList<Track> Build(QList<QFileInfo> filesInfoList) = 0;
+		virtual QList<Track*> Build(QList<QFileInfo> filesInfoList) = 0;
 	};
 }
 

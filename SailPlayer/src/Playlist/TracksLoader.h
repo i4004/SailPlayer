@@ -15,7 +15,7 @@ namespace Playlist
 		TracksLoader(ITracksFactory& tracksFactory, IMultimediaFilesListFactory& filesListFactory);
 		~TracksLoader();
 
-		QList<Track> Build();
+		QList<Track*> Build();
 
 	private:
 		ITracksFactory& _tracksFactory;

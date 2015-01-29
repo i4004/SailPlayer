@@ -13,11 +13,12 @@ namespace Playlist
 	public:
 		TracksFactory();
 
-		virtual QList<Track> Build(QList<QFileInfo> filesInfoList);
+		virtual QList<Track*> Build(QList<QFileInfo> filesInfoList);
 
 	private:
-//		QList<Track> Build(QString fileName);
-//		QList<Track> Build(QFileInfo fileInfo);
+//		QList<Track*> Build(QString fileName);
+		QList<Track*> Build(QFileInfo fileInfo);
+//		QList<Track*> BuildFromCueSheet();
 	};
 }
 

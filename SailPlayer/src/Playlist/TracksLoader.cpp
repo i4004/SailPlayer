@@ -12,7 +12,7 @@ namespace Playlist
 	{
 	}
 
-	QList<Track> TracksLoader::Build()
+	QList<Track*> TracksLoader::Build()
 	{
 		return _tracksFactory.Build(_filesListFactory.Build());
 	}

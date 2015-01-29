@@ -20,10 +20,8 @@ namespace Playlist
 		directory.setSorting(QDir::Name | QDir::DirsFirst);
 
 		foreach (QFileInfo entry, directory.entryInfoList())
-		{
 			if(_supportedFormats.contains(FsHelper::GetFileType(entry.suffix())))
 				items.append(entry);
-		}
 
 		return items;
 	}

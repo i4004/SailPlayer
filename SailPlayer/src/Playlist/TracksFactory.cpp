@@ -6,21 +6,14 @@ namespace Playlist
 	{
 	}
 
-	Track* CreateTrack(QString trackName)
+	QList<Track*> TracksFactory::Build(QList<QFileInfo> filesInfoList)
 	{
-		Track* track = new Track("2", trackName, "12:04" , NULL);
+		QList<Track*> items;
 
-		return track;
-	}
+		foreach (QFileInfo fileInfo, filesInfoList)
+			items.append(Build(fileInfo));
 
-	QList<Track> TracksFactory::Build(QList<QFileInfo> filesInfoList)
-	{
-		QList<Track> tracksList;
-
-//		foreach (QString name, filesInfoList)
-//			items.append(Create(directory.absoluteFilePath(name)));
-
-		return tracksList;
+		return items;
 	}
 
 //	QList<Track> TracksLoader::Build(QString fileName)
@@ -29,9 +22,12 @@ namespace Playlist
 //		return tracksList;
 //	}
 
-//	QList<Track> TracksLoader::Build(QFileInfo fileInfo)
-//	{
-//		QList<Track> tracksList;
-//		return tracksList;
-//	}
+	QList<Track*> TracksLoader::Build(QFileInfo fileInfo)
+	{
+		QList<Track*> items;
+
+		items.append(new Track("2", "trackName", "12:04" , NULL));
+
+		return items;
+	}
 }
