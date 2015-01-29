@@ -11,7 +11,7 @@ namespace Playlist
 	public:
 		virtual ~IMultimediaFilesListFactory(){}
 
-		virtual QList<QFileInfo> Build(QString directoryPath) = 0;
+		virtual QList<QFileInfo> Build() = 0;
 	};
 }
 

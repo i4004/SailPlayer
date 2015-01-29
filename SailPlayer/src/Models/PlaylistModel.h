@@ -4,6 +4,10 @@
 #include <QAbstractListModel>
 
 #include "AlbumModel.h"
+#include "../Playlist/TracksLoader.h"
+#include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.h"
+#include "../Playlist/TracksFactory.h"
+#include "../Playlist/Track.h"
 
 namespace Models
 {
@@ -23,7 +27,15 @@ namespace Models
 
 		Q_INVOKABLE AlbumModel* getAlbumModel(int index);
 
+		// Playlist controls
+
+		Q_INVOKABLE void addTracks(QString directoryPath);
+
 	private:
+		TracksLoader* _tracksLoader;
+		TracksFactory _tracksFactory;
+		DirectoryRecursiveMultimediaFilesListFactory _filesFactory;
+
 		QList<AlbumModel*> _albumsList;
 		QHash<int, QByteArray> _rolesNames;
 

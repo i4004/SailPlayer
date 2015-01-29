@@ -1,14 +1,13 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.AudioPlayer 1.0
-import harbour.sail.player.TracksListFactory 1.0
+import harbour.sail.player.PlaylistModel 1.0
 
 Page
 {
     id: page
 
 	AudioPlayer { id: player }
-	TracksListFactory {}
 
 	allowedOrientations: Orientation.All
 
@@ -19,6 +18,9 @@ Page
 
 	SilicaListView
 	{
+		id: listView
+		model: PlaylistModel {}
+
 		anchors.fill: parent
 		header: PageHeader { title: "Default Playlist" }
 
@@ -104,8 +106,8 @@ Page
 
 					dialog.accepted.connect(function()
 					{
-						// TODO
-					})
+						listView.model.addTracks(dialog.directoryPath);
+					});
 				}
 			}
 		}

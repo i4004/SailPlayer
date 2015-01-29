@@ -8,7 +8,6 @@
 #include "Models/FsRecordsListModel.h"
 #include "Models/PlaylistModel.h"
 #include "SailPlayerSettings.h"
-#include "Playlist/TracksListFactory.h"
 
 using namespace Audio;
 using namespace IO;
@@ -22,7 +21,6 @@ int main(int argc, char *argv[])
 	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
 	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlaylistModel", 1, 0, "PlaylistModel");
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
-	qmlRegisterType<TracksListFactory>("harbour.sail.player.TracksListFactory", 1, 0, "TracksListFactory");
 
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");

@@ -8,12 +8,10 @@ namespace Playlist
 	{
 	}
 
-	QList<QFileInfo> DirectoryRecursiveMultimediaFilesListFactory::Build(QString directoryPath)
+	QList<QFileInfo> DirectoryRecursiveMultimediaFilesListFactory::Build()
 	{
-		Q_UNUSED(directoryPath);
-
 		QList<QFileInfo> fileInfo;
-		QDir directory(directoryPath);
+		QDir directory(_directoryPath);
 
 		directory.setFilter(QDir::AllDirs | QDir::Files | QDir::NoDotAndDotDot | QDir::System | QDir::Readable);
 		directory.setSorting(QDir::Name | QDir::DirsFirst);

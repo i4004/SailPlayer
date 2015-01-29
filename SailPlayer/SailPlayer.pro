@@ -22,12 +22,12 @@ SOURCES += \
     src/SailPlayerSettings.cpp \
     src/IO/FsHelper.cpp \
     src/Playlist/Track.cpp \
-    src/Playlist/TracksListFactory.cpp \
     src/Playlist/TracksFactory.cpp \
     src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.cpp \
     src/Models/FsRecordsListModel.cpp \
     src/Models/PlaylistModel.cpp \
-    src/Models/AlbumModel.cpp
+    src/Models/AlbumModel.cpp \
+    src/Playlist/TracksLoader.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -51,12 +51,13 @@ HEADERS += \
     src/SailPlayerSettings.h \
     src/IO/FsHelper.h \
     src/Playlist/Track.h \
-    src/Playlist/TracksListFactory.h \
     src/Playlist/TracksFactory.h \
     src/Playlist/IMultimediaFilesListFactory.h \
     src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.h \
     src/Models/FsRecordsListModel.h \
     src/Models/PlaylistModel.h \
-    src/Models/AlbumModel.h
+    src/Models/AlbumModel.h \
+    src/Playlist/TracksLoader.h \
+    src/Playlist/ITracksFactory.h
 
 INCLUDEPATH += $$PWD/include

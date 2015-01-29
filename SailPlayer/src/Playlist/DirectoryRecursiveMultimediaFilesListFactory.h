@@ -10,7 +10,11 @@ namespace Playlist
 	public:
 		DirectoryRecursiveMultimediaFilesListFactory();
 
-		virtual QList<QFileInfo> Build(QString directoryPath);
+		void SetDirectoryPath(QString path) { _directoryPath = path; }
+		virtual QList<QFileInfo> Build();
+
+	private:
+		QString _directoryPath;
 	};
 }
 
