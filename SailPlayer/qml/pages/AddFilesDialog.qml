@@ -79,6 +79,7 @@ Dialog
 
 	onAccepted:
 	{
-		settings.lastAddFilesDirectoryPath = fsRecordsListModel.directoryPath
+		settings.lastAddFilesDirectoryPath = fsRecordsListModel.directoryPath;
+		directoryPath = fsRecordsListModel.directoryPath;
 	}
 }

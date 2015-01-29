@@ -1,7 +1,10 @@
 #ifndef DIRECTORYRECURSIVEMULTIMEDIAFILESLISTFACTORY_H
 #define DIRECTORYRECURSIVEMULTIMEDIAFILESLISTFACTORY_H
 
+#include "../IO/FileType.h"
 #include "IMultimediaFilesListFactory.h"
+
+using namespace IO;
 
 namespace Playlist
 {
@@ -15,6 +18,7 @@ namespace Playlist
 
 	private:
 		QString _directoryPath;
+		QList<FileType> _supportedFormats;
 	};
 }
 
