@@ -52,7 +52,7 @@ Page
 			{
 				id: songsList
 				width: parent.width
-				model: model.getAlbumModel(index)
+				model: listView.model.getAlbumModel(index)
 
 				BackgroundItem
 				{

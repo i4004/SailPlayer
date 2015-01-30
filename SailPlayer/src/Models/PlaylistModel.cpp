@@ -65,16 +65,12 @@ namespace Models
 			case AlbumYearRole:
 				return item->GetAlbumYear();
 
-//			case AlbumModelRole:
-//				return (QObject)*item;
-//				return QVariant::fromValue((QObject)*item);
-
 			default:
 				return QVariant();
 		}
 	}
 
-	AlbumModel* PlaylistModel::getAlbumModel(int index)
+	QObject* PlaylistModel::getAlbumModel(int index) const
 	{
 		return _albumsList.at(index);
 	}

@@ -9,6 +9,7 @@
 #include "../Playlist/TracksFactory.h"
 #include "../Playlist/Track.h"
 #include "AlbumModelsFactory.h"
+#include <QtQml>
 
 namespace Models
 {
@@ -26,7 +27,7 @@ namespace Models
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
 
-		Q_INVOKABLE AlbumModel* getAlbumModel(int index);
+		Q_INVOKABLE QObject* getAlbumModel(int index) const;
 
 		// Playlist controls
 
