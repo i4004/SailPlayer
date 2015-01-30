@@ -19,6 +19,8 @@ namespace Playlist
 	private:
 		QString _directoryPath;
 		QList<FileType> _supportedFormats;
+
+		QList<QFileInfo> GetDirectoryFiles(QString directoryPath);
 	};
 }
 
