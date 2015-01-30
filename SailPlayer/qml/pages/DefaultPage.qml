@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.AudioPlayer 1.0
 import harbour.sail.player.PlaylistModel 1.0
+import "../Util.js" as Util
 
 Page
 {
@@ -74,7 +75,7 @@ Page
 						anchors.verticalCenter: parent.verticalCenter
 						anchors.right: parent.right
 						anchors.rightMargin: Theme.paddingMedium
-						text: trackDuration
+						text: Util.formatTrackDuration(trackDuration)
 						color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
 					}
 				}

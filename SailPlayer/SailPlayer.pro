@@ -37,7 +37,8 @@ OTHER_FILES += \
     qml/Main.qml \
     qml/Cover.qml \
     qml/Pages/AddFilesDialog.qml \
-    qml/Pages/DefaultPage.qml
+    qml/Pages/DefaultPage.qml \
+    qml/Util.js
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
