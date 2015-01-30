@@ -27,7 +27,7 @@ namespace Models
 
 		QString GetArtistName();
 		QString GetAlbumName();
-		QString GetAlbumYear();
+		int GetAlbumYear();
 
 		void AddTrack(Track* track) { _tracksList.append(track); }
 

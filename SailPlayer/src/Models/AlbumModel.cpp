@@ -72,8 +72,8 @@ namespace Models
 		return _tracksList.count() > 0 ? _tracksList.first()->GetAlbumName() : "";
 	}
 
-	QString  AlbumModel::GetAlbumYear()
+	int AlbumModel::GetAlbumYear()
 	{
-		return _tracksList.count() > 0 ? _tracksList.first()->GetAlbumYear() : "";
+		return _tracksList.count() > 0 ? _tracksList.first()->GetAlbumYear() : 0;
 	}
 }

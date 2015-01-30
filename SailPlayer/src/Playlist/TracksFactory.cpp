@@ -1,4 +1,9 @@
+#include <fileref.h>
+#include <tag.h>
+
 #include "TracksFactory.h"
+
+using namespace TagLib;
 
 namespace Playlist
 {
@@ -26,7 +31,21 @@ namespace Playlist
 	{
 		QList<Track*> items;
 
-		items.append(new Track("Test Artist", "Test Album", "2014", "2", "Test Track Name", "12:04", NULL));
+		FileRef f(fileInfo.absoluteFilePath().toLocal8Bit().data());
+
+		if(!f.isNull() && f.tag())
+		{
+			Tag* tag = f.tag();
+			AudioProperties *properties = f.audioProperties();
+
+			items.append(new Track(QString(tag->artist().toCString()),
+								   QString(tag->album().toCString()),
+								   tag->year(),
+								   tag->track(),
+								   QString(tag->title().toCString()),
+								   properties->length(),
+								   fileInfo.absoluteFilePath()));
+		}
 
 		return items;
 	}
