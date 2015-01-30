@@ -58,20 +58,33 @@ Page
 				BackgroundItem
 				{
 					id: item
-					height: label.height + Theme.paddingSmall
+					height: labelTrackName.height + Theme.paddingSmall
 
 					Label
 					{
-						id: label
-						width: parent.width
-						x: Theme.paddingLarge + 10
+						id: labelTrackNumber
+						anchors.left: parent.left
+						anchors.leftMargin: Theme.paddingLarge + 10
 						anchors.verticalCenter: parent.verticalCenter
-						text: trackNumber + " " + trackName
+						text: Util.zeroPad(trackNumber, 2)
 						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
 					}
 
 					Label
 					{
+						id: labelTrackName
+						anchors.left: labelTrackNumber.right
+						anchors.leftMargin: Theme.paddingMedium
+						anchors.right: labelTrackDuration.left
+						anchors.verticalCenter: parent.verticalCenter
+						text: trackName
+						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
+						wrapMode: Text.WordWrap
+					}
+
+					Label
+					{
+						id: labelTrackDuration
 						anchors.verticalCenter: parent.verticalCenter
 						anchors.right: parent.right
 						anchors.rightMargin: Theme.paddingMedium
