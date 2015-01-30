@@ -14,6 +14,7 @@ namespace Models
 		Q_UNUSED(parent);
 
 		_tracksLoader = new TracksLoader(_tracksFactory, _filesFactory);
+		_albumModelsFactory = new AlbumModelsFactory(*_tracksLoader);
 
 		_rolesNames = QAbstractListModel::roleNames();
 		_rolesNames.insert(ArtistNameRole, QByteArray("artistName"));
@@ -25,6 +26,7 @@ namespace Models
 	{
 		Cleanup();
 
+		delete _albumModelsFactory;
 		delete _tracksLoader;
 	}
 
@@ -75,6 +77,6 @@ namespace Models
 	void PlaylistModel::addTracks(QString directoryPath)
 	{
 		_filesFactory.SetDirectoryPath(directoryPath);
-		_tracksLoader->Build();
+		_albumsList.append(_albumModelsFactory->Build());
 	}
 }

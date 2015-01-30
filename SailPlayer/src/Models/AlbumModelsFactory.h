@@ -13,6 +13,8 @@ namespace Models
 	public:
 		AlbumModelsFactory(ITracksLoader& tracksLoader);
 
+		virtual QList<AlbumModel*> Build();
+
 	private:
 		ITracksLoader& _tracksLoader;
 	};

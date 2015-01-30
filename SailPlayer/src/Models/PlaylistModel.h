@@ -8,6 +8,7 @@
 #include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.h"
 #include "../Playlist/TracksFactory.h"
 #include "../Playlist/Track.h"
+#include "AlbumModelsFactory.h"
 
 namespace Models
 {
@@ -35,6 +36,7 @@ namespace Models
 		TracksLoader* _tracksLoader;
 		TracksFactory _tracksFactory;
 		DirectoryRecursiveMultimediaFilesListFactory _filesFactory;
+		IAlbumModelsFactory* _albumModelsFactory;
 
 		QList<AlbumModel*> _albumsList;
 		QHash<int, QByteArray> _rolesNames;
