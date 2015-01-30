@@ -8,10 +8,11 @@ namespace Playlist
 	class Track
 	{
 	public:
-		Track(QString artisName, QString albumName, QString number, QString name, QString duration, QString sourceFileName);
+		Track(QString artisName, QString albumName, QString albumYear, QString number, QString name, QString duration, QString sourceFileName);
 
-		QString GetArtistName(){ return _number; }
-		QString GetAlbumName(){ return _number; }
+		QString GetArtistName(){ return _artistName; }
+		QString GetAlbumName(){ return _albumName; }
+		QString GetAlbumYear(){ return _albumYear; }
 		QString GetNumber(){ return _number; }
 		QString GetName(){ return _name; }
 		QString GetDuration(){ return _duration; }
@@ -20,6 +21,7 @@ namespace Playlist
 	private:
 		QString _artistName;
 		QString _albumName;
+		QString _albumYear;
 		QString _number;
 		QString _name;
 		QString _duration;

@@ -61,4 +61,19 @@ namespace Models
 				return QVariant();
 		}
 	}
+
+	QString  AlbumModel::GetArtistName()
+	{
+		return _tracksList.count() > 0 ? _tracksList.first()->GetArtistName() : "";
+	}
+
+	QString  AlbumModel::GetAlbumName()
+	{
+		return _tracksList.count() > 0 ? _tracksList.first()->GetAlbumName() : "";
+	}
+
+	QString  AlbumModel::GetAlbumYear()
+	{
+		return _tracksList.count() > 0 ? _tracksList.first()->GetAlbumYear() : "";
+	}
 }

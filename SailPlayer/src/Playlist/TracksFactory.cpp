@@ -26,7 +26,7 @@ namespace Playlist
 	{
 		QList<Track*> items;
 
-		items.append(new Track("Test Artist", "Test Album", "2", "Test Track Name", "12:04", NULL));
+		items.append(new Track("Test Artist", "Test Album", "2014", "2", "Test Track Name", "12:04", NULL));
 
 		return items;
 	}

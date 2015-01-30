@@ -25,8 +25,9 @@ namespace Models
 
 		// Info
 
-		QString GetArtistName() { return _artistName; }
-		QString GetAlbumName() { return _albumName; }
+		QString GetArtistName();
+		QString GetAlbumName();
+		QString GetAlbumYear();
 
 		void AddTrack(Track* track) { _tracksList.append(track); }
 

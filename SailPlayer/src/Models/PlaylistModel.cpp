@@ -6,7 +6,8 @@ namespace Models
 	{
 		ArtistNameRole = Qt::UserRole + 1,
 		AlbumNameRole = Qt::UserRole + 2,
-		AlbumModelRole = Qt::UserRole + 3
+		AlbumYearRole = Qt::UserRole + 3,
+		AlbumModelRole = Qt::UserRole + 4
 	};
 
 	PlaylistModel::PlaylistModel(QObject* parent)
@@ -19,6 +20,7 @@ namespace Models
 		_rolesNames = QAbstractListModel::roleNames();
 		_rolesNames.insert(ArtistNameRole, QByteArray("artistName"));
 		_rolesNames.insert(AlbumNameRole, QByteArray("albumName"));
+		_rolesNames.insert(AlbumYearRole, QByteArray("albumYear"));
 		_rolesNames.insert(AlbumModelRole, QByteArray("albumModel"));
 	}
 
@@ -59,6 +61,9 @@ namespace Models
 
 			case AlbumNameRole:
 				return item->GetAlbumName();
+
+			case AlbumYearRole:
+				return item->GetAlbumYear();
 
 //			case AlbumModelRole:
 //				return (QObject)*item;

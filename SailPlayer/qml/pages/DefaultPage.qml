@@ -19,7 +19,7 @@ Page
 	SilicaListView
 	{
 		id: listView
-		model: PlaylistModel {}
+		model: PlaylistModel { id: playlistModel }
 
 		anchors.fill: parent
 		header: PageHeader { title: "Default Playlist" }
@@ -32,7 +32,7 @@ Page
 			{
 				width: parent.width
 				x: Theme.paddingMedium
-//				text: artist
+				text: artistName
 				wrapMode: Text.WordWrap
 				color: Theme.highlightColor
 				font.pixelSize: Theme.fontSizeLarge
@@ -42,7 +42,7 @@ Page
 			{
 				width: parent.width
 				x: Theme.paddingMedium
-//				text: "[" + year + "] " + album
+				text: "[" + albumYear + "] " + albumName
 				wrapMode: Text.WordWrap
 				color: Theme.secondaryColor
 				font.pixelSize: Theme.fontSizeTiny
@@ -52,6 +52,7 @@ Page
 			{
 				id: songsList
 				width: parent.width
+				model: model.getAlbumModel(index)
 
 				BackgroundItem
 				{
@@ -64,6 +65,7 @@ Page
 						width: parent.width
 						x: Theme.paddingLarge + 10
 						anchors.verticalCenter: parent.verticalCenter
+						text: "Test Track"
 //						text: trackNumber + " " + songName
 						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
 					}
@@ -73,6 +75,7 @@ Page
 						anchors.verticalCenter: parent.verticalCenter
 						anchors.right: parent.right
 						anchors.rightMargin: Theme.paddingMedium
+						text: "03:10"
 //						text: duration
 						color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
 					}
