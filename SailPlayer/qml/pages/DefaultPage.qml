@@ -65,8 +65,7 @@ Page
 						width: parent.width
 						x: Theme.paddingLarge + 10
 						anchors.verticalCenter: parent.verticalCenter
-						text: "Test Track"
-//						text: trackNumber + " " + songName
+						text: trackNumber + " " + trackName
 						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
 					}
 
@@ -75,8 +74,7 @@ Page
 						anchors.verticalCenter: parent.verticalCenter
 						anchors.right: parent.right
 						anchors.rightMargin: Theme.paddingMedium
-						text: "03:10"
-//						text: duration
+						text: trackDuration
 						color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
 					}
 				}
