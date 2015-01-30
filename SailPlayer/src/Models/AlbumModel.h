@@ -28,6 +28,8 @@ namespace Models
 		QString GetArtistName() { return _artistName; }
 		QString GetAlbumName() { return _albumName; }
 
+		void AddTrack(Track* track) { _tracksList.append(track); }
+
 	private:
 		QString _artistName;
 		QString _albumName;
