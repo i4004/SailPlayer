@@ -22,7 +22,7 @@ namespace Playlist
 //		return tracksList;
 //	}
 
-	QList<Track*> TracksLoader::Build(QFileInfo fileInfo)
+	QList<Track*> TracksFactory::Build(QFileInfo fileInfo)
 	{
 		QList<Track*> items;
 

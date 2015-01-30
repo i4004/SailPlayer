@@ -5,17 +5,18 @@
 
 #include "ITracksFactory.h"
 #include "IMultimediaFilesListFactory.h"
+#include "ITracksLoader.h"
 #include "Track.h"
 
 namespace Playlist
 {
-	class TracksLoader
+	class TracksLoader : public ITracksLoader
 	{
 	public:
 		TracksLoader(ITracksFactory& tracksFactory, IMultimediaFilesListFactory& filesListFactory);
 		~TracksLoader();
 
-		QList<Track*> Build();
+		virtual QList<Track*> Build();
 
 	private:
 		ITracksFactory& _tracksFactory;
