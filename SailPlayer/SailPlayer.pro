@@ -3,7 +3,7 @@ TARGET = harbour-sail-player
 
 CONFIG += link_pkgconfig sailfishapp
 QT += core quick qml
-PKGCONFIG += gstreamer-0.10 glib-2.0 audioresource
+PKGCONFIG += gstreamer-0.10 glib-2.0 audioresource taglib
 
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH
