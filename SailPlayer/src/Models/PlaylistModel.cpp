@@ -77,6 +77,12 @@ namespace Models
 	void PlaylistModel::addTracks(QString directoryPath)
 	{
 		_filesFactory.SetDirectoryPath(directoryPath);
-		_albumsList.append(_albumModelsFactory->Build());
+		QList<AlbumModel*> albums = _albumModelsFactory->Build();
+
+		beginResetModel();
+
+		_albumsList.append(albums);
+
+		endResetModel();
 	}
 }
