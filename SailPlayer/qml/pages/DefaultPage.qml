@@ -6,7 +6,7 @@ import "../Util.js" as Util
 
 Page
 {
-    id: page
+	id: page
 
 	AudioPlayer { id: player }
 
@@ -25,71 +25,71 @@ Page
 		anchors.fill: parent
 		header: PageHeader { title: "Default Playlist" }
 
-		delegate: Column
+		delegate: BackgroundItem
 		{
-			width: parent.width
+			id: item
+			height: labelTrackName.height + Theme.paddingSmall
 
 			Label
 			{
-				width: parent.width
-				x: Theme.paddingMedium
-				text: artistName
-				wrapMode: Text.WordWrap
-				color: Theme.highlightColor
-				font.pixelSize: Theme.fontSizeLarge
+				id: labelTrackNumber
+				anchors.left: parent.left
+				anchors.leftMargin: Theme.paddingLarge + 10
+				anchors.verticalCenter: parent.verticalCenter
+				text: Util.zeroPad(trackNumber, 2)
+				color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
 			}
 
 			Label
 			{
-				width: parent.width
-				x: Theme.paddingMedium
-				text: "[" + albumYear + "] " + albumName
+				id: labelTrackName
+				anchors.left: labelTrackNumber.right
+				anchors.leftMargin: Theme.paddingMedium
+				anchors.right: labelTrackDuration.left
+				anchors.verticalCenter: parent.verticalCenter
+				text: trackName
+				color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
 				wrapMode: Text.WordWrap
-				color: Theme.secondaryColor
-				font.pixelSize: Theme.fontSizeTiny
 			}
 
-			Repeater
+			Label
 			{
-				id: songsList
-				width: parent.width
-				model: listView.model.getAlbumModel(index)
+				id: labelTrackDuration
+				anchors.verticalCenter: parent.verticalCenter
+				anchors.right: parent.right
+				anchors.rightMargin: Theme.paddingMedium
+				text: Util.formatTrackDuration(trackDuration)
+				color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
+			}
+		}
 
-				BackgroundItem
+		section
+		{
+			property: "groupingString"
+			delegate: Component
+			{
+				Column
 				{
-					id: item
-					height: labelTrackName.height + Theme.paddingSmall
+					width: parent.width
 
 					Label
 					{
-						id: labelTrackNumber
-						anchors.left: parent.left
-						anchors.leftMargin: Theme.paddingLarge + 10
-						anchors.verticalCenter: parent.verticalCenter
-						text: Util.zeroPad(trackNumber, 2)
-						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
-					}
-
-					Label
-					{
-						id: labelTrackName
-						anchors.left: labelTrackNumber.right
-						anchors.leftMargin: Theme.paddingMedium
-						anchors.right: labelTrackDuration.left
-						anchors.verticalCenter: parent.verticalCenter
-						text: trackName
-						color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
+						width: parent.width
+						x: Theme.paddingMedium
+						text: "artistName"
 						wrapMode: Text.WordWrap
+						color: Theme.highlightColor
+						font.pixelSize: Theme.fontSizeLarge
 					}
 
 					Label
 					{
-						id: labelTrackDuration
-						anchors.verticalCenter: parent.verticalCenter
-						anchors.right: parent.right
-						anchors.rightMargin: Theme.paddingMedium
-						text: Util.formatTrackDuration(trackDuration)
-						color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
+						width: parent.width
+						x: Theme.paddingMedium
+						text: "[" + "albumYear" + "] " + "albumName"
+						wrapMode: Text.WordWrap
+						color: Theme.secondaryColor
+						font.pixelSize: Theme.fontSizeTiny
 					}
 				}
 			}

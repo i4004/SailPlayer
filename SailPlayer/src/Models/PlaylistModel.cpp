@@ -7,7 +7,10 @@ namespace Models
 		ArtistNameRole = Qt::UserRole + 1,
 		AlbumNameRole = Qt::UserRole + 2,
 		AlbumYearRole = Qt::UserRole + 3,
-		AlbumModelRole = Qt::UserRole + 4
+		TrackNumberRole = Qt::UserRole + 4,
+		TrackNameRole = Qt::UserRole + 5,
+		TrackDurationRole = Qt::UserRole + 6,
+		GroupingStringRole = Qt::UserRole + 7
 	};
 
 	PlaylistModel::PlaylistModel(QObject* parent)
@@ -15,42 +18,43 @@ namespace Models
 		Q_UNUSED(parent);
 
 		_tracksLoader = new TracksLoader(_tracksFactory, _filesFactory);
-		_albumModelsFactory = new AlbumModelsFactory(*_tracksLoader);
 
 		_rolesNames = QAbstractListModel::roleNames();
 		_rolesNames.insert(ArtistNameRole, QByteArray("artistName"));
 		_rolesNames.insert(AlbumNameRole, QByteArray("albumName"));
 		_rolesNames.insert(AlbumYearRole, QByteArray("albumYear"));
-		_rolesNames.insert(AlbumModelRole, QByteArray("albumModel"));
+		_rolesNames.insert(TrackNumberRole, QByteArray("trackNumber"));
+		_rolesNames.insert(TrackNameRole, QByteArray("trackName"));
+		_rolesNames.insert(TrackDurationRole, QByteArray("trackDuration"));
+		_rolesNames.insert(GroupingStringRole, QByteArray("groupingString"));
 	}
 
 	PlaylistModel::~PlaylistModel()
 	{
 		Cleanup();
 
-		delete _albumModelsFactory;
 		delete _tracksLoader;
 	}
 
 	void PlaylistModel::Cleanup()
 	{
-		while (!_albumsList.isEmpty())
-			 delete _albumsList.takeFirst();
+		while (!_tracksList.isEmpty())
+			 delete _tracksList.takeFirst();
 	}
 
 	int PlaylistModel::rowCount(const QModelIndex &parent) const
 	{
 		Q_UNUSED(parent);
 
-		return _albumsList.count();
+		return _tracksList.count();
 	}
 
 	QVariant PlaylistModel::data(const QModelIndex &index, int role) const
 	{
-		if (!index.isValid() || index.row() > _albumsList.size() - 1)
+		if (!index.isValid() || index.row() >= _tracksList.count())
 			return QVariant();
 
-		AlbumModel* item = _albumsList.at(index.row());
+		Track* item = _tracksList.at(index.row());
 
 		switch (role)
 		{
@@ -65,25 +69,32 @@ namespace Models
 			case AlbumYearRole:
 				return item->GetAlbumYear();
 
+			case TrackNumberRole:
+				return item->GetNumber();
+
+			case TrackNameRole:
+				return item->GetName();
+
+			case TrackDurationRole:
+				return item->GetDuration();
+
+			case GroupingStringRole:
+				return item->GetArtistName() + "-" + item->GetAlbumName();
+
 			default:
 				return QVariant();
 		}
 	}
 
-	QObject* PlaylistModel::getAlbumModel(int index) const
-	{
-		return _albumsList.at(index);
-	}
-
 	void PlaylistModel::addTracks(QString directoryPath)
 	{
 		_filesFactory.SetDirectoryPath(directoryPath);
-		QList<AlbumModel*> albums = _albumModelsFactory->Build();
+		QList<Track*> tracks = _tracksLoader->Build();
 
 		beginResetModel();
 
-		_albumsList.append(albums);
+		_tracksList.append(tracks);
 
-		endResetModel();
+		endResetModel();		
 	}
 }

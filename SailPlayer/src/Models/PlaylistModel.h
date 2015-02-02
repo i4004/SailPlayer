@@ -3,13 +3,12 @@
 
 #include <QAbstractListModel>
 
-#include "AlbumModel.h"
 #include "../Playlist/TracksLoader.h"
 #include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.h"
 #include "../Playlist/TracksFactory.h"
 #include "../Playlist/Track.h"
-#include "AlbumModelsFactory.h"
-#include <QtQml>
+
+using namespace Playlist;
 
 namespace Models
 {
@@ -27,8 +26,6 @@ namespace Models
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
 
-		Q_INVOKABLE QObject* getAlbumModel(int index) const;
-
 		// Playlist controls
 
 		Q_INVOKABLE void addTracks(QString directoryPath);
@@ -37,9 +34,8 @@ namespace Models
 		TracksLoader* _tracksLoader;
 		TracksFactory _tracksFactory;
 		DirectoryRecursiveMultimediaFilesListFactory _filesFactory;
-		IAlbumModelsFactory* _albumModelsFactory;
 
-		QList<AlbumModel*> _albumsList;
+		QList<Track*> _tracksList;
 		QHash<int, QByteArray> _rolesNames;
 
 		void Cleanup();
