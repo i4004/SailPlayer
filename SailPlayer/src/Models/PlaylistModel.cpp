@@ -10,7 +10,7 @@ namespace Models
 		TrackNumberRole = Qt::UserRole + 4,
 		TrackNameRole = Qt::UserRole + 5,
 		TrackDurationRole = Qt::UserRole + 6,
-		GroupingStringRole = Qt::UserRole + 7
+		SectionRole = Qt::UserRole + 7
 	};
 
 	PlaylistModel::PlaylistModel(QObject* parent)
@@ -26,7 +26,7 @@ namespace Models
 		_rolesNames.insert(TrackNumberRole, QByteArray("trackNumber"));
 		_rolesNames.insert(TrackNameRole, QByteArray("trackName"));
 		_rolesNames.insert(TrackDurationRole, QByteArray("trackDuration"));
-		_rolesNames.insert(GroupingStringRole, QByteArray("groupingString"));
+		_rolesNames.insert(SectionRole, QByteArray("section"));
 	}
 
 	PlaylistModel::~PlaylistModel()
@@ -78,8 +78,8 @@ namespace Models
 			case TrackDurationRole:
 				return item->GetDuration();
 
-			case GroupingStringRole:
-				return item->GetArtistName() + "|" + item->GetAlbumName();
+			case SectionRole:
+				return item->GetArtistName() + "|" + QString::number(item->GetAlbumYear()) + "|" + item->GetAlbumName();
 
 			default:
 				return QVariant();

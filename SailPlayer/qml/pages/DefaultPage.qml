@@ -65,18 +65,20 @@ Page
 
 		section
 		{
-			property: "groupingString"
+			property: "section"
 			delegate: Component
 			{
 				Column
 				{
 					width: parent.width
 
+					property var sectionSplit: section.split("|")
+
 					Label
 					{
 						width: parent.width
 						x: Theme.paddingMedium
-						text: "artistName"
+						text: sectionSplit[0]
 						wrapMode: Text.WordWrap
 						color: Theme.highlightColor
 						font.pixelSize: Theme.fontSizeLarge
@@ -86,7 +88,7 @@ Page
 					{
 						width: parent.width
 						x: Theme.paddingMedium
-						text: "[" + "albumYear" + "] " + "albumName"
+						text: "[" + sectionSplit[1] + "] " + sectionSplit[2]
 						wrapMode: Text.WordWrap
 						color: Theme.secondaryColor
 						font.pixelSize: Theme.fontSizeTiny
@@ -102,13 +104,13 @@ Page
 			MenuItem
 			{
 				text: qsTr("About")
-				onClicked: pageStack.push(Qt.resolvedUrl("../Pages/About.qml"))
+				onClicked: pageStack.push(Qt.resolvedUrl("../pages/About.qml"))
 			}
 
 			MenuItem
 			{
 				text: qsTr("Settings")
-				onClicked: pageStack.push(Qt.resolvedUrl("../Pages/Settings.qml"))
+				onClicked: pageStack.push(Qt.resolvedUrl("../pages/Settings.qml"))
 			}
 
 			MenuItem
@@ -117,7 +119,7 @@ Page
 
 				onClicked:
 				{
-					var dialog = pageStack.push(Qt.resolvedUrl("../Pages/AddFilesDialog.qml"));
+					var dialog = pageStack.push(Qt.resolvedUrl("../pages/AddFilesDialog.qml"));
 
 					dialog.accepted.connect(function()
 					{
