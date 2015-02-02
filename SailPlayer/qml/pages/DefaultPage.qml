@@ -39,7 +39,7 @@ Page
 				anchors.left: parent.left
 				anchors.leftMargin: Theme.paddingLarge + 10
 				anchors.verticalCenter: parent.verticalCenter
-				text: Util.zeroPad(trackNumber, 2)
+				text: trackNumber != 0 ? Util.zeroPad(trackNumber, 2) : ""
 				color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
 			}
 
@@ -50,7 +50,7 @@ Page
 				anchors.leftMargin: Theme.paddingMedium
 				anchors.right: labelTrackDuration.left
 				anchors.verticalCenter: parent.verticalCenter
-				text: trackName
+				text: trackName != "" ? trackName : trackFileName
 				color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
 				wrapMode: Text.WordWrap
 			}
@@ -81,7 +81,7 @@ Page
 					{
 						width: parent.width
 						x: Theme.paddingMedium
-						text: sectionSplit[0]
+						text: sectionSplit[0] != "" ? sectionSplit[0] : "?"
 						wrapMode: Text.WordWrap
 						color: Theme.highlightColor
 						font.pixelSize: Theme.fontSizeLarge
@@ -91,7 +91,7 @@ Page
 					{
 						width: parent.width
 						x: Theme.paddingMedium
-						text: "[" + sectionSplit[1] + "] " + sectionSplit[2]
+						text: (sectionSplit[1] != 0 ? "[" + sectionSplit[1] + "] " : "?") + sectionSplit[2]
 						wrapMode: Text.WordWrap
 						color: Theme.secondaryColor
 						font.pixelSize: Theme.fontSizeTiny

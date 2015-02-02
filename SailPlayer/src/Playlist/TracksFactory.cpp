@@ -38,6 +38,7 @@ namespace Playlist
 								   tag->track(),
 								   QString(tag->title().toCString()),
 								   properties->length(),
+								   fileInfo.fileName(),
 								   fileInfo.absoluteFilePath()));
 		}
 

@@ -8,7 +8,7 @@ namespace Playlist
 	class Track
 	{
 	public:
-		Track(QString artistName, QString albumName, int albumYear, int number, QString name, int duration, QString sourceFileName);
+		Track(QString artistName, QString albumName, int albumYear, int number, QString name, int duration, QString fileName, QString fullFilePath);
 
 		QString GetArtistName(){ return _artistName; }
 		QString GetAlbumName(){ return _albumName; }
@@ -16,7 +16,8 @@ namespace Playlist
 		int GetNumber(){ return _number; }
 		QString GetName(){ return _name; }
 		int GetDuration(){ return _duration; }
-		QString GetSourceFileName(){ return _sourceFileName; }
+		QString GetFileName(){ return _fileName; }
+		QString GetFullFilePath(){ return _fullFilePath; }
 
 	private:
 		QString _artistName;
@@ -25,7 +26,8 @@ namespace Playlist
 		int _number;
 		QString _name;
 		int _duration;
-		QString _sourceFileName;
+		QString _fileName;
+		QString _fullFilePath;
 	};
 }
 

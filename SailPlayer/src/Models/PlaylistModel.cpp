@@ -10,7 +10,8 @@ namespace Models
 		TrackNumberRole = Qt::UserRole + 4,
 		TrackNameRole = Qt::UserRole + 5,
 		TrackDurationRole = Qt::UserRole + 6,
-		SectionRole = Qt::UserRole + 7
+		TrackFileName = Qt::UserRole + 7,
+		SectionRole = Qt::UserRole + 8
 	};
 
 	QChar PlaylistModel::SectionSeparator = 0x0001;
@@ -28,6 +29,7 @@ namespace Models
 		_rolesNames.insert(TrackNumberRole, QByteArray("trackNumber"));
 		_rolesNames.insert(TrackNameRole, QByteArray("trackName"));
 		_rolesNames.insert(TrackDurationRole, QByteArray("trackDuration"));
+		_rolesNames.insert(TrackFileName, QByteArray("trackFileName"));
 		_rolesNames.insert(SectionRole, QByteArray("section"));
 	}
 
@@ -79,6 +81,9 @@ namespace Models
 
 			case TrackDurationRole:
 				return item->GetDuration();
+
+			case TrackFileName:
+				return item->GetFileName();
 
 			case SectionRole:
 				return item->GetArtistName() + SectionSeparator + QString::number(item->GetAlbumYear()) +  SectionSeparator + item->GetAlbumName();
