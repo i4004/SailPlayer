@@ -36,9 +36,9 @@ OTHER_FILES += \
     harbour-sail-player.desktop \
     qml/Main.qml \
     qml/Cover.qml \
-    qml/Pages/AddFilesDialog.qml \
-    qml/Pages/DefaultPage.qml \
-    qml/Util.js
+    qml/Util.js \
+    qml/pages/AddFilesDialog.qml \
+    qml/pages/DefaultPage.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 

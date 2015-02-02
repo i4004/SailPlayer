@@ -79,7 +79,7 @@ namespace Models
 				return item->GetDuration();
 
 			case GroupingStringRole:
-				return item->GetArtistName() + "-" + item->GetAlbumName();
+				return item->GetArtistName() + "|" + item->GetAlbumName();
 
 			default:
 				return QVariant();
