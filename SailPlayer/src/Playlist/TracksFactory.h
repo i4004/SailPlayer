@@ -16,9 +16,7 @@ namespace Playlist
 		virtual QList<Track*> Build(QList<QFileInfo> filesInfoList);
 
 	private:
-//		QList<Track*> Build(QString fileName);
 		QList<Track*> Build(QFileInfo fileInfo);
-//		QList<Track*> BuildFromCueSheet();
 	};
 }
 

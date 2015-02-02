@@ -21,12 +21,6 @@ namespace Playlist
 		return items;
 	}
 
-//	QList<Track> TracksLoader::Build(QString fileName)
-//	{
-//		QList<Track> tracksList;
-//		return tracksList;
-//	}
-
 	QList<Track*> TracksFactory::Build(QFileInfo fileInfo)
 	{
 		QList<Track*> items;
