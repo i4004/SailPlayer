@@ -20,10 +20,13 @@ Page
 	SilicaListView
 	{
 		id: listView
-		model: PlaylistModel { id: playlistModel }
 
 		anchors.fill: parent
 		header: PageHeader { title: "Default Playlist" }
+
+		clip: true
+
+		model: PlaylistModel {}
 
 		delegate: BackgroundItem
 		{
