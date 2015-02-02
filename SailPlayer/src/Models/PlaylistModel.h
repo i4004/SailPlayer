@@ -31,6 +31,8 @@ namespace Models
 		Q_INVOKABLE void addTracks(QString directoryPath);
 
 	private:
+		static QChar SectionSeparator;
+
 		TracksLoader* _tracksLoader;
 		TracksFactory _tracksFactory;
 		DirectoryRecursiveMultimediaFilesListFactory _filesFactory;

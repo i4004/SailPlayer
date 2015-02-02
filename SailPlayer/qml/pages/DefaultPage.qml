@@ -72,7 +72,7 @@ Page
 				{
 					width: parent.width
 
-					property var sectionSplit: section.split("|")
+					property var sectionSplit: section.split("\u0001")
 
 					Label
 					{

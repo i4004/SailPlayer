@@ -13,6 +13,8 @@ namespace Models
 		SectionRole = Qt::UserRole + 7
 	};
 
+	QChar PlaylistModel::SectionSeparator = 0x0001;
+
 	PlaylistModel::PlaylistModel(QObject* parent)
 	{
 		Q_UNUSED(parent);
@@ -79,7 +81,7 @@ namespace Models
 				return item->GetDuration();
 
 			case SectionRole:
-				return item->GetArtistName() + "|" + QString::number(item->GetAlbumYear()) + "|" + item->GetAlbumName();
+				return item->GetArtistName() + SectionSeparator + QString::number(item->GetAlbumYear()) +  SectionSeparator + item->GetAlbumName();
 
 			default:
 				return QVariant();
