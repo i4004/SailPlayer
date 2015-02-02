@@ -26,9 +26,7 @@ SOURCES += \
     src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.cpp \
     src/Models/FsRecordsListModel.cpp \
     src/Models/PlaylistModel.cpp \
-    src/Models/AlbumModel.cpp \
-    src/Playlist/TracksLoader.cpp \
-    src/Models/AlbumModelsFactory.cpp
+    src/Playlist/TracksLoader.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -58,10 +56,8 @@ HEADERS += \
     src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.h \
     src/Models/FsRecordsListModel.h \
     src/Models/PlaylistModel.h \
-    src/Models/AlbumModel.h \
     src/Playlist/TracksLoader.h \
     src/Playlist/ITracksFactory.h \
-    src/Models/AlbumModelsFactory.h \
     src/Playlist/ITracksLoader.h \
     src/Models/IAlbumModelsFactory.h
 

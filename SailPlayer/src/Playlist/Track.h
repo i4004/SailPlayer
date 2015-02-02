@@ -8,7 +8,7 @@ namespace Playlist
 	class Track
 	{
 	public:
-		Track(QString artisName, QString albumName, int albumYear, int number, QString name, int duration, QString sourceFileName);
+		Track(QString artistName, QString albumName, int albumYear, int number, QString name, int duration, QString sourceFileName);
 
 		QString GetArtistName(){ return _artistName; }
 		QString GetAlbumName(){ return _albumName; }
