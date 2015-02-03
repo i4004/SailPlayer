@@ -40,7 +40,6 @@ OTHER_FILES += \
     qml/controls/PlayerControlPanel.qml \
     qml/controls/PlaylistItem.qml \
     qml/controls/PlaylistSectionHeader.qml \
-    qml/controls/PlayerControlIconButton.qml \
     qml/controls/VerticalSpacerMedium.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
