@@ -24,6 +24,7 @@ Page
 		id: listView
 
 		anchors.fill: parent
+		anchors.bottomMargin: playerControlPanel.visible ? playerControlPanel.visibleSize : 0
 		header: PageHeader { title: "Default Playlist" }
 
 		clip: true
@@ -80,24 +81,24 @@ Page
 		{
 			id: remorse
 		}
+	}
 
-		PlayerControlPanel
-		{
-			id: playerControlPanel
+	PlayerControlPanel
+	{
+		id: playerControlPanel
 
-//			PushUpMenu
+//		PushUpMenu
+//		{
+//			MenuItem
 //			{
-//				MenuItem
-//				{
-//					text: qsTr("Order: default")
-//				}
-
-//				MenuItem
-//				{
-//					text: qsTr("Clear Playlist")
-//					onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
-//				}
+//				text: qsTr("Order: default")
 //			}
-		}
+
+//			MenuItem
+//			{
+//				text: qsTr("Clear Playlist")
+//				onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
+//			}
+//		}
 	}
 }
