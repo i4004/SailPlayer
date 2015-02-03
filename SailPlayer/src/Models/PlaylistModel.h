@@ -30,6 +30,7 @@ namespace Models
 		// Playlist controls
 
 		Q_INVOKABLE void addTracks(QString directoryPath);
+		Q_INVOKABLE void clearPlaylist();
 
 		void AddTracks(QList<Track*> tracks);
 

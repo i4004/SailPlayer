@@ -142,7 +142,13 @@ Page
 			MenuItem
 			{
 				text: qsTr("Clear Playlist")
+				onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
 			}
+		}
+
+		RemorsePopup
+		{
+			id: remorse
 		}
 	}
 }

@@ -118,4 +118,11 @@ namespace Models
 	{
 		_settings.SetPlaylist(_tracksList);
 	}
+
+	void PlaylistModel::clearPlaylist()
+	{
+		beginResetModel();
+		Cleanup();
+		endResetModel();
+	}
 }
