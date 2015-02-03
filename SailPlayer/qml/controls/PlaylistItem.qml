@@ -3,7 +3,7 @@ import Sailfish.Silica 1.0
 
 import "../Util.js" as Util
 
-ListItem
+BackgroundItem
 {
 	id: item
 	height: labelTrackName.height + Theme.paddingSmall
