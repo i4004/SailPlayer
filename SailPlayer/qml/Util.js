@@ -11,15 +11,17 @@ function zeroPad(number, digits)
 	return num;
 }
 
-// Format track duration to format like HH:mm:ss / m:ss
+// Format track duration to format like HH:mm:ss / m:ss / 0:ss
 function formatTrackDuration(trackDuration /* track duration in seconds */)
 {
+	trackDuration = parseInt(trackDuration)
+
 	var seconds = trackDuration % 60;
 	var totalMinutes = (trackDuration - seconds) / 60;
 	var minutes = totalMinutes % 60;
 	var hours = (totalMinutes - minutes) / 60;
 
 	return (hours > 0 ? hours + ":" : "")
-			+ (minutes > 0 ? (hours > 0 ? Util.zeroPad(minutes, 2) : minutes) + ":" : "")
+			+ (minutes > 0 ? (hours > 0 ? Util.zeroPad(minutes, 2) : minutes) + ":" : "0:")
 			+ Util.zeroPad(seconds, 2);
 }

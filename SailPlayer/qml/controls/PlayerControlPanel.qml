@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "../Util.js" as Util
 
 DockedPanel
 {
@@ -26,14 +27,15 @@ DockedPanel
 
 		VerticalSpacerMedium { id: spacer }
 
-		ProgressBar
+		Slider
 		{
 			id: progressBar
 			anchors.left: parent.left
 			anchors.right: parent.right
-			maximumValue: 100
+			maximumValue: 700
 			minimumValue: 0
-			value: 50
+			value: 356
+			valueText: Util.formatTrackDuration(value)
 		}
 
 		Row
