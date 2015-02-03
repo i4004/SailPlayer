@@ -2,7 +2,12 @@
 #define SAILPLAYERSETTINGS_H
 
 #include <QString>
+#include <QList>
 #include <QSettings>
+
+#include "Playlist/Track.h"
+
+using namespace Playlist;
 
 class SailPlayerSettings : public QObject
 {
@@ -16,6 +21,9 @@ public:
 	QString GetDefaultAddFilesDirectoryPath() const { return DefaultAddFilesDirectoryPath; }
 	QString GetLastAddFilesDirectoryPath();
 	void SetLastAddFilesDirectoryPath(QString value);
+
+	QList<Track*> GetPlaylist();
+	void SetPlaylist(QList<Track*> tracks);
 
 signals:
 	void LastAddFilesDirectoryPathChanged();
