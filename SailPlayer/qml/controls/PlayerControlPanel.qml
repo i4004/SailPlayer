@@ -21,11 +21,9 @@ DockedPanel
 	Column
 	{
 		id: playerControlsColumn
-		height: spacer.height + progressBar.height + playerButtons.height
+		height: progressBar.height + playerButtons.height
 		anchors.left: parent.left
 		anchors.right: parent.right
-
-		VerticalSpacerMedium { id: spacer }
 
 		Slider
 		{
@@ -42,7 +40,7 @@ DockedPanel
 		{
 			id: playerButtons
 			anchors.horizontalCenter: parent.horizontalCenter
-			spacing: 35
+			spacing: 38
 			height: playIcon.height
 
 			IconButton
