@@ -7,6 +7,7 @@
 #include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.h"
 #include "../Playlist/TracksFactory.h"
 #include "../Playlist/Track.h"
+#include "../SailPlayerSettings.h"
 
 using namespace Playlist;
 
@@ -30,6 +31,8 @@ namespace Models
 
 		Q_INVOKABLE void addTracks(QString directoryPath);
 
+		void AddTracks(QList<Track*> tracks);
+
 	private:
 		static QChar SectionSeparator;
 
@@ -37,10 +40,14 @@ namespace Models
 		TracksFactory _tracksFactory;
 		DirectoryRecursiveMultimediaFilesListFactory _filesFactory;
 
+		SailPlayerSettings _settings;
+
 		QList<Track*> _tracksList;
 		QHash<int, QByteArray> _rolesNames;
 
 		void Cleanup();
+		void LoadPlaylist();
+		void SavePlaylist();
 	};
 }
 

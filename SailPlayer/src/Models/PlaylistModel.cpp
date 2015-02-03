@@ -31,10 +31,13 @@ namespace Models
 		_rolesNames.insert(TrackDurationRole, QByteArray("trackDuration"));
 		_rolesNames.insert(TrackFileName, QByteArray("trackFileName"));
 		_rolesNames.insert(SectionRole, QByteArray("section"));
+
+		LoadPlaylist();
 	}
 
 	PlaylistModel::~PlaylistModel()
-	{
+	{		
+		SavePlaylist();
 		Cleanup();
 
 		delete _tracksLoader;
@@ -96,12 +99,23 @@ namespace Models
 	void PlaylistModel::addTracks(QString directoryPath)
 	{
 		_filesFactory.SetDirectoryPath(directoryPath);
-		QList<Track*> tracks = _tracksLoader->Build();
+		AddTracks(_tracksLoader->Build());
+	}
 
+	void PlaylistModel::AddTracks(QList<Track*> tracks)
+	{
 		beginResetModel();
-
 		_tracksList.append(tracks);
+		endResetModel();
+	}
 
-		endResetModel();		
+	void PlaylistModel::LoadPlaylist()
+	{
+		AddTracks(_settings.GetPlaylist());
+	}
+
+	void PlaylistModel::SavePlaylist()
+	{
+		_settings.SetPlaylist(_tracksList);
 	}
 }
