@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.AudioPlayer 1.0
 import harbour.sail.player.PlaylistModel 1.0
+import "../controls"
 import "../Util.js" as Util
 
 Page
@@ -17,6 +18,7 @@ Page
 //		player.play();
 	}
 
+	// Playlist
 	SilicaListView
 	{
 		id: listView
@@ -28,76 +30,18 @@ Page
 
 		model: PlaylistModel {}
 
-		delegate: BackgroundItem
+		delegate: PlaylistItem
 		{
-			id: item
-			height: labelTrackName.height + Theme.paddingSmall
-
-			Label
+			onClicked:
 			{
-				id: labelTrackNumber
-				anchors.left: parent.left
-				anchors.leftMargin: Theme.paddingLarge + 10
-				anchors.verticalCenter: parent.verticalCenter
-				text: trackNumber != 0 ? Util.zeroPad(trackNumber, 2) : ""
-				color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
-			}
-
-			Label
-			{
-				id: labelTrackName
-				anchors.left: labelTrackNumber.right
-				anchors.leftMargin: Theme.paddingMedium
-				anchors.right: labelTrackDuration.left
-				anchors.verticalCenter: parent.verticalCenter
-				text: trackName != "" ? trackName : trackFileName
-				color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
-				wrapMode: Text.WordWrap
-			}
-
-			Label
-			{
-				id: labelTrackDuration
-				anchors.verticalCenter: parent.verticalCenter
-				anchors.right: parent.right
-				anchors.rightMargin: Theme.paddingMedium
-				text: Util.formatTrackDuration(trackDuration)
-				color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
+				playerControlPanel.show()
 			}
 		}
 
 		section
 		{
 			property: "section"
-			delegate: Component
-			{
-				Column
-				{
-					width: parent.width
-
-					property var sectionSplit: section.split("\u0001")
-
-					Label
-					{
-						width: parent.width
-						x: Theme.paddingMedium
-						text: sectionSplit[0] != "" ? sectionSplit[0] : "?"
-						wrapMode: Text.WordWrap
-						color: Theme.highlightColor
-						font.pixelSize: Theme.fontSizeLarge
-					}
-
-					Label
-					{
-						width: parent.width
-						x: Theme.paddingMedium
-						text: (sectionSplit[1] != 0 ? "[" + sectionSplit[1] + "] " : "?") + sectionSplit[2]
-						wrapMode: Text.WordWrap
-						color: Theme.secondaryColor
-						font.pixelSize: Theme.fontSizeTiny
-					}
-				}
-			}
+			delegate: PlaylistSectionHeader {}
 		}
 
 		VerticalScrollDecorator {}
@@ -132,23 +76,28 @@ Page
 			}
 		}
 
-		PushUpMenu
-		{
-			MenuItem
-			{
-				text: qsTr("Order: default")
-			}
-
-			MenuItem
-			{
-				text: qsTr("Clear Playlist")
-				onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
-			}
-		}
-
 		RemorsePopup
 		{
 			id: remorse
 		}
+
+//		PlayerControlPanel
+//		{
+//			id: playerControlPanel
+
+//			PushUpMenu
+//			{
+//				MenuItem
+//				{
+//					text: qsTr("Order: default")
+//				}
+
+//				MenuItem
+//				{
+//					text: qsTr("Clear Playlist")
+//					onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
+//				}
+//			}
+//		}
 	}
 }
