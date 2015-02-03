@@ -81,24 +81,26 @@ Page
 		{
 			id: remorse
 		}
+
+		PushUpMenu
+		{
+			MenuItem
+			{
+				text: qsTr("Order: default")
+			}
+
+			MenuItem
+			{
+				text: qsTr("Clear Playlist")
+				onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
+			}
+		}
 	}
 
 	PlayerControlPanel
 	{
 		id: playerControlPanel
 
-//		PushUpMenu
-//		{
-//			MenuItem
-//			{
-//				text: qsTr("Order: default")
-//			}
 
-//			MenuItem
-//			{
-//				text: qsTr("Clear Playlist")
-//				onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
-//			}
-//		}
 	}
 }
