@@ -118,7 +118,7 @@ Page
 
 			MenuItem
 			{
-				text: qsTr("Add")
+				text: qsTr("Add Folder")
 
 				onClicked:
 				{
@@ -129,6 +129,19 @@ Page
 						listView.model.addTracks(dialog.directoryPath);
 					});
 				}
+			}
+		}
+
+		PushUpMenu
+		{
+			MenuItem
+			{
+				text: qsTr("Order: default")
+			}
+
+			MenuItem
+			{
+				text: qsTr("Clear Playlist")
 			}
 		}
 	}
