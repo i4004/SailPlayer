@@ -81,9 +81,9 @@ Page
 			id: remorse
 		}
 
-//		PlayerControlPanel
-//		{
-//			id: playerControlPanel
+		PlayerControlPanel
+		{
+			id: playerControlPanel
 
 //			PushUpMenu
 //			{
@@ -98,6 +98,6 @@ Page
 //					onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
 //				}
 //			}
-//		}
+		}
 	}
 }
