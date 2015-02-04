@@ -44,6 +44,7 @@ Page
 				playlist.setTrackForPlaying(index);
 				player.setTrackForPlaying(playlist.getTrackPathForPlaying());
 				playlist.setPlaying(true);
+				playerControlPanel.isPlaying = true;
 				player.play();
 			}
 		}
@@ -125,6 +126,7 @@ Page
 		{
 			player.stop();
 			isPlaying = false;
+			playlist.setPlaying(isPlaying);
 		}
 	}
 }
