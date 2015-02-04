@@ -20,7 +20,6 @@ void SailPlayerSettings::SetLastAddFilesDirectoryPath(QString value)
 	emit LastAddFilesDirectoryPathChanged();
 }
 
-
 QList<Track*> SailPlayerSettings::GetPlaylist()
 {
 	QList<Track*> tracks;

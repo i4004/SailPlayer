@@ -20,6 +20,7 @@ namespace Models
 	{
 		Q_UNUSED(parent);
 
+		_currentTrack = NULL;
 		_tracksLoader = new TracksLoader(_tracksFactory, _filesFactory);
 
 		_rolesNames = QAbstractListModel::roleNames();
@@ -33,6 +34,7 @@ namespace Models
 		_rolesNames.insert(SectionRole, QByteArray("section"));
 
 		LoadPlaylist();
+		setTrackForPlaying(0);
 	}
 
 	PlaylistModel::~PlaylistModel()
@@ -124,5 +126,21 @@ namespace Models
 		beginResetModel();
 		Cleanup();
 		endResetModel();
+	}
+
+	QString PlaylistModel::getTrackPathForPlaying()
+	{
+		if(_currentTrack == NULL)
+			return NULL;
+
+		return _currentTrack->GetFullFilePath();
+	}
+
+	void PlaylistModel::setTrackForPlaying(int index)
+	{
+		if(_tracksList.count() == 0 || index >= _tracksList.count())
+			return;
+
+		_currentTrack = _tracksList.at(index);
 	}
 }

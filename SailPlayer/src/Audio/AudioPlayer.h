@@ -28,6 +28,7 @@ namespace Audio
 		Q_INVOKABLE void play();
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
+		Q_INVOKABLE void setTrackForPlaying(QString fullFilePath);
 
 	public slots:
 		void OnAudioResourceAquireStateChanged(bool acquired);
@@ -50,6 +51,10 @@ namespace Audio
 
 		static int EqualizerBandsNumber;
 		GstEqualizerBandState _equalizerData[];
+
+		// Current playing data
+
+		QString _trackFullFilePath;
 
 		bool Init();
 

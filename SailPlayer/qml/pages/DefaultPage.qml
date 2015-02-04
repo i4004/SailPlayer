@@ -15,7 +15,7 @@ Page
 
 	Component.onCompleted:
 	{
-//		player.play();
+		player.setTrackForPlaying(playlist.getTrackPathForPlaying())
 	}
 
 	// Playlist
@@ -29,7 +29,7 @@ Page
 
 		clip: true
 
-		model: PlaylistModel {}
+		model: PlaylistModel { id: playlist }
 
 		delegate: PlaylistItem
 		{
@@ -101,6 +101,20 @@ Page
 	{
 		id: playerControlPanel
 
+		onPlayPause:
+		{
+			if(isPlaying)
+				player.pause();
+			else
+				player.play();
 
+			isPlaying = !isPlaying;
+		}
+
+		onStop:
+		{
+			player.stop();
+			isPlaying = false;
+		}
 	}
 }

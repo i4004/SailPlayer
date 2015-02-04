@@ -11,6 +11,7 @@ namespace Audio
 	{
 		_pausedByResourceBlock = false;
 		_currentState = Ready;
+		_trackFullFilePath = "";
 
 		gst_init(NULL, NULL);
 
@@ -116,7 +117,6 @@ namespace Audio
 
 		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _equalizer);
 
-//		g_object_set(G_OBJECT(_source), "location", "/home/nemo/Music/Passage.ogg", NULL);
 		g_object_set (G_OBJECT (_equalizer), "num-bands", EqualizerBandsNumber, NULL);
 
 		SetEqualizerData();
@@ -168,5 +168,11 @@ namespace Audio
 
 			g_object_unref(G_OBJECT(band));
 		}
+	}
+
+	void AudioPlayer::setTrackForPlaying(QString fullFilePath)
+	{
+		_trackFullFilePath = fullFilePath;
+		g_object_set(G_OBJECT(_source), "location", _trackFullFilePath.toLocal8Bit().data(), NULL);
 	}
 }

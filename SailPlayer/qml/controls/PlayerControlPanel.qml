@@ -6,14 +6,20 @@ DockedPanel
 {
 	id: dockPanel
 
-	width: parent.width
-	height: playerControlsColumn.height + Theme.paddingLarge
-	dock: Dock.Bottom
-
 	property int progressMinValue: 0
 	property int progressMaxValue: 0
 	property int progressValue: 0
-	property bool isPlayling: false
+	property bool isPlaying: false
+
+	signal previous
+	signal playPause
+	signal stop
+	signal next
+	signal positonChange
+
+	width: parent.width
+	height: playerControlsColumn.height + Theme.paddingLarge
+	dock: Dock.Bottom
 
 	anchors.left: parent.left
 	anchors.right: parent.right
@@ -46,22 +52,26 @@ DockedPanel
 			IconButton
 			{
 				icon.source: "image://theme/icon-m-previous"
+				onClicked: previous()
 			}
 
 			IconButton
 			{
 				id: playIcon
-				icon.source: isPlayling ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
+				icon.source: isPlaying ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
+				onClicked: playPause()
 			}
 
 			IconButton
 			{
 				icon.source: "image://theme/icon-m-tab"
+				onClicked: stop()
 			}
 
 			IconButton
 			{
 				icon.source: "image://theme/icon-m-next"
+				onClicked: next()
 			}
 		}
 	}

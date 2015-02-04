@@ -31,6 +31,8 @@ namespace Models
 
 		Q_INVOKABLE void addTracks(QString directoryPath);
 		Q_INVOKABLE void clearPlaylist();
+		Q_INVOKABLE QString getTrackPathForPlaying();
+		Q_INVOKABLE void setTrackForPlaying(int index);
 
 		void AddTracks(QList<Track*> tracks);
 
@@ -45,6 +47,10 @@ namespace Models
 
 		QList<Track*> _tracksList;
 		QHash<int, QByteArray> _rolesNames;
+
+		// Current playing data
+
+		Track* _currentTrack;
 
 		void Cleanup();
 		void LoadPlaylist();
