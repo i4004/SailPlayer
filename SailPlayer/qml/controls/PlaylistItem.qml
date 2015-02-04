@@ -17,7 +17,7 @@ BackgroundItem
 		anchors.leftMargin: Theme.paddingLarge + 10
 		anchors.verticalCenter: parent.verticalCenter
 		text: trackNumber != 0 ? Util.zeroPad(trackNumber, 2) : ""
-		color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
+		color: item.highlighted || isPlaying ? Theme.highlightColor : Theme.primaryColor
 	}
 
 	Label
@@ -28,7 +28,7 @@ BackgroundItem
 		anchors.right: labelTrackDuration.left
 		anchors.verticalCenter: parent.verticalCenter
 		text: trackName != "" ? trackName : trackFileName
-		color: item.highlighted ? Theme.highlightColor : Theme.primaryColor
+		color: item.highlighted || isPlaying ? Theme.highlightColor : Theme.primaryColor
 		wrapMode: Text.WordWrap
 	}
 
@@ -39,7 +39,7 @@ BackgroundItem
 		anchors.right: parent.right
 		anchors.rightMargin: Theme.paddingMedium
 		text: Util.formatTrackDuration(trackDuration)
-		color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
+		color: item.highlighted || isPlaying ? Theme.highlightColor : Theme.secondaryColor
 	}
 
 	onPressed:

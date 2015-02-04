@@ -11,7 +11,9 @@ namespace Models
 		TrackNameRole = Qt::UserRole + 5,
 		TrackDurationRole = Qt::UserRole + 6,
 		TrackFileName = Qt::UserRole + 7,
-		SectionRole = Qt::UserRole + 8
+		SectionRole = Qt::UserRole + 8,
+		IsSelectedRole = Qt::UserRole + 9,
+		IsPlayingRole = Qt::UserRole + 10
 	};
 
 	QChar PlaylistModel::SectionSeparator = 0x0001;
@@ -20,7 +22,8 @@ namespace Models
 	{
 		Q_UNUSED(parent);
 
-		_currentTrack = NULL;
+		_currentTrackForPlaying = NULL;
+		_currentPlayingTrack = NULL;
 		_tracksLoader = new TracksLoader(_tracksFactory, _filesFactory);
 
 		_rolesNames = QAbstractListModel::roleNames();
@@ -32,6 +35,8 @@ namespace Models
 		_rolesNames.insert(TrackDurationRole, QByteArray("trackDuration"));
 		_rolesNames.insert(TrackFileName, QByteArray("trackFileName"));
 		_rolesNames.insert(SectionRole, QByteArray("section"));
+		_rolesNames.insert(IsSelectedRole, QByteArray("isSelected"));
+		_rolesNames.insert(IsPlayingRole, QByteArray("isPlaying"));
 
 		LoadPlaylist();
 		setTrackForPlaying(0);
@@ -43,12 +48,6 @@ namespace Models
 		Cleanup();
 
 		delete _tracksLoader;
-	}
-
-	void PlaylistModel::Cleanup()
-	{
-		while (!_tracksList.isEmpty())
-			 delete _tracksList.takeFirst();
 	}
 
 	int PlaylistModel::rowCount(const QModelIndex &parent) const
@@ -91,7 +90,13 @@ namespace Models
 				return item->GetFileName();
 
 			case SectionRole:
-				return item->GetArtistName() + SectionSeparator + QString::number(item->GetAlbumYear()) +  SectionSeparator + item->GetAlbumName();
+				return item->GetArtistName() + SectionSeparator + QString::number(item->GetAlbumYear()) +  SectionSeparator + item->GetAlbumName();\
+
+			case IsSelectedRole:
+				return item->IsSelected();
+
+			case IsPlayingRole:
+				return item->IsPlaying();
 
 			default:
 				return QVariant();
@@ -104,11 +109,64 @@ namespace Models
 		AddTracks(_tracksLoader->Build());
 	}
 
+	void PlaylistModel::clearPlaylist()
+	{
+		beginResetModel();
+		Cleanup();
+		endResetModel();
+	}
+
+	QString PlaylistModel::getTrackPathForPlaying()
+	{
+		if(_currentTrackForPlaying == NULL)
+			return NULL;
+
+		return _currentTrackForPlaying->GetFullFilePath();
+	}
+
+	void PlaylistModel::setTrackForPlaying(int itemIndex)
+	{
+		if(_tracksList.count() == 0 || itemIndex >= _tracksList.count())
+			return;
+
+		_currentTrackForPlaying = _tracksList.at(itemIndex);
+
+		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0));
+	}
+
+	void PlaylistModel::toggleSelectTrack(int itemIndex)
+	{
+		Track* track = _tracksList.at(itemIndex);
+
+		track->SetSelected(!track->IsSelected());
+
+		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsSelectedRole));
+	}
+
+	void PlaylistModel::setPlaying(bool isPlaying)
+	{
+		if(_currentPlayingTrack != NULL)
+			_currentPlayingTrack->SetPlaying(false);
+
+		_currentPlayingTrack = _currentTrackForPlaying;
+
+		if(_currentPlayingTrack != NULL)
+			_currentPlayingTrack->SetPlaying(isPlaying);
+
+		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsPlayingRole));
+	}
+
 	void PlaylistModel::AddTracks(QList<Track*> tracks)
 	{
 		beginResetModel();
 		_tracksList.append(tracks);
 		endResetModel();
+	}
+
+	void PlaylistModel::Cleanup()
+	{
+		while (!_tracksList.isEmpty())
+			delete _tracksList.takeFirst();
 	}
 
 	void PlaylistModel::LoadPlaylist()
@@ -119,28 +177,5 @@ namespace Models
 	void PlaylistModel::SavePlaylist()
 	{
 		_settings.SetPlaylist(_tracksList);
-	}
-
-	void PlaylistModel::clearPlaylist()
-	{
-		beginResetModel();
-		Cleanup();
-		endResetModel();
-	}
-
-	QString PlaylistModel::getTrackPathForPlaying()
-	{
-		if(_currentTrack == NULL)
-			return NULL;
-
-		return _currentTrack->GetFullFilePath();
-	}
-
-	void PlaylistModel::setTrackForPlaying(int index)
-	{
-		if(_tracksList.count() == 0 || index >= _tracksList.count())
-			return;
-
-		_currentTrack = _tracksList.at(index);
 	}
 }

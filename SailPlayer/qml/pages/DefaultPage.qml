@@ -18,7 +18,6 @@ Page
 		player.setTrackForPlaying(playlist.getTrackPathForPlaying())
 	}
 
-	// Playlist
 	SilicaListView
 	{
 		id: listView
@@ -35,14 +34,16 @@ Page
 		{
 			onClicked:
 			{
-				playerControlPanel.show()
+				playerControlPanel.show();
+				playlist.toggleSelectTrack(index);
 			}
 
 			onPushAndHold:
 			{
 				player.stop();
 				playlist.setTrackForPlaying(index);
-				player.setTrackForPlaying(playlist.getTrackPathForPlaying())
+				player.setTrackForPlaying(playlist.getTrackPathForPlaying());
+				playlist.setPlaying(true);
 				player.play();
 			}
 		}
@@ -117,6 +118,7 @@ Page
 				player.play();
 
 			isPlaying = !isPlaying;
+			playlist.setPlaying(isPlaying);
 		}
 
 		onStop:

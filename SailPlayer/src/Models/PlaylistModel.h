@@ -33,6 +33,8 @@ namespace Models
 		Q_INVOKABLE void clearPlaylist();
 		Q_INVOKABLE QString getTrackPathForPlaying();
 		Q_INVOKABLE void setTrackForPlaying(int index);
+		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
+		Q_INVOKABLE void setPlaying(bool isPlaying);
 
 		void AddTracks(QList<Track*> tracks);
 
@@ -50,7 +52,8 @@ namespace Models
 
 		// Current playing data
 
-		Track* _currentTrack;
+		Track* _currentTrackForPlaying;
+		Track* _currentPlayingTrack;
 
 		void Cleanup();
 		void LoadPlaylist();
