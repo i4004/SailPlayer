@@ -37,6 +37,14 @@ Page
 			{
 				playerControlPanel.show()
 			}
+
+			onPushAndHold:
+			{
+				player.stop();
+				playlist.setTrackForPlaying(index);
+				player.setTrackForPlaying(playlist.getTrackPathForPlaying())
+				player.play();
+			}
 		}
 
 		section

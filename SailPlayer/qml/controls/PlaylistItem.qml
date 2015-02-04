@@ -8,8 +8,10 @@ BackgroundItem
 	id: item
 	height: labelTrackName.height + Theme.paddingSmall
 
+	signal pushAndHold
+
 	Label
-	{
+	{		
 		id: labelTrackNumber
 		anchors.left: parent.left
 		anchors.leftMargin: Theme.paddingLarge + 10
@@ -38,5 +40,21 @@ BackgroundItem
 		anchors.rightMargin: Theme.paddingMedium
 		text: Util.formatTrackDuration(trackDuration)
 		color: item.highlighted ? Theme.highlightColor : Theme.secondaryColor
+	}
+
+	onPressed:
+	{
+		pushAndHoldTimer.restart();
+	}
+
+	Timer
+	{
+		id: pushAndHoldTimer
+
+		onTriggered:
+		{
+			if(item.highlighted)
+				item.pushAndHold();
+		}
 	}
 }
