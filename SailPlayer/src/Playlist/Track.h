@@ -19,6 +19,12 @@ namespace Playlist
 		QString GetFileName(){ return _fileName; }
 		QString GetFullFilePath(){ return _fullFilePath; }
 
+		bool IsSelected(){ return _selected; }
+		void SetSelected(bool selected){ _selected = selected; }
+
+		bool IsPlaying(){ return _playing; }
+		void SetPlaying(bool playing){ _playing = playing; }
+
 	private:
 		QString _artistName;
 		QString _albumName;
@@ -28,6 +34,9 @@ namespace Playlist
 		int _duration;
 		QString _fileName;
 		QString _fullFilePath;
+
+		bool _selected;
+		bool _playing;
 	};
 }
 

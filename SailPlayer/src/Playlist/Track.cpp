@@ -6,5 +6,7 @@ namespace Playlist
 		: _artistName(artistName), _albumName(albumName), _albumYear(albumYear), _number(number), _name(name), _duration(duration),
 		  _fileName(fileName), _fullFilePath(fullFilePath)
 	{
+		_selected = false;
+		_playing = false;
 	}
 }
