@@ -15,7 +15,15 @@ Page
 
 	Component.onCompleted:
 	{
-		player.setTrackForPlaying(playlist.getTrackPathForPlaying())
+		playlist.loadPlaylist();
+		playlist.setTrackToPlay(0);
+
+		player.setTrackToPlay(playlist.getTrackToPlayPath());
+	}
+
+	Component.onDestruction:
+	{
+		playlist.savePlaylist();
 	}
 
 	SilicaListView
@@ -41,9 +49,9 @@ Page
 			onPushAndHold:
 			{
 				player.stop();
-				playlist.setTrackForPlaying(index);
-				player.setTrackForPlaying(playlist.getTrackPathForPlaying());
-				playlist.setPlaying(true);
+				playlist.setTrackToPlay(index);
+				player.setTrackToPlay(playlist.getTrackToPlayPath());
+				playlist.setPlayingTrack(true);
 				playerControlPanel.isPlaying = true;
 				player.play();
 			}
@@ -119,14 +127,14 @@ Page
 				player.play();
 
 			isPlaying = !isPlaying;
-			playlist.setPlaying(isPlaying);
+			playlist.setPlayingTrack(isPlaying);
 		}
 
 		onStop:
 		{
 			player.stop();
 			isPlaying = false;
-			playlist.setPlaying(isPlaying);
+			playlist.setPlayingTrack(isPlaying);
 		}
 	}
 }

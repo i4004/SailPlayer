@@ -6,16 +6,13 @@ DockedPanel
 {
 	id: dockPanel
 
-	property int progressMinValue: 0
-	property int progressMaxValue: 0
-	property int progressValue: 0
+	property int sliderMaxValue: 0
 	property bool isPlaying: false
 
 	signal previous
 	signal playPause
 	signal stop
 	signal next
-	signal positonChange
 
 	width: parent.width
 	height: playerControlsColumn.height + Theme.paddingLarge
@@ -27,24 +24,22 @@ DockedPanel
 	Column
 	{
 		id: playerControlsColumn
-		height: progressBar.height + playerButtons.height
+		height: slider.height + playerButtons.height
 		anchors.left: parent.left
 		anchors.right: parent.right
 
 		Slider
 		{
-			id: progressBar
+			id: slider
 			anchors.left: parent.left
 			anchors.right: parent.right
-			maximumValue: 700
-			minimumValue: 0
-			value: 356
 			valueText: Util.formatTrackDuration(value)
 		}
 
 		Row
 		{
 			id: playerButtons
+
 			anchors.horizontalCenter: parent.horizontalCenter
 			spacing: 38
 			height: playIcon.height

@@ -30,13 +30,27 @@ namespace Models
 		// Playlist controls
 
 		Q_INVOKABLE void addTracks(QString directoryPath);
+
 		Q_INVOKABLE void clearPlaylist();
-		Q_INVOKABLE QString getTrackPathForPlaying();
-		Q_INVOKABLE void setTrackForPlaying(int index);
+
+		// Load playlist from settings
+		Q_INVOKABLE void loadPlaylist();
+
+		// Save playlist to settings
+		Q_INVOKABLE void savePlaylist();
+
+		Q_INVOKABLE QString getTrackToPlayPath();
+		Q_INVOKABLE void setTrackToPlay(int index);
+
 		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
-		Q_INVOKABLE void setPlaying(bool isPlaying);
+
+		// Mark track to play as playing unmarking previously playing track
+		Q_INVOKABLE void setPlayingTrack(bool isPlaying);
 
 		void AddTracks(QList<Track*> tracks);
+
+	signals:
+		int	currentTrackDurationUpdated(int duration);
 
 	private:
 		static QChar SectionSeparator;
@@ -52,12 +66,10 @@ namespace Models
 
 		// Current playing data
 
-		Track* _currentTrackForPlaying;
+		Track* _currentTrackToPlay;
 		Track* _currentPlayingTrack;
 
 		void Cleanup();
-		void LoadPlaylist();
-		void SavePlaylist();
 	};
 }
 
