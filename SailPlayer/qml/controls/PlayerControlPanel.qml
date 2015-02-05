@@ -6,17 +6,20 @@ DockedPanel
 {
 	id: dockPanel
 
-	property bool isPlaying: false
-
 	signal previous
-	signal playPause
-	signal stop
+	signal playPause(bool isPlaying)
+	signal stop(bool isPlaying)
 	signal next
 
 	function setTrackDuration(value)
 	{
 		slider.maximumValue = value;
 		slider.value = 0;
+	}
+
+	function setIsPlaying(value)
+	{
+		playerButtons.isPlaying = value;
 	}
 
 	width: parent.width
@@ -46,6 +49,8 @@ DockedPanel
 		{
 			id: playerButtons
 
+			property bool isPlaying: false
+
 			anchors.horizontalCenter: parent.horizontalCenter
 			spacing: 38
 			height: playIcon.height
@@ -59,11 +64,11 @@ DockedPanel
 			IconButton
 			{
 				id: playIcon
-				icon.source: isPlaying ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
+				icon.source: playerButtons.isPlaying ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
 				onClicked:
 				{
-					isPlaying = !isPlaying;
-					playPause();
+					playerButtons.isPlaying = !playerButtons.isPlaying;
+					playPause(playerButtons.isPlaying);
 				}
 			}
 
@@ -72,8 +77,8 @@ DockedPanel
 				icon.source: "image://theme/icon-m-tab"
 				onClicked:
 				{
-					isPlaying = false;
-					stop();
+					playerButtons.isPlaying = false;
+					stop(playerButtons.isPlaying);
 				}
 			}
 

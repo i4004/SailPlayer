@@ -54,7 +54,7 @@ Page
 				playlist.setTrackToPlay(index);
 				player.setTrackToPlay(playlist.getTrackToPlayPath());
 				playlist.setPlayingTrack(true);
-				playerControlPanel.isPlaying = true;
+				playerControlPanel.setIsPlaying(true);
 				player.play();
 			}
 		}
