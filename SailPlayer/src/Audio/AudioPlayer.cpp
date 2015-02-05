@@ -12,6 +12,8 @@ namespace Audio
 		_pausedByResourceBlock = false;
 		_currentState = Ready;
 		_trackToPlayFullFilePath = "";
+		_gstTimeFormat = GST_FORMAT_TIME;
+		_currentPositionTimer.setInterval(1000);
 
 		gst_init(NULL, NULL);
 
@@ -20,6 +22,8 @@ namespace Audio
 		QObject::connect(_audioResource, SIGNAL(OnAquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
 
 		Init();
+
+		connect(&_currentPositionTimer, SIGNAL(timeout()), this, SLOT(OnCurrentPositionTimerCallback()));
 	}
 
 	AudioPlayer::~AudioPlayer()
@@ -130,12 +134,16 @@ namespace Audio
 
 		_currentState = Playing;
 		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
+
+		_currentPositionTimer.start();
 	}
 
 	void AudioPlayer::stop()
 	{
 		gst_element_set_state (_pipeline, GST_STATE_READY);
 		_currentState = Ready;
+
+		_currentPositionTimer.stop();
 
 		_audioResource->Disconnect();
 	}
@@ -145,12 +153,24 @@ namespace Audio
 		_pausedByResourceBlock = false;
 		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
 		_currentState = Paused;
+
+		_currentPositionTimer.stop();
 	}
 
 	void AudioPlayer::setTrackToPlay(QString fullFilePath)
 	{
 		_trackToPlayFullFilePath = fullFilePath;
 		g_object_set(G_OBJECT(_source), "location", _trackToPlayFullFilePath.toLocal8Bit().data(), NULL);
+	}
+
+	void AudioPlayer::seek(int seconds)
+	{
+		Seek(seconds * 1000000000);
+	}
+
+	int AudioPlayer::OnCurrentPositionTimerCallback()
+	{
+		return GetCurrentPosition() / 1000000000;
 	}
 
 	void AudioPlayer::SetEqualizerData()
@@ -174,5 +194,20 @@ namespace Audio
 
 			g_object_unref(G_OBJECT(band));
 		}
+	}
+
+	gint64 AudioPlayer::GetCurrentPosition()
+	{
+		gint64 pos;
+
+		if (gst_element_query_position(_pipeline, &_gstTimeFormat, &pos))
+			return pos;
+
+		return 0;
+	}
+
+	void AudioPlayer::Seek(gint64 nanoseconds)
+	{
+		gst_element_seek(_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH, GST_SEEK_TYPE_SET, nanoseconds, GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
 	}
 }

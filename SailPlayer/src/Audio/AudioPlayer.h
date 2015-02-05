@@ -2,6 +2,7 @@
 #define AUDIOPLAYER_H
 
 #include <QObject>
+#include <QTimer>
 #include <gst/gst.h>
 #include "AudioResource.h"
 #include "AudioPlayerState.h"
@@ -29,9 +30,16 @@ namespace Audio
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
 		Q_INVOKABLE void setTrackToPlay(QString fullFilePath);
+		Q_INVOKABLE void seek(int seconds);
 
 	public slots:
 		void OnAudioResourceAquireStateChanged(bool acquired);
+
+	signals:
+		void OnGetCurrentPosition(int seconds);
+
+	private slots:
+		int OnCurrentPositionTimerCallback();
 
 	private:
 		// Audio resoure and modules
@@ -54,6 +62,8 @@ namespace Audio
 
 		// Current playing data
 
+		QTimer _currentPositionTimer;
+		GstFormat _gstTimeFormat;
 		QString _trackToPlayFullFilePath;
 
 		// Callbacks
@@ -63,6 +73,9 @@ namespace Audio
 
 		bool Init();
 		void SetEqualizerData();
+
+		gint64 GetCurrentPosition();
+		void Seek(gint64 nanoseconds);
 	};
 }
 
