@@ -10,6 +10,7 @@ DockedPanel
 	signal playPause(bool isPlaying)
 	signal stop(bool isPlaying)
 	signal next
+	signal seek(int seconds)
 
 	function setTrackDuration(value)
 	{
@@ -19,7 +20,8 @@ DockedPanel
 
 	function setCurrentTrackPosition(value)
 	{
-		slider.value = value;
+		if(!slider.highlighted && !slider.seekRequestProcess)
+			slider.value = value;
 	}
 
 	function setIsPlaying(value)
@@ -43,11 +45,21 @@ DockedPanel
 
 		Slider
 		{
+			property bool seekRequestProcess: false
+
 			id: slider
 			maximumValue: 1
 			anchors.left: parent.left
 			anchors.right: parent.right
 			valueText: Util.formatTrackDuration(value)
+			onPressed: seekRequestProcess = true
+			onReleased:
+			{
+				if(seekRequestProcess)
+					seek(value);
+
+				seekRequestProcess = false;
+			}
 		}
 
 		Row
@@ -84,6 +96,7 @@ DockedPanel
 				{
 					playerButtons.isPlaying = false;
 					stop(playerButtons.isPlaying);
+					slider.value = 0;
 				}
 			}
 

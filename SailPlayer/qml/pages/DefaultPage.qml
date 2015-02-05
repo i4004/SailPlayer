@@ -137,5 +137,7 @@ Page
 			player.stop();
 			playlist.setPlayingTrack(isPlaying);
 		}
+
+		onSeek: player.seek(seconds)
 	}
 }

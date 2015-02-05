@@ -166,7 +166,7 @@ namespace Audio
 
 	void AudioPlayer::seek(int seconds)
 	{
-		Seek(seconds * 1000000000);
+		Seek(gint64(seconds) * 1000000000);
 	}
 
 	void AudioPlayer::OnCurrentPositionTimerCallback()
