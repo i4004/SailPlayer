@@ -29,7 +29,7 @@ namespace Audio
 		Q_INVOKABLE void play();
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
-		Q_INVOKABLE void setTrackToPlay(QString fullFilePath);
+		Q_INVOKABLE void setFileToPlay(QString fullFilePath);
 		Q_INVOKABLE void seek(int seconds);
 
 	public slots:
@@ -66,7 +66,7 @@ namespace Audio
 
 		QTimer _currentPositionTimer;
 		GstFormat _gstTimeFormat;
-		QString _trackToPlayFullFilePath;
+		QString _fileToPlayFullFilePath;
 
 		// Callbacks
 

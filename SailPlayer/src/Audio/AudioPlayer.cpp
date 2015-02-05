@@ -11,7 +11,7 @@ namespace Audio
 	{
 		_pausedByResourceBlock = false;
 		_currentState = Ready;
-		_trackToPlayFullFilePath = "";
+		_fileToPlayFullFilePath = "";
 		_gstTimeFormat = GST_FORMAT_TIME;
 		_currentPositionTimer.setTimerType(Qt::VeryCoarseTimer);
 		_currentPositionTimer.setInterval(1000);
@@ -161,10 +161,10 @@ namespace Audio
 		_currentPositionTimer.stop();
 	}
 
-	void AudioPlayer::setTrackToPlay(QString fullFilePath)
+	void AudioPlayer::setFileToPlay(QString fullFilePath)
 	{
-		_trackToPlayFullFilePath = fullFilePath;
-		g_object_set(G_OBJECT(_source), "location", _trackToPlayFullFilePath.toLocal8Bit().data(), NULL);
+		_fileToPlayFullFilePath = fullFilePath;
+		g_object_set(G_OBJECT(_source), "location", _fileToPlayFullFilePath.toLocal8Bit().data(), NULL);
 	}
 
 	void AudioPlayer::seek(int seconds)

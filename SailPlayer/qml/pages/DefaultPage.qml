@@ -20,7 +20,7 @@ Page
 
 			if(result === true)
 			{
-				player.setTrackToPlay(playlist.getTrackToPlayPath());
+				player.setFileToPlay(playlist.getTrackToPlayPath());
 				playlist.setPlayingTrack(true);
 				player.play();
 			}
@@ -40,9 +40,9 @@ Page
 		player.getCurrentPosition.connect(playerControlPanel.setCurrentTrackPosition);
 
 		playlist.loadPlaylist();
-		playlist.setNextTrackToPlay();
 
-		player.setTrackToPlay(playlist.getTrackToPlayPath());
+		if(playlist.setNextTrackToPlay())
+			player.setFileToPlay(playlist.getTrackToPlayPath());
 	}
 
 	Component.onDestruction:
@@ -74,7 +74,7 @@ Page
 			{
 				player.stop();
 				playlist.forceTrackToPlay(index);
-				player.setTrackToPlay(playlist.getTrackToPlayPath());
+				player.setFileToPlay(playlist.getTrackToPlayPath());
 				playlist.setPlayingTrack(true);
 				playerControlPanel.setIsPlaying(true);
 				player.play();
