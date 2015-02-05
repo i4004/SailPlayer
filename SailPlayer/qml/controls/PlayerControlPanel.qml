@@ -13,7 +13,11 @@ DockedPanel
 	signal stop
 	signal next
 
-	signal setSliderMaxValue(int value)
+	function setTrackDuration(value)
+	{
+		slider.maximumValue = value;
+		slider.value = 0;
+	}
 
 	width: parent.width
 	height: playerControlsColumn.height + Theme.paddingLarge
@@ -79,10 +83,5 @@ DockedPanel
 				onClicked: next()
 			}
 		}
-	}
-
-	setSliderMaxValue:
-	{
-		slider.maximumValue = value;
 	}
 }

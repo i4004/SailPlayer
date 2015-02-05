@@ -149,6 +149,7 @@ namespace Models
 		_currentTrackToPlay->SetAsTrackToPlay(true);
 
 		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
+		emit currentTrackDurationUpdated(_currentTrackToPlay->GetDuration());
 	}
 
 	void PlaylistModel::toggleSelectTrack(int itemIndex)
