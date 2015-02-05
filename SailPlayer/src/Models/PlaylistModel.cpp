@@ -23,6 +23,7 @@ namespace Models
 	{
 		Q_UNUSED(parent);
 
+		_currentTrackIndex= -1;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
 
@@ -136,20 +137,22 @@ namespace Models
 		return _currentTrackToPlay->GetFullFilePath();
 	}
 
-	void PlaylistModel::setTrackToPlay(int itemIndex)
+	bool PlaylistModel::forceTrackToPlay(int index)
 	{
-		if(_tracksList.count() == 0 || itemIndex >= _tracksList.count())
-			return;
+		if(!CalculateNextTrack(index))
+			return false;
 
-		if(_currentTrackToPlay != NULL)
-			_currentTrackToPlay->SetAsTrackToPlay(false);
+		SetTrackToPlay(_currentTrackIndex);
+	}
 
-		_currentTrackToPlay = _tracksList.at(itemIndex);
+	bool PlaylistModel::setNextTrackToPlay()
+	{
+		if(!CalculateNextTrack(-1))
+			return false;
 
-		_currentTrackToPlay->SetAsTrackToPlay(true);
+		SetTrackToPlay(_currentTrackIndex);
 
-		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
-		emit currentTrackDurationUpdated(_currentTrackToPlay->GetDuration());
+		return true;
 	}
 
 	void PlaylistModel::toggleSelectTrack(int itemIndex)
@@ -185,5 +188,39 @@ namespace Models
 	{
 		while (!_tracksList.isEmpty())
 			delete _tracksList.takeFirst();
+	}
+
+	void PlaylistModel::SetTrackToPlay(int itemIndex)
+	{
+		if(_currentTrackToPlay != NULL)
+			_currentTrackToPlay->SetAsTrackToPlay(false);
+
+		_currentTrackToPlay = _tracksList.at(itemIndex);
+
+		_currentTrackToPlay->SetAsTrackToPlay(true);
+
+		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
+		emit currentTrackDurationUpdated(_currentTrackToPlay->GetDuration());
+	}
+
+	bool PlaylistModel::CalculateNextTrack(int customIndex)
+	{
+		if(_tracksList.count() == 0)
+			return false;
+
+		if(_currentTrackIndex == -1)
+			_currentTrackIndex = 0;
+		else
+		{
+			if(customIndex > -1)
+				_currentTrackIndex++;
+			else
+				_currentTrackIndex = customIndex;
+		}
+
+		if(_currentTrackIndex >= _tracksList.count())
+			_currentTrackIndex = 0;
+
+		return true;
 	}
 }

@@ -9,7 +9,28 @@ Page
 {
 	id: page
 
-	AudioPlayer { id: player }
+	AudioPlayer
+	{
+		id: player
+
+		onEndOfStream:
+		{
+			player.stop();
+			var result = playlist.setNextTrackToPlay();
+
+			if(result === true)
+			{
+				player.setTrackToPlay(playlist.getTrackToPlayPath());
+				playlist.setPlayingTrack(true);
+				player.play();
+			}
+			else
+			{
+				playlist.setPlayingTrack(false);
+				playerControlPanel.setIsPlaying(false);
+			}
+		}
+	}
 
 	allowedOrientations: Orientation.All
 
@@ -19,7 +40,7 @@ Page
 		player.getCurrentPosition.connect(playerControlPanel.setCurrentTrackPosition);
 
 		playlist.loadPlaylist();
-		playlist.setTrackToPlay(0);
+		playlist.setNextTrackToPlay();
 
 		player.setTrackToPlay(playlist.getTrackToPlayPath());
 	}
@@ -52,7 +73,7 @@ Page
 			onPushAndHold:
 			{
 				player.stop();
-				playlist.setTrackToPlay(index);
+				playlist.forceTrackToPlay(index);
 				player.setTrackToPlay(playlist.getTrackToPlayPath());
 				playlist.setPlayingTrack(true);
 				playerControlPanel.setIsPlaying(true);

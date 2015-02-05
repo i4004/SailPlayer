@@ -40,7 +40,11 @@ namespace Models
 		Q_INVOKABLE void savePlaylist();
 
 		Q_INVOKABLE QString getTrackToPlayPath();
-		Q_INVOKABLE void setTrackToPlay(int index);
+
+		Q_INVOKABLE bool forceTrackToPlay(int index);
+
+		// Find next track by order rules and set it to play, default is first track
+		Q_INVOKABLE bool setNextTrackToPlay();
 
 		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
 
@@ -66,10 +70,13 @@ namespace Models
 
 		// Current playing data
 
+		int _currentTrackIndex;
 		Track* _currentTrackToPlay;
 		Track* _currentPlayingTrack;
 
 		void Cleanup();
+		void SetTrackToPlay(int index);
+		bool CalculateNextTrack(int customIndex);
 	};
 }
 

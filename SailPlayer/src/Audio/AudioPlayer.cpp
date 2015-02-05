@@ -68,14 +68,13 @@ namespace Audio
 	{
 		Q_UNUSED(bus);
 
-
 		switch (GST_MESSAGE_TYPE (msg))
 		{
 			case GST_MESSAGE_EOS:
 			{
 				AudioPlayer* player = static_cast<AudioPlayer*>(userData);
 				player->OnEndOfStream();
-			  break;
+				break;
 			}
 
 			case GST_MESSAGE_ERROR:
