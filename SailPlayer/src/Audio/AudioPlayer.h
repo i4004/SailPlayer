@@ -28,7 +28,7 @@ namespace Audio
 		Q_INVOKABLE void play();
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
-		Q_INVOKABLE void setTrackForPlaying(QString fullFilePath);
+		Q_INVOKABLE void setTrackToPlay(QString fullFilePath);
 
 	public slots:
 		void OnAudioResourceAquireStateChanged(bool acquired);
@@ -54,15 +54,14 @@ namespace Audio
 
 		// Current playing data
 
-		QString _trackFullFilePath;
-
-		bool Init();
+		QString _trackToPlayFullFilePath;
 
 		// Callbacks
 
 		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
 		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data);
 
+		bool Init();
 		void SetEqualizerData();
 	};
 }

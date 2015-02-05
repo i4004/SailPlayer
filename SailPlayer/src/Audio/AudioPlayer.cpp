@@ -11,7 +11,7 @@ namespace Audio
 	{
 		_pausedByResourceBlock = false;
 		_currentState = Ready;
-		_trackFullFilePath = "";
+		_trackToPlayFullFilePath = "";
 
 		gst_init(NULL, NULL);
 
@@ -147,6 +147,12 @@ namespace Audio
 		_currentState = Paused;
 	}
 
+	void AudioPlayer::setTrackToPlay(QString fullFilePath)
+	{
+		_trackToPlayFullFilePath = fullFilePath;
+		g_object_set(G_OBJECT(_source), "location", _trackToPlayFullFilePath.toLocal8Bit().data(), NULL);
+	}
+
 	void AudioPlayer::SetEqualizerData()
 	{
 		gint i;
@@ -168,11 +174,5 @@ namespace Audio
 
 			g_object_unref(G_OBJECT(band));
 		}
-	}
-
-	void AudioPlayer::setTrackForPlaying(QString fullFilePath)
-	{
-		_trackFullFilePath = fullFilePath;
-		g_object_set(G_OBJECT(_source), "location", _trackFullFilePath.toLocal8Bit().data(), NULL);
 	}
 }
