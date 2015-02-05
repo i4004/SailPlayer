@@ -7,6 +7,7 @@ namespace Playlist
 		  _fileName(fileName), _fullFilePath(fullFilePath)
 	{
 		_selected = false;
+		_isTrackToPlay = false;
 		_playing = false;
 	}
 }

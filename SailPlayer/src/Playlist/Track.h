@@ -22,6 +22,13 @@ namespace Playlist
 		bool IsSelected(){ return _selected; }
 		void SetSelected(bool selected){ _selected = selected; }
 
+		// Track is selected to play but can be stopped or paused
+
+		bool IsTrackToPlay(){ return _isTrackToPlay; }
+		void SetAsTrackToPlay(bool isTrackToPlay){ _playing = _isTrackToPlay; }
+
+		// Track is playing
+
 		bool IsPlaying(){ return _playing; }
 		void SetPlaying(bool playing){ _playing = playing; }
 
@@ -36,6 +43,7 @@ namespace Playlist
 		QString _fullFilePath;
 
 		bool _selected;
+		bool _isTrackToPlay;
 		bool _playing;
 	};
 }
