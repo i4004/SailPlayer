@@ -6,13 +6,14 @@ DockedPanel
 {
 	id: dockPanel
 
-	property int sliderMaxValue: 1
 	property bool isPlaying: false
 
 	signal previous
 	signal playPause
 	signal stop
 	signal next
+
+	signal setSliderMaxValue(int value)
 
 	width: parent.width
 	height: playerControlsColumn.height + Theme.paddingLarge
@@ -31,7 +32,7 @@ DockedPanel
 		Slider
 		{
 			id: slider
-			maximumValue: sliderMaxValue
+			maximumValue: 1
 			anchors.left: parent.left
 			anchors.right: parent.right
 			valueText: Util.formatTrackDuration(value)
@@ -55,13 +56,21 @@ DockedPanel
 			{
 				id: playIcon
 				icon.source: isPlaying ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
-				onClicked: playPause()
+				onClicked:
+				{
+					isPlaying = !isPlaying;
+					playPause();
+				}
 			}
 
 			IconButton
 			{
 				icon.source: "image://theme/icon-m-tab"
-				onClicked: stop()
+				onClicked:
+				{
+					isPlaying = false;
+					stop();
+				}
 			}
 
 			IconButton
@@ -70,5 +79,10 @@ DockedPanel
 				onClicked: next()
 			}
 		}
+	}
+
+	setSliderMaxValue:
+	{
+		slider.maximumValue = value;
 	}
 }

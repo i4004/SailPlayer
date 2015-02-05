@@ -122,18 +122,16 @@ Page
 		onPlayPause:
 		{
 			if(isPlaying)
-				player.pause();
-			else
 				player.play();
+			else
+				player.pause();
 
-			isPlaying = !isPlaying;
 			playlist.setPlayingTrack(isPlaying);
 		}
 
 		onStop:
 		{
 			player.stop();
-			isPlaying = false;
 			playlist.setPlayingTrack(isPlaying);
 		}
 	}
