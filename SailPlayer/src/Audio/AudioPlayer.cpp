@@ -72,6 +72,7 @@ namespace Audio
 		switch (GST_MESSAGE_TYPE (msg))
 		{
 			case GST_MESSAGE_EOS:
+				emit endOfStream();
 			  break;
 
 			case GST_MESSAGE_ERROR:

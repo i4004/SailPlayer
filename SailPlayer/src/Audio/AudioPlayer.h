@@ -37,6 +37,7 @@ namespace Audio
 
 	signals:
 		void getCurrentPosition(int seconds);
+		void endOfStream();
 
 	private slots:
 		void OnCurrentPositionTimerCallback();
