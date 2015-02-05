@@ -25,7 +25,7 @@ namespace Playlist
 		// Track is selected to play but can be stopped or paused
 
 		bool IsTrackToPlay(){ return _isTrackToPlay; }
-		void SetAsTrackToPlay(bool isTrackToPlay){ _playing = _isTrackToPlay; }
+		void SetAsTrackToPlay(bool isTrackToPlay){ _isTrackToPlay = isTrackToPlay; }
 
 		// Track is playing
 
