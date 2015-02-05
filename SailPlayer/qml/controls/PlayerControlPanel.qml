@@ -17,6 +17,11 @@ DockedPanel
 		slider.value = 0;
 	}
 
+	function setCurrentTrackPosition(value)
+	{
+		slider.value = value;
+	}
+
 	function setIsPlaying(value)
 	{
 		playerButtons.isPlaying = value;
