@@ -6,7 +6,7 @@ DockedPanel
 {
 	id: dockPanel
 
-	property int sliderMaxValue: 0
+	property int sliderMaxValue: 1
 	property bool isPlaying: false
 
 	signal previous
@@ -31,6 +31,7 @@ DockedPanel
 		Slider
 		{
 			id: slider
+			maximumValue: sliderMaxValue
 			anchors.left: parent.left
 			anchors.right: parent.right
 			valueText: Util.formatTrackDuration(value)

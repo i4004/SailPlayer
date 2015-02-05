@@ -141,9 +141,14 @@ namespace Models
 		if(_tracksList.count() == 0 || itemIndex >= _tracksList.count())
 			return;
 
+		if(_currentTrackToPlay != NULL)
+			_currentTrackToPlay->SetAsTrackToPlay(false);
+
 		_currentTrackToPlay = _tracksList.at(itemIndex);
 
-		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsTrackToPlay));
+		_currentTrackToPlay->SetAsTrackToPlay(true);
+
+		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
 	}
 
 	void PlaylistModel::toggleSelectTrack(int itemIndex)
