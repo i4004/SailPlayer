@@ -31,6 +31,9 @@ namespace Audio
 		Q_INVOKABLE void stop();
 		Q_INVOKABLE void setFileToPlay(QString fullFilePath);
 		Q_INVOKABLE void seek(int seconds);
+		Q_INVOKABLE bool hasFileToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
+		Q_INVOKABLE bool isStopped() { return _currentState == Ready; }
+		Q_INVOKABLE void resetCurrentFile() { _fileToPlayFullFilePath = QString(); }
 
 	public slots:
 		void OnAudioResourceAquireStateChanged(bool acquired);

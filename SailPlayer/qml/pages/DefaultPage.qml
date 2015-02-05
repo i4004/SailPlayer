@@ -146,7 +146,21 @@ Page
 		onPlayPause:
 		{
 			if(isPlaying)
-				player.play();
+			{
+				if(player.isStopped() && !playlist.hasTrackToPlay())
+				{
+					var result = playlist.setNextTrackToPlay();
+
+					if(result === true)
+					{
+						player.setFileToPlay(playlist.getTrackToPlayPath());
+						playlist.setPlayingTrack(true);
+					}
+				}
+
+				if(player.hasFileToPlay())
+					player.play();
+			}
 			else
 				player.pause();
 
@@ -157,6 +171,9 @@ Page
 		{
 			player.stop();
 			playlist.setPlayingTrack(isPlaying);
+
+			if(!playlist.hasTrackToPlay())
+				player.resetCurrentFile();
 		}
 
 		onSeek: player.seek(seconds)

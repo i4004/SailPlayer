@@ -27,7 +27,10 @@ namespace Models
 	void PlaylistModel::clearPlaylist()
 	{
 		beginResetModel();
+
+		ResetCurrentTrack();
 		Cleanup();
+
 		endResetModel();
 	}
 
@@ -66,7 +69,7 @@ namespace Models
 	QString PlaylistModel::getTrackToPlayPath()
 	{
 		if(_currentTrackToPlay == NULL)
-			return NULL;
+			return QString();
 
 		return _currentTrackToPlay->GetFullFilePath();
 	}
@@ -123,5 +126,12 @@ namespace Models
 			_currentTrackIndex = 0;
 
 		return true;
+	}
+
+	void PlaylistModel::ResetCurrentTrack()
+	{
+		_currentTrackIndex = -1;
+		_currentTrackToPlay = NULL;
+		_currentPlayingTrack = NULL;
 	}
 }

@@ -41,6 +41,8 @@ namespace Models
 		// Find next track by order rules and set it to play, default is first track
 		Q_INVOKABLE bool setNextTrackToPlay();
 
+		Q_INVOKABLE bool hasTrackToPlay() { return _currentPlayingTrack != NULL; }
+
 	signals:
 		int	currentTrackDurationUpdated(int duration);
 
@@ -59,6 +61,7 @@ namespace Models
 
 		void SetTrackToPlayFromCurrentIndex();
 		bool CalculateNextTrack(int customIndex);
+		void ResetCurrentTrack();
 	};
 }
 
