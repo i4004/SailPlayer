@@ -34,6 +34,7 @@ namespace Audio
 
 	public slots:
 		void OnAudioResourceAquireStateChanged(bool acquired);
+		void OnEndOfStream();
 
 	signals:
 		void getCurrentPosition(int seconds);
@@ -70,7 +71,7 @@ namespace Audio
 		// Callbacks
 
 		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
-		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data);
+		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData);
 
 		bool Init();
 		void SetEqualizerData();

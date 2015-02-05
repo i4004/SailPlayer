@@ -64,16 +64,19 @@ namespace Audio
 		gst_object_unref(sinkpad);
 	}
 
-	gboolean AudioPlayer::OnBusCall(GstBus* bus, GstMessage* msg, gpointer user_data)
+	gboolean AudioPlayer::OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData)
 	{
 		Q_UNUSED(bus);
-		Q_UNUSED(user_data);
+
 
 		switch (GST_MESSAGE_TYPE (msg))
 		{
 			case GST_MESSAGE_EOS:
-				emit endOfStream();
+			{
+				AudioPlayer* player = static_cast<AudioPlayer*>(userData);
+				player->OnEndOfStream();
 			  break;
+			}
 
 			case GST_MESSAGE_ERROR:
 			{
@@ -110,7 +113,7 @@ namespace Audio
 		}
 
 		GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(_pipeline));
-		gst_bus_add_watch(bus, OnBusCall, NULL);
+		gst_bus_add_watch(bus, OnBusCall, this);
 		gst_object_unref(bus);
 
 		gst_bin_add_many(GST_BIN(_pipeline), _source, _decoder, _equalizer, _sink, NULL);
@@ -211,5 +214,10 @@ namespace Audio
 	void AudioPlayer::Seek(gint64 nanoseconds)
 	{
 		gst_element_seek(_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH, GST_SEEK_TYPE_SET, nanoseconds, GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
+	}
+
+	void AudioPlayer::OnEndOfStream()
+	{
+		emit endOfStream();
 	}
 }

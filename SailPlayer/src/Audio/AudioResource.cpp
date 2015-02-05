@@ -67,7 +67,7 @@ namespace Audio
 	{
 		Q_UNUSED(audioResource);
 
-		AudioResource* resource = static_cast<AudioResource* >(userData);
+		AudioResource* resource = static_cast<AudioResource*>(userData);
 		resource->SetAcquireState(acquired);
 	}
 }
