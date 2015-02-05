@@ -13,6 +13,7 @@ namespace Audio
 		_currentState = Ready;
 		_trackToPlayFullFilePath = "";
 		_gstTimeFormat = GST_FORMAT_TIME;
+		_currentPositionTimer.setTimerType(Qt::VeryCoarseTimer);
 		_currentPositionTimer.setInterval(1000);
 
 		gst_init(NULL, NULL);
@@ -168,9 +169,9 @@ namespace Audio
 		Seek(seconds * 1000000000);
 	}
 
-	int AudioPlayer::OnCurrentPositionTimerCallback()
+	void AudioPlayer::OnCurrentPositionTimerCallback()
 	{
-		return GetCurrentPosition() / 1000000000;
+		emit getCurrentPosition(GetCurrentPosition() / 1000000000);
 	}
 
 	void AudioPlayer::SetEqualizerData()
@@ -200,7 +201,7 @@ namespace Audio
 	{
 		gint64 pos;
 
-		if (gst_element_query_position(_pipeline, &_gstTimeFormat, &pos))
+		if(gst_element_query_position(_pipeline, &_gstTimeFormat, &pos))
 			return pos;
 
 		return 0;

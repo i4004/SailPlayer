@@ -36,10 +36,10 @@ namespace Audio
 		void OnAudioResourceAquireStateChanged(bool acquired);
 
 	signals:
-		void OnGetCurrentPosition(int seconds);
+		void getCurrentPosition(int seconds);
 
 	private slots:
-		int OnCurrentPositionTimerCallback();
+		void OnCurrentPositionTimerCallback();
 
 	private:
 		// Audio resoure and modules

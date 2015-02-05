@@ -16,6 +16,7 @@ Page
 	Component.onCompleted:
 	{
 		playlist.currentTrackDurationUpdated.connect(playerControlPanel.setTrackDuration);
+		player.getCurrentPosition.connect(playerControlPanel.setCurrentTrackPosition);
 
 		playlist.loadPlaylist();
 		playlist.setTrackToPlay(0);
