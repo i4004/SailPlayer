@@ -3,6 +3,8 @@
 
 #include "AudioPlayer.h"
 
+const int SecondsConvertion = 1000000000;
+
 namespace Audio
 {
 	int AudioPlayer::EqualizerBandsNumber = 5;
@@ -20,11 +22,10 @@ namespace Audio
 
 		_audioResource = new AudioResource();
 
-		QObject::connect(_audioResource, SIGNAL(OnAquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
+		connect(_audioResource, SIGNAL(AquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
+		connect(&_currentPositionTimer, SIGNAL(timeout()), this, SLOT(OnCurrentPositionTimerCallback()));
 
 		Init();
-
-		connect(&_currentPositionTimer, SIGNAL(timeout()), this, SLOT(OnCurrentPositionTimerCallback()));
 	}
 
 	AudioPlayer::~AudioPlayer()
@@ -36,21 +37,6 @@ namespace Audio
 		gst_object_unref(GST_OBJECT(_pipeline));
 
 		delete _audioResource;
-	}
-
-	void AudioPlayer::OnAudioResourceAquireStateChanged(bool acquired)
-	{
-		if(acquired)
-		{
-			if(_currentState == Paused && _pausedByResourceBlock)
-				play();
-		}
-		else if(_currentState == Playing)
-		{
-			pause();
-
-			_pausedByResourceBlock = true;
-		}
 	}
 
 	void AudioPlayer::OnPadAdded(GstElement* element, GstPad* pad, gpointer data)
@@ -73,7 +59,14 @@ namespace Audio
 			case GST_MESSAGE_EOS:
 			{
 				AudioPlayer* player = static_cast<AudioPlayer*>(userData);
-				player->OnEndOfStream();
+				player->OnEndOfStreamReached();
+				break;
+			}
+
+			case GST_MESSAGE_ASYNC_DONE:
+			{
+				AudioPlayer* player = static_cast<AudioPlayer*>(userData);
+				player->OnAsyncDone();
 				break;
 			}
 
@@ -95,6 +88,85 @@ namespace Audio
 		}
 
 		return TRUE;
+	}
+
+	void AudioPlayer::OnAudioResourceAquireStateChanged(bool acquired)
+	{
+		if(acquired)
+		{
+			if(_currentState == Paused && _pausedByResourceBlock)
+				play();
+		}
+		else if(_currentState == Playing)
+		{
+			pause();
+
+			_pausedByResourceBlock = true;
+		}
+	}
+
+	void AudioPlayer::OnEndOfStreamReached()
+	{
+		emit endOfStreamReached();
+	}
+
+	void AudioPlayer::OnAsyncDone()
+	{
+		if(_currentState == Playing || _currentState == Paused)
+			emit currentDurationUpdated(GetCurrentDuration() / SecondsConvertion);
+	}
+
+	void AudioPlayer::play()
+	{\
+		_audioResource->Connect();
+
+		_currentState = Playing;
+
+		emit stateChanged(Playing);
+
+		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
+
+		_currentPositionTimer.start();
+	}
+
+	void AudioPlayer::pause()
+	{
+		_pausedByResourceBlock = false;
+		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
+		_currentState = Paused;
+		emit stateChanged(Paused);
+
+		_currentPositionTimer.stop();
+	}
+
+	void AudioPlayer::stop()
+	{
+		gst_element_set_state (_pipeline, GST_STATE_READY);
+		_currentState = Ready;
+
+		emit stateChanged(Ready);
+		emit currentPositionUpdated(0);
+		emit currentDurationUpdated(0);
+
+		_currentPositionTimer.stop();
+
+		_audioResource->Disconnect();
+	}
+
+	void AudioPlayer::setFileToPlay(QString fullFilePath)
+	{
+		_fileToPlayFullFilePath = fullFilePath;
+		g_object_set(G_OBJECT(_source), "location", _fileToPlayFullFilePath.toLocal8Bit().data(), NULL);
+	}
+
+	void AudioPlayer::seek(int seconds)
+	{
+		Seek(gint64(seconds) * SecondsConvertion);
+	}
+
+	void AudioPlayer::OnCurrentPositionTimerCallback()
+	{
+		emit currentPositionUpdated(GetCurrentPosition() / SecondsConvertion);
 	}
 
 	bool AudioPlayer::Init()
@@ -132,51 +204,6 @@ namespace Audio
 		return true;
 	}
 
-	void AudioPlayer::play()
-	{\
-		_audioResource->Connect();
-
-		_currentState = Playing;
-		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
-
-		_currentPositionTimer.start();
-	}
-
-	void AudioPlayer::stop()
-	{
-		gst_element_set_state (_pipeline, GST_STATE_READY);
-		_currentState = Ready;
-
-		_currentPositionTimer.stop();
-
-		_audioResource->Disconnect();
-	}
-
-	void AudioPlayer::pause()
-	{
-		_pausedByResourceBlock = false;
-		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
-		_currentState = Paused;
-
-		_currentPositionTimer.stop();
-	}
-
-	void AudioPlayer::setFileToPlay(QString fullFilePath)
-	{
-		_fileToPlayFullFilePath = fullFilePath;
-		g_object_set(G_OBJECT(_source), "location", _fileToPlayFullFilePath.toLocal8Bit().data(), NULL);
-	}
-
-	void AudioPlayer::seek(int seconds)
-	{
-		Seek(gint64(seconds) * 1000000000);
-	}
-
-	void AudioPlayer::OnCurrentPositionTimerCallback()
-	{
-		emit getCurrentPosition(GetCurrentPosition() / 1000000000);
-	}
-
 	void AudioPlayer::SetEqualizerData()
 	{
 		gint i;
@@ -202,10 +229,20 @@ namespace Audio
 
 	gint64 AudioPlayer::GetCurrentPosition()
 	{
-		gint64 pos;
+		gint64 value;
 
-		if(gst_element_query_position(_pipeline, &_gstTimeFormat, &pos))
-			return pos;
+		if(gst_element_query_position(_pipeline, &_gstTimeFormat, &value))
+			return value;
+
+		return 0;
+	}
+
+	gint64 AudioPlayer::GetCurrentDuration()
+	{
+		gint64 value;
+
+		if(gst_element_query_duration(_pipeline, &_gstTimeFormat, &value))
+			return value;
 
 		return 0;
 	}
@@ -213,10 +250,5 @@ namespace Audio
 	void AudioPlayer::Seek(gint64 nanoseconds)
 	{
 		gst_element_seek(_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH, GST_SEEK_TYPE_SET, nanoseconds, GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
-	}
-
-	void AudioPlayer::OnEndOfStream()
-	{
-		emit endOfStream();
 	}
 }

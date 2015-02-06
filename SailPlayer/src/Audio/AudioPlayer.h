@@ -5,7 +5,6 @@
 #include <QTimer>
 #include <gst/gst.h>
 #include "AudioResource.h"
-#include "AudioPlayerState.h"
 
 namespace Audio
 {
@@ -19,10 +18,18 @@ namespace Audio
 	class AudioPlayer : public QObject
 	{
 		Q_OBJECT
+		Q_ENUMS(AudioPlayerState)
 
 	public:
 		AudioPlayer();
 		~AudioPlayer();
+
+		enum AudioPlayerState
+		{
+			Ready = 0,
+			Paused = 1,
+			Playing = 2
+		};
 
 		// Player controls
 
@@ -32,16 +39,17 @@ namespace Audio
 		Q_INVOKABLE void setFileToPlay(QString fullFilePath);
 		Q_INVOKABLE void seek(int seconds);
 		Q_INVOKABLE bool hasFileToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
-		Q_INVOKABLE bool isStopped() { return _currentState == Ready; }
-		Q_INVOKABLE void resetCurrentFile() { _fileToPlayFullFilePath = QString(); }
 
 	public slots:
 		void OnAudioResourceAquireStateChanged(bool acquired);
-		void OnEndOfStream();
+		void OnEndOfStreamReached();
+		void OnAsyncDone();
 
 	signals:
-		void getCurrentPosition(int seconds);
-		void endOfStream();
+		void currentPositionUpdated(int seconds);
+		void currentDurationUpdated(int duration);
+		void endOfStreamReached();
+		void stateChanged(AudioPlayer::AudioPlayerState state);
 
 	private slots:
 		void OnCurrentPositionTimerCallback();
@@ -71,15 +79,17 @@ namespace Audio
 		GstFormat _gstTimeFormat;
 		QString _fileToPlayFullFilePath;
 
-		// Callbacks
+		// Gstreamer callbacks
 
 		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
 		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData);
 
+		// Modules control
+
 		bool Init();
 		void SetEqualizerData();
-
 		gint64 GetCurrentPosition();
+		gint64 GetCurrentDuration();
 		void Seek(gint64 nanoseconds);
 	};
 }

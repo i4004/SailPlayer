@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.AudioPlayer 1.0
+import harbour.sail.player.AudioPlayerState 1.0
 import harbour.sail.player.PlaylistModel 1.0
 import "../controls"
 import "../Util.js" as Util
@@ -13,22 +14,12 @@ Page
 	{
 		id: player
 
-		onEndOfStream:
+		onEndOfStreamReached:
 		{
 			player.stop();
-			var result = playlist.setNextTrackToPlay();
 
-			if(result === true)
-			{
-				player.setFileToPlay(playlist.getTrackToPlayPath());
-				playlist.setPlayingTrack(true);
+			if(playlist.setNextTrackToPlay())
 				player.play();
-			}
-			else
-			{
-				playlist.setPlayingTrack(false);
-				playerControlPanel.setIsPlaying(false);
-			}
 		}
 	}
 
@@ -36,18 +27,22 @@ Page
 
 	Component.onCompleted:
 	{
-		playlist.currentTrackDurationUpdated.connect(playerControlPanel.setTrackDuration);
-		player.getCurrentPosition.connect(playerControlPanel.setCurrentTrackPosition);
+		playlist.currentTrackFilePathUpdated.connect(player.setFileToPlay);
+		player.currentDurationUpdated.connect(playerControlPanel.setTrackDuration);
+		player.currentPositionUpdated.connect(playerControlPanel.setTrackPosition);
+		player.stateChanged.connect(playerControlPanel.onPlayerStateChanged);
+		player.stateChanged.connect(playlist.playerStateChanged);
 
 		playlist.loadPlaylist();
-
-		if(playlist.setNextTrackToPlay())
-			player.setFileToPlay(playlist.getTrackToPlayPath());
+		playlist.setNextTrackToPlay();
 	}
 
 	Component.onDestruction:
 	{
 		playlist.savePlaylist();
+		player.stateChanged.disconnect(playerControlPanel.onPlayerStateChanged);
+		player.currentDurationUpdated.disconnect(playerControlPanel.setTrackDuration);
+		player.currentPositionUpdated.disconnect(playerControlPanel.setTrackPosition);
 	}
 
 	SilicaListView
@@ -73,11 +68,9 @@ Page
 			onPushAndHold:
 			{
 				player.stop();
-				playlist.forceTrackToPlay(index);
-				player.setFileToPlay(playlist.getTrackToPlayPath());
-				playlist.setPlayingTrack(true);
-				playerControlPanel.setIsPlaying(true);
-				player.play();
+
+				if(playlist.forceTrackToPlay(index))
+					player.play();
 			}
 		}
 
@@ -145,37 +138,19 @@ Page
 
 		onPlayPause:
 		{
-			if(isPlaying)
+			if(state == AudioPlayerState.Playing)
+				player.pause();
+			else
 			{
-				if(player.isStopped() && !playlist.hasTrackToPlay())
-				{
-					var result = playlist.setNextTrackToPlay();
-
-					if(result === true)
-					{
-						player.setFileToPlay(playlist.getTrackToPlayPath());
-						playlist.setPlayingTrack(true);
-					}
-				}
+				if(state == AudioPlayerState.Ready && !playlist.hasTrackToPlay())
+					playlist.setNextTrackToPlay();
 
 				if(player.hasFileToPlay())
 					player.play();
 			}
-			else
-				player.pause();
-
-			playlist.setPlayingTrack(isPlaying);
 		}
 
-		onStop:
-		{
-			player.stop();
-			playlist.setPlayingTrack(isPlaying);
-
-			if(!playlist.hasTrackToPlay())
-				player.resetCurrentFile();
-		}
-
+		onStop: player.stop()
 		onSeek: player.seek(seconds)
 	}
 }

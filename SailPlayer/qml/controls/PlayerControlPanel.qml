@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.sail.player.AudioPlayerState 1.0
 import "../Util.js" as Util
 
 DockedPanel
@@ -7,26 +8,34 @@ DockedPanel
 	id: dockPanel
 
 	signal previous
-	signal playPause(bool isPlaying)
-	signal stop(bool isPlaying)
+	signal playPause(int state)
+	signal stop(int state)
 	signal next
 	signal seek(int seconds)
 
 	function setTrackDuration(value)
 	{
-		slider.maximumValue = value;
-		slider.value = 0;
+		if(value === 0)
+		{
+			slider.enabled = false;
+			slider.maximumValue = 1;
+		}
+		else
+		{
+			slider.enabled = true;
+			slider.maximumValue = value;
+		}
 	}
 
-	function setCurrentTrackPosition(value)
+	function setTrackPosition(value)
 	{
 		if(!slider.highlighted && !slider.seekRequestProcess)
 			slider.value = value;
 	}
 
-	function setIsPlaying(value)
+	function onPlayerStateChanged(state)
 	{
-		playerButtons.isPlaying = value;
+		playerButtons.currentPlayerState = state;
 	}
 
 	width: parent.width
@@ -48,7 +57,10 @@ DockedPanel
 			property bool seekRequestProcess: false
 
 			id: slider
+
 			maximumValue: 1
+			enabled: false
+
 			anchors.left: parent.left
 			anchors.right: parent.right
 			valueText: Util.formatTrackDuration(value)
@@ -66,7 +78,7 @@ DockedPanel
 		{
 			id: playerButtons
 
-			property bool isPlaying: false
+			property int currentPlayerState: AudioPlayerState.Ready
 
 			anchors.horizontalCenter: parent.horizontalCenter
 			spacing: 38
@@ -81,12 +93,8 @@ DockedPanel
 			IconButton
 			{
 				id: playIcon
-				icon.source: playerButtons.isPlaying ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
-				onClicked:
-				{
-					playerButtons.isPlaying = !playerButtons.isPlaying;
-					playPause(playerButtons.isPlaying);
-				}
+				icon.source: playerButtons.currentPlayerState === AudioPlayerState.Playing ? "image://theme/icon-m-pause" : "image://theme/icon-m-play"
+				onClicked: playPause(playerButtons.currentPlayerState);
 			}
 
 			IconButton
@@ -94,8 +102,7 @@ DockedPanel
 				icon.source: "image://theme/icon-m-tab"
 				onClicked:
 				{
-					playerButtons.isPlaying = false;
-					stop(playerButtons.isPlaying);
+					stop(playerButtons.currentPlayerState);
 					slider.value = 0;
 				}
 			}

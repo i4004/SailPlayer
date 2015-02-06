@@ -53,26 +53,14 @@ namespace Models
 		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsSelectedRole));
 	}
 
-	void PlaylistModel::setPlayingTrack(bool isPlaying)
+	void PlaylistModel::playerStateChanged(AudioPlayer::AudioPlayerState state)
 	{
-		if(_currentPlayingTrack != NULL)
-			_currentPlayingTrack->SetPlaying(false);
-
-		_currentPlayingTrack = _currentTrackToPlay;
-
-		if(_currentPlayingTrack != NULL)
-			_currentPlayingTrack->SetPlaying(isPlaying);
-
-		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsPlayingRole));
+		if(state == AudioPlayer::Ready || state == AudioPlayer::Paused)
+			SetPlayingTrack(false);
+		else
+			SetPlayingTrack(true);
 	}
 
-	QString PlaylistModel::getTrackToPlayPath()
-	{
-		if(_currentTrackToPlay == NULL)
-			return QString();
-
-		return _currentTrackToPlay->GetFullFilePath();
-	}
 
 	bool PlaylistModel::forceTrackToPlay(int index)
 	{
@@ -104,7 +92,7 @@ namespace Models
 		_currentTrackToPlay->SetAsTrackToPlay(true);
 
 		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
-		emit currentTrackDurationUpdated(_currentTrackToPlay->GetDuration());
+		emit currentTrackFilePathUpdated(_currentTrackToPlay->GetFullFilePath());
 	}
 
 	bool PlaylistModel::CalculateNextTrack(int customIndex)
@@ -133,5 +121,18 @@ namespace Models
 		_currentTrackIndex = -1;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
+	}
+
+	void PlaylistModel::SetPlayingTrack(bool isPlaying)
+	{
+		if(_currentPlayingTrack != NULL)
+			_currentPlayingTrack->SetPlaying(false);
+
+		_currentPlayingTrack = _currentTrackToPlay;
+
+		if(_currentPlayingTrack != NULL)
+			_currentPlayingTrack->SetPlaying(isPlaying);
+
+		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsPlayingRole));
 	}
 }

@@ -6,6 +6,9 @@
 #include "../Playlist/TracksFactory.h"
 #include "../SailPlayerSettings.h"
 #include "PlaylistModelBase.h"
+#include "../Audio/AudioPlayer.h"
+
+using namespace Audio;
 
 namespace Models
 {
@@ -31,20 +34,18 @@ namespace Models
 
 		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
 
-		// Mark track to play as playing and unmarking previously playing track
-		Q_INVOKABLE void setPlayingTrack(bool isPlaying);
-
-		Q_INVOKABLE QString getTrackToPlayPath();
-
 		Q_INVOKABLE bool forceTrackToPlay(int index);
 
 		// Find next track by order rules and set it to play, default is first track
 		Q_INVOKABLE bool setNextTrackToPlay();
 
-		Q_INVOKABLE bool hasTrackToPlay() { return _currentPlayingTrack != NULL; }
+		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
+
+	public slots:
+		Q_INVOKABLE void playerStateChanged(AudioPlayer::AudioPlayerState state);
 
 	signals:
-		int	currentTrackDurationUpdated(int duration);
+		void currentTrackFilePathUpdated(QString filePath);
 
 	private:
 		TracksLoader* _tracksLoader;
@@ -62,6 +63,9 @@ namespace Models
 		void SetTrackToPlayFromCurrentIndex();
 		bool CalculateNextTrack(int customIndex);
 		void ResetCurrentTrack();
+
+		// Mark track to play as playing and unmarking previously playing track
+		void SetPlayingTrack(bool isPlaying);
 	};
 }
 

@@ -60,7 +60,7 @@ namespace Audio
 		_audioResourceGotReply = true;
 		_audioResourceAcquired = acquired;
 
-		emit OnAquireStateChanged(acquired);
+		emit AquireStateChanged(acquired);
 	}
 
 	void AudioResource::OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData)

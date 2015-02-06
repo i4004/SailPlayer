@@ -52,7 +52,6 @@ HEADERS += \
     src/IO/FileType.h \
     src/Audio/AudioResource.h \
     src/Audio/AudioPlayer.h \
-    src/Audio/AudioPlayerState.h \
     src/SailPlayerSettings.h \
     src/IO/FsHelper.h \
     src/Playlist/Track.h \

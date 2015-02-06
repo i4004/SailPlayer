@@ -25,7 +25,7 @@ namespace Audio
 		void SetAcquireState(bool acquired);
 
 	signals:
-		void OnAquireStateChanged(bool acquired);
+		void AquireStateChanged(bool acquired);
 
 	private:
 		audioresource_t* _resource;
