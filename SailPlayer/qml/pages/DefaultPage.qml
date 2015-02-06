@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 import harbour.sail.player.AudioPlayer 1.0
 import harbour.sail.player.AudioPlayerState 1.0
 import harbour.sail.player.PlaylistModel 1.0
+import harbour.sail.player.PlayDirection 1.0
 import "../controls"
 import "../Util.js" as Util
 
@@ -18,7 +19,7 @@ Page
 		{
 			player.stop();
 
-			if(playlist.setNextTrackToPlay())
+			if(playlist.calculateTrackToPlay())
 				player.play();
 		}
 	}
@@ -34,7 +35,7 @@ Page
 		player.stateChanged.connect(playlist.playerStateChanged);
 
 		playlist.loadPlaylist();
-		playlist.setNextTrackToPlay();
+		playlist.calculateTrackToPlay();
 	}
 
 	Component.onDestruction:
@@ -69,7 +70,7 @@ Page
 			{
 				player.stop();
 
-				if(playlist.forceTrackToPlay(index))
+				if(playlist.calculateTrackToPlay(PlayDirection.ByIndex, index))
 					player.play();
 			}
 		}
@@ -139,7 +140,7 @@ Page
 		onPrevious:
 		{
 			player.stop();
-			if(playlist.setNextTrackToPlay() && state != AudioPlayerState.Ready)
+			if(playlist.calculateTrackToPlay(PlayDirection.Previous) && state != AudioPlayerState.Ready)
 				player.play();
 		}
 
@@ -150,7 +151,7 @@ Page
 			else
 			{
 				if(state == AudioPlayerState.Ready && !playlist.hasTrackToPlay())
-					playlist.setNextTrackToPlay();
+					playlist.calculateTrackToPlay();
 
 				if(player.hasFileToPlay())
 					player.play();
@@ -162,7 +163,7 @@ Page
 		onNext:
 		{
 			player.stop();
-			if(playlist.setNextTrackToPlay() && state != AudioPlayerState.Ready)
+			if(playlist.calculateTrackToPlay(PlayDirection.NextWithForce) && state != AudioPlayerState.Ready)
 				player.play();
 		}
 	}

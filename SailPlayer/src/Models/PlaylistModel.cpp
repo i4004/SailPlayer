@@ -7,6 +7,7 @@ namespace Models
 		Q_UNUSED(parent);
 
 		_currentTrackIndex= -1;
+		_currentPlayOrder = RepeatPlaylist;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
 
@@ -53,7 +54,7 @@ namespace Models
 		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsSelectedRole));
 	}
 
-	bool PlaylistModel::calculateTrackToPlay(NextTrackPlayDirection direction, int customIndex)
+	bool PlaylistModel::calculateTrackToPlay(PlayDirection direction, int customIndex)
 	{
 		if(_tracksList.count() == 0)
 			return false;
@@ -68,22 +69,63 @@ namespace Models
 			{
 				if(direction == Next || direction == NextWithForce)
 				{
-					_currentTrackIndex++;
+					switch(_currentPlayOrder)
+					{
+						case Default:
+						{
+							if(_currentTrackIndex == _tracksList.count() - 1)
+								return false;
+							else
+								_currentTrackIndex++;
 
-//					else if(direction == Random)
-//					{
-//						_currentTrackIndex = rand() % _tracksList.count();
-//					}
+							break;
+						}
+
+						case RepeatPlaylist:
+							_currentTrackIndex++;
+						break;
+
+						case RepeatTrack:
+						{
+							if(direction == NextWithForce)
+								_currentTrackIndex++;
+
+							break;
+						}
+
+						case Random:
+						{
+							int randomIndex;
+
+							while((randomIndex = rand() % _tracksList.count()) == _currentTrackIndex){}
+
+							_currentTrackIndex = randomIndex;
+
+							break;
+						}
+					}
 				}
 				else if(direction == Previous)
+				{
 					_currentTrackIndex--;
+
+					if(_currentTrackIndex == -1)
+						_currentTrackIndex = _tracksList.count() - 1;
+				}
 			}
 		}
 
 		if(_currentTrackIndex >= _tracksList.count())
 			_currentTrackIndex = 0;
 
+		SetTrackToPlayFromCurrentIndex();
+
 		return true;
+	}
+
+	void PlaylistModel::setPlayOrder(PlayOrder order)
+	{
+		_currentPlayOrder = order;
 	}
 
 	void PlaylistModel::playerStateChanged(AudioPlayer::AudioPlayerState state)
