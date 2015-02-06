@@ -15,10 +15,28 @@ namespace Models
 	class PlaylistModel : public PlaylistModelBase
 	{
 		Q_OBJECT
+		Q_ENUMS(NextTrackPlayDirection)
+		Q_ENUMS(NextTrackPlayOrderType)
 
 	public:
 		explicit PlaylistModel(QObject* parent = 0);
 		~PlaylistModel();
+
+		enum NextTrackPlayDirection
+		{
+			ByIndex = 0,
+			Next = 1,
+			NextWithForce = 2,
+			Previous = 3
+		};
+
+		enum NextTrackPlayOrderType
+		{
+			Default = 0,
+			RepeatPlaylist = 1,
+			RepeatTrack = 2,
+			Random = 3
+		};
 
 		// Playlist controls
 
@@ -34,10 +52,7 @@ namespace Models
 
 		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
 
-		Q_INVOKABLE bool forceTrackToPlay(int index);
-
-		// Find next track by order rules and set it to play, default is first track
-		Q_INVOKABLE bool setNextTrackToPlay();
+		Q_INVOKABLE bool calculateTrackToPlay(NextTrackPlayDirection direction = Next, int customIndex = -1);
 
 		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
 
@@ -61,7 +76,6 @@ namespace Models
 		Track* _currentPlayingTrack;
 
 		void SetTrackToPlayFromCurrentIndex();
-		bool CalculateNextTrack(int customIndex);
 		void ResetCurrentTrack();
 
 		// Mark track to play as playing and unmarking previously playing track

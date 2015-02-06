@@ -22,6 +22,8 @@ int main(int argc, char *argv[])
 	qmlRegisterType<FsHelper>("harbour.sail.player.FsHelper", 1, 0, "FsHelper");
 	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
 	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlaylistModel", 1, 0, "PlaylistModel");
+	qRegisterMetaType<PlaylistModel::NextTrackPlayDirection>("PlaylistModel::NextTrackPlayDirection");
+	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlaylistModel", 1, 0, "PlaylistModel");
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
 
 	QCoreApplication::setOrganizationName("Alexander Krylkov");

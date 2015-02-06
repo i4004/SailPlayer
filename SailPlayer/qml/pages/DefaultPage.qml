@@ -136,6 +136,13 @@ Page
 	{
 		id: playerControlPanel
 
+		onPrevious:
+		{
+			player.stop();
+			if(playlist.setNextTrackToPlay() && state != AudioPlayerState.Ready)
+				player.play();
+		}
+
 		onPlayPause:
 		{
 			if(state == AudioPlayerState.Playing)
@@ -152,5 +159,11 @@ Page
 
 		onStop: player.stop()
 		onSeek: player.seek(seconds)
+		onNext:
+		{
+			player.stop();
+			if(playlist.setNextTrackToPlay() && state != AudioPlayerState.Ready)
+				player.play();
+		}
 	}
 }

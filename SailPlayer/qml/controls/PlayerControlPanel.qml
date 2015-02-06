@@ -7,10 +7,10 @@ DockedPanel
 {
 	id: dockPanel
 
-	signal previous
+	signal previous(int state)
 	signal playPause(int state)
 	signal stop(int state)
-	signal next
+	signal next(int state)
 	signal seek(int seconds)
 
 	function setTrackDuration(value)
@@ -87,7 +87,7 @@ DockedPanel
 			IconButton
 			{
 				icon.source: "image://theme/icon-m-previous"
-				onClicked: previous()
+				onClicked: previous(playerButtons.currentPlayerState)
 			}
 
 			IconButton
@@ -110,7 +110,7 @@ DockedPanel
 			IconButton
 			{
 				icon.source: "image://theme/icon-m-next"
-				onClicked: next()
+				onClicked: next(playerButtons.currentPlayerState)
 			}
 		}
 	}

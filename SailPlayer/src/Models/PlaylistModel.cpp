@@ -53,33 +53,45 @@ namespace Models
 		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsSelectedRole));
 	}
 
+	bool PlaylistModel::calculateTrackToPlay(NextTrackPlayDirection direction, int customIndex)
+	{
+		if(_tracksList.count() == 0)
+			return false;
+
+		if(direction == ByIndex)
+			_currentTrackIndex = customIndex;
+		else
+		{
+			if(_currentTrackIndex == -1)
+				_currentTrackIndex = 0;
+			else
+			{
+				if(direction == Next || direction == NextWithForce)
+				{
+					_currentTrackIndex++;
+
+//					else if(direction == Random)
+//					{
+//						_currentTrackIndex = rand() % _tracksList.count();
+//					}
+				}
+				else if(direction == Previous)
+					_currentTrackIndex--;
+			}
+		}
+
+		if(_currentTrackIndex >= _tracksList.count())
+			_currentTrackIndex = 0;
+
+		return true;
+	}
+
 	void PlaylistModel::playerStateChanged(AudioPlayer::AudioPlayerState state)
 	{
 		if(state == AudioPlayer::Ready || state == AudioPlayer::Paused)
 			SetPlayingTrack(false);
 		else
 			SetPlayingTrack(true);
-	}
-
-
-	bool PlaylistModel::forceTrackToPlay(int index)
-	{
-		if(!CalculateNextTrack(index))
-			return false;
-
-		SetTrackToPlayFromCurrentIndex();
-
-		return true;
-	}
-
-	bool PlaylistModel::setNextTrackToPlay()
-	{
-		if(!CalculateNextTrack(-1))
-			return false;
-
-		SetTrackToPlayFromCurrentIndex();
-
-		return true;
 	}
 
 	void PlaylistModel::SetTrackToPlayFromCurrentIndex()
@@ -93,27 +105,6 @@ namespace Models
 
 		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
 		emit currentTrackFilePathUpdated(_currentTrackToPlay->GetFullFilePath());
-	}
-
-	bool PlaylistModel::CalculateNextTrack(int customIndex)
-	{
-		if(_tracksList.count() == 0)
-			return false;
-
-		if(customIndex > -1)
-			_currentTrackIndex = customIndex;
-		else
-		{
-			if(_currentTrackIndex == -1)
-				_currentTrackIndex = 0;
-			else
-				_currentTrackIndex++;
-		}
-
-		if(_currentTrackIndex >= _tracksList.count())
-			_currentTrackIndex = 0;
-
-		return true;
 	}
 
 	void PlaylistModel::ResetCurrentTrack()
