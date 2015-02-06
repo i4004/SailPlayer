@@ -73,10 +73,10 @@ namespace Models
 					{
 						case Default:
 						{
-							if(_currentTrackIndex == _tracksList.count() - 1)
-								return false;
-							else
+							if(_currentTrackIndex < _tracksList.count() - 1 || direction == NextWithForce)
 								_currentTrackIndex++;
+							else
+								return false;
 
 							break;
 						}
