@@ -45,6 +45,11 @@ DockedPanel
 	anchors.left: parent.left
 	anchors.right: parent.right
 
+	onMovingChanged:
+	{
+		slider.seekRequestProcess = false;
+	}
+
 	Column
 	{
 		id: playerControlsColumn
