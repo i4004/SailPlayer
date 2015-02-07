@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import harbour.sail.player.PlayOrder 1.0
+import "radio"
 
 Row
 {

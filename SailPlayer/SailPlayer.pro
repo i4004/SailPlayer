@@ -39,12 +39,12 @@ OTHER_FILES += \
     qml/pages/AddFilesDialog.qml \
     qml/pages/DefaultPage.qml \
     qml/controls/PlayerControlPanel.qml \
-    qml/controls/PlaylistItem.qml \
-    qml/controls/PlaylistSectionHeader.qml \
     qml/controls/VerticalSpacerMedium.qml \
-    qml/controls/RadioGroup.qml \
-    qml/controls/RadioSwitch.qml \
-    qml/controls/PlayOrderControl.qml
+    qml/controls/PlayOrderControl.qml \
+    qml/controls/playlist/PlaylistItem.qml \
+    qml/controls/playlist/PlaylistSectionHeader.qml \
+    qml/controls/radio/RadioGroup.qml \
+    qml/controls/radio/RadioSwitch.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
