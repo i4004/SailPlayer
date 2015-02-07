@@ -123,11 +123,6 @@ namespace Models
 		return true;
 	}
 
-	void PlaylistModel::setPlayOrder(PlayOrder order)
-	{
-		_currentPlayOrder = order;
-	}
-
 	void PlaylistModel::playerStateChanged(AudioPlayer::AudioPlayerState state)
 	{
 		if(state == AudioPlayer::Ready || state == AudioPlayer::Paused)

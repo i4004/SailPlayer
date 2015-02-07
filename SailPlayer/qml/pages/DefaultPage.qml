@@ -4,6 +4,7 @@ import harbour.sail.player.AudioPlayer 1.0
 import harbour.sail.player.AudioPlayerState 1.0
 import harbour.sail.player.PlaylistModel 1.0
 import harbour.sail.player.PlayDirection 1.0
+import harbour.sail.player.PlayOrder 1.0
 import "../controls"
 import "../Util.js" as Util
 
@@ -36,6 +37,7 @@ Page
 
 		playlist.loadPlaylist();
 		playlist.calculateTrackToPlay();
+		playOrderControl.setOrder(playlist.playOrder);
 	}
 
 	Component.onDestruction:
@@ -120,15 +122,21 @@ Page
 
 		PushUpMenu
 		{
-			MenuItem
+			Column
 			{
-				text: qsTr("Order: default")
-			}
+				width: parent.width
 
-			MenuItem
-			{
-				text: qsTr("Clear Playlist")
-				onClicked: remorse.execute(qsTr("Clearing"), function() { listView.model.clearPlaylist() })
+				MenuItem
+				{
+					text: qsTr("Clear Playlist")
+					onClicked: remorse.execute(qsTr("Clearing"), function() { playlist.clearPlaylist() })
+				}
+
+				PlayOrderControl
+				{
+					id: playOrderControl
+					onOrderChange: playlist.playOrder = order
+				}
 			}
 		}
 	}

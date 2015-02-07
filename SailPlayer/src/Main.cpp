@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 
 	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlaylistModel", 1, 0, "PlaylistModel");
 	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlayDirection", 1, 0, "PlayDirection");
+	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
 	qRegisterMetaType<PlaylistModel::PlayDirection>("PlaylistModel::PlayDirection");
 	qRegisterMetaType<PlaylistModel::PlayOrder>("PlaylistModel::PlayOrder");
 

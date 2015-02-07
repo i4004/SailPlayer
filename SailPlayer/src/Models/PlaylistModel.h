@@ -15,6 +15,7 @@ namespace Models
 	class PlaylistModel : public PlaylistModelBase
 	{
 		Q_OBJECT
+		Q_PROPERTY(PlayOrder playOrder READ GetPlayOrder() WRITE SetPlayOrder(PlayOrder) NOTIFY playlistOrderChanged())
 		Q_ENUMS(PlayDirection)
 		Q_ENUMS(PlayOrder)
 
@@ -56,8 +57,6 @@ namespace Models
 		// Calculates and sets next track to play
 		Q_INVOKABLE bool calculateTrackToPlay(PlayDirection direction = Next, int customIndex = -1);
 
-		Q_INVOKABLE void setPlayOrder(PlayOrder order);
-
 		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
 
 	public slots:
@@ -65,6 +64,7 @@ namespace Models
 
 	signals:
 		void currentTrackFilePathUpdated(QString filePath);
+		void playlistOrderChanged();
 
 	private:
 		TracksLoader* _tracksLoader;
@@ -85,6 +85,9 @@ namespace Models
 
 		// Mark track to play as playing and unmarking previously playing track
 		void SetPlayingTrack(bool isPlaying);
+
+		void SetPlayOrder(PlayOrder order) { _currentPlayOrder = order; }
+		PlayOrder GetPlayOrder() { return _currentPlayOrder; }
 	};
 }
 

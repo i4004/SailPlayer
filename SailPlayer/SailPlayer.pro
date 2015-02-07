@@ -41,7 +41,10 @@ OTHER_FILES += \
     qml/controls/PlayerControlPanel.qml \
     qml/controls/PlaylistItem.qml \
     qml/controls/PlaylistSectionHeader.qml \
-    qml/controls/VerticalSpacerMedium.qml
+    qml/controls/VerticalSpacerMedium.qml \
+    qml/controls/RadioGroup.qml \
+    qml/controls/RadioSwitch.qml \
+    qml/controls/PlayOrderControl.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
