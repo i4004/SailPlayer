@@ -25,7 +25,7 @@ Row
 	RadioSwitch
 	{
 		id: orderDefault
-		icon.source: "../images/icons/icon-m-stop.png"
+		icon.source: "../images/icons/icon-m-no-repeat.png"
 		radioGroup: radioGroup
 		onClicked: orderChange(PlayOrder.Default)
 	}
@@ -33,7 +33,7 @@ Row
 	RadioSwitch
 	{
 		id: orderRepeatPlaylist
-		icon.source: "../images/icons/icon-m-stop.png"
+		icon.source: "image://theme/icon-m-repeat"
 		radioGroup: radioGroup
 		onClicked: orderChange(PlayOrder.RepeatPlaylist)
 	}
@@ -41,7 +41,7 @@ Row
 	RadioSwitch
 	{
 		id: orderRepeatTrack
-		icon.source: "../images/icons/icon-m-stop.png"
+		icon.source: "../images/icons/icon-m-repeat-track.png"
 		radioGroup: radioGroup
 		onClicked: orderChange(PlayOrder.RepeatTrack)
 	}
@@ -49,7 +49,7 @@ Row
 	RadioSwitch
 	{
 		id: orderRandom
-		icon.source: "../images/icons/icon-m-stop.png"
+		icon.source: "../images/icons/icon-m-random.png"
 		radioGroup: radioGroup
 		onClicked: orderChange(PlayOrder.Random)
 	}
