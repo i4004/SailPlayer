@@ -109,7 +109,7 @@ Page
 
 					dialog.accepted.connect(function()
 					{
-						listView.model.addTracks(dialog.directoryPath);
+						playlist.addTracks(dialog.directoryPath);
 					});
 				}
 			}
