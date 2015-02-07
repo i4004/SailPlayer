@@ -10,11 +10,21 @@ BackgroundItem
 
 	signal pushAndHold
 
+	Image
+	{
+		id: playArrow
+		anchors.left: parent.left
+		anchors.leftMargin: Theme.paddingSmall
+		anchors.verticalCenter: parent.verticalCenter
+		source: "../../images/icons/icon-m-play-arrow.png"
+		visible: isPlaying
+	}
+
 	Label
 	{		
 		id: labelTrackNumber
-		anchors.left: parent.left
-		anchors.leftMargin: Theme.paddingLarge + 10
+		anchors.left: playArrow.right
+		anchors.leftMargin: Theme.paddingSmall
 		anchors.verticalCenter: parent.verticalCenter
 		text: trackNumber != 0 ? Util.zeroPad(trackNumber, 2) : ""
 		color: item.highlighted || isTrackToPlay ? Theme.highlightColor : Theme.primaryColor
