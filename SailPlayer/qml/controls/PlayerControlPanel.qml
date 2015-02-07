@@ -104,7 +104,7 @@ DockedPanel
 
 			IconButton
 			{
-				icon.source: "image://theme/icon-m-tab"
+				icon.source: "../images/icons/icon-m-stop.png"
 				onClicked:
 				{
 					stop(playerButtons.currentPlayerState);
