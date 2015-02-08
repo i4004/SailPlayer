@@ -1,5 +1,5 @@
-#include "DirectoryRecursiveMultimediaFilesListFactory.h"
-#include "TracksLoader.h"
+#include "DirectoryRecursiveMultimediaFilesListFactory.hpp"
+#include "TracksLoader.hpp"
 
 namespace Playlist
 {

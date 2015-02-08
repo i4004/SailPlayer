@@ -1,4 +1,4 @@
-#include "SailPlayerSettings.h"
+#include "SailPlayerSettings.hpp"
 
 QString SailPlayerSettings::DefaultAddFilesDirectoryPath = "/home/nemo";
 

@@ -1,11 +1,11 @@
-#ifndef FSRECORDSLISTMODEL_H
-#define FSRECORDSLISTMODEL_H
+#ifndef FSRECORDSLISTMODEL_HPP
+#define FSRECORDSLISTMODEL_HPP
 
 #include <QAbstractListModel>
 #include <QDir>
 
-#include "../IO/FsRecordInfo.h"
-#include "../IO/FsRecordsInfoFactory.h"
+#include "../IO/FsRecordInfo.hpp"
+#include "../IO/FsRecordsInfoFactory.hpp"
 
 using namespace IO;
 
@@ -44,4 +44,4 @@ namespace Models
 	};
 }
 
-#endif // FSRECORDSLISTMODEL_H
+#endif // FSRECORDSLISTMODEL_HPP

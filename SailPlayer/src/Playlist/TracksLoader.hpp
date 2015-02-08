@@ -1,12 +1,12 @@
-#ifndef TRACKSLOADER_H
-#define TRACKSLOADER_H
+#ifndef TRACKSLOADER_HPP
+#define TRACKSLOADER_HPP
 
 #include <QString>
 
-#include "ITracksFactory.h"
-#include "IMultimediaFilesListFactory.h"
-#include "ITracksLoader.h"
-#include "Track.h"
+#include "ITracksFactory.hpp"
+#include "IMultimediaFilesListFactory.hpp"
+#include "ITracksLoader.hpp"
+#include "Track.hpp"
 
 namespace Playlist
 {
@@ -24,4 +24,4 @@ namespace Playlist
 	};
 }
 
-#endif // TRACKSLOADER_H
+#endif // TRACKSLOADER_HPP

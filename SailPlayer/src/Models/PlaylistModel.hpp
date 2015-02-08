@@ -1,12 +1,12 @@
-#ifndef PLAYLISTMODEL_H
-#define PLAYLISTMODEL_H
+#ifndef PLAYLISTMODEL_HPP
+#define PLAYLISTMODEL_HPP
 
-#include "../Playlist/TracksLoader.h"
-#include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.h"
-#include "../Playlist/TracksFactory.h"
-#include "../SailPlayerSettings.h"
-#include "PlaylistModelBase.h"
-#include "../Audio/AudioPlayer.h"
+#include "../Playlist/TracksLoader.hpp"
+#include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp"
+#include "../Playlist/TracksFactory.hpp"
+#include "../SailPlayerSettings.hpp"
+#include "PlaylistModelBase.hpp"
+#include "../Audio/AudioPlayer.hpp"
 
 using namespace Audio;
 
@@ -91,4 +91,4 @@ namespace Models
 	};
 }
 
-#endif // PLAYLISTMODEL_H
+#endif // PLAYLISTMODEL_HPP

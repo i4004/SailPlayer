@@ -3,11 +3,11 @@
 
 #include <sailfishapp.h>
 
-#include "Audio/AudioPlayer.h"
-#include "IO/FsHelper.h"
-#include "Models/FsRecordsListModel.h"
-#include "Models/PlaylistModel.h"
-#include "SailPlayerSettings.h"
+#include "Audio/AudioPlayer.hpp"
+#include "IO/FsHelper.hpp"
+#include "Models/FsRecordsListModel.hpp"
+#include "Models/PlaylistModel.hpp"
+#include "SailPlayerSettings.hpp"
 
 using namespace Audio;
 using namespace IO;

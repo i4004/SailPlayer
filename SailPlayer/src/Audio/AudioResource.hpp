@@ -1,5 +1,5 @@
-#ifndef AUDIORRSOIRCE_H
-#define AUDIORRSOIRCE_H
+#ifndef AUDIORRSOIRCE_HPP
+#define AUDIORRSOIRCE_HPP
 
 #include <QObject>
 #include <audioresource.h>
@@ -37,4 +37,4 @@ namespace Audio
 	};
 }
 
-#endif // AUDIORRSOIRCE_H
+#endif // AUDIORRSOIRCE_HPP

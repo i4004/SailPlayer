@@ -1,9 +1,9 @@
-#ifndef FILEINFO_H
-#define FILEINFO_H
+#ifndef FILEINFO_HPP
+#define FILEINFO_HPP
 
 #include <QFileInfo>
 
-#include "FileType.h"
+#include "FileType.hpp"
 
 namespace IO
 {
@@ -25,4 +25,4 @@ namespace IO
 	};
 }
 
-#endif // FILEINFO_H
+#endif // FILEINFO_HPP

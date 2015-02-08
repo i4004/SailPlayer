@@ -1,7 +1,7 @@
-#ifndef FILEINFOFACTORY_H
-#define FILEINFOFACTORY_H
+#ifndef FILEINFOFACTORY_HPP
+#define FILEINFOFACTORY_HPP
 
-#include "FsRecordInfo.h"
+#include "FsRecordInfo.hpp"
 
 namespace IO
 {
@@ -13,4 +13,4 @@ namespace IO
 	};
 }
 
-#endif // FILEINFOFACTORY_H
+#endif // FILEINFOFACTORY_HPP

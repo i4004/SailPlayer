@@ -1,8 +1,8 @@
 #include <QDir>
 #include <QDebug>
 
-#include "../IO/FsHelper.h"
-#include "DirectoryRecursiveMultimediaFilesListFactory.h"
+#include "../IO/FsHelper.hpp"
+#include "DirectoryRecursiveMultimediaFilesListFactory.hpp"
 
 namespace Playlist
 {

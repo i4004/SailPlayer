@@ -1,10 +1,10 @@
-#ifndef PLAYLISTFACTORY_H
-#define PLAYLISTFACTORY_H
+#ifndef PLAYLISTFACTORY_HPP
+#define PLAYLISTFACTORY_HPP
 
 #include <QFileInfo>
 
-#include "ITracksFactory.h"
-#include "Track.h"
+#include "ITracksFactory.hpp"
+#include "Track.hpp"
 
 namespace Playlist
 {
@@ -20,4 +20,4 @@ namespace Playlist
 	};
 }
 
-#endif // PLAYLISTFACTORY_H
+#endif // PLAYLISTFACTORY_HPP

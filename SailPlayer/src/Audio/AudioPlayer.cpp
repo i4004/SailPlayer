@@ -1,7 +1,7 @@
 #include <QObject>
 #include <QDebug>
 
-#include "AudioPlayer.h"
+#include "AudioPlayer.hpp"
 
 const int SecondsConvertion = 1000000000;
 

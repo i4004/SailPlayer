@@ -1,5 +1,5 @@
-#ifndef FILETYPE_H
-#define FILETYPE_H
+#ifndef FILETYPE_HPP
+#define FILETYPE_HPP
 
 namespace IO
 {
@@ -18,4 +18,4 @@ namespace IO
 	};
 }
 
-#endif // FILETYPE_H
+#endif // FILETYPE_HPP

@@ -49,24 +49,24 @@ OTHER_FILES += \
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
 HEADERS += \
-    src/Util/FsRecordIconHelper.h \
-    src/IO/FsRecordsInfoFactory.h \
-    src/IO/FsRecordInfo.h \
-    src/IO/FileType.h \
-    src/Audio/AudioResource.h \
-    src/Audio/AudioPlayer.h \
-    src/SailPlayerSettings.h \
-    src/IO/FsHelper.h \
-    src/Playlist/Track.h \
-    src/Playlist/TracksFactory.h \
-    src/Playlist/IMultimediaFilesListFactory.h \
-    src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.h \
-    src/Models/FsRecordsListModel.h \
-    src/Models/PlaylistModel.h \
-    src/Playlist/TracksLoader.h \
-    src/Playlist/ITracksFactory.h \
-    src/Playlist/ITracksLoader.h \
-    src/Models/IAlbumModelsFactory.h \
-    src/Models/PlaylistModelBase.h
+    src/SailPlayerSettings.hpp \
+    src/Util/FsRecordIconHelper.hpp \
+    src/Playlist/TracksLoader.hpp \
+    src/Playlist/TracksFactory.hpp \
+    src/Playlist/Track.hpp \
+    src/Playlist/ITracksLoader.hpp \
+    src/Playlist/ITracksFactory.hpp \
+    src/Playlist/IMultimediaFilesListFactory.hpp \
+    src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp \
+    src/Models/PlaylistModelBase.hpp \
+    src/Models/PlaylistModel.hpp \
+    src/Models/IAlbumModelsFactory.hpp \
+    src/Models/FsRecordsListModel.hpp \
+    src/IO/FsRecordsInfoFactory.hpp \
+    src/IO/FsRecordInfo.hpp \
+    src/IO/FsHelper.hpp \
+    src/IO/FileType.hpp \
+    src/Audio/AudioResource.hpp \
+    src/Audio/AudioPlayer.hpp
 
 INCLUDEPATH += $$PWD/include

@@ -1,11 +1,11 @@
-#ifndef SAILPLAYERSETTINGS_H
-#define SAILPLAYERSETTINGS_H
+#ifndef SAILPLAYERSETTINGS_HPP
+#define SAILPLAYERSETTINGS_HPP
 
 #include <QString>
 #include <QList>
 #include <QSettings>
 
-#include "Playlist/Track.h"
+#include "Playlist/Track.hpp"
 
 using namespace Playlist;
 
@@ -34,4 +34,4 @@ private:
 	QSettings settings;
 };
 
-#endif // SAILPLAYERSETTINGS_H
+#endif // SAILPLAYERSETTINGS_HPP

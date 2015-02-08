@@ -1,4 +1,4 @@
-#include "PlaylistModel.h"
+#include "PlaylistModel.hpp"
 
 namespace Models
 {

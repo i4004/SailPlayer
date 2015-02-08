@@ -1,7 +1,7 @@
-#ifndef ITRACKSLOADER_H
-#define ITRACKSLOADER_H
+#ifndef ITRACKSLOADER_HPP
+#define ITRACKSLOADER_HPP
 
-#include "Track.h"
+#include "Track.hpp"
 
 namespace Playlist
 {
@@ -14,4 +14,4 @@ namespace Playlist
 	};
 }
 
-#endif // ITRACKSLOADER_H
+#endif // ITRACKSLOADER_HPP

@@ -1,5 +1,5 @@
 #include "glib.h"
-#include "AudioResource.h"
+#include "AudioResource.hpp"
 
 namespace Audio
 {
