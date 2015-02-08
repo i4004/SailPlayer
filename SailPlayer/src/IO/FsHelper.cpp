@@ -1,6 +1,6 @@
 #include <QFileInfo>
 
-#include "FsHelper.h"
+#include "FsHelper.hpp"
 
 namespace IO
 {

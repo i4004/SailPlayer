@@ -1,8 +1,8 @@
-#ifndef FILEICONHELPER_H
-#define FILEICONHELPER_H
+#ifndef FILEICONHELPER_HPP
+#define FILEICONHELPER_HPP
 
-#include "../IO/FileType.h"
-#include "../IO/FsRecordInfo.h"
+#include "../IO/FileType.hpp"
+#include "../IO/FsRecordInfo.hpp"
 
 using namespace IO;
 
@@ -16,4 +16,4 @@ namespace Util
 	};
 }
 
-#endif // FILEICONHELPER_H
+#endif // FILEICONHELPER_HPP

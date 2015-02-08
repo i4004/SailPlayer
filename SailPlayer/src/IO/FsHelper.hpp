@@ -1,10 +1,10 @@
-#ifndef FSHELPER_H
-#define FSHELPER_H
+#ifndef FSHELPER_HPP
+#define FSHELPER_HPP
 
 #include <QObject>
 #include <QString>
 
-#include "FileType.h"
+#include "FileType.hpp"
 
 namespace IO
 {
@@ -19,4 +19,4 @@ namespace IO
 	};
 }
 
-#endif // FSHELPER_H
+#endif // FSHELPER_HPP

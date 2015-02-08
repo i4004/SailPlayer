@@ -1,9 +1,9 @@
-#ifndef PLAYLISTMODELBASE_H
-#define PLAYLISTMODELBASE_H
+#ifndef PLAYLISTMODELBASE_HPP
+#define PLAYLISTMODELBASE_HPP
 
 #include <QAbstractListModel>
 
-#include "../Playlist/Track.h"
+#include "../Playlist/Track.hpp"
 
 using namespace Playlist;
 
@@ -51,4 +51,4 @@ namespace Models
 	};
 }
 
-#endif // PLAYLISTMODELBASE_H
+#endif // PLAYLISTMODELBASE_HPP

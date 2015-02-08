@@ -1,5 +1,5 @@
-#ifndef TRACK_H
-#define TRACK_H
+#ifndef TRACK_HPP
+#define TRACK_HPP
 
 #include <QString>
 
@@ -48,4 +48,4 @@ namespace Playlist
 	};
 }
 
-#endif // TRACK_H
+#endif // TRACK_HPP

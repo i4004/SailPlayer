@@ -1,10 +1,10 @@
-#ifndef AUDIOPLAYER_H
-#define AUDIOPLAYER_H
+#ifndef AUDIOPLAYER_HPP
+#define AUDIOPLAYER_HPP
 
 #include <QObject>
 #include <QTimer>
 #include <gst/gst.h>
-#include "AudioResource.h"
+#include "AudioResource.hpp"
 
 namespace Audio
 {
@@ -94,4 +94,4 @@ namespace Audio
 	};
 }
 
-#endif // AUDIOPLAYER_H
+#endif // AUDIOPLAYER_HPP

@@ -1,7 +1,7 @@
-#ifndef IALBUMMODELSFACTORY_H
-#define IALBUMMODELSFACTORY_H
+#ifndef IALBUMMODELSFACTORY_HPP
+#define IALBUMMODELSFACTORY_HPP
 
-#include "AlbumModel.h"
+#include "AlbumModel.hpp"
 
 namespace Models
 {
@@ -14,4 +14,4 @@ namespace Models
 	};
 }
 
-#endif // IALBUMMODELSFACTORY_H
+#endif // IALBUMMODELSFACTORY_HPP

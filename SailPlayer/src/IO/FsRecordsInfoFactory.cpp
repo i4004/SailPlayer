@@ -1,6 +1,6 @@
 #include <QDir>
 
-#include "FsRecordsInfoFactory.h"
+#include "FsRecordsInfoFactory.hpp"
 
 namespace IO
 {

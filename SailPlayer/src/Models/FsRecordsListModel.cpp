@@ -1,5 +1,5 @@
-#include "../Util/FsRecordIconHelper.h"
-#include "FsRecordsListModel.h"
+#include "../Util/FsRecordIconHelper.hpp"
+#include "FsRecordsListModel.hpp"
 
 using namespace Util;
 

@@ -1,9 +1,9 @@
-#ifndef ITRACKSFACTORY_H
-#define ITRACKSFACTORY_H
+#ifndef ITRACKSFACTORY_HPP
+#define ITRACKSFACTORY_HPP
 
 #include <QFileInfo>
 
-#include "Track.h"
+#include "Track.hpp"
 
 namespace Playlist
 {
@@ -16,4 +16,4 @@ namespace Playlist
 	};
 }
 
-#endif // ITRACKSFACTORY_H
+#endif // ITRACKSFACTORY_HPP
