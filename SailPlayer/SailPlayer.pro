@@ -5,6 +5,9 @@ CONFIG += link_pkgconfig sailfishapp
 QT += core quick qml
 PKGCONFIG += gstreamer-0.10 glib-2.0 audioresource taglib
 
+LIBS += -L$$OUT_PWD/../QtCue/ -lQtCue
+QMAKE_RPATHDIR += /usr/share/QtCue/lib
+
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH
 DEPLOYMENT_PATH = /usr/share/$$TARGET
@@ -70,3 +73,5 @@ HEADERS += \
     src/Audio/AudioPlayer.hpp
 
 INCLUDEPATH += $$PWD/include
+INCLUDEPATH += $$PWD/../QtCue
+DEPENDPATH += $$PWD/../QtCue

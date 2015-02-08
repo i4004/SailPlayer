@@ -8,6 +8,7 @@
 #include "Models/FsRecordsListModel.hpp"
 #include "Models/PlaylistModel.hpp"
 #include "SailPlayerSettings.hpp"
+#include <CueSheetParser.hpp>
 
 using namespace Audio;
 using namespace IO;
@@ -30,6 +31,9 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<PlaylistModel::PlayOrder>("PlaylistModel::PlayOrder");
 
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
+
+	CueSheetParser p;
+	QString a = p.Test();
 
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");
