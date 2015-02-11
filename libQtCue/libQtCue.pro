@@ -1,10 +1,12 @@
+include(../common.pri)
+
 TEMPLATE = lib
 TARGET = QtCue
 
-#CONFIG += plugin
+CONFIG += plugin
 QT += core
 
-target.path = /usr/share/QtCue/lib
+target.path = /usr/share/$${PACKAGE}/lib
 INSTALLS += target
 
 HEADERS += \

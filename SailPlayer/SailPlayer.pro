@@ -1,12 +1,12 @@
+include(../common.pri)
+
 TEMPLATE=app
 TARGET = harbour-sail-player
 
 CONFIG += link_pkgconfig sailfishapp
 QT += core quick qml
 PKGCONFIG += gstreamer-0.10 glib-2.0 audioresource taglib
-
-LIBS += -L$$OUT_PWD/../QtCue/ -lQtCue
-QMAKE_RPATHDIR += /usr/share/QtCue/lib
+LIBS += -L$$OUT_PWD/../libQtCue -lQtCue
 
 TARGETPATH = /usr/bin
 target.path = $$TARGETPATH
@@ -73,5 +73,4 @@ HEADERS += \
     src/Audio/AudioPlayer.hpp
 
 INCLUDEPATH += $$PWD/include
-INCLUDEPATH += $$PWD/../QtCue
-DEPENDPATH += $$PWD/../QtCue
+INCLUDEPATH += $$PWD/../libQtCue

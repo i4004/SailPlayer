@@ -1,6 +1,8 @@
+include(common.pri)
+
 TEMPLATE = subdirs
-SUBDIRS = SailPlayer SailPlayer.Tests QtCue QtCue.Tests
+SUBDIRS = SailPlayer SailPlayer.Tests libQtCue libQtCue.Tests
 
 CONFIG += ordered
 
-SailPlayer.depends = QtCue
+SailPlayer.depends = libQtCue
