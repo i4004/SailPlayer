@@ -14,6 +14,7 @@ using namespace Audio;
 using namespace IO;
 using namespace Models;\
 using namespace Playlist;
+using namespace QtCue;
 
 int main(int argc, char *argv[])
 {

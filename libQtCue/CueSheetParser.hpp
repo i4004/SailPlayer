@@ -3,12 +3,15 @@
 
 #include <QString>
 
-class CueSheetParser
+namespace QtCue
 {
-public:
-	CueSheetParser();
+	class CueSheetParser
+	{
+	public:
+		CueSheetParser();
 
-	QString Test();
-};
+		QString Test();
+	};
+}
 
 #endif // CUESHEETPARSER_HPP

@@ -10,7 +10,11 @@ target.path = /usr/share/$${PACKAGE}/lib
 INSTALLS += target
 
 HEADERS += \
-    CueSheetParser.hpp
+    CueSheetParser.hpp \
+    CueSheetReader.hpp \
+    CueSheet.hpp
 
 SOURCES += \
-    CueSheetParser.cpp
+    CueSheetParser.cpp \
+    CueSheetReader.cpp \
+    CueSheet.cpp

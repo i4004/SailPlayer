@@ -1,10 +1,13 @@
 #include "cuesheetparser.hpp"
 
-CueSheetParser::CueSheetParser()
+namespace QtCue
 {
-}
+	CueSheetParser::CueSheetParser()
+	{
+	}
 
-QString CueSheetParser::Test()
-{
-	return QString("Hello world!!!");
+	QString CueSheetParser::Test()
+	{
+		return QString("Hello world!!!");
+	}
 }
