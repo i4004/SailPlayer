@@ -6,8 +6,8 @@ TARGET = QtCue.Tests
 
 #LIBS += -L$$OUT_PWD/../libQtCue -lQtCue
 
-#INCLUDEPATH += $$PWD/../libQtCue
-INCLUDEPATH += $$PWD/../include
+target.path = /opt/tests/libQtCue.Tests
+INSTALLS += target
 
 HEADERS += \
     CueSheetParserTests.hpp
@@ -15,3 +15,5 @@ HEADERS += \
 SOURCES += \
     CueSheetParserTests.cpp \
     Main.cpp
+
+INCLUDEPATH += $$PWD/../include

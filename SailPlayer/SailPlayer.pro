@@ -74,3 +74,4 @@ HEADERS += \
 
 INCLUDEPATH += $$PWD/include
 INCLUDEPATH += $$PWD/../libQtCue
+DEPENDPATH += $$PWD/../libQtCue
