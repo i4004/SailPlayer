@@ -27,7 +27,12 @@ SOURCES += \
     src/Models/FsRecordsListModel.cpp \
     src/Models/PlaylistModel.cpp \
     src/Playlist/TracksLoader.cpp \
-    src/Models/PlaylistModelBase.cpp
+    src/Models/PlaylistModelBase.cpp \
+    src/Cue/CueSheet.cpp \
+    src/Cue/CueSheetParser.cpp \
+    src/Cue/CueSheetReader.cpp \
+    src/Cue/CueTrack.cpp \
+    src/Cue/CueFile.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -67,6 +72,13 @@ HEADERS += \
     src/IO/FsHelper.hpp \
     src/IO/FileType.hpp \
     src/Audio/AudioResource.hpp \
-    src/Audio/AudioPlayer.hpp
+    src/Audio/AudioPlayer.hpp \
+    src/Cue/CueSheet.hpp \
+    src/Cue/CueSheetParser.hpp \
+    src/Cue/CueSheetReader.hpp \
+    src/Cue/CueTrack.hpp \
+    src/Cue/CueFile.hpp \
+    src/Cue/CueTrackDataType.hpp \
+    src/Cue/CueFileType.hpp
 
 INCLUDEPATH += $$PWD/include

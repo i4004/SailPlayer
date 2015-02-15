@@ -30,7 +30,7 @@ namespace Playlist
 		if(!f.isNull() && f.tag())
 		{
 			Tag* tag = f.tag();
-			AudioProperties *properties = f.audioProperties();
+			AudioProperties* properties = f.audioProperties();
 
 			items.append(new Track(QString(tag->artist().toCString()),
 								   QString(tag->album().toCString()),
