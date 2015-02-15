@@ -10,19 +10,12 @@ namespace Cue
 
 	CueSheet* CueSheetReader::Read(QString cueFileName)
 	{
-//		QStringList items = ReadFileData(cueFileName);
+		QStringList items = ReadFileData(cueFileName);
 
-//		if(items.count() == 0)
-//			return CueSheet();
+		if(items.count() == 0)
+			return NULL;
 
-//		CueSheet* cue = new CueSheet();
-
-//		foreach(QString item, items)
-//		{
-//		}
-
-//		return cue;
-		return NULL;
+		return parser.Parse(items);
 	}
 
 	QStringList CueSheetReader::ReadFileData(QString cueFileName)

@@ -1,7 +1,7 @@
 #ifndef CUESHEETPARSER_HPP
 #define CUESHEETPARSER_HPP
 
-#include <QString>
+#include <QStringList>
 
 #include "CueSheet.hpp"
 
@@ -13,6 +13,7 @@ namespace Cue
 		CueSheetParser();
 
 		CueSheet* Parse(QString cueSheetData);
+		CueSheet* Parse(QStringList cueSheetData);
 	};
 }
 
