@@ -1,4 +1,5 @@
 #include <QFile>
+#include <QTextStream>
 
 #include "CueSheetReader.hpp"
 
@@ -10,6 +11,9 @@ namespace Cue
 
 	CueSheet* CueSheetReader::Read(QString cueFileName)
 	{
+		if(!QFile::exists(cueFileName))
+			return NULL;
+
 		QStringList items = ReadFileData(cueFileName);
 
 		if(items.count() == 0)
@@ -20,11 +24,18 @@ namespace Cue
 
 	QStringList CueSheetReader::ReadFileData(QString cueFileName)
 	{
-		QFile file(cueFileName);
 		QStringList items;
+		QFile inputFile(cueFileName);
 
-		while(!file.atEnd())
-			items.append(file.readLine());
+		if(inputFile.open(QIODevice::ReadOnly))
+		{
+			QTextStream stream(&inputFile);
+
+			while(!stream.atEnd())
+				items.append(stream.readLine());
+
+			inputFile.close();
+		}
 
 		return items;
 	}
