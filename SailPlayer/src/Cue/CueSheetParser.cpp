@@ -52,16 +52,8 @@ namespace Cue
 
 	CueFile* CueSheetParser::ParseFileHeader(QString data)
 	{
-		QStringList items = data.split(" ", QString::SkipEmptyParts);
-
-		QString fileName;
-		CueFileType fileType = Cue::FileType::Undefined;
-
-		if(items.count() >= 3)
-		{
-			fileName = items[1];
-			fileType = ParseFileType(items[2]);
-		}
+		QString fileName = data.mid(5, data.lastIndexOf(" ") - 5).replace("\"", "");
+		CueFileType fileType = ParseFileType(data.mid(data.lastIndexOf(" ") + 1));
 
 		return new CueFile(fileName, fileType);
 	}
@@ -70,14 +62,8 @@ namespace Cue
 	{
 		QStringList items = data.split(" ", QString::SkipEmptyParts);
 
-		int number;
-		CueTrackDataType dataType = Cue::TrackDataType::Undefined;
-
-		if(items.count() >= 3)
-		{
-			number =  items[1].toInt();
-			dataType = ParseTrackDataType(items[2]);
-		}
+		int number =  items[1].toInt();
+		CueTrackDataType dataType = ParseTrackDataType(items[2]);
 
 		return new CueTrack(number, dataType);
 	}
