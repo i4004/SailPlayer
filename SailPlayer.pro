@@ -1,4 +1,4 @@
 TEMPLATE = subdirs
-SUBDIRS = SailPlayer SailPlayer.Tests
+SUBDIRS = SailPlayer
 
 CONFIG += ordered
