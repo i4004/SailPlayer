@@ -3,14 +3,18 @@
 
 namespace Cue
 {
-	enum CueFileType
+	namespace FileType
 	{
-		Binary = 0,
-		Motorola = 1,
-		Aiff = 2,
-		Wave = 3,
-		Mp3 = 4
-	};
+		enum CueFileType
+		{
+			Undefined = 0,
+			Binary = 1,
+			Motorola = 2,
+			Aiff = 3,
+			Wave = 4,
+			Mp3 = 5
+		};
+	}
 }
 
 #endif // CUEFILETYPE_HPP

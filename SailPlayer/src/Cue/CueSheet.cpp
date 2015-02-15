@@ -2,8 +2,13 @@
 
 namespace Cue
 {
-	CueSheet::CueSheet(QList<CueFile> files)
+	CueSheet::CueSheet()
 	{
-		_files = files;
+	}
+
+	CueSheet::~CueSheet()
+	{
+		while (!_files.isEmpty())
+			delete _files.takeFirst();
 	}
 }

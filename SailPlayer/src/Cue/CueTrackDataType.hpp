@@ -3,17 +3,21 @@
 
 namespace Cue
 {
-	enum CueTrackDataType
+	namespace TrackDataType
 	{
-		Audio = 0,
-		Cdg = 1,
-		Mode12048 = 2,
-		Mode12352 = 3,
-		Mode22336 = 4,
-		Mode22352 = 5,
-		Cdi2336 = 6,
-		Cdi2352 = 7
-	};
+		enum CueTrackDataType
+		{
+			Undefined = 0,
+			Audio = 1,
+			Cdg = 2,
+			Mode12048 = 3,
+			Mode12352 = 4,
+			Mode22336 = 5,
+			Mode22352 = 6,
+			Cdi2336 = 7,
+			Cdi2352 = 8
+		};
+	}
 }
 
 #endif // CUETRACKDATATYPE_HPP

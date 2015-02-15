@@ -5,6 +5,8 @@
 
 #include "CueTrackDataType.hpp"
 
+using namespace Cue::TrackDataType;
+
 namespace Cue
 {
 	class CueTrack

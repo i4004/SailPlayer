@@ -8,12 +8,15 @@ namespace Cue
 	class CueSheet
 	{
 	public:
-		CueSheet(QList<CueFile> files);
+		CueSheet();
+		~CueSheet();
 
-		QList<CueFile> GetFiles() { return _files; }
+		void AddFile(CueFile* file) { _files.append(file); }
+
+		QList<CueFile*> GetFiles() { return _files; }
 
 	private:
-		QList<CueFile> _files;
+		QList<CueFile*> _files;
 	};
 }
 

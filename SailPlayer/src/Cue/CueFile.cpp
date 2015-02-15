@@ -2,10 +2,15 @@
 
 namespace Cue
 {
-	CueFile::CueFile(QString fileName, CueFileType fileType, QList<CueTrack> tracks)
+	CueFile::CueFile(QString fileName, CueFileType fileType)
 	{
 		_fileName = fileName;
 		_fileType = fileType;
-		_tracks = tracks;
+	}
+
+	CueFile::~CueFile()
+	{
+		while (!_tracks.isEmpty())
+			delete _tracks.takeFirst();
 	}
 }

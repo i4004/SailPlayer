@@ -14,6 +14,12 @@ namespace Cue
 
 		CueSheet* Parse(QString cueSheetData);
 		CueSheet* Parse(QStringList cueSheetData);
+
+	private:
+		CueFile* ParseFileHeader(QString data);
+		CueTrack* ParseTrackHeader(QString data);
+		CueFileType ParseFileType(QString data);
+		CueTrackDataType ParseTrackDataType(QString data);
 	};
 }
 
