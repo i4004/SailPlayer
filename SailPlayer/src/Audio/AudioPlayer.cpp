@@ -207,7 +207,7 @@ namespace Audio
 	void AudioPlayer::SetEqualizerData()
 	{
 		gint i;
-		GstObject *band;
+		GObject *band;
 
 		// TODO
 		GstEqualizerBandState equalizerData[] = {
@@ -231,7 +231,7 @@ namespace Audio
 	{
 		gint64 value;
 
-		if(gst_element_query_position(_pipeline, &_gstTimeFormat, &value))
+		if(gst_element_query_position(_pipeline, _gstTimeFormat, &value))
 			return value;
 
 		return 0;
@@ -241,7 +241,7 @@ namespace Audio
 	{
 		gint64 value;
 
-		if(gst_element_query_duration(_pipeline, &_gstTimeFormat, &value))
+		if(gst_element_query_duration(_pipeline, _gstTimeFormat, &value))
 			return value;
 
 		return 0;
