@@ -10,9 +10,9 @@ namespace Audio
 {
 	typedef struct
 	{
-	  gfloat freq;
-	  gfloat width;
-	  gfloat gain;
+		gfloat freq;
+		gfloat width;
+		gfloat gain;
 	} GstEqualizerBandState;
 
 	class AudioPlayer : public QObject
@@ -36,7 +36,7 @@ namespace Audio
 		Q_INVOKABLE void play();
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
-		Q_INVOKABLE void setFileToPlay(QString fullFilePath);
+		Q_INVOKABLE void setFileToPlay(QString fullFilePath);//, int startPosition, int endPosition);
 		Q_INVOKABLE void seek(int milliseconds);
 		Q_INVOKABLE bool hasFileToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
 
@@ -60,8 +60,7 @@ namespace Audio
 		AudioResource* _audioResource;
 
 		GstElement* _pipeline;
-		GstElement* _source;
-		GstElement* _decoder;
+		GstElement* _additionalPlugins;
 		GstElement* _equalizer;
 		GstElement* _sink;
 
@@ -81,8 +80,8 @@ namespace Audio
 
 		// Gstreamer callbacks
 
-		static void OnPadAdded(GstElement* element, GstPad* pad, gpointer data);
 		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData);
+		static void OnAboutToFinish(GstElement* pipeline, gpointer userData);
 
 		// Modules control
 

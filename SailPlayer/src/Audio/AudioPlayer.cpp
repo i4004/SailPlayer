@@ -39,17 +39,6 @@ namespace Audio
 		delete _audioResource;
 	}
 
-	void AudioPlayer::OnPadAdded(GstElement* element, GstPad* pad, gpointer data)
-	{
-		Q_UNUSED(element);
-
-		GstElement* sink = (GstElement*) data;
-
-		GstPad* sinkpad = gst_element_get_static_pad(sink, "sink");
-		gst_pad_link(pad, sinkpad);
-		gst_object_unref(sinkpad);
-	}
-
 	gboolean AudioPlayer::OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData)
 	{
 		Q_UNUSED(bus);
@@ -88,6 +77,14 @@ namespace Audio
 		}
 
 		return TRUE;
+	}
+
+	void AudioPlayer::OnAboutToFinish(GstElement* pipeline, gpointer userData)
+	{
+		Q_UNUSED(pipeline);
+		Q_UNUSED(userData);
+
+//		AudioPlayer* player = static_cast<AudioPlayer*>(userData);
 	}
 
 	void AudioPlayer::OnAudioResourceAquireStateChanged(bool acquired)
@@ -156,7 +153,7 @@ namespace Audio
 	void AudioPlayer::setFileToPlay(QString fullFilePath)
 	{
 		_fileToPlayFullFilePath = fullFilePath;
-		g_object_set(G_OBJECT(_source), "location", _fileToPlayFullFilePath.toLocal8Bit().data(), NULL);
+		g_object_set(_pipeline, "uri", ("file://" + _fileToPlayFullFilePath).toLocal8Bit().data(), NULL);
 	}
 
 	void AudioPlayer::seek(int milliseconds)
@@ -171,35 +168,50 @@ namespace Audio
 
 	bool AudioPlayer::Init()
 	{
-		_pipeline = gst_pipeline_new("audio-player");
-		_source = gst_element_factory_make("filesrc", NULL);
-		_decoder = gst_element_factory_make("decodebin", NULL);
-		_equalizer = gst_element_factory_make("equalizer-nbands", NULL);
+		_pipeline = gst_parse_launch("playbin", NULL);
+		_equalizer = gst_element_factory_make ("equalizer-nbands", NULL);
 		_sink = gst_element_factory_make("autoaudiosink", NULL);
 
-		if (!_pipeline || !_source || !_decoder || !_equalizer || !_sink)
+		if (!_pipeline || !_equalizer || !_sink)
 		{
 			g_warning("Failed to initialize elements!");
 			return false;
 		}
 
+		// Subscribe to pipeline messages
+
 		GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(_pipeline));
 		gst_bus_add_watch(bus, OnBusCall, this);
 		gst_object_unref(bus);
 
-		gst_bin_add_many(GST_BIN(_pipeline), _source, _decoder, _equalizer, _sink, NULL);
+		// Initializing additional plugins bin
 
-		if (!gst_element_link(_source, _decoder) || !gst_element_link(_equalizer, _sink))
+		_additionalPlugins = gst_bin_new("additional_plugins");
+		gst_bin_add_many(GST_BIN(_additionalPlugins), _equalizer, _sink, NULL);
+
+		if (!gst_element_link_many(_equalizer, _sink, NULL))
 		{
 			g_warning("Failed to link elements!");
 			return false;
 		}
 
-		g_signal_connect(_decoder, "pad-added", G_CALLBACK(OnPadAdded), _equalizer);
+		// Connecting with additional plugins bin
 
-		g_object_set (G_OBJECT (_equalizer), "num-bands", EqualizerBandsNumber, NULL);
+		GstPad* pad = gst_element_get_static_pad(_equalizer, "sink");
+		GstPad* ghost_pad = gst_ghost_pad_new("sink", pad);
+		gst_pad_set_active(ghost_pad, TRUE);
+		gst_element_add_pad(_additionalPlugins, ghost_pad);
+		gst_object_unref(pad);
 
+		g_object_set(GST_OBJECT(_pipeline), "audio-sink", _additionalPlugins, NULL);
+
+		// Set-up equalizer
+
+		g_object_set(G_OBJECT(_equalizer), "num-bands", EqualizerBandsNumber, NULL);
 		SetEqualizerData();
+
+		// Subsribe to next track gapless playing handling
+		g_signal_connect(_pipeline, "about-to-finish", G_CALLBACK(OnAboutToFinish), this);
 
 		return true;
 	}
@@ -211,11 +223,11 @@ namespace Audio
 
 		// TODO
 		GstEqualizerBandState equalizerData[] = {
-			{ 120.0,	5.0,	0 },
-			{ 500.0,	2.0,	0 },
-			{ 1503.0,	2.0,	0 },
-			{ 6000.0,	2.0,	0 },
-			{ 3000.0,	120.0,	0 }
+			{ 120.0,   50.0, 0.0},
+			{ 500.0,   20.0, 0.0},
+			{1503.0,    2.0, 0.0},
+			{6000.0, 1000.0, 0.0},
+			{3000.0,  120.0, 0.0}
 		};
 
 		for (i = 0; i < EqualizerBandsNumber; i++)
