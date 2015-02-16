@@ -3,7 +3,7 @@
 
 #include "AudioPlayer.hpp"
 
-const int SecondsConvertion = 1000000000;
+const int MillisecondsConvertion = 1000000;
 
 namespace Audio
 {
@@ -113,7 +113,7 @@ namespace Audio
 	void AudioPlayer::OnAsyncDone()
 	{
 		if(_currentState == Playing || _currentState == Paused)
-			emit currentDurationUpdated(GetCurrentDuration() / SecondsConvertion);
+			emit currentDurationUpdated(GetCurrentDuration() / MillisecondsConvertion);
 	}
 
 	void AudioPlayer::play()
@@ -159,14 +159,14 @@ namespace Audio
 		g_object_set(G_OBJECT(_source), "location", _fileToPlayFullFilePath.toLocal8Bit().data(), NULL);
 	}
 
-	void AudioPlayer::seek(int seconds)
+	void AudioPlayer::seek(int milliseconds)
 	{
-		Seek(gint64(seconds) * SecondsConvertion);
+		Seek(gint64(milliseconds) * MillisecondsConvertion);
 	}
 
 	void AudioPlayer::OnCurrentPositionTimerCallback()
 	{
-		emit currentPositionUpdated(GetCurrentPosition() / SecondsConvertion);
+		emit currentPositionUpdated(GetCurrentPosition() / MillisecondsConvertion);
 	}
 
 	bool AudioPlayer::Init()

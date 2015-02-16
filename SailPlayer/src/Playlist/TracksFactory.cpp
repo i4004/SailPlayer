@@ -48,7 +48,8 @@ namespace Playlist
 								   tag->year(),
 								   tag->track(),
 								   QString(tag->title().toCString()),
-								   properties->length(),
+								   0,
+								   properties->length() * 1000, // Length in milliseconds
 								   fileInfo.fileName(),
 								   fileInfo.absoluteFilePath()));
 		}
@@ -62,6 +63,8 @@ namespace Playlist
 
 		CueSheet* cue = _cueReader.Read(fileInfo.absoluteFilePath());
 
+		int a = GetMillisecondsFromCueFrames(37);
+
 		if(cue != NULL)
 		{
 			foreach (CueFile* currentFile, cue->GetFiles())
@@ -72,12 +75,18 @@ namespace Playlist
 					int albumYear = cue->GetRemarks()["DATE"].toInt();
 					QString fullFilePath = QDir::isAbsolutePath(currentFile->GetFileName()) ? currentFile->GetFileName() : fileInfo.absolutePath() + "/" + currentFile->GetFileName();
 					QFileInfo mediaFileInfo(fullFilePath);
+					CueIndex* dataIndex = GetDataIndex(currentTrack->GetIndexes());
+//					int duration = 0;
+
+//					if(dataIndex != NULL)
+//						duration = (dataIndex->GetMinutes() * 60 + dataIndex->GetSeconds()) * 1000 + GetMillisecondsFromCueFrames(dataIndex->GetFrames());
 
 					items.append(new Track(artist,
 										   cue->GetTitle(),
 										   albumYear,
 										   currentTrack->GetNumber(),
 										   currentTrack->GetTitle(),
+										   0,
 										   666,
 										   mediaFileInfo.fileName(),
 										   fullFilePath));
@@ -88,5 +97,19 @@ namespace Playlist
 		}
 
 		return items;
+	}
+
+	int TracksFactory::GetMillisecondsFromCueFrames(int frames)
+	{
+		return 1 / 75 * frames * 1000;
+	}
+
+	CueIndex* TracksFactory::GetDataIndex(QList<CueIndex*> indexes)
+	{
+		foreach(CueIndex* index, indexes)
+			if(index->GetNumber() == 1)
+				return index;
+
+		return NULL;
 	}
 }

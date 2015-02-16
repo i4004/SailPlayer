@@ -37,7 +37,7 @@ namespace Audio
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
 		Q_INVOKABLE void setFileToPlay(QString fullFilePath);
-		Q_INVOKABLE void seek(int seconds);
+		Q_INVOKABLE void seek(int milliseconds);
 		Q_INVOKABLE bool hasFileToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
 
 	public slots:
@@ -46,7 +46,7 @@ namespace Audio
 		void OnAsyncDone();
 
 	signals:
-		void currentPositionUpdated(int seconds);
+		void currentPositionUpdated(int milliseconds);
 		void currentDurationUpdated(int duration);
 		void endOfStreamReached();
 		void stateChanged(AudioPlayer::AudioPlayerState state);

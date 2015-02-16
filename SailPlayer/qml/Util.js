@@ -12,9 +12,9 @@ function zeroPad(number, digits)
 }
 
 // Format track duration to format like HH:mm:ss / m:ss / 0:ss
-function formatTrackDuration(trackDuration /* track duration in seconds */)
+function formatTrackDuration(trackDuration /* track duration in milliseconds */)
 {
-	trackDuration = parseInt(trackDuration)
+	trackDuration = Math.round(parseInt(trackDuration) / 1000);
 
 	var seconds = trackDuration % 60;
 	var totalMinutes = (trackDuration - seconds) / 60;

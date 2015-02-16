@@ -11,7 +11,7 @@ DockedPanel
 	signal playPause(int state)
 	signal stop(int state)
 	signal next(int state)
-	signal seek(int seconds)
+	signal seek(int milliseconds)
 
 	function setTrackDuration(value)
 	{

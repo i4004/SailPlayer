@@ -168,7 +168,7 @@ Page
 		}
 
 		onStop: player.stop()
-		onSeek: player.seek(seconds)
+		onSeek: player.seek(milliseconds)
 		onNext:
 		{
 			player.stop();

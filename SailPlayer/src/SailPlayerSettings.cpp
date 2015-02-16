@@ -34,7 +34,8 @@ QList<Track*> SailPlayerSettings::GetPlaylist()
 								settings.value("AlbumYear").toInt(),
 								settings.value("TrackNumber").toInt(),
 								settings.value("TrackName").toString(),
-								settings.value("TrackDuration").toInt(),
+								settings.value("TrackStartPosition").toInt(),
+								settings.value("TrackEndPosition").toInt(),
 								settings.value("TrackFileName").toString(),
 								settings.value("TrackFullFilePath").toString());
 
@@ -60,7 +61,8 @@ void SailPlayerSettings::SetPlaylist(QList<Track*> tracks)
 		settings.setValue("AlbumYear", track->GetAlbumYear());
 		settings.setValue("TrackNumber", track->GetNumber());
 		settings.setValue("TrackName", track->GetName());
-		settings.setValue("TrackDuration", track->GetDuration());
+		settings.setValue("TrackStartPosition", track->GetStartPosition());
+		settings.setValue("TrackEndPosition", track->GetEndPosition());
 		settings.setValue("TrackFileName", track->GetFileName());
 		settings.setValue("TrackFullFilePath", track->GetFullFilePath());
 	}

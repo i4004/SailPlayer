@@ -24,6 +24,9 @@ namespace Playlist
 
 		QList<Track*> Build(QFileInfo fileInfo);
 		QList<Track*> BuildFromCueSheet(QFileInfo fileInfo);
+
+		int GetMillisecondsFromCueFrames(int frames);
+		CueIndex* GetDataIndex(QList<CueIndex*> indexes);
 	};
 }
 
