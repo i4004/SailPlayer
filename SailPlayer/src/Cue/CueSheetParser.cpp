@@ -97,22 +97,22 @@ namespace Cue
 			return Cdg;
 
 		if(data == "MODE1/2048")
-			return Mode12048;
+			return Mode1_2048;
 
 		if(data == "MODE1/2352")
-			return Mode12352;
+			return Mode1_2352;
 
 		if(data == "MODE2/2336")
-			return Mode22336;
+			return Mode2_2336;
 
 		if(data == "MODE2/2352")
-			return Mode22352;
+			return Mode2_2352;
 
 		if(data == "CDI/2336")
-			return Cdi2336;
+			return Cdi_2336;
 
 		if(data == "CDI/2352")
-			return Cdi2352;
+			return Cdi_2352;
 
 		return Cue::TrackDataType::Undefined;
 	}
