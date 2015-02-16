@@ -7,7 +7,6 @@
 #include "TracksFactory.hpp"
 
 using namespace TagLib;
-//using namespace IO;
 
 namespace Playlist
 {
@@ -63,8 +62,6 @@ namespace Playlist
 
 		CueSheet* cue = _cueReader.Read(fileInfo.absoluteFilePath());
 
-		int a = GetMillisecondsFromCueFrames(37);
-
 		if(cue != NULL)
 		{
 			foreach (CueFile* currentFile, cue->GetFiles())
@@ -101,7 +98,7 @@ namespace Playlist
 
 	int TracksFactory::GetMillisecondsFromCueFrames(int frames)
 	{
-		return 1 / 75 * frames * 1000;
+		return 1.0f / 75 * frames * 1000;
 	}
 
 	CueIndex* TracksFactory::GetDataIndex(QList<CueIndex*> indexes)
