@@ -9,6 +9,7 @@ namespace Playlist
 	DirectoryRecursiveMultimediaFilesListFactory::DirectoryRecursiveMultimediaFilesListFactory()
 	{
 		_supportedFormats.append(Flac);
+		_supportedFormats.append(Cue);
 	}
 
 	QList<QFileInfo> DirectoryRecursiveMultimediaFilesListFactory::Build()

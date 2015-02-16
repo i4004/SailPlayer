@@ -3,8 +3,12 @@
 
 #include <QFileInfo>
 
+#include "../Cue/CueSheetReader.hpp"
+
 #include "ITracksFactory.hpp"
 #include "Track.hpp"
+
+using namespace Cue;
 
 namespace Playlist
 {
@@ -16,7 +20,10 @@ namespace Playlist
 		virtual QList<Track*> Build(QList<QFileInfo> filesInfoList);
 
 	private:
+		CueSheetReader _cueReader;
+
 		QList<Track*> Build(QFileInfo fileInfo);
+		QList<Track*> BuildFromCueSheet(QFileInfo fileInfo);
 	};
 }
 
