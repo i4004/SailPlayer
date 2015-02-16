@@ -32,7 +32,8 @@ SOURCES += \
     src/Cue/CueSheetParser.cpp \
     src/Cue/CueSheetReader.cpp \
     src/Cue/CueTrack.cpp \
-    src/Cue/CueFile.cpp
+    src/Cue/CueFile.cpp \
+    src/Cue/CueIndex.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -79,6 +80,7 @@ HEADERS += \
     src/Cue/CueTrack.hpp \
     src/Cue/CueFile.hpp \
     src/Cue/CueTrackDataType.hpp \
-    src/Cue/CueFileType.hpp
+    src/Cue/CueFileType.hpp \
+    src/Cue/CueIndex.hpp
 
 INCLUDEPATH += $$PWD/include
