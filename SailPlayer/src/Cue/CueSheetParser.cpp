@@ -37,6 +37,30 @@ namespace Cue
 
 				currentTrack = ParseTrackHeader(item);
 			}
+			else if(item.startsWith("INDEX"))
+				currentTrack->AddIndex(ParseIndex(item));
+			else if(item.startsWith("TITLE"))
+			{
+				if(currentTrack != NULL)
+					currentTrack->SetTitle(ParseKeyValueStringValue(item));
+				else
+					cueSheet->SetTitle(ParseKeyValueStringValue(item));
+			}
+			else if(item.startsWith("PERFORMER"))
+			{
+				if(currentTrack != NULL)
+					currentTrack->SetPerformer(ParseKeyValueStringValue(item));
+				else
+					cueSheet->SetPerformer(ParseKeyValueStringValue(item));
+			}
+			else if(item.startsWith("REM"))
+			{
+				QString name;
+				QString value;
+
+				ParseRemark(item, name, value);
+				cueSheet->AddRemark(name, value);
+			}
 		}
 
 		if(currentFile != NULL)
@@ -66,6 +90,16 @@ namespace Cue
 		CueTrackDataType dataType = ParseTrackDataType(items[2]);
 
 		return new CueTrack(number, dataType);
+	}
+
+	CueIndex* CueSheetParser::ParseIndex(QString data)
+	{
+		QStringList items = data.split(" ", QString::SkipEmptyParts);
+
+		int number =  items[1].toInt();
+		QStringList timeData = items[2].split(":", QString::SkipEmptyParts);
+
+		return new CueIndex(number, timeData[0].toInt(), timeData[1].toInt(), timeData[2].toInt());
 	}
 
 	CueFileType CueSheetParser::ParseFileType(QString data)
@@ -115,5 +149,23 @@ namespace Cue
 			return Cdi_2352;
 
 		return Cue::TrackDataType::Undefined;
+	}
+
+	QString CueSheetParser::ParseKeyValueStringValue(QString data)
+	{
+		return data.mid(data.indexOf(" ") + 1).replace("\"", "");
+	}
+
+	void CueSheetParser::ParseRemark(QString data, QString& name, QString& value)
+	{
+		data = data.mid(4);
+
+		if(data.indexOf(" ") == -1)
+		{
+			name = data.mid(0, data.indexOf(" "));
+			value = data.mid(data.indexOf(" ") + 1).replace("\"", "");
+		}
+		else
+			name = data;
 	}
 }

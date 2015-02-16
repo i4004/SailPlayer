@@ -18,8 +18,11 @@ namespace Cue
 	private:
 		CueFile* ParseFileHeader(QString data);
 		CueTrack* ParseTrackHeader(QString data);
+		CueIndex* ParseIndex(QString data);
 		CueFileType ParseFileType(QString data);
 		CueTrackDataType ParseTrackDataType(QString data);
+		QString ParseKeyValueStringValue(QString data);
+		void ParseRemark(QString data, QString& name, QString& value);
 	};
 }
 

@@ -7,4 +7,10 @@ namespace Cue
 		_number = number;
 		_dataType = dataType;
 	}
+
+	CueTrack::~CueTrack()
+	{
+		while (!_indexes.isEmpty())
+			delete _indexes.takeFirst();
+	}
 }

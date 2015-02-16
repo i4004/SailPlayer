@@ -1,6 +1,7 @@
 #ifndef CUEFILE_HPP
 #define CUEFILE_HPP
 
+#include <QString>
 #include <QList>
 
 #include "CueFileType.hpp"
