@@ -1,4 +1,5 @@
 #include "PlaylistModel.hpp"
+#include <QDebug>
 
 namespace Models
 {
@@ -60,7 +61,8 @@ namespace Models
 		if(result == false)
 			return false;
 
-		setTrackToPlayFromNextTrack();
+		SetTrackToPlayFromNextTrack();
+		emit playingTrackFilePathUpdated(_currentTrackToPlay->GetFullFilePath());
 
 		return true;
 	}
@@ -75,6 +77,50 @@ namespace Models
 		_nextTrackToPlay = _tracksList.at(index);
 
 		return true;
+	}
+
+	bool PlaylistModel::setTrackToPlayAndPlayingFromNextTrack()
+	{
+		bool result = SetTrackToPlayFromNextTrack();
+
+		SetPlayingTrack(true);
+
+		return result;
+	}
+
+	bool PlaylistModel::SetTrackToPlayFromNextTrack()
+	{
+		if(_nextTrackToPlay == NULL)
+			return false;
+
+		if(_currentTrackToPlay != NULL)
+			_currentTrackToPlay->SetAsTrackToPlay(false);
+
+		_currentTrackToPlay = _nextTrackToPlay;
+
+		_currentTrackToPlay->SetAsTrackToPlay(true);
+
+		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
+
+		_nextTrackToPlay = NULL;
+
+		return true;
+	}
+
+	void PlaylistModel::playerStateChanged(AudioPlayer::AudioPlayerState state)
+	{
+		if(state == AudioPlayer::Ready || state == AudioPlayer::Paused)
+			SetPlayingTrack(false);
+		else
+			SetPlayingTrack(true);
+	}
+
+	void PlaylistModel::requestNextTrack()
+	{
+		bool result = calculateNextTrackToPlay();
+
+		if(result == true)
+			emit playingTrackFilePathUpdated(_nextTrackToPlay->GetFullFilePath());
 	}
 
 	int PlaylistModel::CalculateNextTrackIndex(PlayDirection direction, int customIndex)
@@ -146,30 +192,6 @@ namespace Models
 			trackIndex = 0;
 
 		return trackIndex;
-	}
-
-	void PlaylistModel::playerStateChanged(AudioPlayer::AudioPlayerState state)
-	{
-		if(state == AudioPlayer::Ready || state == AudioPlayer::Paused)
-			SetPlayingTrack(false);
-		else
-			SetPlayingTrack(true);
-	}
-
-	void PlaylistModel::setTrackToPlayFromNextTrack()
-	{
-		if(_nextTrackToPlay == NULL)
-			return;
-
-		if(_currentTrackToPlay != NULL)
-			_currentTrackToPlay->SetAsTrackToPlay(false);
-
-		_currentTrackToPlay = _nextTrackToPlay;
-
-		_currentTrackToPlay->SetAsTrackToPlay(true);
-
-		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
-		emit currentTrackFilePathUpdated(_currentTrackToPlay->GetFullFilePath());
 	}
 
 	void PlaylistModel::ResetCurrentTrack()

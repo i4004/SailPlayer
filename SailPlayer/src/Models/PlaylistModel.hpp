@@ -60,15 +60,16 @@ namespace Models
 		// Calculates next track to play and sets it
 		Q_INVOKABLE bool calculateAndSetTrackToPlay(PlayDirection direction = Next, int customIndex = -1);
 
-		Q_INVOKABLE void setTrackToPlayFromNextTrack();
-
 		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
+
+		Q_INVOKABLE void requestNextTrack();
+		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
 
 	public slots:
 		Q_INVOKABLE void playerStateChanged(AudioPlayer::AudioPlayerState state);
 
 	signals:
-		void currentTrackFilePathUpdated(QString filePath);
+		void playingTrackFilePathUpdated(QString filePath);
 		void playlistOrderChanged();
 
 	private:
@@ -86,6 +87,7 @@ namespace Models
 		Track* _currentTrackToPlay;
 		Track* _currentPlayingTrack;
 
+		bool SetTrackToPlayFromNextTrack();
 		int CalculateNextTrackIndex(PlayDirection direction, int customIndex);
 		void ResetCurrentTrack();
 

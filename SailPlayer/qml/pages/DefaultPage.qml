@@ -19,14 +19,8 @@ Page
 
 		onEndOfStreamReached:
 		{
-			player.stop();
-
-			if(playlist.calculateAndSetTrackToPlay())
-				player.play();
-		}
-
-		onAboutToFinish:
-		{
+			if(!playlist.setTrackToPlayAndPlayingFromNextTrack())
+				player.stop();
 		}
 	}
 
@@ -34,11 +28,12 @@ Page
 
 	Component.onCompleted:
 	{
-		playlist.currentTrackFilePathUpdated.connect(player.setFileToPlay);
+		playlist.playingTrackFilePathUpdated.connect(player.setFileToPlay);
 		player.currentDurationUpdated.connect(playerControlPanel.setTrackDuration);
 		player.currentPositionUpdated.connect(playerControlPanel.setTrackPosition);
 		player.stateChanged.connect(playerControlPanel.onPlayerStateChanged);
 		player.stateChanged.connect(playlist.playerStateChanged);
+		player.aboutToFinish.connect(playlist.requestNextTrack);
 
 		playlist.loadPlaylist();
 		playlist.calculateAndSetTrackToPlay();
