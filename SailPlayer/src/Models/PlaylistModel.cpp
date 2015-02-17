@@ -6,7 +6,6 @@ namespace Models
 	{
 		Q_UNUSED(parent);
 
-		_currentTrackIndex= -1;
 		_currentPlayOrder = RepeatPlaylist;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
@@ -54,41 +53,69 @@ namespace Models
 		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsSelectedRole));
 	}
 
-	bool PlaylistModel::calculateTrackToPlay(PlayDirection direction, int customIndex)
+	bool PlaylistModel::calculateAndSetTrackToPlay(PlayDirection direction, int customIndex)
 	{
-		if(_tracksList.count() == 0)
+		bool result = calculateNextTrackToPlay(direction, customIndex);
+
+		if(result == false)
 			return false;
 
+		setTrackToPlayFromNextTrack();
+
+		return true;
+	}
+
+	bool PlaylistModel::calculateNextTrackToPlay(PlayDirection direction, int customIndex)
+	{
+		int index = CalculateNextTrackIndex(direction, customIndex);
+
+		if(index == -1)
+			return false;
+
+		_nextTrackToPlay = _tracksList.at(index);
+
+		return true;
+	}
+
+	int PlaylistModel::CalculateNextTrackIndex(PlayDirection direction, int customIndex)
+	{
+		int trackIndex = -1;
+
+		if(_tracksList.count() == 0)
+			return -1;
+
 		if(direction == ByIndex)
-			_currentTrackIndex = customIndex;
+			return customIndex;
 		else
 		{
-			if(_currentTrackIndex == -1)
-				_currentTrackIndex = 0;
+			if(_currentTrackToPlay == NULL)
+				return 0;
 			else
 			{
+				trackIndex = _tracksList.indexOf(_currentTrackToPlay);
+
 				if(direction == Next || direction == NextWithForce)
 				{
 					switch(_currentPlayOrder)
 					{
 						case Default:
 						{
-							if(_currentTrackIndex < _tracksList.count() - 1 || direction == NextWithForce)
-								_currentTrackIndex++;
+							if(trackIndex < _tracksList.count() - 1 || direction == NextWithForce)
+								trackIndex++;
 							else
-								return false;
+								return -1;
 
 							break;
 						}
 
 						case RepeatPlaylist:
-							_currentTrackIndex++;
+							trackIndex++;
 						break;
 
 						case RepeatTrack:
 						{
 							if(direction == NextWithForce)
-								_currentTrackIndex++;
+								trackIndex++;
 
 							break;
 						}
@@ -97,9 +124,9 @@ namespace Models
 						{
 							int randomIndex;
 
-							while((randomIndex = rand() % _tracksList.count()) == _currentTrackIndex){}
+							while((randomIndex = rand() % _tracksList.count()) == trackIndex){}
 
-							_currentTrackIndex = randomIndex;
+							trackIndex = randomIndex;
 
 							break;
 						}
@@ -107,20 +134,18 @@ namespace Models
 				}
 				else if(direction == Previous)
 				{
-					_currentTrackIndex--;
+					trackIndex--;
 
-					if(_currentTrackIndex == -1)
-						_currentTrackIndex = _tracksList.count() - 1;
+					if(trackIndex == -1)
+						trackIndex = _tracksList.count() - 1;
 				}
 			}
 		}
 
-		if(_currentTrackIndex >= _tracksList.count())
-			_currentTrackIndex = 0;
+		if(trackIndex >= _tracksList.count())
+			trackIndex = 0;
 
-		SetTrackToPlayFromCurrentIndex();
-
-		return true;
+		return trackIndex;
 	}
 
 	void PlaylistModel::playerStateChanged(AudioPlayer::AudioPlayerState state)
@@ -131,12 +156,15 @@ namespace Models
 			SetPlayingTrack(true);
 	}
 
-	void PlaylistModel::SetTrackToPlayFromCurrentIndex()
+	void PlaylistModel::setTrackToPlayFromNextTrack()
 	{
+		if(_nextTrackToPlay == NULL)
+			return;
+
 		if(_currentTrackToPlay != NULL)
 			_currentTrackToPlay->SetAsTrackToPlay(false);
 
-		_currentTrackToPlay = _tracksList.at(_currentTrackIndex);
+		_currentTrackToPlay = _nextTrackToPlay;
 
 		_currentTrackToPlay->SetAsTrackToPlay(true);
 
@@ -146,7 +174,6 @@ namespace Models
 
 	void PlaylistModel::ResetCurrentTrack()
 	{
-		_currentTrackIndex = -1;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
 	}

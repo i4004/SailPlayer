@@ -21,8 +21,12 @@ Page
 		{
 			player.stop();
 
-			if(playlist.calculateTrackToPlay())
+			if(playlist.calculateAndSetTrackToPlay())
 				player.play();
+		}
+
+		onAboutToFinish:
+		{
 		}
 	}
 
@@ -37,7 +41,7 @@ Page
 		player.stateChanged.connect(playlist.playerStateChanged);
 
 		playlist.loadPlaylist();
-		playlist.calculateTrackToPlay();
+		playlist.calculateAndSetTrackToPlay();
 		playOrderControl.setOrder(playlist.playOrder);
 	}
 
@@ -73,7 +77,7 @@ Page
 			{
 				player.stop();
 
-				if(playlist.calculateTrackToPlay(PlayDirection.ByIndex, index))
+				if(playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, index))
 					player.play();
 			}
 		}
@@ -149,7 +153,7 @@ Page
 		onPrevious:
 		{
 			player.stop();
-			if(playlist.calculateTrackToPlay(PlayDirection.Previous) && state != AudioPlayerState.Ready)
+			if(playlist.calculateAndSetTrackToPlay(PlayDirection.Previous) && state != AudioPlayerState.Ready)
 				player.play();
 		}
 
@@ -160,7 +164,7 @@ Page
 			else
 			{
 				if(state == AudioPlayerState.Ready && !playlist.hasTrackToPlay())
-					playlist.calculateTrackToPlay();
+					playlist.calculateAndSetTrackToPlay();
 
 				if(player.hasFileToPlay())
 					player.play();
@@ -172,7 +176,7 @@ Page
 		onNext:
 		{
 			player.stop();
-			if(playlist.calculateTrackToPlay(PlayDirection.NextWithForce) && state != AudioPlayerState.Ready)
+			if(playlist.calculateAndSetTrackToPlay(PlayDirection.NextWithForce) && state != AudioPlayerState.Ready)
 				player.play();
 		}
 	}

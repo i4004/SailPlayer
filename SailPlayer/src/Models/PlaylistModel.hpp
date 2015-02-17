@@ -54,8 +54,13 @@ namespace Models
 
 		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
 
-		// Calculates and sets next track to play
-		Q_INVOKABLE bool calculateTrackToPlay(PlayDirection direction = Next, int customIndex = -1);
+		// Calculates next track to play
+		Q_INVOKABLE bool calculateNextTrackToPlay(PlayDirection direction = Next, int customIndex = -1);
+
+		// Calculates next track to play and sets it
+		Q_INVOKABLE bool calculateAndSetTrackToPlay(PlayDirection direction = Next, int customIndex = -1);
+
+		Q_INVOKABLE void setTrackToPlayFromNextTrack();
 
 		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
 
@@ -76,11 +81,12 @@ namespace Models
 		// Current playing data
 
 		PlayOrder _currentPlayOrder;
-		int _currentTrackIndex;
+
+		Track* _nextTrackToPlay;
 		Track* _currentTrackToPlay;
 		Track* _currentPlayingTrack;
 
-		void SetTrackToPlayFromCurrentIndex();
+		int CalculateNextTrackIndex(PlayDirection direction, int customIndex);
 		void ResetCurrentTrack();
 
 		// Mark track to play as playing and unmarking previously playing track
