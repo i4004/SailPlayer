@@ -44,12 +44,14 @@ namespace Audio
 		void OnAudioResourceAquireStateChanged(bool acquired);
 		void OnEndOfStreamReached();
 		void OnAsyncDone();
+		void OnAboutToFinish();
 
 	signals:
 		void currentPositionUpdated(int milliseconds);
 		void currentDurationUpdated(int duration);
 		void endOfStreamReached();
 		void stateChanged(AudioPlayer::AudioPlayerState state);
+		void aboutToFinish();
 
 	private slots:
 		void OnCurrentPositionTimerCallback();
@@ -81,7 +83,7 @@ namespace Audio
 		// Gstreamer callbacks
 
 		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData);
-		static void OnAboutToFinish(GstElement* pipeline, gpointer userData);
+		static void OnPipelineAboutToFinish(GstElement* pipeline, gpointer userData);
 
 		// Modules control
 

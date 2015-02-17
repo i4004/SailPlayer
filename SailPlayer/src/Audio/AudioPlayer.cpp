@@ -79,7 +79,7 @@ namespace Audio
 		return TRUE;
 	}
 
-	void AudioPlayer::OnAboutToFinish(GstElement* pipeline, gpointer userData)
+	void AudioPlayer::OnPipelineAboutToFinish(GstElement* pipeline, gpointer userData)
 	{
 		Q_UNUSED(pipeline);
 		Q_UNUSED(userData);
@@ -111,6 +111,11 @@ namespace Audio
 	{
 		if(_currentState == Playing || _currentState == Paused)
 			emit currentDurationUpdated(GetCurrentDuration() / MillisecondsConvertion);
+	}
+
+	void AudioPlayer::OnAboutToFinish()
+	{
+		emit aboutToFinish();
 	}
 
 	void AudioPlayer::play()
@@ -211,7 +216,7 @@ namespace Audio
 		SetEqualizerData();
 
 		// Subsribe to next track gapless playing handling
-		g_signal_connect(_pipeline, "about-to-finish", G_CALLBACK(OnAboutToFinish), this);
+		g_signal_connect(_pipeline, "about-to-finish", G_CALLBACK(OnPipelineAboutToFinish), this);
 
 		return true;
 	}
