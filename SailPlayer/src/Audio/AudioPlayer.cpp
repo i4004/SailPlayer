@@ -82,9 +82,9 @@ namespace Audio
 	void AudioPlayer::OnPipelineAboutToFinish(GstElement* pipeline, gpointer userData)
 	{
 		Q_UNUSED(pipeline);
-		Q_UNUSED(userData);
 
-//		AudioPlayer* player = static_cast<AudioPlayer*>(userData);
+		AudioPlayer* player = static_cast<AudioPlayer*>(userData);
+		player->OnAboutToFinish();
 	}
 
 	void AudioPlayer::OnAudioResourceAquireStateChanged(bool acquired)
