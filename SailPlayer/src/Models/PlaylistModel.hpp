@@ -69,7 +69,7 @@ namespace Models
 		Q_INVOKABLE void playerStateChanged(AudioPlayer::AudioPlayerState state);
 
 	signals:
-		void playingTrackFilePathUpdated(QString filePath);
+		void playingTrackFilePathUpdated(QString filePath, int startPos, int endPos);
 		void playlistOrderChanged();
 
 	private:

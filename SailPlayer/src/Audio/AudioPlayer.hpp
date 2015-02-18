@@ -36,7 +36,7 @@ namespace Audio
 		Q_INVOKABLE void play();
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
-		Q_INVOKABLE void setTrackToPlay(QString fullFilePath);
+		Q_INVOKABLE void setTrackToPlay(QString fullFilePath, int startPos, int endPos);
 		Q_INVOKABLE void seek(int milliseconds);
 		Q_INVOKABLE bool hasTrackToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
 		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
@@ -48,6 +48,7 @@ namespace Audio
 		void OnAsyncDone();
 		void OnAboutToFinish();
 		void OnStreamStart();
+		void OnStateChanged();
 
 	signals:
 		void currentPositionUpdated(int milliseconds);
@@ -83,6 +84,8 @@ namespace Audio
 		QTimer _currentPositionTimer;
 		GstFormat _gstTimeFormat;
 		QString _fileToPlayFullFilePath;
+		int _currentStartPosition;
+		int _currentEndPosition;
 
 		bool _nextTrackDataReceived;
 		bool _isStreamFromNextTrack;

@@ -62,7 +62,8 @@ namespace Models
 			return false;
 
 		SetTrackToPlayFromNextTrack();
-		emit playingTrackFilePathUpdated(_currentTrackToPlay->GetFullFilePath());
+
+		emit playingTrackFilePathUpdated(_currentTrackToPlay->GetFullFilePath(), _currentTrackToPlay->GetStartPosition(), _currentTrackToPlay->GetEndPosition());
 
 		return true;
 	}

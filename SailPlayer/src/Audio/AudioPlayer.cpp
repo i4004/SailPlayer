@@ -47,6 +47,13 @@ namespace Audio
 
 		switch (GST_MESSAGE_TYPE (msg))
 		{
+			case GST_MESSAGE_STATE_CHANGED:
+			{
+				AudioPlayer* player = static_cast<AudioPlayer*>(userData);
+				player->OnStateChanged();
+				break;
+			}
+
 			case GST_MESSAGE_EOS:
 			{
 				AudioPlayer* player = static_cast<AudioPlayer*>(userData);
@@ -142,11 +149,30 @@ namespace Audio
 		emit currentPositionUpdated(0);
 	}
 
+	void AudioPlayer::OnStateChanged()
+	{
+		GstState state = GST_STATE(_pipeline);
+
+		if(state == GST_STATE_PLAYING)
+		{
+			if(_currentState == Ready)
+			{
+				qDebug() << _currentStartPosition;
+				qDebug() << _currentEndPosition;
+
+				gst_element_seek (_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
+							GST_SEEK_TYPE_SET, _currentStartPosition * MillisecondsConvertion,
+GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
+//							GST_SEEK_TYPE_SET, _currentEndPosition * MillisecondsConvertion);
+			}
+
+			_currentState = Playing;
+		}
+	}
+
 	void AudioPlayer::play()
 	{\
 		_audioResource->Connect();
-
-		_currentState = Playing;
 
 		emit stateChanged(Playing);
 
@@ -179,15 +205,18 @@ namespace Audio
 		_audioResource->Disconnect();
 	}
 
-	void AudioPlayer::setTrackToPlay(QString fullFilePath)
+	void AudioPlayer::setTrackToPlay(QString fullFilePath, int startPos, int endPos)
 	{
 		_fileToPlayFullFilePath = fullFilePath;
 		_isStreamFromNextTrack = false;
+		_currentStartPosition = startPos;
+		_currentEndPosition = endPos;
 		g_object_set(_pipeline, "uri", QString("file://" + _fileToPlayFullFilePath).toLocal8Bit().data(), NULL);
 	}
 
 	void AudioPlayer::seek(int milliseconds)
 	{
+		qDebug() << milliseconds;
 		Seek(gint64(milliseconds) * MillisecondsConvertion);
 	}
 
@@ -248,6 +277,10 @@ namespace Audio
 
 		// Subsribe to next track gapless playing handling
 		g_signal_connect(_pipeline, "about-to-finish", G_CALLBACK(OnPipelineAboutToFinish), this);
+
+//		g_signal_connect (src, "pad-added", (GCallback) cb_pad_added, pipeline);
+//		  g_signal_connect (src, "no-more-pads",
+//		      (GCallback) cb_no_more_pads, pipeline);
 
 		return true;
 	}
