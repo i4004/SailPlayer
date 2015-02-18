@@ -139,6 +139,7 @@ namespace Audio
 	{
 		emit streamStarted();
 		emit currentDurationUpdated(GetCurrentDuration() / MillisecondsConvertion);
+		emit currentPositionUpdated(0);
 	}
 
 	void AudioPlayer::play()
