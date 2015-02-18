@@ -18,6 +18,8 @@ namespace Playlist
 	{
 		QList<Track*> items;
 
+		_filesLoadedViaCue.clear();
+
 		foreach (QFileInfo fileInfo, filesInfoList)
 		{
 			IO::FileType fileType = IO::FsHelper::GetFileType(fileInfo.suffix());
@@ -34,6 +36,9 @@ namespace Playlist
 	QList<Track*> TracksFactory::Build(QFileInfo fileInfo)
 	{
 		QList<Track*> items;
+
+		if(_filesLoadedViaCue.contains(fileInfo.absoluteFilePath()))
+			return items;
 
 		FileRef f(fileInfo.absoluteFilePath().toLocal8Bit().data());
 
@@ -68,6 +73,8 @@ namespace Playlist
 			{
 				Track* previousTrack = NULL;
 				QString fullFilePath = QDir::isAbsolutePath(currentFile->GetFileName()) ? currentFile->GetFileName() : fileInfo.absolutePath() + "/" + currentFile->GetFileName();
+
+				_filesLoadedViaCue.append(fullFilePath);
 
 				foreach (CueTrack* currentTrack, currentFile->GetTracks())
 				{

@@ -27,6 +27,8 @@ namespace Playlist
 
 		int GetMillisecondsFromCueFrames(int frames);
 		CueIndex* GetDataIndex(QList<CueIndex*> indexes);
+
+		QList<QString> _filesLoadedViaCue;
 	};
 }
 
