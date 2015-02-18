@@ -23,6 +23,8 @@ namespace Playlist
 		QString GetFileName(){ return _fileName; }
 		QString GetFullFilePath(){ return _fullFilePath; }
 
+		void SetEndPosition(int endPosition){ _endPosition = endPosition; }
+
 		bool IsSelected(){ return _selected; }
 		void SetSelected(bool selected){ _selected = selected; }
 

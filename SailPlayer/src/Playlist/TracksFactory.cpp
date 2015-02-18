@@ -66,27 +66,48 @@ namespace Playlist
 		{
 			foreach (CueFile* currentFile, cue->GetFiles())
 			{
+				Track* previousTrack = NULL;
+				QString fullFilePath = QDir::isAbsolutePath(currentFile->GetFileName()) ? currentFile->GetFileName() : fileInfo.absolutePath() + "/" + currentFile->GetFileName();
+
 				foreach (CueTrack* currentTrack, currentFile->GetTracks())
 				{
 					QString artist = currentTrack->GetPerformer().isNull() ? currentTrack->GetPerformer() : cue->GetPerformer();
 					int albumYear = cue->GetRemarks()["DATE"].toInt();
-					QString fullFilePath = QDir::isAbsolutePath(currentFile->GetFileName()) ? currentFile->GetFileName() : fileInfo.absolutePath() + "/" + currentFile->GetFileName();
 					QFileInfo mediaFileInfo(fullFilePath);
 					CueIndex* dataIndex = GetDataIndex(currentTrack->GetIndexes());
-//					int duration = 0;
 
-//					if(dataIndex != NULL)
-//						duration = (dataIndex->GetMinutes() * 60 + dataIndex->GetSeconds()) * 1000 + GetMillisecondsFromCueFrames(dataIndex->GetFrames());
+					int startPosition = 0;
 
-					items.append(new Track(artist,
-										   cue->GetTitle(),
-										   albumYear,
-										   currentTrack->GetNumber(),
-										   currentTrack->GetTitle(),
-										   0,
-										   666,
-										   mediaFileInfo.fileName(),
-										   fullFilePath));
+					if(dataIndex != NULL)
+						startPosition = (dataIndex->GetMinutes() * 60 + dataIndex->GetSeconds()) * 1000 + GetMillisecondsFromCueFrames(dataIndex->GetFrames());
+
+					if(previousTrack != NULL)
+						previousTrack->SetEndPosition(startPosition);
+
+					previousTrack = new Track(artist,
+											  cue->GetTitle(),
+											  albumYear,
+											  currentTrack->GetNumber(),
+											  currentTrack->GetTitle(),
+											  startPosition,
+											  0,
+											  mediaFileInfo.fileName(),
+											  fullFilePath);
+
+					items.append(previousTrack);
+				}
+
+				// Calculating end position for final item
+
+				if(previousTrack != NULL)
+				{
+					FileRef f(fullFilePath.toLocal8Bit().data());
+
+					if(!f.isNull() && f.tag())
+					{
+						AudioProperties* properties = f.audioProperties();
+						previousTrack->SetEndPosition(properties->length() * 1000);
+					}
 				}
 			}
 
