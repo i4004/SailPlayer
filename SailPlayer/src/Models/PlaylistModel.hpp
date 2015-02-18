@@ -62,7 +62,7 @@ namespace Models
 
 		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
 
-		Q_INVOKABLE void requestNextTrack();
+		Q_INVOKABLE QString requestNextTrack();
 		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
 
 	public slots:

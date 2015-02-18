@@ -17,6 +17,8 @@ namespace Audio
 		_gstTimeFormat = GST_FORMAT_TIME;
 		_currentPositionTimer.setTimerType(Qt::VeryCoarseTimer);
 		_currentPositionTimer.setInterval(1000);
+		_nextTrackDataReceived = true;
+		_isStreamFromNextTrack = false;
 
 		gst_init(NULL, NULL);
 
@@ -56,6 +58,13 @@ namespace Audio
 			{
 				AudioPlayer* player = static_cast<AudioPlayer*>(userData);
 				player->OnAsyncDone();
+				break;
+			}
+
+			case GST_MESSAGE_STREAM_START:
+			{
+				AudioPlayer* player = static_cast<AudioPlayer*>(userData);
+				player->OnStreamStart();
 				break;
 			}
 
@@ -115,7 +124,21 @@ namespace Audio
 
 	void AudioPlayer::OnAboutToFinish()
 	{
+		_nextTrackDataReceived = false;
 		emit aboutToFinish();
+
+		WaitForNextTrackData();
+
+		_isStreamFromNextTrack = true;
+
+		if(!_fileToPlayFullFilePath.isNull())
+			g_object_set(_pipeline, "uri", QString("file://" + _fileToPlayFullFilePath).toLocal8Bit().data(), NULL);
+	}
+
+	void AudioPlayer::OnStreamStart()
+	{
+		emit streamStarted();
+		emit currentDurationUpdated(GetCurrentDuration() / MillisecondsConvertion);
 	}
 
 	void AudioPlayer::play()
@@ -155,15 +178,22 @@ namespace Audio
 		_audioResource->Disconnect();
 	}
 
-	void AudioPlayer::setFileToPlay(QString fullFilePath)
+	void AudioPlayer::setTrackToPlay(QString fullFilePath)
 	{
 		_fileToPlayFullFilePath = fullFilePath;
-		g_object_set(_pipeline, "uri", ("file://" + _fileToPlayFullFilePath).toLocal8Bit().data(), NULL);
+		_isStreamFromNextTrack = false;
+		g_object_set(_pipeline, "uri", QString("file://" + _fileToPlayFullFilePath).toLocal8Bit().data(), NULL);
 	}
 
 	void AudioPlayer::seek(int milliseconds)
 	{
 		Seek(gint64(milliseconds) * MillisecondsConvertion);
+	}
+
+	void AudioPlayer::setNextTrackToPlay(QString fullFilePath)
+	{
+		_fileToPlayFullFilePath = fullFilePath;
+		_nextTrackDataReceived = true;
 	}
 
 	void AudioPlayer::OnCurrentPositionTimerCallback()
@@ -267,5 +297,11 @@ namespace Audio
 	void AudioPlayer::Seek(gint64 nanoseconds)
 	{
 		gst_element_seek(_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH, GST_SEEK_TYPE_SET, nanoseconds, GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
+	}
+
+	void AudioPlayer::WaitForNextTrackData()
+	{
+		while (!_nextTrackDataReceived)
+			usleep(1000);
 	}
 }

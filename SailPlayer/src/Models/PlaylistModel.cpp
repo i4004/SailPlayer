@@ -115,12 +115,14 @@ namespace Models
 			SetPlayingTrack(true);
 	}
 
-	void PlaylistModel::requestNextTrack()
+	QString PlaylistModel::requestNextTrack()
 	{
 		bool result = calculateNextTrackToPlay();
 
 		if(result == true)
-			emit playingTrackFilePathUpdated(_nextTrackToPlay->GetFullFilePath());
+			return _nextTrackToPlay->GetFullFilePath();
+
+		return QString();
 	}
 
 	int PlaylistModel::CalculateNextTrackIndex(PlayDirection direction, int customIndex)

@@ -36,15 +36,18 @@ namespace Audio
 		Q_INVOKABLE void play();
 		Q_INVOKABLE void pause();
 		Q_INVOKABLE void stop();
-		Q_INVOKABLE void setFileToPlay(QString fullFilePath);//, int startPosition, int endPosition);
+		Q_INVOKABLE void setTrackToPlay(QString fullFilePath);
 		Q_INVOKABLE void seek(int milliseconds);
-		Q_INVOKABLE bool hasFileToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
+		Q_INVOKABLE bool hasTrackToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
+		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
+		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath);
 
 	public slots:
 		void OnAudioResourceAquireStateChanged(bool acquired);
 		void OnEndOfStreamReached();
 		void OnAsyncDone();
 		void OnAboutToFinish();
+		void OnStreamStart();
 
 	signals:
 		void currentPositionUpdated(int milliseconds);
@@ -52,6 +55,7 @@ namespace Audio
 		void endOfStreamReached();
 		void stateChanged(AudioPlayer::AudioPlayerState state);
 		void aboutToFinish();
+		void streamStarted();
 
 	private slots:
 		void OnCurrentPositionTimerCallback();
@@ -80,10 +84,15 @@ namespace Audio
 		GstFormat _gstTimeFormat;
 		QString _fileToPlayFullFilePath;
 
+		bool _nextTrackDataReceived;
+		bool _isStreamFromNextTrack;
+
 		// Gstreamer callbacks
 
 		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData);
 		static void OnPipelineAboutToFinish(GstElement* pipeline, gpointer userData);
+
+		void WaitForNextTrackData();
 
 		// Modules control
 

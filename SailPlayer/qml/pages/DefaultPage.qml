@@ -19,7 +19,17 @@ Page
 
 		onEndOfStreamReached:
 		{
-			if(!playlist.setTrackToPlayAndPlayingFromNextTrack())
+			player.stop();
+
+			if(playlist.calculateAndSetTrackToPlay())
+				player.play();
+		}
+
+		onAboutToFinish: player.setNextTrackToPlay(playlist.requestNextTrack())
+
+		onStreamStarted:
+		{
+			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
 				player.stop();
 		}
 	}
@@ -28,12 +38,11 @@ Page
 
 	Component.onCompleted:
 	{
-		playlist.playingTrackFilePathUpdated.connect(player.setFileToPlay);
+		playlist.playingTrackFilePathUpdated.connect(player.setTrackToPlay);
 		player.currentDurationUpdated.connect(playerControlPanel.setTrackDuration);
 		player.currentPositionUpdated.connect(playerControlPanel.setTrackPosition);
 		player.stateChanged.connect(playerControlPanel.onPlayerStateChanged);
 		player.stateChanged.connect(playlist.playerStateChanged);
-		player.aboutToFinish.connect(playlist.requestNextTrack);
 
 		playlist.loadPlaylist();
 		playlist.calculateAndSetTrackToPlay();
@@ -161,7 +170,7 @@ Page
 				if(state == AudioPlayerState.Ready && !playlist.hasTrackToPlay())
 					playlist.calculateAndSetTrackToPlay();
 
-				if(player.hasFileToPlay())
+				if(player.hasTrackToPlay())
 					player.play();
 			}
 		}
