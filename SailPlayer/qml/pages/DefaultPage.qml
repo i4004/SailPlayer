@@ -25,7 +25,14 @@ Page
 				player.play();
 		}
 
-		onAboutToFinish: player.setNextTrackToPlay(playlist.requestNextTrack())
+		onAboutToFinish:
+		{
+			var path = playlist.requestNextTrack();
+			var startPos = playlist.getNextStartPosition();
+			var endPos = playlist.getNextEndPosition();
+
+			player.setNextTrackToPlay(path, startPos, endPos);
+		}
 
 		onStreamStarted:
 		{

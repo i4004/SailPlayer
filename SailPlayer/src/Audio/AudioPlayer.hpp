@@ -40,7 +40,7 @@ namespace Audio
 		Q_INVOKABLE void seek(int milliseconds);
 		Q_INVOKABLE bool hasTrackToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
 		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
-		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath);
+		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath, int startPos, int endPos);
 
 	public slots:
 		void OnAudioResourceAquireStateChanged(bool acquired);
@@ -83,12 +83,15 @@ namespace Audio
 
 		QTimer _currentPositionTimer;
 		GstFormat _gstTimeFormat;
+
 		QString _fileToPlayFullFilePath;
 		int _currentStartPosition;
 		int _currentEndPosition;
+		bool _currentPositionsSet;
 
 		bool _nextTrackDataReceived;
 		bool _isStreamFromNextTrack;
+//		bool _needtToSetOnlyEndPosition;
 
 		// Gstreamer callbacks
 
@@ -102,8 +105,10 @@ namespace Audio
 		bool Init();
 		void SetEqualizerData();
 		gint64 GetCurrentPosition();
-		gint64 GetCurrentDuration();
+		int GetCurrentDuration();
 		void Seek(gint64 nanoseconds);
+//		void SeekToCurrentPosition();
+//		void UpdateEndPosition();
 	};
 }
 

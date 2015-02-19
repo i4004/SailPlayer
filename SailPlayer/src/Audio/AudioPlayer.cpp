@@ -126,7 +126,17 @@ namespace Audio
 	void AudioPlayer::OnAsyncDone()
 	{
 		if(_currentState == Playing || _currentState == Paused)
-			emit currentDurationUpdated(GetCurrentDuration() / MillisecondsConvertion);
+		{
+			int pos = GetCurrentDuration();
+			qDebug() << pos;
+			emit currentDurationUpdated(pos);
+		}
+
+		if(_currentState == Playing && !_currentPositionsSet)
+		{
+			_currentPositionsSet = true;
+			SeekToCurrentPosition();
+		}
 	}
 
 	void AudioPlayer::OnAboutToFinish()
@@ -145,34 +155,35 @@ namespace Audio
 	void AudioPlayer::OnStreamStart()
 	{
 		emit streamStarted();
-		emit currentDurationUpdated(GetCurrentDuration() / MillisecondsConvertion);
+		emit currentDurationUpdated(GetCurrentDuration());
 		emit currentPositionUpdated(0);
+
+//		if(_needtToSetOnlyEndPosition)
+//			UpdateEndPosition();
+//		else
+//			SeekToCurrentPosition();
 	}
 
 	void AudioPlayer::OnStateChanged()
 	{
-		GstState state = GST_STATE(_pipeline);
+//		GstState state = GST_STATE(_pipeline);
 
-		if(state == GST_STATE_PLAYING)
-		{
-			if(_currentState == Ready)
-			{
-				qDebug() << _currentStartPosition;
-				qDebug() << _currentEndPosition;
+//		if(state == GST_STATE_PLAYING)
+//		{
+//			if(_currentState == Ready)
+//			{
+//			}
 
-				gst_element_seek (_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
-							GST_SEEK_TYPE_SET, _currentStartPosition * MillisecondsConvertion,
-GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
-//							GST_SEEK_TYPE_SET, _currentEndPosition * MillisecondsConvertion);
-			}
-
-			_currentState = Playing;
-		}
+//			_currentState = Playing;
+//		}
 	}
 
 	void AudioPlayer::play()
 	{\
+		_currentPositionsSet = false;
 		_audioResource->Connect();
+
+		_currentState = Playing;
 
 		emit stateChanged(Playing);
 
@@ -216,19 +227,24 @@ GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
 
 	void AudioPlayer::seek(int milliseconds)
 	{
-		qDebug() << milliseconds;
-		Seek(gint64(milliseconds) * MillisecondsConvertion);
+		Seek(gint64(milliseconds + _currentStartPosition) * MillisecondsConvertion);
 	}
 
-	void AudioPlayer::setNextTrackToPlay(QString fullFilePath)
+	void AudioPlayer::setNextTrackToPlay(QString fullFilePath, int startPos, int endPos)
 	{
 		_fileToPlayFullFilePath = fullFilePath;
+//		_needtToSetOnlyEndPosition = startPos == _currentEndPosition;
+		_currentStartPosition = startPos;
+		_currentEndPosition = endPos;
 		_nextTrackDataReceived = true;
 	}
 
 	void AudioPlayer::OnCurrentPositionTimerCallback()
 	{
-		emit currentPositionUpdated(GetCurrentPosition() / MillisecondsConvertion);
+		int currentPosition = GetCurrentPosition() / MillisecondsConvertion;
+		if(_currentEndPosition - currentPosition)
+
+		emit currentPositionUpdated( - _currentStartPosition);
 	}
 
 	bool AudioPlayer::Init()
@@ -278,10 +294,6 @@ GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
 		// Subsribe to next track gapless playing handling
 		g_signal_connect(_pipeline, "about-to-finish", G_CALLBACK(OnPipelineAboutToFinish), this);
 
-//		g_signal_connect (src, "pad-added", (GCallback) cb_pad_added, pipeline);
-//		  g_signal_connect (src, "no-more-pads",
-//		      (GCallback) cb_no_more_pads, pipeline);
-
 		return true;
 	}
 
@@ -318,14 +330,16 @@ GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
 		return 0;
 	}
 
-	gint64 AudioPlayer::GetCurrentDuration()
+	int AudioPlayer::GetCurrentDuration()
 	{
-		gint64 value;
+//		gint64 value;
 
-		if(gst_element_query_duration(_pipeline, _gstTimeFormat, &value))
-			return value;
+//		if(gst_element_query_duration(_pipeline, _gstTimeFormat, &value))
+//			return (value / MillisecondsConvertion) - _currentStartPosition;
 
-		return 0;
+		return _currentEndPosition - _currentStartPosition;
+
+//		return 0;
 	}
 
 	void AudioPlayer::Seek(gint64 nanoseconds)
@@ -338,4 +352,18 @@ GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE);
 		while (!_nextTrackDataReceived)
 			usleep(1000);
 	}
+
+//	void AudioPlayer::SeekToCurrentPosition()
+//	{
+//		gst_element_seek (_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
+//					GST_SEEK_TYPE_SET, gint64(_currentStartPosition) * MillisecondsConvertion,
+//					GST_SEEK_TYPE_SET, gint64(_currentEndPosition) * MillisecondsConvertion);
+//	}
+
+//	void AudioPlayer::UpdateEndPosition()
+//	{
+//		gst_element_seek (_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
+//					GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE,
+//					GST_SEEK_TYPE_SET, gint64(_currentEndPosition) * MillisecondsConvertion);
+//	}
 }

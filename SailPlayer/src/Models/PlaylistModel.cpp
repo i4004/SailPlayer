@@ -126,6 +126,22 @@ namespace Models
 		return QString();
 	}
 
+	int PlaylistModel::getNextStartPosition()
+	{
+		if(_nextTrackToPlay != NULL)
+			return _nextTrackToPlay->GetStartPosition();
+		else
+			return -1;
+	}
+
+	int PlaylistModel::getNextEndPosition()
+	{
+		if(_nextTrackToPlay != NULL)
+			return _nextTrackToPlay->GetEndPosition();
+		else
+			return -1;
+	}
+
 	int PlaylistModel::CalculateNextTrackIndex(PlayDirection direction, int customIndex)
 	{
 		int trackIndex = -1;
