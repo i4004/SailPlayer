@@ -16,7 +16,9 @@ namespace Audio
 		_fileToPlayFullFilePath = "";
 		_gstTimeFormat = GST_FORMAT_TIME;
 		_currentPositionTimer.setTimerType(Qt::VeryCoarseTimer);
+		_endOfStreamStatusTimer.setTimerType(Qt::PreciseTimer);
 		_currentPositionTimer.setInterval(1000);
+		_endOfStreamStatusTimer.setInterval(1);
 		_nextTrackDataReceived = true;
 		_isStreamFromNextTrack = false;
 
@@ -26,6 +28,7 @@ namespace Audio
 
 		connect(_audioResource, SIGNAL(AquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
 		connect(&_currentPositionTimer, SIGNAL(timeout()), this, SLOT(OnCurrentPositionTimerCallback()));
+		connect(&_currentPositionTimer, SIGNAL(timeout()), this, SLOT(OnEndOfStreamTimerCallback()));
 
 		Init();
 	}
@@ -128,7 +131,7 @@ namespace Audio
 		if(_currentState == Playing || _currentState == Paused)
 		{
 			int pos = GetCurrentDuration();
-			qDebug() << pos;
+//			qDebug() << pos;
 			emit currentDurationUpdated(pos);
 		}
 
@@ -159,7 +162,11 @@ namespace Audio
 		emit currentPositionUpdated(0);
 
 //		if(_needtToSetOnlyEndPosition)
+//		{
+//			qDebug() << "test";
+
 //			UpdateEndPosition();
+//		}
 //		else
 //			SeekToCurrentPosition();
 	}
@@ -189,6 +196,7 @@ namespace Audio
 
 		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
 
+//		_endOfStreamStatusTimer.start();
 		_currentPositionTimer.start();
 	}
 
@@ -199,6 +207,7 @@ namespace Audio
 		_currentState = Paused;
 		emit stateChanged(Paused);
 
+//		_endOfStreamStatusTimer.stop();
 		_currentPositionTimer.stop();
 	}
 
@@ -211,6 +220,7 @@ namespace Audio
 		emit currentPositionUpdated(0);
 		emit currentDurationUpdated(0);
 
+//		_endOfStreamStatusTimer.stop();
 		_currentPositionTimer.stop();
 
 		_audioResource->Disconnect();
@@ -233,7 +243,7 @@ namespace Audio
 	void AudioPlayer::setNextTrackToPlay(QString fullFilePath, int startPos, int endPos)
 	{
 		_fileToPlayFullFilePath = fullFilePath;
-//		_needtToSetOnlyEndPosition = startPos == _currentEndPosition;
+		_needtToSetOnlyEndPosition = startPos == _currentEndPosition;
 		_currentStartPosition = startPos;
 		_currentEndPosition = endPos;
 		_nextTrackDataReceived = true;
@@ -242,9 +252,13 @@ namespace Audio
 	void AudioPlayer::OnCurrentPositionTimerCallback()
 	{
 		int currentPosition = GetCurrentPosition() / MillisecondsConvertion;
-		if(_currentEndPosition - currentPosition)
 
-		emit currentPositionUpdated( - _currentStartPosition);
+		if(_currentEndPosition - currentPosition < 2000 && GetCurrentFileDuration() - currentPosition > 2000)
+		{
+			qDebug() << "test";
+		}
+
+		emit currentPositionUpdated(currentPosition - _currentStartPosition);
 	}
 
 	bool AudioPlayer::Init()
@@ -332,14 +346,17 @@ namespace Audio
 
 	int AudioPlayer::GetCurrentDuration()
 	{
-//		gint64 value;
-
-//		if(gst_element_query_duration(_pipeline, _gstTimeFormat, &value))
-//			return (value / MillisecondsConvertion) - _currentStartPosition;
-
 		return _currentEndPosition - _currentStartPosition;
+	}
 
-//		return 0;
+	int AudioPlayer::GetCurrentFileDuration()
+	{
+		gint64 value;
+
+		if(gst_element_query_duration(_pipeline, _gstTimeFormat, &value))
+			return (value / MillisecondsConvertion) - _currentStartPosition;
+
+		return 0;
 	}
 
 	void AudioPlayer::Seek(gint64 nanoseconds)
@@ -353,17 +370,23 @@ namespace Audio
 			usleep(1000);
 	}
 
-//	void AudioPlayer::SeekToCurrentPosition()
-//	{
-//		gst_element_seek (_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
-//					GST_SEEK_TYPE_SET, gint64(_currentStartPosition) * MillisecondsConvertion,
-//					GST_SEEK_TYPE_SET, gint64(_currentEndPosition) * MillisecondsConvertion);
-//	}
+	void AudioPlayer::SeekToCurrentPosition()
+	{
+		gst_element_seek (_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
+					GST_SEEK_TYPE_SET, gint64(_currentStartPosition) * MillisecondsConvertion,
+					GST_SEEK_TYPE_SET, gint64(_currentEndPosition) * MillisecondsConvertion);
+	}
 
-//	void AudioPlayer::UpdateEndPosition()
-//	{
-//		gst_element_seek (_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
-//					GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE,
-//					GST_SEEK_TYPE_SET, gint64(_currentEndPosition) * MillisecondsConvertion);
-//	}
+	void AudioPlayer::UpdateEndPosition()
+	{
+		gst_element_seek (_pipeline, 1.0, GST_FORMAT_TIME, GST_SEEK_FLAG_FLUSH,
+					GST_SEEK_TYPE_NONE, GST_CLOCK_TIME_NONE,
+					GST_SEEK_TYPE_SET, gint64(_currentEndPosition) * MillisecondsConvertion);
+	}
+
+	void AudioPlayer::OnEndOfStreamTimerCallback()
+	{
+//		if(_currentEndPosition - GetCurrentPosition() / MillisecondsConvertion <= 1)
+//			qDebug() << "test";
+	}
 }

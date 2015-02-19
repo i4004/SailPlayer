@@ -60,6 +60,7 @@ namespace Audio
 
 	private slots:
 		void OnCurrentPositionTimerCallback();
+		void OnEndOfStreamTimerCallback();
 
 	private:
 		// Audio resoure and modules
@@ -70,6 +71,8 @@ namespace Audio
 		GstElement* _additionalPlugins;
 		GstElement* _equalizer;
 		GstElement* _sink;
+
+		QTimer _endOfStreamStatusTimer;
 
 		AudioPlayerState _currentState;
 		bool _pausedByResourceBlock;
@@ -91,7 +94,7 @@ namespace Audio
 
 		bool _nextTrackDataReceived;
 		bool _isStreamFromNextTrack;
-//		bool _needtToSetOnlyEndPosition;
+		bool _needtToSetOnlyEndPosition;
 
 		// Gstreamer callbacks
 
@@ -106,9 +109,10 @@ namespace Audio
 		void SetEqualizerData();
 		gint64 GetCurrentPosition();
 		int GetCurrentDuration();
+		int GetCurrentFileDuration();
 		void Seek(gint64 nanoseconds);
-//		void SeekToCurrentPosition();
-//		void UpdateEndPosition();
+		void SeekToCurrentPosition();
+		void UpdateEndPosition();
 	};
 }
 
