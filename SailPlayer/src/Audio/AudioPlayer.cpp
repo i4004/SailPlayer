@@ -256,6 +256,7 @@ namespace Audio
 		if(_currentEndPosition - currentPosition < 2000 && GetCurrentFileDuration() - currentPosition > 2000)
 		{
 			qDebug() << "test";
+			emit aboutToFinish();
 		}
 
 		emit currentPositionUpdated(currentPosition - _currentStartPosition);
