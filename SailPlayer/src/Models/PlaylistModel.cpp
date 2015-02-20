@@ -54,6 +54,18 @@ namespace Models
 		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsSelectedRole));
 	}
 
+	bool PlaylistModel::calculateNextTrackToPlay(PlayDirection direction, int customIndex)
+	{
+		int index = CalculateNextTrackIndex(direction, customIndex);
+
+		if(index == -1)
+			return false;
+
+		_nextTrackToPlay = _tracksList.at(index);
+
+		return true;
+	}
+
 	bool PlaylistModel::calculateAndSetTrackToPlay(PlayDirection direction, int customIndex)
 	{
 		bool result = calculateNextTrackToPlay(direction, customIndex);
@@ -63,19 +75,7 @@ namespace Models
 
 		SetTrackToPlayFromNextTrack();
 
-		emit playingTrackFilePathUpdated(_currentTrackToPlay->GetFullFilePath(), _currentTrackToPlay->GetStartPosition(), _currentTrackToPlay->GetEndPosition());
-
-		return true;
-	}
-
-	bool PlaylistModel::calculateNextTrackToPlay(PlayDirection direction, int customIndex)
-	{
-		int index = CalculateNextTrackIndex(direction, customIndex);
-
-		if(index == -1)
-			return false;
-
-		_nextTrackToPlay = _tracksList.at(index);
+		emit currentTrackToPlayDataUpdated(_currentTrackToPlay->GetFullFilePath(), _currentTrackToPlay->GetStartPosition(), _currentTrackToPlay->GetEndPosition());
 
 		return true;
 	}
@@ -108,7 +108,7 @@ namespace Models
 		return true;
 	}
 
-	void PlaylistModel::playerStateChanged(AudioPlayer::AudioPlayerState state)
+	void PlaylistModel::setPlayerState(AudioPlayer::AudioPlayerState state)
 	{
 		if(state == AudioPlayer::Ready || state == AudioPlayer::Paused)
 			SetPlayingTrack(false);

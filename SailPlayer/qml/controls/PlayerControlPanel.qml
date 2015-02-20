@@ -33,7 +33,7 @@ DockedPanel
 			slider.value = value;
 	}
 
-	function onPlayerStateChanged(state)
+	function setPlayerState(state)
 	{
 		playerButtons.currentPlayerState = state;
 	}

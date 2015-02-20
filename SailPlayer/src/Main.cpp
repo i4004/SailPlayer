@@ -19,7 +19,8 @@ using namespace Playlist;
 int main(int argc, char *argv[])
 {
 	qmlRegisterType<AudioPlayer>("harbour.sail.player.AudioPlayer", 1, 0, "AudioPlayer");
-	qmlRegisterType<AudioPlayer>("harbour.sail.player.AudioPlayerState", 1, 0, "AudioPlayerState");
+	qmlRegisterType<AudioPlayerBase>("harbour.sail.player.AudioPlayerState", 1, 0, "AudioPlayerState");
+	qRegisterMetaType<AudioPlayerBase::AudioPlayerState>("AudioPlayerBase::AudioPlayerState");
 	qRegisterMetaType<AudioPlayer::AudioPlayerState>("AudioPlayer::AudioPlayerState");
 
 	qmlRegisterType<FsHelper>("harbour.sail.player.FsHelper", 1, 0, "FsHelper");
@@ -32,10 +33,6 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<PlaylistModel::PlayOrder>("PlaylistModel::PlayOrder");
 
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
-
-//	Cue::CueSheetReader reader;
-//	Cue::CueSheet* cue = reader.Read("/media/sdcard/ad0455d2-34f3-4356-94bf-5195e21dd734/Music/Age Of Nemesis/2007 - Terra Incognita/2007 - Terra Incognita.cue");
-//	delete cue;
 
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");

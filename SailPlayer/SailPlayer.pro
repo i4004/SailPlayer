@@ -33,7 +33,8 @@ SOURCES += \
     src/Cue/CueSheetReader.cpp \
     src/Cue/CueTrack.cpp \
     src/Cue/CueFile.cpp \
-    src/Cue/CueIndex.cpp
+    src/Cue/CueIndex.cpp \
+    src/Audio/AudioPlayerBase.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -81,6 +82,7 @@ HEADERS += \
     src/Cue/CueFile.hpp \
     src/Cue/CueTrackDataType.hpp \
     src/Cue/CueFileType.hpp \
-    src/Cue/CueIndex.hpp
+    src/Cue/CueIndex.hpp \
+    src/Audio/AudioPlayerBase.hpp
 
 INCLUDEPATH += $$PWD/include

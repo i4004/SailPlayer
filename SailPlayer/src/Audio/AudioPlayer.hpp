@@ -3,116 +3,74 @@
 
 #include <QObject>
 #include <QTimer>
-#include <gst/gst.h>
-#include "AudioResource.hpp"
+
+#include "AudioPlayerBase.hpp"
 
 namespace Audio
 {
-	typedef struct
-	{
-		gfloat freq;
-		gfloat width;
-		gfloat gain;
-	} GstEqualizerBandState;
-
-	class AudioPlayer : public QObject
+	class AudioPlayer : public AudioPlayerBase
 	{
 		Q_OBJECT
-		Q_ENUMS(AudioPlayerState)
 
 	public:
 		AudioPlayer();
-		~AudioPlayer();
-
-		enum AudioPlayerState
-		{
-			Ready = 0,
-			Paused = 1,
-			Playing = 2
-		};
 
 		// Player controls
 
-		Q_INVOKABLE void play();
-		Q_INVOKABLE void pause();
-		Q_INVOKABLE void stop();
-		Q_INVOKABLE void setTrackToPlay(QString fullFilePath, int startPos, int endPos);
-		Q_INVOKABLE void seek(int milliseconds);
-		Q_INVOKABLE bool hasTrackToPlay() { return !_fileToPlayFullFilePath.isNull() && !_fileToPlayFullFilePath.isEmpty(); }
-		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
-		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath, int startPos, int endPos);
+		Q_INVOKABLE virtual void play();
+		Q_INVOKABLE virtual void pause();
+		Q_INVOKABLE virtual void stop();
 
-	public slots:
-		void OnAudioResourceAquireStateChanged(bool acquired);
-		void OnEndOfStreamReached();
+		Q_INVOKABLE void setTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
+		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
+		Q_INVOKABLE void seek(int milliseconds);
+		Q_INVOKABLE bool hasTrackToPlay() { return !_currentFilePath.isNull() && !_currentFilePath.isEmpty(); }
+//		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
+
+		void OnStreamStart();
 		void OnAsyncDone();
 		void OnAboutToFinish();
-		void OnStreamStart();
-		void OnStateChanged();
+
+	public slots:
+//		void OnEndOfStreamReached();
 
 	signals:
 		void currentPositionUpdated(int milliseconds);
 		void currentDurationUpdated(int duration);
-		void endOfStreamReached();
-		void stateChanged(AudioPlayer::AudioPlayerState state);
 		void aboutToFinish();
-		void streamStarted();
-
-	private slots:
-		void OnCurrentPositionTimerCallback();
-		void OnEndOfStreamTimerCallback();
+//		void endOfStreamReached();
+//		void streamStarted();
 
 	private:
-		// Audio resoure and modules
+		// Current state
 
-		AudioResource* _audioResource;
-
-		GstElement* _pipeline;
-		GstElement* _additionalPlugins;
-		GstElement* _equalizer;
-		GstElement* _sink;
-
-		QTimer _endOfStreamStatusTimer;
-
-		AudioPlayerState _currentState;
-		bool _pausedByResourceBlock;
-
-		// Equalizer
-
-		static int EqualizerBandsNumber;
-		GstEqualizerBandState _equalizerData[];
-
-		// Current playing data
-
-		QTimer _currentPositionTimer;
-		GstFormat _gstTimeFormat;
-
-		QString _fileToPlayFullFilePath;
+		QString _currentFilePath;
 		int _currentStartPosition;
 		int _currentEndPosition;
 		bool _currentPositionsSet;
+		QTimer _currentPositionTimer;
 
+		QString _nextTrackFilePath;
+		int _nextTrackStartPosition;
+		int _nextTracktEndPosition;
 		bool _nextTrackDataReceived;
-		bool _isStreamFromNextTrack;
-		bool _needtToSetOnlyEndPosition;
 
-		// Gstreamer callbacks
+//		bool _isStreamFromNextTrack;
+//		bool _needtToSetOnlyEndPosition;
 
-		static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData);
-		static void OnPipelineAboutToFinish(GstElement* pipeline, gpointer userData);
+		// Internal controls
+
+		int GetCurrentDuration();
+		int GetCurrentFileDurationMs();
+		void SeekMs(int position);
+		void SeekToCurrentPosition();
+//		void SeekToCurrentPosition();
+//		void UpdateEndPosition();
 
 		void WaitForNextTrackData();
 
-		// Modules control
-
-		bool Init();
-		void SetEqualizerData();
-		gint64 GetCurrentPosition();
-		int GetCurrentDuration();
-		int GetCurrentFileDuration();
-		void Seek(gint64 nanoseconds);
-		void SeekToCurrentPosition();
-		void UpdateEndPosition();
+	private slots:
+		void OnCurrentPositionTimerCallback();
 	};
 }
 

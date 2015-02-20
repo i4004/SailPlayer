@@ -17,39 +17,39 @@ Page
 	{
 		id: player
 
-		onEndOfStreamReached:
-		{
-			player.stop();
+//		onEndOfStreamReached:
+//		{
+//			player.stop();
 
-			if(playlist.calculateAndSetTrackToPlay())
-				player.play();
-		}
+//			if(playlist.calculateAndSetTrackToPlay())
+//				player.play();
+//		}
 
-		onAboutToFinish:
-		{
-			var path = playlist.requestNextTrack();
-			var startPos = playlist.getNextStartPosition();
-			var endPos = playlist.getNextEndPosition();
+//		onAboutToFinish:
+//		{
+//			var path = playlist.requestNextTrack();
+//			var startPos = playlist.getNextStartPosition();
+//			var endPos = playlist.getNextEndPosition();
 
-			player.setNextTrackToPlay(path, startPos, endPos);
-		}
+//			player.setNextTrackToPlay(path, startPos, endPos);
+//		}
 
-		onStreamStarted:
-		{
-			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
-				player.stop();
-		}
+//		onStreamStarted:
+//		{
+//			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
+//				player.stop();
+//		}
 	}
 
 	allowedOrientations: Orientation.All
 
 	Component.onCompleted:
 	{
-		playlist.playingTrackFilePathUpdated.connect(player.setTrackToPlay);
+		playlist.currentTrackToPlayDataUpdated.connect(player.setTrackToPlay);
 		player.currentDurationUpdated.connect(playerControlPanel.setTrackDuration);
 		player.currentPositionUpdated.connect(playerControlPanel.setTrackPosition);
-		player.stateChanged.connect(playerControlPanel.onPlayerStateChanged);
-		player.stateChanged.connect(playlist.playerStateChanged);
+		player.stateChanged.connect(playerControlPanel.setPlayerState);
+		player.stateChanged.connect(playlist.setPlayerState);
 
 		playlist.loadPlaylist();
 		playlist.calculateAndSetTrackToPlay();
@@ -59,7 +59,7 @@ Page
 	Component.onDestruction:
 	{
 		playlist.savePlaylist();
-		player.stateChanged.disconnect(playerControlPanel.onPlayerStateChanged);
+		player.stateChanged.disconnect(playerControlPanel.setPlayerState);
 		player.currentDurationUpdated.disconnect(playerControlPanel.setTrackDuration);
 		player.currentPositionUpdated.disconnect(playerControlPanel.setTrackPosition);
 	}
