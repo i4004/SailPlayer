@@ -40,8 +40,8 @@ namespace Audio
 
 		virtual void OnStreamStart();
 		virtual void OnAsyncDone();
-		virtual void OnEndOfStream();
 		virtual void OnAboutToFinish();
+		virtual void OnEndOfStream();
 
 		AudioPlayerState GetCurrentState() { return _currentState; }
 

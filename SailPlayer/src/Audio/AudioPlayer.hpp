@@ -25,21 +25,19 @@ namespace Audio
 		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
 		Q_INVOKABLE void seek(int milliseconds);
 		Q_INVOKABLE bool hasTrackToPlay() { return !_currentFilePath.isNull() && !_currentFilePath.isEmpty(); }
-//		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
+		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
 
 		void OnStreamStart();
 		void OnAsyncDone();
 		void OnAboutToFinish();
-
-	public slots:
-//		void OnEndOfStreamReached();
+		void OnEndOfStream();
 
 	signals:
 		void currentPositionUpdated(int milliseconds);
 		void currentDurationUpdated(int duration);
 		void aboutToFinish();
-//		void endOfStreamReached();
-//		void streamStarted();
+		void streamStarted();
+		void endOfStream();
 
 	private:
 		// Current state
@@ -54,8 +52,8 @@ namespace Audio
 		int _nextTrackStartPosition;
 		int _nextTracktEndPosition;
 		bool _nextTrackDataReceived;
+		bool _isStreamFromNextTrack;
 
-//		bool _isStreamFromNextTrack;
 //		bool _needtToSetOnlyEndPosition;
 
 		// Internal controls
@@ -64,6 +62,7 @@ namespace Audio
 		int GetCurrentFileDurationMs();
 		void SeekMs(int position);
 		void SeekToCurrentPosition();
+		void SetCurrentTrackFromNextTrack();
 //		void SeekToCurrentPosition();
 //		void UpdateEndPosition();
 

@@ -189,21 +189,18 @@ namespace Audio
 		{
 			case GST_MESSAGE_EOS:
 			{
-//				qDebug() << 1;
 				static_cast<AudioPlayerBase*>(userData)->OnEndOfStream();
 				break;
 			}
 
 			case GST_MESSAGE_ASYNC_DONE:
 			{
-//				qDebug() << 2;
 				static_cast<AudioPlayerBase*>(userData)->OnAsyncDone();
 				break;
 			}
 
 			case GST_MESSAGE_STREAM_START:
 			{
-//				qDebug() << 3;
 				static_cast<AudioPlayerBase*>(userData)->OnStreamStart();
 				break;
 			}

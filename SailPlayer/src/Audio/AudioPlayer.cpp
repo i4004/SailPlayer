@@ -21,6 +21,10 @@ namespace Audio
 	void AudioPlayer::play()
 	{\
 		_currentPositionsSet = false;
+
+		if(GetCurrentState() == Ready)
+			_isStreamFromNextTrack = false;
+
 		AudioPlayerBase::play();
 	}
 
@@ -64,26 +68,13 @@ namespace Audio
 
 	void AudioPlayer::OnStreamStart()
 	{
-		AudioPlayerBase::OnStreamStart();
-
-		emit currentDurationUpdated(GetCurrentDuration());
 		emit currentPositionUpdated(0);
-
-//		if(GetCurrentState() == Playing && !_currentPositionsSet)
-//			SeekToCurrentPosition();
-
-////		if(_needtToSetOnlyEndPosition)
-////		{
-////			UpdateEndPosition();
-////		}
-////		else
-////			SeekToCurrentPosition();
+		emit currentDurationUpdated(GetCurrentDuration());
+		emit streamStarted();
 	}
 
 	void AudioPlayer::OnAsyncDone()
 	{
-		AudioPlayerBase::OnAsyncDone();
-
 		AudioPlayerState state = GetCurrentState();
 
 		if(state == Playing || state == Paused)
@@ -97,21 +88,17 @@ namespace Audio
 
 	void AudioPlayer::OnAboutToFinish()
 	{
-		AudioPlayerBase::OnAboutToFinish();
-
 		_nextTrackDataReceived = false;
 		emit aboutToFinish();
-
 		WaitForNextTrackData();
 
 		if(!_nextTrackFilePath.isNull())
-		{
-			_currentFilePath = _nextTrackFilePath;
-			_currentStartPosition = _nextTrackStartPosition;
-			_currentEndPosition = _nextTracktEndPosition;
+			SetCurrentTrackFromNextTrack();
+	}
 
-			SetFileToPlay(_currentFilePath);
-		}
+	void AudioPlayer::OnEndOfStream()
+	{
+		emit endOfStream();
 	}
 
 	int AudioPlayer::GetCurrentDuration()
@@ -135,6 +122,19 @@ namespace Audio
 		SeekMs(_currentStartPosition);
 	}
 
+	void AudioPlayer::SetCurrentTrackFromNextTrack()
+	{
+		_currentStartPosition = _nextTrackStartPosition;
+		_currentEndPosition = _nextTracktEndPosition;
+		_isStreamFromNextTrack = true;
+
+		if(_nextTrackFilePath != _currentFilePath)
+			SetFileToPlay(_nextTrackFilePath);
+
+		_currentFilePath = _nextTrackFilePath;
+	}
+
+
 	void AudioPlayer::WaitForNextTrackData()
 	{
 		while (!_nextTrackDataReceived)
@@ -147,9 +147,28 @@ namespace Audio
 
 		if(_currentEndPosition - currentPosition < 1000 && GetCurrentFileDurationMs() - currentPosition > 2000)
 		{
+			_nextTrackDataReceived = false;
 			emit aboutToFinish();
-
 			WaitForNextTrackData();
+
+			if(!_nextTrackFilePath.isNull())
+			{
+				if(_nextTrackStartPosition != _currentEndPosition && _nextTrackFilePath != _currentFilePath)
+				{
+					stop();
+					SetCurrentTrackFromNextTrack();
+					play();
+				}
+				else if(_nextTrackStartPosition != _currentEndPosition && _nextTrackFilePath == _currentFilePath)
+				{
+					SetCurrentTrackFromNextTrack();
+					SeekToCurrentPosition();
+				}
+				else
+					SetCurrentTrackFromNextTrack();
+
+				OnStreamStart();
+			}
 		}
 
 		emit currentPositionUpdated(currentPosition - _currentStartPosition);

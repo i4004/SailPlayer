@@ -25,20 +25,20 @@ Page
 //				player.play();
 //		}
 
-//		onAboutToFinish:
-//		{
-//			var path = playlist.requestNextTrack();
-//			var startPos = playlist.getNextStartPosition();
-//			var endPos = playlist.getNextEndPosition();
+		onAboutToFinish:
+		{
+			var path = playlist.requestNextTrack();
+			var startPosition = playlist.getNextStartPosition();
+			var endPosition = playlist.getNextEndPosition();
 
-//			player.setNextTrackToPlay(path, startPos, endPos);
-//		}
+			player.setNextTrackToPlay(path, startPosition, endPosition);
+		}
 
-//		onStreamStarted:
-//		{
-//			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
-//				player.stop();
-//		}
+		onStreamStarted:
+		{
+			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
+				player.stop();
+		}
 	}
 
 	allowedOrientations: Orientation.All
