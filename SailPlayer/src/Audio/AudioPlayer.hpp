@@ -45,8 +45,9 @@ namespace Audio
 		QString _currentFilePath;
 		int _currentStartPosition;
 		int _currentEndPosition;
-		bool _currentPositionsSet;
+		bool _needToSetCurrentPosition;
 		QTimer _currentPositionTimer;
+		bool _currentPositionReady;
 
 		QString _nextTrackFilePath;
 		int _nextTrackStartPosition;
@@ -54,17 +55,16 @@ namespace Audio
 		bool _nextTrackDataReceived;
 		bool _isStreamFromNextTrack;
 
-//		bool _needtToSetOnlyEndPosition;
-
 		// Internal controls
 
+		int GetCurrentPositionMs();
 		int GetCurrentDuration();
 		int GetCurrentFileDurationMs();
 		void SeekMs(int position);
 		void SeekToCurrentPosition();
-		void SetCurrentTrackFromNextTrack();
-//		void SeekToCurrentPosition();
-//		void UpdateEndPosition();
+		void SetCurrentPositionsFromNextTrack();
+		void SetFileToPlayFromNextTrack();
+		void CalculateNeedToSetCurrentPosition();
 
 		void WaitForNextTrackData();
 

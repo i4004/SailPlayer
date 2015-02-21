@@ -8,10 +8,16 @@ namespace Audio
 {
 	AudioPlayer::AudioPlayer()
 	{
-		_currentPositionsSet = false;
+		_currentStartPosition = 0;
+		_currentEndPosition = 0;
+		_needToSetCurrentPosition = false;
 		_currentPositionTimer.setTimerType(Qt::VeryCoarseTimer);
 		_currentPositionTimer.setInterval(1000);
-		_nextTrackDataReceived = true;
+		_currentPositionReady = false;
+		_nextTrackStartPosition = 0;
+		_nextTracktEndPosition = 0;
+		_nextTrackDataReceived = false;
+		_isStreamFromNextTrack = false;
 
 		connect(&_currentPositionTimer, SIGNAL(timeout()), this, SLOT(OnCurrentPositionTimerCallback()));
 	}
@@ -20,12 +26,18 @@ namespace Audio
 
 	void AudioPlayer::play()
 	{\
-		_currentPositionsSet = false;
+		AudioPlayerState state = GetCurrentState();
 
-		if(GetCurrentState() == Ready)
+		if(state == Ready)
+		{
+			_needToSetCurrentPosition = _currentStartPosition != 0;
 			_isStreamFromNextTrack = false;
+		}
 
 		AudioPlayerBase::play();
+
+		if(state == Paused)
+			_currentPositionTimer.start();
 	}
 
 	void AudioPlayer::pause()
@@ -63,42 +75,60 @@ namespace Audio
 
 	void AudioPlayer::seek(int milliseconds)
 	{
-		Seek(gint64(milliseconds + _currentStartPosition) * MillisecondsConvertion);
+		SeekMs(milliseconds + _currentStartPosition);
 	}
 
 	void AudioPlayer::OnStreamStart()
-	{
-		emit currentPositionUpdated(0);
+	{	
+		qDebug() << "start";
+
+		if(_isStreamFromNextTrack)
+			SetCurrentPositionsFromNextTrack();
+
 		emit currentDurationUpdated(GetCurrentDuration());
 		emit streamStarted();
+
+		if(GetCurrentState() == Playing && _needToSetCurrentPosition)
+			SeekToCurrentPosition();
+		else
+			_currentPositionReady = true;
+
+		_currentPositionTimer.start();
 	}
 
 	void AudioPlayer::OnAsyncDone()
 	{
-		AudioPlayerState state = GetCurrentState();
+////		AudioPlayerState state = GetCurrentState();
 
-		if(state == Playing || state == Paused)
-			emit currentDurationUpdated(GetCurrentDuration());
+////		if(state == Playing || state == Paused)
+////			emit currentDurationUpdated(GetCurrentDuration());
 
-		if(state == Playing && !_currentPositionsSet)
-			SeekToCurrentPosition();
-		else
-			_currentPositionTimer.start();
+//		if(GetCurrentState() == Playing && _currentPositionsSet)
+//			_currentPositionTimer.start();
 	}
 
 	void AudioPlayer::OnAboutToFinish()
 	{
+		qDebug() << "aboutToFinish";
 		_nextTrackDataReceived = false;
 		emit aboutToFinish();
 		WaitForNextTrackData();
 
 		if(!_nextTrackFilePath.isNull())
-			SetCurrentTrackFromNextTrack();
+		{
+			CalculateNeedToSetCurrentPosition();
+			SetFileToPlayFromNextTrack();
+		}
 	}
 
 	void AudioPlayer::OnEndOfStream()
 	{
 		emit endOfStream();
+	}
+
+	int AudioPlayer::GetCurrentPositionMs()
+	{
+		 return GetCurrentPosition() / MillisecondsConvertion;
 	}
 
 	int AudioPlayer::GetCurrentDuration()
@@ -113,27 +143,44 @@ namespace Audio
 
 	void AudioPlayer::SeekMs(int position)
 	{
+		_currentPositionReady = false;
+		qDebug() << "seek";
 		Seek(gint64(position) * MillisecondsConvertion);
+		_currentPositionReady = true;
 	}
 
 	void AudioPlayer::SeekToCurrentPosition()
 	{
-		_currentPositionsSet = true;
+		qDebug() << "set";
+		_needToSetCurrentPosition = false;
 		SeekMs(_currentStartPosition);
 	}
 
-	void AudioPlayer::SetCurrentTrackFromNextTrack()
+	void AudioPlayer::SetCurrentPositionsFromNextTrack()
 	{
 		_currentStartPosition = _nextTrackStartPosition;
 		_currentEndPosition = _nextTracktEndPosition;
+	}
+
+	void AudioPlayer::SetFileToPlayFromNextTrack()
+	{
 		_isStreamFromNextTrack = true;
 
-		if(_nextTrackFilePath != _currentFilePath)
+		// TODO check in CUE file mode
+//		if(_nextTrackFilePath != _currentFilePath)
 			SetFileToPlay(_nextTrackFilePath);
 
 		_currentFilePath = _nextTrackFilePath;
 	}
 
+	void AudioPlayer::CalculateNeedToSetCurrentPosition()
+	{
+		if((_nextTrackFilePath != _currentFilePath && _nextTrackStartPosition != 0) ||
+			(_nextTrackFilePath == _currentFilePath && _currentEndPosition != _nextTrackStartPosition))
+			_needToSetCurrentPosition = true;
+		else
+			_needToSetCurrentPosition = false;
+	}
 
 	void AudioPlayer::WaitForNextTrackData()
 	{
@@ -143,33 +190,41 @@ namespace Audio
 
 	void AudioPlayer::OnCurrentPositionTimerCallback()
 	{
-		int currentPosition = GetCurrentPosition() / MillisecondsConvertion;
+		if(!_currentPositionReady)
+			return;
 
-		if(_currentEndPosition - currentPosition < 1000 && GetCurrentFileDurationMs() - currentPosition > 2000)
-		{
-			_nextTrackDataReceived = false;
-			emit aboutToFinish();
-			WaitForNextTrackData();
+		int currentPosition = GetCurrentPositionMs();
 
-			if(!_nextTrackFilePath.isNull())
-			{
-				if(_nextTrackStartPosition != _currentEndPosition && _nextTrackFilePath != _currentFilePath)
-				{
-					stop();
-					SetCurrentTrackFromNextTrack();
-					play();
-				}
-				else if(_nextTrackStartPosition != _currentEndPosition && _nextTrackFilePath == _currentFilePath)
-				{
-					SetCurrentTrackFromNextTrack();
-					SeekToCurrentPosition();
-				}
-				else
-					SetCurrentTrackFromNextTrack();
+//		if(_currentEndPosition - currentPosition < 1000 && GetCurrentFileDurationMs() - currentPosition > 2000)
+//		{
+//			_nextTrackDataReceived = false;
+//			emit aboutToFinish();
+//			WaitForNextTrackData();
 
-				OnStreamStart();
-			}
-		}
+//			if(!_nextTrackFilePath.isNull())
+//			{
+//				if(_nextTrackStartPosition != _currentEndPosition && _nextTrackFilePath != _currentFilePath)
+//				{
+//					qDebug() << "next1";
+//					stop();
+//					SetCurrentTrackFromNextTrack();
+//					play();
+//				}
+//				else if(_nextTrackStartPosition != _currentEndPosition && _nextTrackFilePath == _currentFilePath)
+//				{
+//					qDebug() << "next2";
+//					SetCurrentTrackFromNextTrack();
+//					SeekToCurrentPosition();
+//				}
+//				else
+//				{
+//					qDebug() << "next3";
+//					SetCurrentTrackFromNextTrack();
+//				}
+
+//				OnStreamStart();
+//			}
+//		}
 
 		emit currentPositionUpdated(currentPosition - _currentStartPosition);
 	}
