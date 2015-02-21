@@ -1,6 +1,7 @@
 #include <QDir>
 #include <fileref.h>
 #include <tag.h>
+#include <QDebug>
 
 #include "../IO/FsHelper.hpp"
 
@@ -47,11 +48,11 @@ namespace Playlist
 			Tag* tag = f.tag();
 			AudioProperties* properties = f.audioProperties();
 
-			items.append(new Track(QString(tag->artist().toCString()),
-								   QString(tag->album().toCString()),
+			items.append(new Track(QString(tag->artist().toCString(true)),
+								   QString(tag->album().toCString(true)),
 								   tag->year(),
 								   tag->track(),
-								   QString(tag->title().toCString()),
+								   QString(tag->title().toCString(true)),
 								   0,
 								   properties->length() * 1000, // Length in milliseconds
 								   fileInfo.fileName(),
