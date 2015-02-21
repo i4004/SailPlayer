@@ -45,6 +45,21 @@ namespace Models
 		_settings.SetPlaylist(_tracksList);
 	}
 
+	void PlaylistModel::saveCurrentPlayingState(int currentTrackIndex, int currentPlayingPosition)
+	{
+		_settings.SetCurrentPlayingState(currentTrackIndex, currentPlayingPosition);
+	}
+
+	int PlaylistModel::loadCurrentTrackIndex()
+	{
+		return _settings.GetCurrentTrackIndex();
+	}
+
+	int PlaylistModel::loadCurrentPosition()
+	{
+		return _settings.GetCurrentPlayingPosition();
+	}
+
 	void PlaylistModel::toggleSelectTrack(int itemIndex)
 	{
 		Track* track = _tracksList.at(itemIndex);
@@ -87,6 +102,14 @@ namespace Models
 		SetPlayingTrack(true);
 
 		return result;
+	}
+
+	int PlaylistModel::getCurrentTrackIndex()
+	{
+		if(_currentTrackToPlay == NULL)
+			return -1;
+
+		return _tracksList.indexOf(_currentTrackToPlay);
 	}
 
 	bool PlaylistModel::SetTrackToPlayFromNextTrack()

@@ -13,12 +13,24 @@ Page
 {
 	id: page
 
+	property bool needToSetStartupPosition: false
+
 	AudioPlayer
 	{
 		id: player
 
 		onStreamStarted:
 		{
+			if(needToSetStartupPosition)
+			{
+				needToSetStartupPosition = false;
+
+				var currentPosition = playlist.loadCurrentPosition();
+
+				if(currentPosition !== -1)
+					seek(currentPosition);
+			}
+
 			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
 				player.stop();
 		}
@@ -46,13 +58,26 @@ Page
 		player.stateChanged.connect(playlist.setPlayerState);
 
 		playlist.loadPlaylist();
-		playlist.calculateAndSetTrackToPlay();
+
+		var currentTrackIndex = playlist.loadCurrentTrackIndex();
+
+		if(currentTrackIndex !== -1)
+		{
+			needToSetStartupPosition = true;
+			playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, currentTrackIndex);
+			player.pause();
+		}
+
 		playOrderControl.setOrder(playlist.playOrder);
 	}
 
 	Component.onDestruction:
 	{
+		if(player.getCurrentState() === AudioPlayerState.Playing)
+			player.pause();
+
 		playlist.savePlaylist();
+		playlist.saveCurrentPlayingState(playlist.getCurrentTrackIndex(), player.getCurrentPosition());
 		player.stateChanged.disconnect(playerControlPanel.setPlayerState);
 		player.currentDurationUpdated.disconnect(playerControlPanel.setTrackDuration);
 		player.currentPositionUpdated.disconnect(playerControlPanel.setTrackPosition);

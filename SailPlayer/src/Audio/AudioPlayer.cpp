@@ -26,7 +26,7 @@ namespace Audio
 
 	void AudioPlayer::play()
 	{\
-		AudioPlayerState state = GetCurrentState();
+		AudioPlayerState state = getCurrentState();
 
 		if(state == Ready)
 		{
@@ -78,6 +78,13 @@ namespace Audio
 		SeekMs(milliseconds + _currentStartPosition);
 	}
 
+	int AudioPlayer::getCurrentPosition()
+	{
+		int position = GetCurrentPositionMs();
+
+		return position == -1 ? -1 : position - _currentStartPosition;
+	}
+
 	void AudioPlayer::OnStreamStart()
 	{	
 		if(_isStreamFromNextTrack)
@@ -87,7 +94,7 @@ namespace Audio
 		emit currentDurationUpdated(GetCurrentDuration());
 		emit streamStarted();
 
-		if(GetCurrentState() == Playing && _needToSetCurrentPosition)
+		if(getCurrentState() == Playing && _needToSetCurrentPosition)
 			SeekToCurrentPosition();
 		else
 			_currentPositionReady = true;

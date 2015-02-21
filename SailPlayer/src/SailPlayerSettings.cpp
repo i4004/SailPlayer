@@ -69,3 +69,20 @@ void SailPlayerSettings::SetPlaylist(QList<Track*> tracks)
 
 	settings.endArray();
 }
+
+void SailPlayerSettings::SetCurrentPlayingState(int currentTrackIndex, int currentPlayingPosition)
+{
+	settings.setValue("CurrentTrackIndex", currentTrackIndex);
+	settings.setValue("CurrentPlayingPosition", currentPlayingPosition);
+}
+
+int SailPlayerSettings::GetCurrentTrackIndex()
+{
+	return settings.value("CurrentTrackIndex", DefaultAddFilesDirectoryPath).toInt();
+}
+
+int SailPlayerSettings::GetCurrentPlayingPosition()
+{
+	return settings.value("CurrentPlayingPosition", DefaultAddFilesDirectoryPath).toInt();
+}
+

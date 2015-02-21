@@ -25,6 +25,10 @@ public:
 	QList<Track*> GetPlaylist();
 	void SetPlaylist(QList<Track*> tracks);
 
+	void SetCurrentPlayingState(int currentTrackIndex, int currentPlayingPosition);
+	int GetCurrentTrackIndex();
+	int GetCurrentPlayingPosition();
+
 signals:
 	void LastAddFilesDirectoryPathChanged();
 

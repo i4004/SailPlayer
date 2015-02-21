@@ -26,6 +26,7 @@ namespace Audio
 		Q_INVOKABLE void seek(int milliseconds);
 		Q_INVOKABLE bool hasTrackToPlay() { return !_currentFilePath.isNull() && !_currentFilePath.isEmpty(); }
 		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
+		Q_INVOKABLE int getCurrentPosition();
 
 		void OnStreamStart();
 		void OnAboutToFinish();

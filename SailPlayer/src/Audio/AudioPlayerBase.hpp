@@ -37,13 +37,12 @@ namespace Audio
 		Q_INVOKABLE virtual void play();
 		Q_INVOKABLE virtual void pause();
 		Q_INVOKABLE virtual void stop();
+		Q_INVOKABLE AudioPlayerState getCurrentState() { return _currentState; }
 
 		virtual void OnStreamStart();
 		virtual void OnAsyncDone();
 		virtual void OnAboutToFinish();
 		virtual void OnEndOfStream();
-
-		AudioPlayerState GetCurrentState() { return _currentState; }
 
 	signals:
 		void stateChanged(AudioPlayerBase::AudioPlayerState state);

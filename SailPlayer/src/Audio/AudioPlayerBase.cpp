@@ -42,6 +42,7 @@ namespace Audio
 
 	void AudioPlayerBase::pause()
 	{
+		_audioResource->Connect();
 		_pausedByResourceBlock = false;
 
 		gst_element_set_state (_pipeline, GST_STATE_PAUSED);

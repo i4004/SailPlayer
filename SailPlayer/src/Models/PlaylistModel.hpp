@@ -52,6 +52,10 @@ namespace Models
 		// Save playlist to settings
 		Q_INVOKABLE void savePlaylist();
 
+		Q_INVOKABLE void saveCurrentPlayingState(int currentTrackIndex, int currentPlayingPosition);
+		Q_INVOKABLE int loadCurrentTrackIndex();
+		Q_INVOKABLE int loadCurrentPosition();
+
 		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
 
 		// Calculates next track to play
@@ -66,6 +70,7 @@ namespace Models
 		Q_INVOKABLE int getNextStartPosition();
 		Q_INVOKABLE int getNextEndPosition();
 		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
+		Q_INVOKABLE int getCurrentTrackIndex();
 
 	public slots:
 		Q_INVOKABLE void setPlayerState(AudioPlayer::AudioPlayerState state);
