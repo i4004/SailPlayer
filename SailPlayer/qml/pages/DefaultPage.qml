@@ -14,10 +14,14 @@ Page
 	id: page
 
 	property bool needToSetStartupPosition: false
+	property var playbackErrorPage
 
 	function onPlaybackError(value)
 	{
-		pageStack.push(Qt.resolvedUrl("../pages/PlaybackErrorInfoPage.qml"), { message: value });
+		if(playbackErrorPage !== null && pageStack.currentPage === playbackErrorPage)
+			return;
+
+		playbackErrorPage = pageStack.push(Qt.resolvedUrl("../pages/PlaybackErrorInfoPage.qml"), { message: value });
 	}
 
 	AudioPlayer
