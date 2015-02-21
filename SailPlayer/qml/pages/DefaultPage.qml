@@ -15,6 +15,11 @@ Page
 
 	property bool needToSetStartupPosition: false
 
+	function onPlaybackError(value)
+	{
+		pageStack.push(Qt.resolvedUrl("../pages/PlaybackErrorInfoPage.qml"), { message: value });
+	}
+
 	AudioPlayer
 	{
 		id: player
@@ -56,6 +61,7 @@ Page
 		player.currentPositionUpdated.connect(playerControlPanel.setTrackPosition);
 		player.stateChanged.connect(playerControlPanel.setPlayerState);
 		player.stateChanged.connect(playlist.setPlayerState);
+		player.playbackError.connect(page.onPlaybackError);
 
 		playlist.loadPlaylist();
 

@@ -43,6 +43,7 @@ namespace Audio
 		virtual void OnAsyncDone();
 		virtual void OnAboutToFinish();
 		virtual void OnEndOfStream();
+		virtual void OnErrorMessage(QString message);
 
 	signals:
 		void stateChanged(AudioPlayerBase::AudioPlayerState state);

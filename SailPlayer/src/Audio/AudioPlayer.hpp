@@ -31,6 +31,7 @@ namespace Audio
 		void OnStreamStart();
 		void OnAboutToFinish();
 		void OnEndOfStream();
+		void OnErrorMessage(QString message);
 
 	signals:
 		void currentPositionUpdated(int milliseconds);
@@ -38,6 +39,7 @@ namespace Audio
 		void aboutToFinish();
 		void streamStarted();
 		void endOfStream();
+		void playbackError(QString message);
 
 	private:
 		// Current state

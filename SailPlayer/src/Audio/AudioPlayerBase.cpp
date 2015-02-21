@@ -77,6 +77,11 @@ namespace Audio
 	{
 	}
 
+	void AudioPlayerBase::OnErrorMessage(QString message)
+	{
+		Q_UNUSED(message);
+	}
+
 	// Player internal controls
 
 	void AudioPlayerBase::Seek(gint64 nanoseconds)
@@ -214,7 +219,7 @@ namespace Audio
 				gst_message_parse_error (msg, &error, &debug);
 				g_free (debug);
 
-				qDebug() << "Error:" << error->message;
+				static_cast<AudioPlayerBase*>(userData)->OnErrorMessage(error->message);
 				g_error_free (error);
 				break;
 			}

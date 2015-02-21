@@ -120,6 +120,14 @@ namespace Audio
 		emit endOfStream();
 	}
 
+	void AudioPlayer::OnErrorMessage(QString message)
+	{
+		stop();
+		AudioPlayerBase::OnErrorMessage(message);
+
+		emit playbackError(message);
+	}
+
 	int AudioPlayer::GetCurrentPositionMs()
 	{
 		gint64 position = GetCurrentPosition();
