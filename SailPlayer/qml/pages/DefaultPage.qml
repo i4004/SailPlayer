@@ -13,86 +13,6 @@ Page
 {
 	id: page
 
-	property bool needToSetStartupPosition: false
-	property var playbackErrorPage
-
-	function onPlaybackError(value)
-	{
-		if(playbackErrorPage !== null && pageStack.currentPage === playbackErrorPage)
-			return;
-
-		playbackErrorPage = pageStack.push(Qt.resolvedUrl("../pages/PlaybackErrorInfoPage.qml"), { message: value });
-	}
-
-	AudioPlayer
-	{
-		id: player
-
-		onStreamStarted:
-		{
-			if(needToSetStartupPosition)
-			{
-				needToSetStartupPosition = false;
-
-				var currentPosition = playlist.loadCurrentPosition();
-
-				if(currentPosition !== -1)
-					seek(currentPosition);
-			}
-
-			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
-				player.stop();
-		}
-
-		onAboutToFinish:
-		{
-			var path = playlist.requestNextTrack();
-			var startPosition = playlist.getNextStartPosition();
-			var endPosition = playlist.getNextEndPosition();
-
-			player.setNextTrackToPlay(path, startPosition, endPosition);
-		}
-
-		onEndOfStream: player.stop()
-	}
-
-	allowedOrientations: Orientation.All
-
-	Component.onCompleted:
-	{
-		playlist.currentTrackToPlayDataUpdated.connect(player.setTrackToPlay);
-		player.currentDurationUpdated.connect(playerControlPanel.setTrackDuration);
-		player.currentPositionUpdated.connect(playerControlPanel.setTrackPosition);
-		player.stateChanged.connect(playerControlPanel.setPlayerState);
-		player.stateChanged.connect(playlist.setPlayerState);
-		player.playbackError.connect(page.onPlaybackError);
-
-		playlist.loadPlaylist();
-
-		var currentTrackIndex = playlist.loadCurrentTrackIndex();
-
-		if(currentTrackIndex !== -1)
-		{
-			needToSetStartupPosition = true;
-			playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, currentTrackIndex);
-			player.pause();
-		}
-
-		playOrderControl.setOrder(playlist.playOrder);
-	}
-
-	Component.onDestruction:
-	{
-		if(player.getCurrentState() === AudioPlayerState.Playing)
-			player.pause();
-
-		playlist.savePlaylist();
-		playlist.saveCurrentPlayingState(playlist.getCurrentTrackIndex(), player.getCurrentPosition());
-		player.stateChanged.disconnect(playerControlPanel.setPlayerState);
-		player.currentDurationUpdated.disconnect(playerControlPanel.setTrackDuration);
-		player.currentPositionUpdated.disconnect(playerControlPanel.setTrackPosition);
-	}
-
 	SilicaListView
 	{
 		id: listView
@@ -103,7 +23,7 @@ Page
 
 		clip: true
 
-		model: PlaylistModel { id: playlist }
+		model: playlist
 
 		delegate: PlaylistItem
 		{
@@ -181,6 +101,11 @@ Page
 				{
 					id: playOrderControl
 					onOrderChange: playlist.playOrder = order
+
+					Component.onCompleted:
+					{
+						playOrderControl.setOrder(playlist.playOrder);
+					}
 				}
 			}
 		}
@@ -189,6 +114,20 @@ Page
 	PlayerControlPanel
 	{
 		id: playerControlPanel
+
+		Component.onCompleted:
+		{
+			player.currentDurationUpdated.connect(playerControlPanel.setTrackDuration);
+			player.currentPositionUpdated.connect(playerControlPanel.setTrackPosition);
+			player.stateChanged.connect(playerControlPanel.setPlayerState);
+		}
+
+		Component.onDestruction:
+		{
+			player.stateChanged.disconnect(playerControlPanel.setPlayerState);
+			player.currentDurationUpdated.disconnect(playerControlPanel.setTrackDuration);
+			player.currentPositionUpdated.disconnect(playerControlPanel.setTrackPosition);
+		}
 
 		onPrevious:
 		{

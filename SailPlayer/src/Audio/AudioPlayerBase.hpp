@@ -20,6 +20,7 @@ namespace Audio
 	{
 		Q_OBJECT
 		Q_ENUMS(AudioPlayerState)
+		Q_PROPERTY(AudioPlayerState state READ getCurrentState NOTIFY stateChanged)
 
 	public:
 		AudioPlayerBase();
