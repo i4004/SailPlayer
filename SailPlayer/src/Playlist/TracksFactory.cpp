@@ -78,7 +78,7 @@ namespace Playlist
 
 				foreach (CueTrack* currentTrack, currentFile->GetTracks())
 				{
-					QString artist = currentTrack->GetPerformer().isNull() ? currentTrack->GetPerformer() : cue->GetPerformer();
+					QString artist = currentTrack->GetPerformer().isNull() ? cue->GetPerformer() : currentTrack->GetPerformer();
 					int albumYear = cue->GetRemarks()["DATE"].toInt();
 					QFileInfo mediaFileInfo(fullFilePath);
 					CueIndex* dataIndex = GetDataIndex(currentTrack->GetIndexes());
