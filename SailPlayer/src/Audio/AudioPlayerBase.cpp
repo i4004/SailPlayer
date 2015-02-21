@@ -90,7 +90,7 @@ namespace Audio
 		if(gst_element_query_position(_pipeline, _gstTimeFormat, &value))
 			return value;
 
-		return 0;
+		return -1;
 	}
 
 	void AudioPlayerBase::SetFileToPlay(QString fullFilePath)
@@ -105,7 +105,7 @@ namespace Audio
 		if(gst_element_query_duration(_pipeline, _gstTimeFormat, &value))
 			return value;
 
-		return 0;
+		return -1;
 	}
 
 	bool AudioPlayerBase::Init()

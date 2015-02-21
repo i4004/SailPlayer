@@ -28,7 +28,6 @@ namespace Audio
 		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
 
 		void OnStreamStart();
-		void OnAsyncDone();
 		void OnAboutToFinish();
 		void OnEndOfStream();
 

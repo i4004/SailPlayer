@@ -17,13 +17,11 @@ Page
 	{
 		id: player
 
-//		onEndOfStreamReached:
-//		{
-//			player.stop();
-
-//			if(playlist.calculateAndSetTrackToPlay())
-//				player.play();
-//		}
+		onStreamStarted:
+		{
+			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
+				player.stop();
+		}
 
 		onAboutToFinish:
 		{
@@ -34,11 +32,7 @@ Page
 			player.setNextTrackToPlay(path, startPosition, endPosition);
 		}
 
-		onStreamStarted:
-		{
-			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
-				player.stop();
-		}
+		onEndOfStream: player.stop()
 	}
 
 	allowedOrientations: Orientation.All
