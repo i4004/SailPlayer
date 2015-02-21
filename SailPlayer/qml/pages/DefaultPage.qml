@@ -13,6 +13,8 @@ Page
 {
 	id: page
 
+	allowedOrientations: Orientation.All
+
 	SilicaListView
 	{
 		id: listView

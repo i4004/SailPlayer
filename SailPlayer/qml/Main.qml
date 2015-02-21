@@ -41,35 +41,33 @@ ApplicationWindow
 		}
 
 		onEndOfStream: player.stop()
-	}
 
-	allowedOrientations: Orientation.All
-
-	Component.onCompleted:
-	{
-		playlist.currentTrackToPlayDataUpdated.connect(player.setTrackToPlay);
-		player.stateChanged.connect(playlist.setPlayerState);
-		player.playbackError.connect(applicationWindow.onPlaybackError);
-
-		playlist.loadPlaylist();
-
-		var currentTrackIndex = playlist.loadCurrentTrackIndex();
-
-		if(currentTrackIndex !== -1)
+		Component.onCompleted:
 		{
-			needToSetStartupPosition = true;
-			playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, currentTrackIndex);
-			player.pause();
+			playlist.currentTrackToPlayDataUpdated.connect(player.setTrackToPlay);
+			player.stateChanged.connect(playlist.setPlayerState);
+			player.playbackError.connect(applicationWindow.onPlaybackError);
+
+			playlist.loadPlaylist();
+
+			var currentTrackIndex = playlist.loadCurrentTrackIndex();
+
+			if(currentTrackIndex !== -1)
+			{
+				needToSetStartupPosition = true;
+				playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, currentTrackIndex);
+				player.pause();
+			}
 		}
-	}
 
-	Component.onDestruction:
-	{
-		if(player.getCurrentState() === AudioPlayerState.Playing)
-			player.pause();
+		Component.onDestruction:
+		{
+			if(player.getCurrentState() === AudioPlayerState.Playing)
+				player.pause();
 
-		playlist.savePlaylist();
-		playlist.saveCurrentPlayingState(playlist.getCurrentTrackIndex(), player.getCurrentPosition());
+			playlist.savePlaylist();
+			playlist.saveCurrentPlayingState(playlist.getCurrentTrackIndex(), player.getCurrentPosition());
+		}
 	}
 
 	property bool needToSetStartupPosition: false

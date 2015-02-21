@@ -6,10 +6,14 @@ import harbour.sail.player.PlayDirection 1.0
 
 CoverBackground
 {
+	CoverPlaceholder
+	{
+		text: qsTrId("Sail Player")
+		icon.source: "image://theme/icon-launcher-mediaplayer"
+	}
+
 	CoverActionList
 	{
-		id: coverAction
-
 		CoverAction
 		{
 			iconSource: "image://theme/icon-cover-next-song"
