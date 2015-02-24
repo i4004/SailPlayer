@@ -6,7 +6,6 @@ import "../../Util.js" as Util
 ListItem
 {
 	id: item
-//	height: labelTrackName.height + Theme.paddingSmall
 
 	signal pushAndHold
 
