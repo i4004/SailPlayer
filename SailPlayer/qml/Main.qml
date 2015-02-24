@@ -25,10 +25,8 @@ ApplicationWindow
 			{
 				needToSetStartupPosition = false;
 
-				var currentPosition = playlist.loadCurrentPosition();
-
-				if(currentPosition !== -1)
-					seek(currentPosition);
+				if(settings.currentPlayingPosition !== -1)
+					seek(settings.currentPlayingPosition);
 			}
 
 			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
@@ -47,12 +45,10 @@ ApplicationWindow
 
 			playlist.loadPlaylist();
 
-			var currentTrackIndex = playlist.loadCurrentTrackIndex();
-
-			if(currentTrackIndex !== -1)
+			if(settings.currentTrackIndex !== -1)
 			{
 				needToSetStartupPosition = true;
-				playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, currentTrackIndex);
+				playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, settings.currentTrackIndex);
 				player.pause();
 			}
 		}
@@ -63,7 +59,8 @@ ApplicationWindow
 				player.pause();
 
 			playlist.savePlaylist();
-			playlist.saveCurrentPlayingState(playlist.getCurrentTrackIndex(), player.getCurrentPosition());
+			settings.currentTrackIndex = playlist.getCurrentTrackIndex();
+			settings.currentPlayingPosition = player.getCurrentPosition();
 		}
 	}
 

@@ -45,21 +45,6 @@ namespace Models
 		_settings.SetPlaylist(_tracksList);
 	}
 
-	void PlaylistModel::saveCurrentPlayingState(int currentTrackIndex, int currentPlayingPosition)
-	{
-		_settings.SetCurrentPlayingState(currentTrackIndex, currentPlayingPosition);
-	}
-
-	int PlaylistModel::loadCurrentTrackIndex()
-	{
-		return _settings.GetCurrentTrackIndex();
-	}
-
-	int PlaylistModel::loadCurrentPosition()
-	{
-		return _settings.GetCurrentPlayingPosition();
-	}
-
 	void PlaylistModel::toggleSelectTrack(int itemIndex)
 	{
 		Track* track = _tracksList.at(itemIndex);

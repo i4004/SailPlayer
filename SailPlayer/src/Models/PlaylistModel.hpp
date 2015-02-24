@@ -52,10 +52,6 @@ namespace Models
 		// Save playlist to settings
 		Q_INVOKABLE void savePlaylist();
 
-		Q_INVOKABLE void saveCurrentPlayingState(int currentTrackIndex, int currentPlayingPosition);
-		Q_INVOKABLE int loadCurrentTrackIndex();
-		Q_INVOKABLE int loadCurrentPosition();
-
 		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
 
 		// Calculates next track to play
