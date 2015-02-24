@@ -3,12 +3,14 @@ import Sailfish.Silica 1.0
 
 import "../../Util.js" as Util
 
-BackgroundItem
+ListItem
 {
 	id: item
-	height: labelTrackName.height + Theme.paddingSmall
+//	height: labelTrackName.height + Theme.paddingSmall
 
 	signal pushAndHold
+
+	contentHeight: labelTrackName.height + Theme.paddingSmall
 
 	Image
 	{
@@ -36,6 +38,7 @@ BackgroundItem
 		anchors.left: labelTrackNumber.right
 		anchors.leftMargin: Theme.paddingMedium
 		anchors.right: labelTrackDuration.left
+		anchors.rightMargin: Theme.paddingSmall
 		anchors.verticalCenter: parent.verticalCenter
 		text: trackName != "" ? trackName : trackFileName
 		color: item.highlighted || isTrackToPlay ? Theme.highlightColor : Theme.primaryColor
