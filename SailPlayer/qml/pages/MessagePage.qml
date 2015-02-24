@@ -5,7 +5,8 @@ Page
 {
 	allowedOrientations: Orientation.All
 
-	property string message: '';
+	property string message: ''
+	property string pageTitle: ''
 
 	SilicaFlickable
 	{
@@ -18,7 +19,7 @@ Page
 			anchors.left: parent.left
 			anchors.right: parent.right
 
-			PageHeader { title: qsTr("Playback error") }
+			PageHeader { title: pageTitle }
 
 			Label
 			{

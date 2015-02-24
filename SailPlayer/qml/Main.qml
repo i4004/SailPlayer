@@ -5,7 +5,9 @@ import harbour.sail.player.AudioPlayerState 1.0
 import harbour.sail.player.PlaylistModel 1.0
 import harbour.sail.player.PlayDirection 1.0
 import harbour.sail.player.PlayOrder 1.0
+import harbour.sail.player.SailPlayerSettings 1.0
 import "pages"
+import "controls"
 
 ApplicationWindow
 {
@@ -14,6 +16,8 @@ ApplicationWindow
 	AudioPlayer
 	{
 		id: player
+
+		property bool needToSetStartupPosition: false
 
 		onStreamStarted:
 		{
@@ -39,7 +43,7 @@ ApplicationWindow
 		{
 			playlist.currentTrackToPlayDataUpdated.connect(player.setTrackToPlay);
 			player.stateChanged.connect(playlist.setPlayerState);
-			player.playbackError.connect(applicationWindow.onPlaybackError);
+			player.playbackError.connect(messagePage.displayMessage);
 
 			playlist.loadPlaylist();
 
@@ -63,18 +67,13 @@ ApplicationWindow
 		}
 	}
 
-	property bool needToSetStartupPosition: false
-	property var playbackErrorPage
-
-	function onPlaybackError(value)
-	{
-		if(playbackErrorPage !== null && pageStack.currentPage === playbackErrorPage)
-			return;
-
-		playbackErrorPage = pageStack.push(Qt.resolvedUrl("pages/PlaybackErrorInfoPage.qml"), { message: value });
-	}
-
 	PlaylistModel { id: playlist }
+	SailPlayerSettings { id: settings }
+	MessagePageDisplayer
+	{
+		id: messagePage
+		title: qsTr("Playback error")
+	}
 
 	initialPage: Component { MainPage {} }
 	cover: Qt.resolvedUrl("Cover.qml")
