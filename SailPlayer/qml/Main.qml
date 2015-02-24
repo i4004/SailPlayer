@@ -76,6 +76,6 @@ ApplicationWindow
 
 	PlaylistModel { id: playlist }
 
-	initialPage: Component { DefaultPage {} }
+	initialPage: Component { MainPage {} }
 	cover: Qt.resolvedUrl("Cover.qml")
 }

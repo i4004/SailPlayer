@@ -57,13 +57,13 @@ Page
 			MenuItem
 			{
 				text: qsTr("About")
-				onClicked: pageStack.push(Qt.resolvedUrl("../pages/About.qml"))
+				onClicked: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
 			}
 
 			MenuItem
 			{
 				text: qsTr("Settings")
-				onClicked: pageStack.push(Qt.resolvedUrl("../pages/Settings.qml"))
+				onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
 			}
 
 			MenuItem
@@ -72,7 +72,7 @@ Page
 
 				onClicked:
 				{
-					var dialog = pageStack.push(Qt.resolvedUrl("../pages/AddFilesDialog.qml"));
+					var dialog = pageStack.push(Qt.resolvedUrl("AddFilesDialog.qml"));
 
 					dialog.accepted.connect(function()
 					{
