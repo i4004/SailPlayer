@@ -31,14 +31,7 @@ ApplicationWindow
 				player.stop();
 		}
 
-		onAboutToFinish:
-		{
-			var path = playlist.requestNextTrack();
-			var startPosition = playlist.getNextStartPosition();
-			var endPosition = playlist.getNextEndPosition();
-
-			player.setNextTrackToPlay(path, startPosition, endPosition);
-		}
+		onAboutToFinish: player.setNextTrackToPlay(playlist.requestNextTrack(), playlist.getNextStartPosition(), playlist.getNextEndPosition())
 
 		onEndOfStream: player.stop()
 
@@ -62,7 +55,7 @@ ApplicationWindow
 
 		Component.onDestruction:
 		{
-			if(player.getCurrentState() === AudioPlayerState.Playing)
+			if(player.state === AudioPlayerState.Playing)
 				player.pause();
 
 			playlist.savePlaylist();
