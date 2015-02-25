@@ -27,6 +27,13 @@ Page
 
 		model: playlist
 
+		ViewPlaceholder
+		{
+			enabled: listView.count == 0
+			text: qsTr("No tracks in playlist")
+			hintText: qsTr("Pull down to add tracks")
+		}
+
 		delegate: PlaylistItem
 		{
 			id: itemp
