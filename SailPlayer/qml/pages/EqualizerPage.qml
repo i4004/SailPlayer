@@ -106,12 +106,20 @@ Page
 
 		PullDownMenu
 		{
+
 			MenuItem
 			{
-				text: qsTr("Add Preset")
+				text: qsTr("Delete Current Preset")
+			}
+
+			MenuItem
+			{
+				text: qsTr("Duplicate Current Preset")
 				onClicked:
 				{
-					var dialog = pageStack.push(Qt.resolvedUrl("ManageTextItemDialog.qml"), { inputName: qsTr("Preset Name") });
+					var dialog = pageStack.push(Qt.resolvedUrl("ManageTextItemDialog.qml"),
+												{ inputName: qsTr("New Preset Name"), dialogTitle: qsTr("Duplicate Preset") });
+
 					dialog.accepted.connect(function()
 					{
 					});
@@ -120,10 +128,26 @@ Page
 
 			MenuItem
 			{
-				text: qsTr("Edit Preset")
+				text: qsTr("Edit Current Preset Name")
 				onClicked:
 				{
-					var dialog = pageStack.push(Qt.resolvedUrl("ManageTextItemDialog.qml"), { inputName: qsTr("Preset Name") });
+					var dialog = pageStack.push(Qt.resolvedUrl("ManageTextItemDialog.qml"),
+												{ inputName: qsTr("Preset Name"), dialogTitle: qsTr("Edit Preset Name") });
+
+					dialog.accepted.connect(function()
+					{
+					});
+				}
+			}
+
+			MenuItem
+			{
+				text: qsTr("New Preset")
+				onClicked:
+				{
+					var dialog = pageStack.push(Qt.resolvedUrl("ManageTextItemDialog.qml"),
+												{ inputName: qsTr("Preset Name"), dialogTitle: qsTr("New Preset") });
+
 					dialog.accepted.connect(function()
 					{
 					});
