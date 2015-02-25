@@ -55,7 +55,8 @@ OTHER_FILES += \
     qml/pages/SettingsPage.qml \
     qml/pages/MessagePage.qml \
     qml/controls/MessagePageDisplayer.qml \
-    qml/pages/EqualizerPage.qml
+    qml/pages/EqualizerPage.qml \
+    qml/pages/ManageTextItemDialog.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 

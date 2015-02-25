@@ -25,3 +25,13 @@ function formatTrackDuration(trackDuration /* track duration in milliseconds */)
 			+ (minutes > 0 ? (hours > 0 ? Util.zeroPad(minutes, 2) : minutes) + ":" : "0:")
 			+ Util.zeroPad(seconds, 2);
 }
+
+function formatFequency(frequency /* frequency in Hz */)
+{
+	frequency = parseInt(frequency);
+
+	if(frequency >= 1000)
+		return (frequency / 1000).toFixed(1) + " kHz";
+	else
+		return frequency + " Hz";
+}

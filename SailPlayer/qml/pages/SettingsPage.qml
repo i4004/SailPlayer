@@ -17,17 +17,6 @@ Page
 			anchors.right: parent.right
 
 			PageHeader { title: qsTr("Settings") }
-
-//			Row
-//			{
-//				anchors.horizontalCenter: parent.horizontalCenter
-
-//				Button
-//				{
-//				   text: qsTr("Equalizer")
-//				   onClicked: pageStack.push(Qt.resolvedUrl("EqualizerSettingsPage.qml"));
-//				}
-//			}
 		}
 	}
 }
