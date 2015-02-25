@@ -29,6 +29,7 @@ Page
 
 		delegate: PlaylistItem
 		{
+			id: itemp
 			onClicked:
 			{
 				playerControlPanel.show();
@@ -64,6 +65,12 @@ Page
 			{
 				text: qsTr("Settings")
 				onClicked: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+			}
+
+			MenuItem
+			{
+				text: qsTr("Equalizer")
+				onClicked: pageStack.push(Qt.resolvedUrl("EqualizerPage.qml"))
 			}
 
 			MenuItem

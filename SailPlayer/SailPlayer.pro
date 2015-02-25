@@ -53,9 +53,9 @@ OTHER_FILES += \
     qml/controls/radio/RadioSwitch.qml \
     qml/pages/MainPage.qml \
     qml/pages/SettingsPage.qml \
-    qml/pages/EqualizerSettingsPage.qml \
     qml/pages/MessagePage.qml \
-    qml/controls/MessagePageDisplayer.qml
+    qml/controls/MessagePageDisplayer.qml \
+    qml/pages/EqualizerPage.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
