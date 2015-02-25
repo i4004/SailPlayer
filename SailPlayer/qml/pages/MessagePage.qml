@@ -21,14 +21,15 @@ Page
 
 			PageHeader { title: pageTitle }
 
-			Label
+			TextArea
 			{
 				anchors.left: parent.left
 				anchors.right: parent.right
-				anchors.leftMargin: Theme.paddingLarge
-				anchors.rightMargin: Theme.paddingLarge
-				wrapMode: Text.Wrap
+
 				color: Theme.primaryColor
+				wrapMode: Text.Wrap
+				readOnly: true
+				focusOnClick: true
 
 				text: message
 			}
