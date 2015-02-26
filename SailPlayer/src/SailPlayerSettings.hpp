@@ -6,8 +6,10 @@
 #include <QSettings>
 
 #include "Playlist/Track.hpp"
+#include "Audio/AudioPlayer.hpp"
 
 using namespace Playlist;
+using namespace Audio;
 
 class SailPlayerSettings : public QObject
 {
@@ -16,6 +18,7 @@ class SailPlayerSettings : public QObject
 	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath(QString) NOTIFY LastAddFilesDirectoryPathChanged)
 	Q_PROPERTY(int currentTrackIndex READ GetCurrentTrackIndex WRITE SetCurrentTrackIndex)
 	Q_PROPERTY(int currentPlayingPosition READ GetCurrentPlayingPosition WRITE SetCurrentPlayingPosition)
+//	Q_PROPERTY(int playOrder READ GetPlayOrder WRITE SetPlayOrder)
 
 public:
 	static SailPlayerSettings& Default();
@@ -32,6 +35,9 @@ public:
 
 	int GetCurrentPlayingPosition();
 	void SetCurrentPlayingPosition(int currentPlayingPosition);
+
+//	PlaylistModel::PlayOrder GetPlayOrder();
+//	void SetPlayOrder(PlaylistModel::PlayOrder playOrder);
 
 signals:
 	void LastAddFilesDirectoryPathChanged();

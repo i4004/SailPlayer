@@ -19,7 +19,6 @@ SOURCES += \
     src/IO/FsRecordInfo.cpp \
     src/Audio/AudioResource.cpp \
     src/Audio/AudioPlayer.cpp \
-    src/SailPlayerSettings.cpp \
     src/IO/FsHelper.cpp \
     src/Playlist/Track.cpp \
     src/Playlist/TracksFactory.cpp \
@@ -34,7 +33,8 @@ SOURCES += \
     src/Cue/CueTrack.cpp \
     src/Cue/CueFile.cpp \
     src/Cue/CueIndex.cpp \
-    src/Audio/AudioPlayerBase.cpp
+    src/Audio/AudioPlayerBase.cpp \
+    src/SailPlayerSettings.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -88,6 +88,7 @@ HEADERS += \
     src/Cue/CueTrackDataType.hpp \
     src/Cue/CueFileType.hpp \
     src/Cue/CueIndex.hpp \
-    src/Audio/AudioPlayerBase.hpp
+    src/Audio/AudioPlayerBase.hpp \
+    src/SailPlayer.hpp
 
 INCLUDEPATH += $$PWD/include

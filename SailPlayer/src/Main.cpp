@@ -7,6 +7,7 @@
 #include "IO/FsHelper.hpp"
 #include "Models/FsRecordsListModel.hpp"
 #include "Models/PlaylistModel.hpp"
+#include "SailPlayer.hpp"
 #include "SailPlayerSettings.hpp"
 
 #include "Cue/CueSheetReader.hpp"
@@ -27,10 +28,10 @@ int main(int argc, char *argv[])
 	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
 
 	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlaylistModel", 1, 0, "PlaylistModel");
-	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlayDirection", 1, 0, "PlayDirection");
-	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
-	qRegisterMetaType<PlaylistModel::PlayDirection>("PlaylistModel::PlayDirection");
-	qRegisterMetaType<PlaylistModel::PlayOrder>("PlaylistModel::PlayOrder");
+	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayDirection", 1, 0, "PlayDirection");
+	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
+	qRegisterMetaType<SailPlayer::PlayDirection>("SailPlayer::PlayDirection");
+	qRegisterMetaType<SailPlayer::PlayOrder>("SailPlayer::PlayOrder");
 
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
 

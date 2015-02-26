@@ -5,8 +5,8 @@
 #include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp"
 #include "../Playlist/TracksFactory.hpp"
 #include "../SailPlayerSettings.hpp"
-#include "PlaylistModelBase.hpp"
 #include "../Audio/AudioPlayer.hpp"
+#include "PlaylistModelBase.hpp"
 
 using namespace Audio;
 
