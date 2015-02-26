@@ -2,7 +2,7 @@
 SailPlayer
 ==========
 
-![Simplify](https://raw.github.com/i4004/SailPlayer/master/Images/Icon128x128.png)
+![Sail Player](https://raw.githubusercontent.com/i4004/SailPlayer/master/Images/Logo128x128.png)
 
 Sailfish OS music player
 
