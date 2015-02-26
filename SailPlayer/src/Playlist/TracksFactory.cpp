@@ -26,7 +26,21 @@ namespace Playlist
 			IO::FileType fileType = IO::FsHelper::GetFileType(fileInfo.suffix());
 
 			if(fileType == IO::Cue)
-				items.append(BuildFromCueSheet(fileInfo));
+			{
+				QList<Track*> newItems = BuildFromCueSheet(fileInfo);
+				QList<Track*> itemsToRemove;
+
+				// Removing previously loaded multimedia files used by cuesheet
+
+				foreach (Track* item, items)
+					if(_filesLoadedViaCue.contains(item->GetFullFilePath()))
+						itemsToRemove.append(item);
+
+				foreach (Track* item, itemsToRemove)
+					items.removeOne(item);
+
+				items.append(newItems);
+			}
 			else
 				items.append(Build(fileInfo));
 		}
