@@ -9,7 +9,7 @@ CoverBackground
 	CoverPlaceholder
 	{
 		text: qsTrId("Sail Player")
-		icon.source: "image://theme/icon-launcher-mediaplayer"
+		icon.source: "images/harbour-sail-player.png"
 	}
 
 	CoverActionList

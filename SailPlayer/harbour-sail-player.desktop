@@ -4,6 +4,6 @@ X-Nemo-Application-Type=silica-qt5
 Icon=harbour-sail-player
 Exec=harbour-sail-player
 
-Name=SailPlayer
-Name[de]=SailPlayer
+Name=Sail Player
+Name[de]=Sail Player
 
