@@ -37,11 +37,7 @@ Page
 		delegate: PlaylistItem
 		{
 			id: itemp
-			onClicked:
-			{
-				playerControlPanel.show();
-				playlist.toggleSelectTrack(index);
-			}
+			onClicked: playerControlPanel.visibleSize == 0 ? playerControlPanel.show() : playerControlPanel.hide()
 
 			onPushAndHold:
 			{
