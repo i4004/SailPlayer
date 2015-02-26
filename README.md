@@ -2,6 +2,8 @@
 SailPlayer
 ==========
 
+![Simplify](https://raw.github.com/i4004/SailPlayer/master/Images/Icon128x128.png)
+
 Sailfish OS music player
 
 Status
