@@ -6,6 +6,7 @@ import harbour.sail.player.PlaylistModel 1.0
 import harbour.sail.player.PlayDirection 1.0
 import harbour.sail.player.PlayOrder 1.0
 import harbour.sail.player.SailPlayerSettings 1.0
+import harbour.sail.player.LastFmScrobbler 1.0
 import "pages"
 import "controls"
 
@@ -66,6 +67,7 @@ ApplicationWindow
 
 	PlaylistModel { id: playlist }
 	SailPlayerSettings { id: settings }
+	LastFmScrobbler { id: scrobbler }
 	MessagePageDisplayer
 	{
 		id: messagePage

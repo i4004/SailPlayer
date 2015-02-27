@@ -4,18 +4,19 @@
 #include <sailfishapp.h>
 
 #include "Audio/AudioPlayer.hpp"
+#include "Cue/CueSheetReader.hpp"
 #include "IO/FsHelper.hpp"
 #include "Models/FsRecordsListModel.hpp"
 #include "Models/PlaylistModel.hpp"
+#include "Net/LastFmScrobbler.hpp"
 #include "SailPlayer.hpp"
 #include "SailPlayerSettings.hpp"
-
-#include "Cue/CueSheetReader.hpp"
 
 using namespace Audio;
 using namespace IO;
 using namespace Models;\
 using namespace Playlist;
+using namespace Net;
 
 int main(int argc, char *argv[])
 {
@@ -34,6 +35,7 @@ int main(int argc, char *argv[])
 	qRegisterMetaType<SailPlayer::PlayOrder>("SailPlayer::PlayOrder");
 
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
+	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmScrobbler", 1, 0, "LastFmScrobbler");
 
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");
