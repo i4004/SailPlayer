@@ -111,8 +111,8 @@ Page
 
 				PlayOrderControl
 				{
-					playOrder: playlist.playOrder
 					onOrderChange: playlist.playOrder = order
+					Component.onCompleted: setOrder(playlist.playOrder)
 				}
 			}
 		}

@@ -7,7 +7,7 @@ namespace Models
 	{
 		Q_UNUSED(parent);
 
-		_currentPlayOrder = RepeatPlaylist;
+		_currentPlayOrder = SailPlayer::RepeatPlaylist;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
 
@@ -54,7 +54,7 @@ namespace Models
 		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsSelectedRole));
 	}
 
-	bool PlaylistModel::calculateNextTrackToPlay(PlayDirection direction, int customIndex)
+	bool PlaylistModel::calculateNextTrackToPlay(SailPlayer::PlayDirection direction, int customIndex)
 	{
 		int index = CalculateNextTrackIndex(direction, customIndex);
 
@@ -66,7 +66,7 @@ namespace Models
 		return true;
 	}
 
-	bool PlaylistModel::calculateAndSetTrackToPlay(PlayDirection direction, int customIndex)
+	bool PlaylistModel::calculateAndSetTrackToPlay(SailPlayer::PlayDirection direction, int customIndex)
 	{
 		bool result = calculateNextTrackToPlay(direction, customIndex);
 
@@ -150,14 +150,14 @@ namespace Models
 			return -1;
 	}
 
-	int PlaylistModel::CalculateNextTrackIndex(PlayDirection direction, int customIndex)
+	int PlaylistModel::CalculateNextTrackIndex(SailPlayer::PlayDirection direction, int customIndex)
 	{
 		int trackIndex = -1;
 
 		if(_tracksList.count() == 0)
 			return -1;
 
-		if(direction == ByIndex)
+		if(direction == SailPlayer::ByIndex)
 			return customIndex;
 		else
 		{
@@ -167,13 +167,13 @@ namespace Models
 			{
 				trackIndex = _tracksList.indexOf(_currentTrackToPlay);
 
-				if(direction == Next || direction == NextWithForce)
+				if(direction == SailPlayer::Next || direction == SailPlayer::NextWithForce)
 				{
 					switch(_currentPlayOrder)
 					{
-						case Default:
+						case SailPlayer::Default:
 						{
-							if(trackIndex < _tracksList.count() - 1 || direction == NextWithForce)
+							if(trackIndex < _tracksList.count() - 1 || direction == SailPlayer::NextWithForce)
 								trackIndex++;
 							else
 								return -1;
@@ -181,19 +181,19 @@ namespace Models
 							break;
 						}
 
-						case RepeatPlaylist:
+						case SailPlayer::RepeatPlaylist:
 							trackIndex++;
 						break;
 
-						case RepeatTrack:
+						case SailPlayer::RepeatTrack:
 						{
-							if(direction == NextWithForce)
+							if(direction == SailPlayer::NextWithForce)
 								trackIndex++;
 
 							break;
 						}
 
-						case Random:
+						case SailPlayer::Random:
 						{
 							int randomIndex;
 
@@ -205,7 +205,7 @@ namespace Models
 						}
 					}
 				}
-				else if(direction == Previous)
+				else if(direction == SailPlayer::Previous)
 				{
 					trackIndex--;
 

@@ -65,7 +65,14 @@ ApplicationWindow
 		}
 	}
 
-	PlaylistModel { id: playlist }
+	PlaylistModel
+	{
+		id: playlist
+
+		Component.onCompleted: playOrder = settings.currentPlayOrder
+		Component.onDestruction: settings.currentPlayOrder = playlist.playOrder
+	}
+
 	SailPlayerSettings { id: settings }
 
 	LastFmScrobbler

@@ -16,10 +16,10 @@ class SailPlayerSettings : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath)
-	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath(QString) NOTIFY LastAddFilesDirectoryPathChanged)
+	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath(QString) NOTIFY lastAddFilesDirectoryPathChanged)
 	Q_PROPERTY(int currentTrackIndex READ GetCurrentTrackIndex WRITE SetCurrentTrackIndex)
 	Q_PROPERTY(int currentPlayingPosition READ GetCurrentPlayingPosition WRITE SetCurrentPlayingPosition)
-	Q_PROPERTY(SailPlayer::PlayOrder currentPlayOrder READ GetCurrentPlayOrder WRITE SetCurrentPlayOrder)
+	Q_PROPERTY(SailPlayer::PlayOrder currentPlayOrder READ GetCurrentPlayOrder WRITE SetCurrentPlayOrder NOTIFY currentPlayOrderChanged)
 
 public:
 	static SailPlayerSettings& Default();
@@ -41,7 +41,8 @@ public:
 	void SetCurrentPlayOrder(SailPlayer::PlayOrder playOrder);
 
 signals:
-	void LastAddFilesDirectoryPathChanged();
+	void lastAddFilesDirectoryPathChanged();
+	void currentPlayOrderChanged();
 
 private:
 	static QString DefaultAddFilesDirectoryPath;

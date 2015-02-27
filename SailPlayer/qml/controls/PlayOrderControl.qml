@@ -4,18 +4,17 @@ import "radio"
 
 Row
 {
-	property int playOrder
 	signal orderChange(int order)
 
-	onPlayOrderChanged:
+	function setOrder(order)
 	{
-		if(playOrder == PlayOrder.Default)
+		if(order === PlayOrder.Default)
 			orderDefault.check();
-		else if(playOrder == PlayOrder.RepeatPlaylist)
+		else if(order === PlayOrder.RepeatPlaylist)
 			orderRepeatPlaylist.check();
-		else if(playOrder == PlayOrder.RepeatTrack)
+		else if(order === PlayOrder.RepeatTrack)
 			orderRepeatTrack.check();
-		else if(playOrder == PlayOrder.RepeatPlaylist)
+		else if(order === PlayOrder.Random)
 			orderRandom.check();
 	}
 
