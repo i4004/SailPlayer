@@ -4,22 +4,23 @@ import "radio"
 
 Row
 {
-	anchors.horizontalCenter: parent.horizontalCenter
-	spacing: 38
-
+	property int playOrder
 	signal orderChange(int order)
 
-	function setOrder(order)
+	onPlayOrderChanged:
 	{
-		if(order === PlayOrder.Default)
+		if(playOrder == PlayOrder.Default)
 			orderDefault.check();
-		else if(order === PlayOrder.RepeatPlaylist)
+		else if(playOrder == PlayOrder.RepeatPlaylist)
 			orderRepeatPlaylist.check();
-		else if(order === PlayOrder.RepeatTrack)
+		else if(playOrder == PlayOrder.RepeatTrack)
 			orderRepeatTrack.check();
-		else if(order === PlayOrder.RepeatPlaylist)
+		else if(playOrder == PlayOrder.RepeatPlaylist)
 			orderRandom.check();
 	}
+
+	anchors.horizontalCenter: parent.horizontalCenter
+	spacing: 38
 
 	RadioGroup { id: radioGroup }
 

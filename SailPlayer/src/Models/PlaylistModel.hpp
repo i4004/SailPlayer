@@ -15,7 +15,7 @@ namespace Models
 	class PlaylistModel : public PlaylistModelBase
 	{
 		Q_OBJECT
-		Q_PROPERTY(PlayOrder playOrder READ GetPlayOrder() WRITE SetPlayOrder(PlayOrder) NOTIFY playlistOrderChanged())
+		Q_PROPERTY(PlayOrder playOrder READ GetPlayOrder() WRITE SetPlayOrder(PlayOrder) NOTIFY playOrderChanged())
 		Q_ENUMS(PlayDirection)
 		Q_ENUMS(PlayOrder)
 
@@ -73,7 +73,7 @@ namespace Models
 
 	signals:
 		void currentTrackToPlayDataUpdated(QString filePath, int startPosition, int endPosition);
-		void playlistOrderChanged();
+		void playOrderChanged();
 
 	private:
 		TracksLoader* _tracksLoader;
