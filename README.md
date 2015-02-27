@@ -1,5 +1,5 @@
 
-SailPlayer
+Sail Player
 ==========
 
 ![Sail Player](https://raw.githubusercontent.com/i4004/SailPlayer/master/Images/Logo128x128.png)
