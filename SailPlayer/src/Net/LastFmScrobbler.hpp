@@ -20,6 +20,8 @@ namespace Net
 		QString GetSecret() { return _secret; }
 		void SetSecret(QString secret) { _secret = secret; }
 
+		void Authenticate(QString userName, QString password);
+
 	private:
 		QString _apiKey;
 		QString _secret;
