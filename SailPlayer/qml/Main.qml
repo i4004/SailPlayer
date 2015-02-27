@@ -67,7 +67,15 @@ ApplicationWindow
 
 	PlaylistModel { id: playlist }
 	SailPlayerSettings { id: settings }
-	LastFmScrobbler { id: scrobbler }
+
+	LastFmScrobbler
+	{
+		id: scrobbler
+
+		apiKey: "06b931aaed5fbf1f1558c165f3a08eb4"
+		secret: "9fe3f69ecd90045d2d18fe6823803370"
+	}
+
 	MessagePageDisplayer
 	{
 		id: messagePage
