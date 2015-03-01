@@ -90,6 +90,16 @@ void SailPlayerSettings::SetCurrentPlayingPosition(int currentPlayingPosition)
 	settings.setValue("CurrentPlayingPosition", currentPlayingPosition);
 }
 
+bool SailPlayerSettings::GetRestoreLastPlayingPosition()
+{
+	return settings.value("RestoreLastPlayingPosition", true).toBool();
+}
+
+void SailPlayerSettings::SetRestoreLastPlayingPosition(bool restore)
+{
+	settings.setValue("RestoreLastPlayingPosition", restore);
+}
+
 SailPlayer::PlayOrder SailPlayerSettings::GetCurrentPlayOrder()
 {
 	return (SailPlayer::PlayOrder)settings.value("CurrentPlayOrder", SailPlayer::RepeatPlaylist).toInt();

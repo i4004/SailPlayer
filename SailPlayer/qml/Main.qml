@@ -46,7 +46,7 @@ ApplicationWindow
 
 			playlist.loadPlaylist();
 
-			if(settings.currentTrackIndex !== -1)
+			if(settings.restoreLastPlayingPosition && settings.currentTrackIndex !== -1)
 			{
 				needToSetStartupPosition = true;
 				playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, settings.currentTrackIndex);
@@ -81,6 +81,11 @@ ApplicationWindow
 
 		apiKey: "06b931aaed5fbf1f1558c165f3a08eb4"
 		secret: "9fe3f69ecd90045d2d18fe6823803370"
+
+//		Component.onCompleted:
+//		{
+//			authenticate("asd", "test");
+//		}
 	}
 
 	MessagePageDisplayer

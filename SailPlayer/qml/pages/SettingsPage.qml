@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.sail.player.SailPlayerSettings 1.0
 
 Page
 {
@@ -26,6 +27,8 @@ Page
 			TextSwitch
 			{
 				text: qsTr("Restore last playing position on startup")
+				checked: settings.restoreLastPlayingPosition
+				onClicked: settings.restoreLastPlayingPosition = !settings.restoreLastPlayingPosition;
 			}
 
 			SectionHeader
