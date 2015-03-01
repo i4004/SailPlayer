@@ -11,6 +11,7 @@
 #include "Net/LastFmScrobbler.hpp"
 #include "SailPlayer.hpp"
 #include "SailPlayerSettings.hpp"
+#include "Net/LastFmRequestBuilder.hpp"
 
 using namespace Audio;
 using namespace IO;
@@ -39,8 +40,16 @@ int main(int argc, char *argv[])
 	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmError", 1, 0, "LastFmError");
 	qRegisterMetaType<LastFmScrobbler::LastFmError>("LastFmScrobbler::LastFmError");
 
+	// Application description
+
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");
+
+	LastFmRequestBuilder::SetApplicationName("Sail Player");
+	LastFmRequestBuilder::SetApplicationVersion("0.1");
+	LastFmRequestBuilder::SetContactUrl("https://github.com/i4004/SailPlayer");
+
+	// Startup
 
 	QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 	QScopedPointer<QQuickView> view(SailfishApp::createView());

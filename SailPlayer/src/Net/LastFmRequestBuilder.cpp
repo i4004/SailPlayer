@@ -12,6 +12,7 @@ namespace Net
 		QNetworkRequest request = QNetworkRequest(_apiRootUrl);
 
 		request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+		request.setHeader(QNetworkRequest::UserAgentHeader, QString("%1/%2 (%3)").arg(ApplicationName, ApplicationVersion, ContactUrl);
 
 		return request;
 	}
