@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	QCoreApplication::setApplicationName("Sail Player");
 
 	LastFmRequestBuilder::SetApplicationName("Sail Player");
-	LastFmRequestBuilder::SetApplicationVersion("0.1");
+	LastFmRequestBuilder::SetApplicationVersion("0.2");
 	LastFmRequestBuilder::SetContactUrl("https://github.com/i4004/SailPlayer");
 
 	// Startup
