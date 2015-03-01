@@ -1,4 +1,3 @@
-#include <QNetworkRequest>
 #include <QDebug>
 
 #include "LastFmScrobbler.hpp"
@@ -7,7 +6,6 @@ namespace Net
 {
 	LastFmScrobbler::LastFmScrobbler()
 	{
-		_apiRootUrl = QUrl("https://ws.audioscrobbler.com/2.0/");
 		_networkAccessManager = new QNetworkAccessManager(this);
 
 		 connect(_networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(OnNetworkAccessManagerReply(QNetworkReply*)));
@@ -31,9 +29,7 @@ namespace Net
 	void LastFmScrobbler::SendRequest(QString method, QMap<QString, QString> queryVariables)
 	{
 		QUrlQuery query = _queryBuilder.Build(method, _apiKey, _secret, queryVariables);
-		QNetworkRequest request = QNetworkRequest(_apiRootUrl);
-
-		request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+		QNetworkRequest request = _requestBuilder.Build();
 
 		_networkAccessManager->post(request, query.toString(QUrl::FullyEncoded).toUtf8());
 	}
@@ -57,6 +53,8 @@ namespace Net
 		if(error != QNetworkReply::NoError)
 		{
 			qDebug() << reply->error();
+			qDebug() << "HTTP CODE: " << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toUInt();
+
 			emit errorResponse(Undefined, "Network error.");
 			return;
 		}

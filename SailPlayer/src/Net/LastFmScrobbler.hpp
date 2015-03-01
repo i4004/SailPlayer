@@ -7,6 +7,7 @@
 #include <QDomDocument>
 
 #include "LastFmQueryBuilder.hpp"
+#include "LastFmRequestBuilder.hpp"
 
 namespace Net
 {
@@ -55,8 +56,8 @@ namespace Net
 
 	private:
 		LastFmQueryBuilder _queryBuilder;
+		LastFmRequestBuilder _requestBuilder;
 
-		QUrl _apiRootUrl;
 		QString _apiKey;
 		QString _secret;
 
