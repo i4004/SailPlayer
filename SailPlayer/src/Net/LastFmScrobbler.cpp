@@ -1,4 +1,3 @@
-#include <QCryptographicHash>
 #include <QNetworkRequest>
 #include <QDebug>
 
@@ -29,33 +28,9 @@ namespace Net
 		SendRequest("auth.getMobileSession", queryVariables);
 	}
 
-	QUrlQuery LastFmScrobbler::MakeQuery(QString method, QMap<QString, QString> queryVariables)
-	{
-		QUrlQuery query;
-		QString signatureInput = "";
-		QByteArray signatureInputRaw;
-		QMap<QString, QString>::iterator i;
-
-		queryVariables.insert("method", method);
-		queryVariables.insert("api_key", _apiKey);
-
-		for (i = queryVariables.begin(); i != queryVariables.end(); ++i)
-		{
-			query.addQueryItem(i.key(), i.value());
-			signatureInput += i.key() + i.value();
-		}
-
-		signatureInputRaw.append(signatureInput + _secret);
-
-		query.addQueryItem("api_sig", QCryptographicHash::hash(signatureInputRaw, QCryptographicHash::Md5).toHex());
-		qDebug() << signatureInputRaw;
-
-		return query;
-	}
-
 	void LastFmScrobbler::SendRequest(QString method, QMap<QString, QString> queryVariables)
 	{
-		QUrlQuery query = MakeQuery(method, queryVariables);
+		QUrlQuery query = _queryBuilder.Build(method, _apiKey, _secret, queryVariables);
 		QNetworkRequest request = QNetworkRequest(_apiRootUrl);
 
 		request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");

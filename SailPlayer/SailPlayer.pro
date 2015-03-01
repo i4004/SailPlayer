@@ -35,7 +35,8 @@ SOURCES += \
     src/Cue/CueIndex.cpp \
     src/Audio/AudioPlayerBase.cpp \
     src/SailPlayerSettings.cpp \
-    src/Net/LastFmScrobbler.cpp
+    src/Net/LastFmScrobbler.cpp \
+    src/Net/LastFmQueryBuilder.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -93,6 +94,7 @@ HEADERS += \
     src/Cue/CueIndex.hpp \
     src/Audio/AudioPlayerBase.hpp \
     src/SailPlayer.hpp \
-    src/Net/LastFmScrobbler.hpp
+    src/Net/LastFmScrobbler.hpp \
+    src/Net/LastFmQueryBuilder.hpp
 
 INCLUDEPATH += $$PWD/include

@@ -2,11 +2,11 @@
 #define LASTFMSCROBBLER_HPP
 
 #include <QObject>
-#include <QMap>
-#include <QUrlQuery>
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
 #include <QDomDocument>
+
+#include "LastFmQueryBuilder.hpp"
 
 namespace Net
 {
@@ -54,13 +54,14 @@ namespace Net
 			void errorResponse(LastFmError error, QString description);
 
 	private:
+		LastFmQueryBuilder _queryBuilder;
+
 		QUrl _apiRootUrl;
 		QString _apiKey;
 		QString _secret;
 
 		QNetworkAccessManager* _networkAccessManager;
 
-		QUrlQuery MakeQuery(QString method, QMap<QString, QString> queryVariables);
 		void SendRequest(QString method, QMap<QString, QString> queryVariables);
 
 		void ProcessOkReplyData(QDomElement lfmElement);
