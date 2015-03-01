@@ -13,9 +13,9 @@ namespace Net
 
 		QNetworkRequest Build();
 
-		static SetApplicationName(QString name) { ApplicationName = name; }
-		static SetApplicationVersion(QString version) { ApplicationVersion = version; }
-		static SetContactUrl(QString url) { ContactUrl = url; }
+		static void SetApplicationName(QString name) { ApplicationName = name; }
+		static void SetApplicationVersion(QString version) { ApplicationVersion = version; }
+		static void SetContactUrl(QString url) { ContactUrl = url; }
 
 	private:
 		QUrl _apiRootUrl;
