@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
 
 	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
 	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmScrobbler", 1, 0, "LastFmScrobbler");
+	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmError", 1, 0, "LastFmError");
+	qRegisterMetaType<LastFmScrobbler::LastFmError>("LastFmScrobbler::LastFmError");
 
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");

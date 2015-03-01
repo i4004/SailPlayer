@@ -109,3 +109,27 @@ void SailPlayerSettings::SetCurrentPlayOrder(SailPlayer::PlayOrder playOrder)
 {
 	settings.setValue("CurrentPlayOrder", playOrder);
 }
+
+// Last.fm
+
+bool SailPlayerSettings::GetScrobblingIsEnabled()
+{
+	return settings.value("Last.fm/ScrobblingIsEnabled", true).toBool();
+}
+
+void SailPlayerSettings::SetScrobblingIsEnabled(bool enabled)
+{
+	settings.setValue("Last.fm/ScrobblingIsEnabled", enabled);
+}
+
+QString SailPlayerSettings::GetLastFmSessionKey()
+{
+	return settings.value("Last.fm/SessionKey", "").toString();
+}
+
+void SailPlayerSettings::SetLastFmSessionKey(QString key)
+{
+	settings.setValue("Last.fm/SessionKey", key);
+
+	emit lastFmSessionKeyChanged();
+}

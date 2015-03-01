@@ -1,9 +1,13 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.SailPlayerSettings 1.0
+import harbour.sail.player.LastFmError 1.0
+import "../controls"
 
 Page
 {
+	id: page
+
 	allowedOrientations: Orientation.All
 
 	SilicaFlickable
@@ -14,6 +18,7 @@ Page
 		Column
 		{
 			id: column
+
 			anchors.left: parent.left
 			anchors.right: parent.right
 
@@ -26,8 +31,10 @@ Page
 
 			TextSwitch
 			{
-				text: qsTr("Restore last playing position on startup")
 				checked: settings.restoreLastPlayingPosition
+
+				text: qsTr("Restore last playing position on startup")
+
 				onClicked: settings.restoreLastPlayingPosition = !settings.restoreLastPlayingPosition;
 			}
 
@@ -38,7 +45,12 @@ Page
 
 			TextSwitch
 			{
+				enabled: settings.lastFmSessionKey !== ""
+				checked: settings.scrobblingIsEnabled
+
 				text: qsTr("Scrobbling is enabled")
+
+				onClicked: settings.scrobblingIsEnabled = !settings.scrobblingIsEnabled;
 			}
 
 			Label
@@ -51,32 +63,101 @@ Page
 				font.pixelSize: Theme.fontSizeTiny
 				wrapMode: Text.WordWrap
 				color: Theme.secondaryColor
-				text: qsTr("Enter your last.fm credentials if you want to scrobble your songs to Last.fm. Only Last.fm session ID will be saved on the device.")
+
+				text: qsTr("Enter your last.fm credentials if you want to scrobble your songs to Last.fm. Only Last.fm session key will be saved on the device.")
 			}
 
 			TextField
 			{
 				id: lastFmUserName
 
-				placeholderText: qsTr('User name')
 				width: parent.width
+
+				placeholderText: qsTr('User name or e-mail')
+
+				EnterKey.onClicked: lastFmPassword.focus = true
 			}
 
 			TextField
 			{
-				placeholderText: qsTr('Password')
+				id: lastFmPassword
+
 				width: parent.width
+				echoMode: TextInput.Password
+
+				placeholderText: qsTr('Password')
+
+				EnterKey.onClicked: lastFmAuthenticateButton.focus = true
 			}
 
-			Row
+			Button
 			{
+				id: lastFmAuthenticateButton
+
 				anchors.horizontalCenter: parent.horizontalCenter
 
-				Button
+				enabled: settings.lastFmSessionKey !== "" || (settings.lastFmSessionKey === "" && lastFmUserName.text != "" && lastFmPassword.text != "")
+
+				text: settings.lastFmSessionKey === "" ? qsTr('Authenticate on Last.fm') : qsTr('Clear Last.fm authentication')
+
+				Component.onCompleted:
 				{
-				   text: qsTr('Authenticate on Last.fm')
+					scrobbler.authenticated.connect(onAuthenticated);
+					scrobbler.errorResponse.connect(onError);
+				}
+
+				onClicked:
+				{
+					if(settings.lastFmSessionKey !== "")
+						settings.lastFmSessionKey = "";
+					else
+					{
+						lastFmAuthenticateButton.enabled = false;
+						lastFmBusyIndicator.running = true;
+						scrobbler.authenticate(lastFmUserName.text, lastFmPassword.text);
+					}
+				}
+
+				function onAuthenticated(key)
+				{
+					lastFmBusyIndicator.running = false;
+					lastFmAuthenticateButton.enabled = true;
+
+					console.log(key);
+
+					settings.lastFmSessionKey = key;
+				}
+
+				function onError(error, description)
+				{
+					lastFmBusyIndicator.running = false;
+					lastFmAuthenticateButton.enabled = true;
+
+					if(error === LastFmError.AuthenticationFailed)
+						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
+					else if(error === LastFmError.NoInternetConnection)
+						notifiicationPanel.showText(qsTr('No internet connection.'));
+					else
+						notifiicationPanel.showText(description);
 				}
 			}
+
+			BusyIndicator
+			{
+				id: lastFmBusyIndicator
+
+				anchors.horizontalCenter: parent.horizontalCenter
+				size: BusyIndicatorSize.Small
+
+				running: false
+			}
+		}
+
+		NotificationPanel
+		{
+			id: notifiicationPanel
+
+			page: page
 		}
 	}
 }

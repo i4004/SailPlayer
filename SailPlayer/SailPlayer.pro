@@ -2,7 +2,7 @@ TEMPLATE=app
 TARGET = harbour-sail-player
 
 CONFIG += link_pkgconfig sailfishapp
-QT += core quick qml
+QT += core quick qml xml
 PKGCONFIG += gstreamer-1.0 glib-2.0 audioresource taglib
 
 TARGETPATH = /usr/bin
@@ -57,7 +57,9 @@ OTHER_FILES += \
     qml/pages/MessagePage.qml \
     qml/controls/MessagePageDisplayer.qml \
     qml/pages/EqualizerPage.qml \
-    qml/pages/ManageTextItemDialog.qml
+    qml/pages/ManageTextItemDialog.qml \
+    qml/controls/NotificationPanel.qml \
+    qml/controls/InteractionBlocker.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
