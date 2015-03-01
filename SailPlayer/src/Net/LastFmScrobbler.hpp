@@ -2,6 +2,10 @@
 #define LASTFMSCROBBLER_HPP
 
 #include <QObject>
+#include <QMap>
+#include <QUrlQuery>
+#include <QNetworkReply>
+#include <QNetworkAccessManager>
 
 namespace Net
 {
@@ -13,6 +17,7 @@ namespace Net
 
 	public:
 		LastFmScrobbler();
+		~LastFmScrobbler();
 
 		QString GetApiKey() { return _apiKey; }
 		void SetApiKey(QString key) { _apiKey = key; }
@@ -20,11 +25,21 @@ namespace Net
 		QString GetSecret() { return _secret; }
 		void SetSecret(QString secret) { _secret = secret; }
 
-		void Authenticate(QString userName, QString password);
+		Q_INVOKABLE void authenticate(QString userName, QString password);
 
 	private:
+		QUrl _apiRootUrl;
 		QString _apiKey;
 		QString _secret;
+
+		QNetworkAccessManager* _networkAccessManager;
+
+		QUrlQuery MakeQuery(QString method, QMap<QString, QString> queryVariables);
+		void SendRequest(QString method, QMap<QString, QString> queryVariables);
+
+	private slots:
+		void OnNetworkAccessManagerReply(QNetworkReply*);
+
 	};
 }
 
