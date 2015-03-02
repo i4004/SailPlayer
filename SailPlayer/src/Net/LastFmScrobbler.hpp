@@ -23,7 +23,7 @@ namespace Net
 		Q_PROPERTY(QString apiKey READ GetApiKey WRITE SetApiKey)
 		Q_PROPERTY(QString secret READ GetSecret WRITE SetSecret)
 		Q_PROPERTY(QString sessionKey READ GetSessionKey WRITE SetSessionKey)
-		Q_PROPERTY(int numberOfScrobbleCacheItems READ GetScrobbleCacheItemsNumber)
+		Q_PROPERTY(int numberOfScrobbleCacheItems READ GetScrobbleCacheItemsNumber NOTIFY numberOfScrobbleCacheItemsChanged)
 
 	public:
 		LastFmScrobbler();
@@ -72,6 +72,7 @@ namespace Net
 		void authenticated(QString sessionKey);
 		void nowPlaying();
 		void errorResponse(LastFmError error, QString description);
+		void numberOfScrobbleCacheItemsChanged();
 
 	private:
 		LastFmQueryBuilder _queryBuilder;

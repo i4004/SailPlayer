@@ -151,6 +151,40 @@ Page
 
 				running: false
 			}
+
+			Label
+			{
+				anchors.left: parent.left
+				anchors.leftMargin: Theme.paddingLarge
+				anchors.right: parent.right
+				anchors.rightMargin: Theme.paddingLarge
+
+				wrapMode: Text.WordWrap
+				color: Theme.secondaryColor
+
+				text: qsTr("Manual cached tracks scrobble.") + (scrobbler.numberOfScrobbleCacheItems > 0 ? qsTr(" You have ") + scrobbler.numberOfScrobbleCacheItems +  qsTr(" tracks to scrobble.") : qsTr('Nothing to scrobble.'))
+			}
+
+			Button
+			{
+				id: lastFmScrobbleButton
+
+				anchors.horizontalCenter: parent.horizontalCenter
+
+				enabled: settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0
+
+				text: qsTr("Scrobble")
+			}
+
+			BusyIndicator
+			{
+				id: lastFmScrobbleBusyIndicator
+
+				anchors.horizontalCenter: parent.horizontalCenter
+				size: BusyIndicatorSize.Small
+
+				running: false
+			}
 		}
 
 		NotificationPanel
