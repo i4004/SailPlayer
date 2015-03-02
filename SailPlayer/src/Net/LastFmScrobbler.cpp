@@ -50,20 +50,9 @@ namespace Net
 			return;
 		}
 
-		if(error != QNetworkReply::NoError)
-		{
-			qDebug() << reply->error();
-			qDebug() << "HTTP CODE: " << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toUInt();
-
-			emit errorResponse(Undefined, "Network error.");
-			return;
-		}
-
 		QDomDocument doc;
 
 		doc.setContent(reply->readAll());
-
-		qDebug() << doc.toElement().text();
 
 		if(!doc.hasChildNodes())
 			emit errorResponse(Undefined, "XML reply is empty.");
