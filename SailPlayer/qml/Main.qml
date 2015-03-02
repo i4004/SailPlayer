@@ -35,7 +35,7 @@ ApplicationWindow
 
 			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
 				player.stop();
-			else if(!needToSetStartupTrackLastFmNowPlaying)
+			else if(!needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
 				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
 		}
 
@@ -48,7 +48,7 @@ ApplicationWindow
 			if(state == AudioPlayerState.Ready)
 				needToSetStartupTrackLastFmNowPlaying = false;
 
-			if(state == AudioPlayerState.Playing && needToSetStartupTrackLastFmNowPlaying)
+			if(state == AudioPlayerState.Playing && needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
 			{
 				needToSetStartupTrackLastFmNowPlaying = false;
 				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
