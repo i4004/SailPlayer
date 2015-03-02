@@ -37,6 +37,8 @@ ApplicationWindow
 				player.stop();
 			else if(!needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
 				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+
+			scrobbler.scrobbleTrack(playlist.getCurrentPlayingTrack());
 		}
 
 		onAboutToFinish: player.setNextTrackToPlay(playlist.requestNextTrack(), playlist.getNextStartPosition(), playlist.getNextEndPosition())

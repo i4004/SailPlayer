@@ -11,6 +11,9 @@ namespace Net
 
 	LastFmScrobbler::~LastFmScrobbler()
 	{
+		qDeleteAll(_scrobbleCache);
+		_scrobbleCache.clear();
+
 		delete _networkAccessManager;
 	}
 
@@ -60,7 +63,7 @@ namespace Net
 		if(_sessionKey.isNull() || _sessionKey.isEmpty() || playedTrack == NULL)
 			return;
 
-		Track* track = (Track*)playedTrack;
+		Track* track = new Track(*(Track*)playedTrack);
 
 		_scrobbleCache.insert(playStartTime, track);
 
@@ -73,10 +76,17 @@ namespace Net
 
 	void LastFmScrobbler::loadTracksToCache()
 	{
+		QMap<QDateTime, Track*> tracks = _settings.GetCachedTracks();
+
+		QMap<QDateTime, Track*>::iterator i;
+
+		for (i = tracks.begin(); i != tracks.end(); ++i)
+			_scrobbleCache.insert(i.key(), i.value());
 	}
 
-	void LastFmScrobbler::getTracksFromCache()
+	void LastFmScrobbler::saveCachedTracks()
 	{
+		_settings.SetCachedTracks(_scrobbleCache);
 	}
 
 	void LastFmScrobbler::SendRequest(QString method, QMap<QString, QString> queryVariables)

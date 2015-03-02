@@ -1,12 +1,13 @@
 #ifndef SAILPLAYERSETTINGS_HPP
 #define SAILPLAYERSETTINGS_HPP
 
-#include <QString>
+#include <QDateTime>
 #include <QList>
 #include <QSettings>
+#include <QString>
 
-#include "Playlist/Track.hpp"
 #include "Audio/AudioPlayer.hpp"
+#include "Playlist/Track.hpp"
 #include "SailPlayer.hpp"
 
 using namespace Playlist;
@@ -39,6 +40,9 @@ public:
 
 	QList<Track*> GetPlaylist();
 	void SetPlaylist(QList<Track*> tracks);
+
+	QMap<QDateTime, Track*> GetCachedTracks();
+	void SetCachedTracks(QMap<QDateTime, Track*> tracks);
 
 	// General
 
@@ -78,6 +82,9 @@ private:
 	static QString DefaultAddFilesDirectoryPath;
 
 	QSettings settings;
+
+	Track* GetTrackFromSettings();
+	void SetTrackToSettings(Track* track);
 };
 
 #endif // SAILPLAYERSETTINGS_HPP

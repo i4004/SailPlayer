@@ -29,17 +29,7 @@ QList<Track*> SailPlayerSettings::GetPlaylist()
 	{
 		settings.setArrayIndex(i);
 
-		Track* track = new Track(settings.value("ArtistName").toString(),
-								settings.value("AlbumName").toString(),
-								settings.value("AlbumYear").toInt(),
-								settings.value("TrackNumber").toInt(),
-								settings.value("TrackName").toString(),
-								settings.value("TrackStartPosition").toInt(),
-								settings.value("TrackEndPosition").toInt(),
-								settings.value("TrackFileName").toString(),
-								settings.value("TrackFullFilePath").toString());
-
-		tracks.append(track);
+		tracks.append(GetTrackFromSettings());
 	}
 
 	settings.endArray();
@@ -52,19 +42,43 @@ void SailPlayerSettings::SetPlaylist(QList<Track*> tracks)
 	settings.beginWriteArray("Playlist", tracks.count());
 
 	for(int i = 0; i < tracks.count(); ++i)
+	{	
+		settings.setArrayIndex(i);
+
+		SetTrackToSettings(tracks.at(i));
+	}
+
+	settings.endArray();
+}
+
+QMap<QDateTime, Track*> SailPlayerSettings::GetCachedTracks()
+{
+	QMap<QDateTime, Track*>  tracks;
+	int size = settings.beginReadArray("CachedTracksToScrobble");
+
+	for (int i = 0; i < size; ++i)
 	{
 		settings.setArrayIndex(i);
-		Track* track = tracks.at(i);
 
-		settings.setValue("ArtistName", track->GetArtistName());
-		settings.setValue("AlbumName", track->GetAlbumName());
-		settings.setValue("AlbumYear", track->GetAlbumYear());
-		settings.setValue("TrackNumber", track->GetNumber());
-		settings.setValue("TrackName", track->GetName());
-		settings.setValue("TrackStartPosition", track->GetStartPosition());
-		settings.setValue("TrackEndPosition", track->GetEndPosition());
-		settings.setValue("TrackFileName", track->GetFileName());
-		settings.setValue("TrackFullFilePath", track->GetFullFilePath());
+		tracks.insert(settings.value("AlbumName").toDateTime(), GetTrackFromSettings());
+	}
+
+	settings.endArray();
+
+	return tracks;
+}
+
+void SailPlayerSettings::SetCachedTracks(QMap<QDateTime, Track*> tracks)
+{
+	settings.beginWriteArray("CachedTracksToScrobble", tracks.count());
+
+	QMap<QDateTime, Track*>::iterator i;
+
+	for (i = tracks.begin(); i != tracks.end(); ++i)
+	{
+		settings.setValue("PlayingStartTime", i.key());
+
+		SetTrackToSettings(i.value());
 	}
 
 	settings.endArray();
@@ -132,4 +146,30 @@ void SailPlayerSettings::SetLastFmSessionKey(QString key)
 	settings.setValue("Last.fm/SessionKey", key);
 
 	emit lastFmSessionKeyChanged();
+}
+
+Track* SailPlayerSettings::GetTrackFromSettings()
+{
+	return new Track(settings.value("ArtistName").toString(),
+					settings.value("AlbumName").toString(),
+					settings.value("AlbumYear").toInt(),
+					settings.value("TrackNumber").toInt(),
+					settings.value("TrackName").toString(),
+					settings.value("TrackStartPosition").toInt(),
+					settings.value("TrackEndPosition").toInt(),
+					settings.value("TrackFileName").toString(),
+					settings.value("TrackFullFilePath").toString());
+		}
+
+void SailPlayerSettings::SetTrackToSettings(Track* track)
+{
+	settings.setValue("ArtistName", track->GetArtistName());
+	settings.setValue("AlbumName", track->GetAlbumName());
+	settings.setValue("AlbumYear", track->GetAlbumYear());
+	settings.setValue("TrackNumber", track->GetNumber());
+	settings.setValue("TrackName", track->GetName());
+	settings.setValue("TrackStartPosition", track->GetStartPosition());
+	settings.setValue("TrackEndPosition", track->GetEndPosition());
+	settings.setValue("TrackFileName", track->GetFileName());
+	settings.setValue("TrackFullFilePath", track->GetFullFilePath());
 }

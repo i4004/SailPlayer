@@ -10,4 +10,21 @@ namespace Playlist
 		_isTrackToPlay = false;
 		_playing = false;
 	}
+
+	Track::Track(Track& track)
+	{
+		_selected = false;
+		_isTrackToPlay = false;
+		_playing = false;
+
+		_artistName = track.GetArtistName();
+		_albumName = track.GetAlbumName();
+		_albumYear = track.GetAlbumYear();
+		_number = track.GetNumber();
+		_name = track.GetName();
+		_startPosition = track.GetStartPosition();
+		_endPosition = track.GetEndPosition();
+		_fileName = track.GetFileName();
+		_fullFilePath = track.GetFullFilePath();
+	}
 }
