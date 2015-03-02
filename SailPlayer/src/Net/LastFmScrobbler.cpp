@@ -74,7 +74,7 @@ namespace Net
 	{
 	}
 
-	void LastFmScrobbler::loadTracksToCache()
+	void LastFmScrobbler::loadSavedTracksToCache()
 	{
 		QMap<QDateTime, Track*> tracks = _settings.GetCachedTracks();
 

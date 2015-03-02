@@ -20,6 +20,7 @@ ApplicationWindow
 
 		property bool needToSetStartupPosition: false
 		property bool needToSetStartupTrackLastFmNowPlaying: false
+		property var trackPlayStartTime
 
 		onStreamStarted:
 		{
@@ -36,9 +37,11 @@ ApplicationWindow
 			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
 				player.stop();
 			else if(!needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
-				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+			{
+				trackPlayStartTime = new Date();
 
-			scrobbler.scrobbleTrack(playlist.getCurrentPlayingTrack());
+				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+			}
 		}
 
 		onAboutToFinish: player.setNextTrackToPlay(playlist.requestNextTrack(), playlist.getNextStartPosition(), playlist.getNextEndPosition())
@@ -53,6 +56,7 @@ ApplicationWindow
 			if(state == AudioPlayerState.Playing && needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
 			{
 				needToSetStartupTrackLastFmNowPlaying = false;
+				trackPlayStartTime = new Date();
 				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
 			}
 		}
@@ -105,7 +109,10 @@ ApplicationWindow
 		Component.onCompleted:
 		{
 			errorResponse.connect(onError);
+			loadSavedTracksToCache();
 		}
+
+		Component.onDestruction: saveCachedTracks()
 
 		function onError(error, description)
 		{
