@@ -60,7 +60,11 @@ Item {
 
         dock: Dock.Top
         open: false
-        onOpenChanged: page.backNavigation = !open; // disable back navigation
+		onOpenChanged:
+		{
+			if(page != null)
+				page.backNavigation = !open; // disable back navigation
+		}
 
         Rectangle {
             anchors.fill: parent
