@@ -109,7 +109,7 @@ Page
 				onClicked:
 				{
 					if(settings.lastFmSessionKey !== "")
-						settings.lastFmSessionKey = "";
+						remorse.execute(qsTr("Clearing"), function() { settings.lastFmSessionKey = ""; })
 					else
 					{
 						lastFmAuthenticateButton.enabled = false;
@@ -122,8 +122,8 @@ Page
 				{
 					lastFmBusyIndicator.running = false;
 					lastFmAuthenticateButton.enabled = true;
-
-					console.log(key);
+					lastFmUserName.text = "";
+					lastFmPassword.text = "";
 
 					settings.lastFmSessionKey = key;
 				}
@@ -158,6 +158,11 @@ Page
 			id: notifiicationPanel
 
 			page: page
+		}
+
+		RemorsePopup
+		{
+			id: remorse
 		}
 	}
 }
