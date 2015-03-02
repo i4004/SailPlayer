@@ -105,8 +105,6 @@ ApplicationWindow
 			errorResponse.connect(onError);
 		}
 
-		onNowPlaying: console.log("Now playing ok")
-
 		function onError(error, description)
 		{
 			notifiicationPanel.showText(description);
