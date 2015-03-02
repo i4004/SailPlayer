@@ -77,7 +77,6 @@ HEADERS += \
     src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp \
     src/Models/PlaylistModelBase.hpp \
     src/Models/PlaylistModel.hpp \
-    src/Models/IAlbumModelsFactory.hpp \
     src/Models/FsRecordsListModel.hpp \
     src/IO/FsRecordsInfoFactory.hpp \
     src/IO/FsRecordInfo.hpp \
