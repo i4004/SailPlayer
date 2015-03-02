@@ -22,6 +22,7 @@ namespace Net
 		Q_PROPERTY(QString apiKey READ GetApiKey WRITE SetApiKey)
 		Q_PROPERTY(QString secret READ GetSecret WRITE SetSecret)
 		Q_PROPERTY(QString sessionKey READ GetSessionKey WRITE SetSessionKey)
+		Q_PROPERTY(int numberOfScrobbleCacheItems READ GetScrobbleCacheItemsNumber)
 
 	public:
 		LastFmScrobbler();
@@ -59,6 +60,13 @@ namespace Net
 		Q_INVOKABLE void authenticate(QString userName, QString password);
 		Q_INVOKABLE void sendNowPlaying(QObject* currentPlayingTrack);
 
+		// TODO
+
+		Q_INVOKABLE void scrobbleTrack(QObject* playedTrack, QDateTime playStartTime);
+		Q_INVOKABLE void submitTracksFromCache();
+		Q_INVOKABLE void loadTracksToCache();
+		Q_INVOKABLE void getTracksFromCache();
+
 	signals:
 		void authenticated(QString sessionKey);
 		void nowPlaying();
@@ -72,12 +80,16 @@ namespace Net
 		QString _secret;
 		QString _sessionKey;
 
+		QMap<QDateTime, Track*> _scrobbleCache;
+
 		QNetworkAccessManager* _networkAccessManager;
 
 		void SendRequest(QString method, QMap<QString, QString> queryVariables);
 
 		void ProcessOkReplyData(QDomElement lfmElement);
 		void ProcessFailedReplyData(QDomElement lfmElement);
+
+		int GetScrobbleCacheItemsNumber() { return _scrobbleCache.count(); }
 
 	private slots:
 		void OnNetworkAccessManagerReply(QNetworkReply*);

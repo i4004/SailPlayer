@@ -55,6 +55,30 @@ namespace Net
 		SendRequest("track.updateNowPlaying", queryVariables);
 	}
 
+	void LastFmScrobbler::scrobbleTrack(QObject* playedTrack, QDateTime playStartTime)
+	{
+		if(_sessionKey.isNull() || _sessionKey.isEmpty() || playedTrack == NULL)
+			return;
+
+		Track* track = (Track*)playedTrack;
+
+		_scrobbleCache.insert(playStartTime, track);
+
+		submitTracksFromCache();
+	}
+
+	void LastFmScrobbler::submitTracksFromCache()
+	{
+	}
+
+	void LastFmScrobbler::loadTracksToCache()
+	{
+	}
+
+	void LastFmScrobbler::getTracksFromCache()
+	{
+	}
+
 	void LastFmScrobbler::SendRequest(QString method, QMap<QString, QString> queryVariables)
 	{
 		QUrlQuery query = _queryBuilder.Build(method, _apiKey, _secret, queryVariables);
