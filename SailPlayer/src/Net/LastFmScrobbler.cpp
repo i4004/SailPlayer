@@ -1,5 +1,3 @@
-#include <QDebug>
-
 #include "LastFmScrobbler.hpp"
 
 namespace Net

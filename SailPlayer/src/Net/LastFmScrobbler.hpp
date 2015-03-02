@@ -17,6 +17,7 @@ namespace Net
 		Q_ENUMS(LastFmError)
 		Q_PROPERTY(QString apiKey READ GetApiKey WRITE SetApiKey)
 		Q_PROPERTY(QString secret READ GetSecret WRITE SetSecret)
+		Q_PROPERTY(QString sessionKey READ GetSessionKey WRITE SetSessionKey)
 
 	public:
 		LastFmScrobbler();
@@ -48,6 +49,9 @@ namespace Net
 		QString GetSecret() { return _secret; }
 		void SetSecret(QString secret) { _secret = secret; }
 
+		QString GetSessionKey() { return _sessionKey; }
+		void SetSessionKey(QString key) { _sessionKey = key; }
+
 		Q_INVOKABLE void authenticate(QString userName, QString password);
 
 	signals:
@@ -60,6 +64,7 @@ namespace Net
 
 		QString _apiKey;
 		QString _secret;
+		QString _sessionKey;
 
 		QNetworkAccessManager* _networkAccessManager;
 

@@ -81,6 +81,7 @@ ApplicationWindow
 
 		apiKey: "06b931aaed5fbf1f1558c165f3a08eb4"
 		secret: "9fe3f69ecd90045d2d18fe6823803370"
+		sessionKey: settings.lastFmSessionKey
 	}
 
 	MessagePageDisplayer
