@@ -65,7 +65,7 @@ namespace Net
 
 		Track* track = new Track(*(Track*)playedTrack);
 
-		_scrobbleCache.insert(playStartTime, track);
+		_scrobbleCache.insert(playStartTime.toUTC(), track);
 
 		submitTracksFromCache();
 	}

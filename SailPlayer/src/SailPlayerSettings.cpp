@@ -73,9 +73,12 @@ void SailPlayerSettings::SetCachedTracks(QMap<QDateTime, Track*> tracks)
 	settings.beginWriteArray("CachedTracksToScrobble", tracks.count());
 
 	QMap<QDateTime, Track*>::iterator i;
+	int index = 0;
 
 	for (i = tracks.begin(); i != tracks.end(); ++i)
 	{
+		settings.setArrayIndex(index++);
+
 		settings.setValue("PlayingStartTime", i.key());
 
 		SetTrackToSettings(i.value());
