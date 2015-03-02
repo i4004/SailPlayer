@@ -6,8 +6,12 @@
 #include <QNetworkAccessManager>
 #include <QDomDocument>
 
+#include "../Playlist/Track.hpp"
+
 #include "LastFmQueryBuilder.hpp"
 #include "LastFmRequestBuilder.hpp"
+
+using namespace Playlist;
 
 namespace Net
 {
@@ -53,10 +57,12 @@ namespace Net
 		void SetSessionKey(QString key) { _sessionKey = key; }
 
 		Q_INVOKABLE void authenticate(QString userName, QString password);
+		Q_INVOKABLE void sendNowPlaying(QObject* currentPlayingTrack);
 
 	signals:
-			void authenticated(QString sessionKey);
-			void errorResponse(LastFmError error, QString description);
+		void authenticated(QString sessionKey);
+		void nowPlaying();
+		void errorResponse(LastFmError error, QString description);
 
 	private:
 		LastFmQueryBuilder _queryBuilder;

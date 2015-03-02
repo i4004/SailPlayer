@@ -50,6 +50,8 @@ namespace Models
 		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
 		Q_INVOKABLE int getCurrentTrackIndex();
 
+		Q_INVOKABLE QObject* getCurrentPlayingTrack(){ return (QObject*)_currentPlayingTrack; }
+
 	public slots:
 		Q_INVOKABLE void setPlayerState(AudioPlayer::AudioPlayerState state);
 

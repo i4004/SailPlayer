@@ -24,6 +24,37 @@ namespace Net
 		SendRequest("auth.getMobileSession", queryVariables);
 	}
 
+	void LastFmScrobbler::sendNowPlaying(QObject* currentPlayingTrack)
+	{
+		if(_sessionKey.isNull() || _sessionKey.isEmpty() || currentPlayingTrack == NULL)
+			return;
+
+		Track* track = (Track*)currentPlayingTrack;
+		QString artistName = track->GetArtistName();
+		QString trackName = track->GetName();
+		int trackNumber = track->GetNumber();
+		int duration = track->GetDuration() / 1000;
+
+		if(artistName.isNull() || artistName.isEmpty() || trackName.isNull() || trackName.isEmpty())
+			return;
+
+		QMap<QString, QString> queryVariables;
+
+		queryVariables["artist"] = artistName;
+		queryVariables["track"] = trackName;
+		queryVariables["album"] = track->GetAlbumName();
+
+		if(duration > 0)
+			queryVariables["duration"] = QString::number(duration);
+
+		if(trackNumber > 0)
+			queryVariables["trackNumber"] = QString::number(trackNumber);
+
+		queryVariables["sk"] = _sessionKey;
+
+		SendRequest("track.updateNowPlaying", queryVariables);
+	}
+
 	void LastFmScrobbler::SendRequest(QString method, QMap<QString, QString> queryVariables)
 	{
 		QUrlQuery query = _queryBuilder.Build(method, _apiKey, _secret, queryVariables);
@@ -67,9 +98,12 @@ namespace Net
 	void LastFmScrobbler::ProcessOkReplyData(QDomElement lfmElement)
 	{
 		QDomNodeList sessionList = lfmElement.elementsByTagName("session");
+		QDomNodeList nowplayingList = lfmElement.elementsByTagName("nowplaying");
 
 		if(sessionList.count() > 0)
 			emit authenticated(sessionList.at(0).toElement().elementsByTagName("key").at(0).toElement().text());
+		else if(nowplayingList.count() > 0)
+			emit nowPlaying();
 	}
 
 	void LastFmScrobbler::ProcessFailedReplyData(QDomElement lfmElement)

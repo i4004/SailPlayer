@@ -1,14 +1,17 @@
 #ifndef TRACK_HPP
 #define TRACK_HPP
 
+#include <QObject>
 #include <QString>
 
 namespace Playlist
 {
-	class Track
+	class Track : public QObject
 	{
+		Q_OBJECT
+
 	public:
-		Track(QString artistName, QString albumName, int albumYear, int number, QString name, int startPosition, int endPosition, QString fileName, QString fullFilePath);
+		Track(QString artistName, QString albumName, int albumYear, int number, QString name, int startPosition /* msec */, int endPosition /* msec */, QString fileName, QString fullFilePath);
 
 		QString GetArtistName(){ return _artistName; }
 		QString GetAlbumName(){ return _albumName; }
@@ -18,6 +21,8 @@ namespace Playlist
 
 		int GetStartPosition(){ return _startPosition; }
 		int GetEndPosition(){ return _endPosition; }
+
+		// Track duration in msec
 		int GetDuration(){ return _endPosition - _startPosition; }
 
 		QString GetFileName(){ return _fileName; }

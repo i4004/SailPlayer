@@ -19,6 +19,7 @@ ApplicationWindow
 		id: player
 
 		property bool needToSetStartupPosition: false
+		property bool needToSetStartupTrackLastFmNowPlaying: false
 
 		onStreamStarted:
 		{
@@ -28,15 +29,31 @@ ApplicationWindow
 
 				if(settings.currentPlayingPosition !== -1)
 					seek(settings.currentPlayingPosition);
+
+				needToSetStartupTrackLastFmNowPlaying = true;
 			}
 
 			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
 				player.stop();
+			else if(!needToSetStartupTrackLastFmNowPlaying)
+				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
 		}
 
 		onAboutToFinish: player.setNextTrackToPlay(playlist.requestNextTrack(), playlist.getNextStartPosition(), playlist.getNextEndPosition())
 
 		onEndOfStream: player.stop()
+
+		onStateChanged:
+		{
+			if(state == AudioPlayerState.Ready)
+				needToSetStartupTrackLastFmNowPlaying = false;
+
+			if(state == AudioPlayerState.Playing && needToSetStartupTrackLastFmNowPlaying)
+			{
+				needToSetStartupTrackLastFmNowPlaying = false;
+				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+			}
+		}
 
 		Component.onCompleted:
 		{
@@ -82,12 +99,29 @@ ApplicationWindow
 		apiKey: "06b931aaed5fbf1f1558c165f3a08eb4"
 		secret: "9fe3f69ecd90045d2d18fe6823803370"
 		sessionKey: settings.lastFmSessionKey
+
+		Component.onCompleted:
+		{
+			errorResponse.connect(onError);
+		}
+
+		onNowPlaying: console.log("Now playing ok")
+
+		function onError(error, description)
+		{
+			notifiicationPanel.showText(description);
+		}
 	}
 
 	MessagePageDisplayer
 	{
 		id: messagePage
 		title: qsTr("Playback error")
+	}
+
+	NotificationPanel
+	{
+		id: notifiicationPanel
 	}
 
 	initialPage: Component { MainPage {} }
