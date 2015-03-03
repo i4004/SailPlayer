@@ -100,11 +100,7 @@ Page
 
 				text: settings.lastFmSessionKey === "" ? qsTr('Authenticate on Last.fm') : qsTr('Clear Last.fm authentication')
 
-				Component.onCompleted:
-				{
-					scrobbler.authenticated.connect(onAuthenticated);
-					scrobbler.errorResponse.connect(onError);
-				}
+				Component.onCompleted: scrobbler.authenticated.connect(onAuthenticated)
 
 				onClicked:
 				{
@@ -112,7 +108,8 @@ Page
 						remorse.execute(qsTr("Clearing"), function() { settings.lastFmSessionKey = ""; })
 					else
 					{
-						lastFmAuthenticateButton.enabled = false;
+						scrobbler.errorResponse.connect(onError);
+						enabled = false;
 						lastFmBusyIndicator.running = true;
 						scrobbler.authenticate(lastFmUserName.text, lastFmPassword.text);
 					}
@@ -121,7 +118,7 @@ Page
 				function onAuthenticated(key)
 				{
 					lastFmBusyIndicator.running = false;
-					lastFmAuthenticateButton.enabled = true;
+					enabled = true;
 					lastFmUserName.text = "";
 					lastFmPassword.text = "";
 
@@ -130,8 +127,9 @@ Page
 
 				function onError(error, description)
 				{
+					scrobbler.errorResponse.disconnect(onError);
 					lastFmBusyIndicator.running = false;
-					lastFmAuthenticateButton.enabled = true;
+					enabled = true;
 
 					if(error === LastFmError.AuthenticationFailed)
 						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
@@ -174,6 +172,37 @@ Page
 				enabled: settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0
 
 				text: qsTr("Scrobble")
+
+				Component.onCompleted: scrobbler.tracksSubmitted.connect(onTracksSubmitted)
+
+				onClicked:
+				{
+					scrobbler.errorResponse.connect(onError);
+					enabled = false;
+					lastFmScrobbleBusyIndicator.running = true;
+					scrobbler.submitTracksFromCache();
+				}
+
+				function onTracksSubmitted()
+				{
+					scrobbler.errorResponse.disconnect(onError);
+					lastFmScrobbleBusyIndicator.running = false;
+					enabled = true;
+				}
+
+				function onError(error, description)
+				{
+					scrobbler.errorResponse.disconnect(onError);
+					lastFmScrobbleBusyIndicator.running = false;
+					enabled = true;
+
+					if(error === LastFmError.AuthenticationFailed)
+						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
+					else if(error === LastFmError.NoInternetConnection)
+						notifiicationPanel.showText(qsTr('No internet connection.'));
+					else
+						notifiicationPanel.showText(description);
+				}
 			}
 
 			BusyIndicator

@@ -60,10 +60,8 @@ namespace Net
 
 		Q_INVOKABLE void authenticate(QString userName, QString password);
 		Q_INVOKABLE void sendNowPlaying(QObject* currentPlayingTrack);
-
-		// TODO
-
 		Q_INVOKABLE void scrobbleTrack(QObject* playedTrack, QDateTime playStartTime);
+
 		Q_INVOKABLE void submitTracksFromCache();
 		Q_INVOKABLE void loadSavedTracksToCache();
 		Q_INVOKABLE void saveCachedTracks();
@@ -73,6 +71,7 @@ namespace Net
 		void nowPlaying();
 		void errorResponse(LastFmError error, QString description);
 		void numberOfScrobbleCacheItemsChanged();
+		void tracksSubmitted();
 
 	private:
 		LastFmQueryBuilder _queryBuilder;
