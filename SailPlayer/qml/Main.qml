@@ -7,6 +7,7 @@ import harbour.sail.player.PlayDirection 1.0
 import harbour.sail.player.PlayOrder 1.0
 import harbour.sail.player.SailPlayerSettings 1.0
 import harbour.sail.player.LastFmScrobbler 1.0
+import harbour.sail.player.LastFmError 1.0
 import "pages"
 import "controls"
 
@@ -21,6 +22,8 @@ ApplicationWindow
 		property bool needToSetStartupPosition: false
 		property bool needToSetStartupTrackLastFmNowPlaying: false
 		property var trackPlayStartTime
+		property int elapsed: 0
+		property bool scrobbled: false
 
 		onStreamStarted:
 		{
@@ -41,6 +44,8 @@ ApplicationWindow
 				trackPlayStartTime = new Date();
 
 				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+				elapsed = 0;
+				scrobbled = false;
 			}
 		}
 
@@ -53,12 +58,21 @@ ApplicationWindow
 			if(state == AudioPlayerState.Ready)
 				needToSetStartupTrackLastFmNowPlaying = false;
 
-			if(state == AudioPlayerState.Playing && needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
+			if(state == AudioPlayerState.Playing)
 			{
-				needToSetStartupTrackLastFmNowPlaying = false;
-				trackPlayStartTime = new Date();
-				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+				if(needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
+				{
+					needToSetStartupTrackLastFmNowPlaying = false;
+					trackPlayStartTime = new Date();
+					scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+					elapsed = 0;
+					scrobbled = false;
+				}
+
+				elapseTimer.start();
 			}
+			else
+				elapseTimer.stop();
 		}
 
 		Component.onCompleted:
@@ -85,6 +99,30 @@ ApplicationWindow
 			playlist.savePlaylist();
 			settings.currentTrackIndex = playlist.getCurrentTrackIndex();
 			settings.currentPlayingPosition = player.getCurrentPosition();
+		}
+	}
+
+	Timer
+	{
+		id: elapseTimer
+
+		interval: 1000;
+		running: false;
+		repeat: true
+
+		onTriggered:
+		{
+			player.elapsed++;
+
+			console.log(player.currentDuration);
+			console.log(player.elapsed);
+
+			// If track duration is more than 5 seconds and is played more than half of track length or more than 4 minutes
+			if(!scrobbled && player.currentDuration > 5000 && player.elapsed * 1000 >= player.currentDuration / 2 || player.elapsed >= 10)// 2401000)
+			{
+				player.scrobbled = true;
+				scrobbler.scrobbleTrack(playlist.getCurrentPlayingTrack(), trackPlayStartTime);
+			}
 		}
 	}
 
@@ -116,7 +154,12 @@ ApplicationWindow
 
 		function onError(error, description)
 		{
-			notifiicationPanel.showText(description);
+			if(error === LastFmError.AuthenticationFailed)
+				notifiicationPanel.showText(qsTr('Invalid user name or password.'));
+			else if(error === LastFmError.NoInternetConnection)
+				notifiicationPanel.showText(qsTr('No internet connection.'));
+			else
+				notifiicationPanel.showText(description);
 		}
 	}
 

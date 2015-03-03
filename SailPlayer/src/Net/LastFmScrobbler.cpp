@@ -65,13 +65,54 @@ namespace Net
 
 		Track* track = new Track(*(Track*)playedTrack);
 
+		QString artistName = track->GetArtistName();
+		QString trackName = track->GetName();
+
+		if(artistName.isNull() || artistName.isEmpty() || trackName.isNull() || trackName.isEmpty())
+			return;
+
 		_scrobbleCache.insert(playStartTime.toUTC(), track);
 
-		submitTracksFromCache();
+		emit numberOfScrobbleCacheItemsChanged();
+//		submitTracksFromCache();
 	}
 
 	void LastFmScrobbler::submitTracksFromCache()
 	{
+		if(_sessionKey.isNull() || _sessionKey.isEmpty())
+			return;
+
+		QMap<QString, QString> queryVariables;
+		QMap<QDateTime, Track*>::iterator i;
+		int index = 0;
+
+		for (i = _scrobbleCache.begin(); i != _scrobbleCache.end() && index <= 49; ++i)
+		{
+			Track* track = i.value();
+
+			QString artistName = track->GetArtistName();
+			QString trackName = track->GetName();
+			int trackNumber = track->GetNumber();
+			int duration = track->GetDuration() / 1000;
+
+			queryVariables[QString("artist[%1]").arg(index)] = artistName;
+			queryVariables[QString("track[%1]").arg(index)] = trackName;
+			queryVariables[QString("timestamp[%1]").arg(index)] = QString::number(i.key().toTime_t());
+			queryVariables[QString("album[%1]").arg(index)] = track->GetAlbumName();
+			queryVariables[QString("chosenByUser[%1]").arg(index)] = QString("1");
+
+			if(trackNumber > 0)
+				queryVariables[QString("trackNumber[%1]").arg(index)] = QString::number(trackNumber);
+
+			if(duration > 0)
+				queryVariables[QString("duration[%1]").arg(index)] = QString::number(duration);
+
+			queryVariables["sk"] = _sessionKey;
+
+			index++;
+		}
+
+		SendRequest("track.scrobble", queryVariables);
 	}
 
 	void LastFmScrobbler::loadSavedTracksToCache()
@@ -133,11 +174,14 @@ namespace Net
 	{
 		QDomNodeList sessionList = lfmElement.elementsByTagName("session");
 		QDomNodeList nowplayingList = lfmElement.elementsByTagName("nowplaying");
+		QDomNodeList scrobblesList = lfmElement.elementsByTagName("scrobbles");
 
 		if(sessionList.count() > 0)
 			emit authenticated(sessionList.at(0).toElement().elementsByTagName("key").at(0).toElement().text());
 		else if(nowplayingList.count() > 0)
 			emit nowPlaying();
+		else if(scrobblesList.count() > 0)
+			ProcessScrobbleResult(scrobblesList.at(0).toElement());
 	}
 
 	void LastFmScrobbler::ProcessFailedReplyData(QDomElement lfmElement)
@@ -145,5 +189,26 @@ namespace Net
 		QDomElement errorElement = lfmElement.elementsByTagName("error").at(0).toElement();
 
 		emit errorResponse((LastFmError)errorElement.attribute("code").toInt(), errorElement.text().trimmed());
+	}
+
+	void LastFmScrobbler::ProcessScrobbleResult(QDomElement scrobblesElement)
+	{
+		int accepted = scrobblesElement.attribute("accepted").toInt();
+		int ignored = scrobblesElement.attribute("ignored").toInt();
+
+		QMap<QDateTime, Track*>::iterator i;
+		int index = 0;
+
+		for (i = _scrobbleCache.begin(); i != _scrobbleCache.end() && index < accepted + ignored;)
+		{
+			Track* track = i.value();
+			delete track;
+			i = _scrobbleCache.erase(i);
+
+			index++;
+		}
+
+		emit numberOfScrobbleCacheItemsChanged();
+		emit tracksSubmitted();
 	}
 }

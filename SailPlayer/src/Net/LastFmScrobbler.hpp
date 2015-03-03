@@ -92,6 +92,7 @@ namespace Net
 		void ProcessFailedReplyData(QDomElement lfmElement);
 
 		int GetScrobbleCacheItemsNumber() { return _scrobbleCache.count(); }
+		void ProcessScrobbleResult(QDomElement scrobblesElement);
 
 	private slots:
 		void OnNetworkAccessManagerReply(QNetworkReply*);

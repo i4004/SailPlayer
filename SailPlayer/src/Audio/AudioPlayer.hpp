@@ -11,6 +11,7 @@ namespace Audio
 	class AudioPlayer : public AudioPlayerBase
 	{
 		Q_OBJECT
+		Q_PROPERTY(int currentDuration READ GetCurrentDuration NOTIFY currentDurationUpdated)
 
 	public:
 		AudioPlayer();
