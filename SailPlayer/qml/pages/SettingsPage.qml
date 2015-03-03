@@ -130,13 +130,6 @@ Page
 					scrobbler.errorResponse.disconnect(onError);
 					lastFmBusyIndicator.running = false;
 					enabled = true;
-
-					if(error === LastFmError.AuthenticationFailed)
-						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
-					else if(error === LastFmError.NoInternetConnection)
-						notifiicationPanel.showText(qsTr('No internet connection.'));
-					else
-						notifiicationPanel.showText(description);
 				}
 			}
 
@@ -160,7 +153,7 @@ Page
 				wrapMode: Text.WordWrap
 				color: Theme.secondaryColor
 
-				text: qsTr("Manual cached tracks scrobble.") + (scrobbler.numberOfScrobbleCacheItems > 0 ? qsTr(" You have ") + scrobbler.numberOfScrobbleCacheItems +  qsTr(" tracks to scrobble.") : qsTr('Nothing to scrobble.'))
+				text: qsTr("Manual cached tracks scrobble.") + (scrobbler.numberOfScrobbleCacheItems > 0 ? qsTr(" You have ") + scrobbler.numberOfScrobbleCacheItems +  qsTr(" tracks to scrobble.") : qsTr(' Nothing to scrobble.'))
 			}
 
 			Button
@@ -195,13 +188,6 @@ Page
 					scrobbler.errorResponse.disconnect(onError);
 					lastFmScrobbleBusyIndicator.running = false;
 					enabled = true;
-
-					if(error === LastFmError.AuthenticationFailed)
-						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
-					else if(error === LastFmError.NoInternetConnection)
-						notifiicationPanel.showText(qsTr('No internet connection.'));
-					else
-						notifiicationPanel.showText(description);
 				}
 			}
 
