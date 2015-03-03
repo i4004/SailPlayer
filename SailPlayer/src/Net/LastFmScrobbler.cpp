@@ -74,12 +74,13 @@ namespace Net
 		_scrobbleCache.insert(playStartTime.toUTC(), track);
 
 		emit numberOfScrobbleCacheItemsChanged();
-//		submitTracksFromCache();
+
+		submitTracksFromCache();
 	}
 
 	void LastFmScrobbler::submitTracksFromCache()
 	{
-		if(_sessionKey.isNull() || _sessionKey.isEmpty())
+		if(_sessionKey.isNull() || _sessionKey.isEmpty() || _scrobbleCache.count() == 0)
 			return;
 
 		QMap<QString, QString> queryVariables;
