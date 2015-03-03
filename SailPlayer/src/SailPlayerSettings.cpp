@@ -39,8 +39,8 @@ QList<Track*> SailPlayerSettings::GetPlaylist()
 
 void SailPlayerSettings::SetPlaylist(QList<Track*> tracks)
 {
+	settings.remove("Playlist");
 	settings.beginWriteArray("Playlist", tracks.count());
-	settings.remove("");
 
 	for(int i = 0; i < tracks.count(); ++i)
 	{	
@@ -71,8 +71,8 @@ QMap<QDateTime, Track*> SailPlayerSettings::GetCachedTracks()
 
 void SailPlayerSettings::SetCachedTracks(QMap<QDateTime, Track*> tracks)
 {
+	settings.remove("CachedTracksToScrobble");
 	settings.beginWriteArray("CachedTracksToScrobble", tracks.count());
-	settings.remove("");
 
 	QMap<QDateTime, Track*>::iterator i;
 	int index = 0;
