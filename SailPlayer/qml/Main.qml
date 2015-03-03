@@ -118,10 +118,10 @@ ApplicationWindow
 			console.log(player.elapsed);
 
 			// If track duration is more than 5 seconds and is played more than half of track length or more than 4 minutes
-			if(!scrobbled && player.currentDuration > 5000 && player.elapsed * 1000 >= player.currentDuration / 2 || player.elapsed >= 10)// 2401000)
+			if(!player.scrobbled && player.currentDuration > 5000 && player.elapsed * 1000 >= player.currentDuration / 2 || player.elapsed >= 10)// 2401000)
 			{
 				player.scrobbled = true;
-				scrobbler.scrobbleTrack(playlist.getCurrentPlayingTrack(), trackPlayStartTime);
+				scrobbler.scrobbleTrack(playlist.getCurrentPlayingTrack(), player.trackPlayStartTime);
 			}
 		}
 	}
