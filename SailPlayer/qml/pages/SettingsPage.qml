@@ -162,11 +162,13 @@ Page
 
 				anchors.horizontalCenter: parent.horizontalCenter
 
-				enabled: settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0
-
 				text: qsTr("Scrobble")
 
-				Component.onCompleted: scrobbler.tracksSubmitted.connect(onTracksSubmitted)
+				Component.onCompleted:
+				{
+					scrobbler.tracksSubmitted.connect(onTracksSubmitted);
+					enabled = settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0;
+				}
 
 				onClicked:
 				{
@@ -180,14 +182,14 @@ Page
 				{
 					scrobbler.errorResponse.disconnect(onError);
 					lastFmScrobbleBusyIndicator.running = false;
-					enabled = true;
+					enabled = settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0;
 				}
 
 				function onError(error, description)
 				{
 					scrobbler.errorResponse.disconnect(onError);
 					lastFmScrobbleBusyIndicator.running = false;
-					enabled = true;
+					enabled = settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0;
 				}
 			}
 
