@@ -60,7 +60,7 @@ QMap<QDateTime, Track*> SailPlayerSettings::GetCachedTracks()
 	{
 		settings.setArrayIndex(i);
 
-		tracks.insert(settings.value("AlbumName").toDateTime(), GetTrackFromSettings());
+		tracks.insert(QDateTime::fromString(settings.value("PlayingStartTime").toString()), GetTrackFromSettings());
 	}
 
 	settings.endArray();
@@ -79,7 +79,7 @@ void SailPlayerSettings::SetCachedTracks(QMap<QDateTime, Track*> tracks)
 	{
 		settings.setArrayIndex(index++);
 
-		settings.setValue("PlayingStartTime", i.key());
+		settings.setValue("PlayingStartTime", i.key().toString());
 
 		SetTrackToSettings(i.value());
 	}
