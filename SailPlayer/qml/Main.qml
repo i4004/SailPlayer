@@ -60,16 +60,19 @@ ApplicationWindow
 
 			if(state == AudioPlayerState.Playing)
 			{
-				if(needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
-				{
-					needToSetStartupTrackLastFmNowPlaying = false;
-					trackPlayStartTime = new Date();
-					scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
-					elapsed = 0;
-					scrobbled = false;
-				}
+                if(settings.scrobblingIsEnabled)
+                {
+                    if(needToSetStartupTrackLastFmNowPlaying)
+                    {
+                        needToSetStartupTrackLastFmNowPlaying = false;
+                        trackPlayStartTime = new Date();
+                        scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+                        elapsed = 0;
+                        scrobbled = false;
+                    }
 
-				elapseTimer.start();
+                    elapseTimer.start();
+                }
 			}
 			else
 				elapseTimer.stop();
