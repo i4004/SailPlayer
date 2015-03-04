@@ -40,13 +40,7 @@ ApplicationWindow
 			if(player.isStreamFromNextTrack() && !playlist.setTrackToPlayAndPlayingFromNextTrack())
 				player.stop();
 			else if(!needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
-			{
-				trackPlayStartTime = new Date();
-
-				scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
-				elapsed = 0;
-				scrobbled = false;
-			}
+				startScrobbleMotitoring();
 		}
 
 		onAboutToFinish: player.setNextTrackToPlay(playlist.requestNextTrack(), playlist.getNextStartPosition(), playlist.getNextEndPosition())
@@ -60,19 +54,16 @@ ApplicationWindow
 
 			if(state == AudioPlayerState.Playing)
 			{
-                if(settings.scrobblingIsEnabled)
-                {
-                    if(needToSetStartupTrackLastFmNowPlaying)
-                    {
-                        needToSetStartupTrackLastFmNowPlaying = false;
-                        trackPlayStartTime = new Date();
-                        scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
-                        elapsed = 0;
-                        scrobbled = false;
-                    }
+				if(settings.scrobblingIsEnabled)
+				{
+					if(needToSetStartupTrackLastFmNowPlaying)
+					{
+						needToSetStartupTrackLastFmNowPlaying = false;
+						startScrobbleMotitoring();
+					}
 
-                    elapseTimer.start();
-                }
+					elapseTimer.start();
+				}
 			}
 			else
 				elapseTimer.stop();
@@ -102,6 +93,14 @@ ApplicationWindow
 			playlist.savePlaylist();
 			settings.currentTrackIndex = playlist.getCurrentTrackIndex();
 			settings.currentPlayingPosition = player.getCurrentPosition();
+		}
+
+		function startScrobbleMotitoring()
+		{
+			trackPlayStartTime = new Date();
+			scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
+			elapsed = 0;
+			scrobbled = false;
 		}
 	}
 
