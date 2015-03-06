@@ -4,7 +4,6 @@
 #include "../Playlist/TracksLoader.hpp"
 #include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp"
 #include "../Playlist/TracksFactory.hpp"
-#include "../SailPlayerSettings.hpp"
 #include "../Audio/AudioPlayer.hpp"
 #include "PlaylistModelBase.hpp"
 #include "../SailPlayer.hpp"
@@ -63,8 +62,6 @@ namespace Models
 		TracksLoader* _tracksLoader;
 		TracksFactory _tracksFactory;
 		DirectoryRecursiveMultimediaFilesListFactory _filesFactory;
-
-		SailPlayerSettings _settings;
 
 		// Current playing data
 

@@ -1,6 +1,7 @@
 #include "PlaylistModel.hpp"
 #include <QDebug>
 
+#include "../SailPlayerSettings.hpp"
 #include "../Playlist/PlaylistHelper.hpp"
 
 namespace Models
@@ -40,12 +41,12 @@ namespace Models
 
 	void PlaylistModel::loadPlaylist()
 	{
-		AddTracks(_settings.GetPlaylist());
+		AddTracks(SailPlayerSettings::Default().GetPlaylist());
 	}
 
 	void PlaylistModel::savePlaylist()
 	{
-		_settings.SetPlaylist(_tracksList);
+		SailPlayerSettings::Default().SetPlaylist(_tracksList);
 	}
 
 	void PlaylistModel::toggleSelectTrack(int itemIndex)

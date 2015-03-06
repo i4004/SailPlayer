@@ -1,3 +1,5 @@
+#include "../SailPlayerSettings.hpp"
+
 #include "LastFmScrobbler.hpp"
 
 namespace Net
@@ -118,7 +120,7 @@ namespace Net
 
 	void LastFmScrobbler::loadSavedTracksToCache()
 	{
-		QMap<QDateTime, Track*> tracks = _settings.GetCachedTracks();
+		QMap<QDateTime, Track*> tracks = SailPlayerSettings::Default().GetCachedTracks();
 
 		QMap<QDateTime, Track*>::iterator i;
 
@@ -128,7 +130,7 @@ namespace Net
 
 	void LastFmScrobbler::saveCachedTracks()
 	{
-		_settings.SetCachedTracks(_scrobbleCache);
+		SailPlayerSettings::Default().SetCachedTracks(_scrobbleCache);
 	}
 
 	void LastFmScrobbler::SendRequest(QString method, QMap<QString, QString> queryVariables)

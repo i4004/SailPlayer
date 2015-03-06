@@ -10,7 +10,6 @@
 
 #include "LastFmQueryBuilder.hpp"
 #include "LastFmRequestBuilder.hpp"
-#include "../SailPlayerSettings.hpp"
 
 using namespace Playlist;
 
@@ -84,7 +83,6 @@ namespace Net
 		QMap<QDateTime, Track*> _scrobbleCache;
 
 		QNetworkAccessManager* _networkAccessManager;	
-		SailPlayerSettings _settings;
 
 		void SendRequest(QString method, QMap<QString, QString> queryVariables);
 
