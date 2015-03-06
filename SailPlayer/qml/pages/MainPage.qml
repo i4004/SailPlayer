@@ -1,13 +1,9 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sail.player.AudioPlayer 1.0
 import harbour.sail.player.AudioPlayerState 1.0
-import harbour.sail.player.PlaylistModel 1.0
 import harbour.sail.player.PlayDirection 1.0
-import harbour.sail.player.PlayOrder 1.0
 import "../controls"
 import "../controls/playlist"
-import "../Util.js" as Util
 
 Page
 {

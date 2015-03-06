@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sail.player.AudioPlayer 1.0
 import harbour.sail.player.AudioPlayerState 1.0
 import harbour.sail.player.PlayDirection 1.0
 
