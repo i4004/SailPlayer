@@ -11,6 +11,7 @@ namespace Audio
 		_currentStartPosition = 0;
 		_currentEndPosition = 0;
 		_needToSetCurrentPosition = false;
+		_currentFilePath = QString();
 		_currentPositionTimer.setTimerType(Qt::VeryCoarseTimer);
 		_currentPositionTimer.setInterval(1000);
 		_currentPositionReady = false;

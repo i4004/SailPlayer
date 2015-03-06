@@ -10,6 +10,7 @@ namespace Models
 		Q_UNUSED(parent);
 
 		_currentPlayOrder = SailPlayer::RepeatPlaylist;
+		_nextTrackToPlay = NULL;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
 
