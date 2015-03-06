@@ -10,14 +10,24 @@ SailPlayerSettings& SailPlayerSettings::Default()
 
 QString SailPlayerSettings::GetLastAddFilesDirectoryPath()
 {
-	return settings.value("AddFilesDialog/CurrentPath", DefaultAddFilesDirectoryPath).toString();
+	return settings.value("AddFilesDialog/DirectoryPath", DefaultAddFilesDirectoryPath).toString();
 }
 
 void SailPlayerSettings::SetLastAddFilesDirectoryPath(QString value)
 {
-	settings.setValue("AddFilesDialog/CurrentPath", value);
+	settings.setValue("AddFilesDialog/DirectoryPath", value);
 
 	emit lastAddFilesDirectoryPathChanged();
+}
+
+SailPlayer::PlayOrder SailPlayerSettings::GetPlayOrder()
+{
+	return (SailPlayer::PlayOrder)settings.value("PlayOrder", SailPlayer::RepeatPlaylist).toInt();
+}
+
+void SailPlayerSettings::SetPlayOrder(SailPlayer::PlayOrder playOrder)
+{
+	settings.setValue("PlayOrder", playOrder);
 }
 
 QList<Track*> SailPlayerSettings::GetPlaylist()
@@ -43,13 +53,67 @@ void SailPlayerSettings::SetPlaylist(QList<Track*> tracks)
 	settings.beginWriteArray("Playlist", tracks.count());
 
 	for(int i = 0; i < tracks.count(); ++i)
-	{	
+	{
 		settings.setArrayIndex(i);
 
 		SetTrackToSettings(tracks.at(i));
 	}
 
 	settings.endArray();
+}
+
+int SailPlayerSettings::GetLastTrackIndex()
+{
+	return settings.value("LastTrackIndex", -1).toInt();
+}
+
+void SailPlayerSettings::SetLastTrackIndex(int currentTrackIndex)
+{
+	settings.setValue("LastTrackIndex", currentTrackIndex);
+}
+
+int SailPlayerSettings::GetLastPlayingPosition()
+{
+	return settings.value("LastPlayingPosition", -1).toInt();
+}
+
+void SailPlayerSettings::SetLastPlayingPosition(int currentPlayingPosition)
+{
+	settings.setValue("LastPlayingPosition", currentPlayingPosition);
+}
+
+bool SailPlayerSettings::GetRestoreLastPlayingPosition()
+{
+	return settings.value("RestoreLastPlayingPosition", true).toBool();
+}
+
+void SailPlayerSettings::SetRestoreLastPlayingPosition(bool restore)
+{
+	settings.setValue("RestoreLastPlayingPosition", restore);
+}
+
+// Last.fm
+
+bool SailPlayerSettings::GetScrobblingIsEnabled()
+{
+	return settings.value("Last.fm/ScrobblingIsEnabled", true).toBool();
+}
+
+void SailPlayerSettings::SetScrobblingIsEnabled(bool enabled)
+{
+	settings.setValue("Last.fm/ScrobblingIsEnabled", enabled);
+}
+
+QString SailPlayerSettings::GetLastFmSessionKey()
+{
+	return settings.value("Last.fm/SessionKey", "").toString();
+}
+
+void SailPlayerSettings::SetLastFmSessionKey(QString key)
+{
+	settings.setValue("Last.fm/SessionKey", key);
+
+	emit lastFmSessionKeyChanged();
 }
 
 QMap<QDateTime, Track*> SailPlayerSettings::GetCachedTracks()
@@ -87,70 +151,6 @@ void SailPlayerSettings::SetCachedTracks(QMap<QDateTime, Track*> tracks)
 	}
 
 	settings.endArray();
-}
-
-int SailPlayerSettings::GetCurrentTrackIndex()
-{
-	return settings.value("CurrentTrackIndex", -1).toInt();
-}
-
-void SailPlayerSettings::SetCurrentTrackIndex(int currentTrackIndex)
-{
-	settings.setValue("CurrentTrackIndex", currentTrackIndex);
-}
-
-int SailPlayerSettings::GetCurrentPlayingPosition()
-{
-	return settings.value("CurrentPlayingPosition", -1).toInt();
-}
-
-void SailPlayerSettings::SetCurrentPlayingPosition(int currentPlayingPosition)
-{
-	settings.setValue("CurrentPlayingPosition", currentPlayingPosition);
-}
-
-bool SailPlayerSettings::GetRestoreLastPlayingPosition()
-{
-	return settings.value("RestoreLastPlayingPosition", true).toBool();
-}
-
-void SailPlayerSettings::SetRestoreLastPlayingPosition(bool restore)
-{
-	settings.setValue("RestoreLastPlayingPosition", restore);
-}
-
-SailPlayer::PlayOrder SailPlayerSettings::GetCurrentPlayOrder()
-{
-	return (SailPlayer::PlayOrder)settings.value("CurrentPlayOrder", SailPlayer::RepeatPlaylist).toInt();
-}
-
-void SailPlayerSettings::SetCurrentPlayOrder(SailPlayer::PlayOrder playOrder)
-{
-	settings.setValue("CurrentPlayOrder", playOrder);
-}
-
-// Last.fm
-
-bool SailPlayerSettings::GetScrobblingIsEnabled()
-{
-	return settings.value("Last.fm/ScrobblingIsEnabled", true).toBool();
-}
-
-void SailPlayerSettings::SetScrobblingIsEnabled(bool enabled)
-{
-	settings.setValue("Last.fm/ScrobblingIsEnabled", enabled);
-}
-
-QString SailPlayerSettings::GetLastFmSessionKey()
-{
-	return settings.value("Last.fm/SessionKey", "").toString();
-}
-
-void SailPlayerSettings::SetLastFmSessionKey(QString key)
-{
-	settings.setValue("Last.fm/SessionKey", key);
-
-	emit lastFmSessionKeyChanged();
 }
 
 Track* SailPlayerSettings::GetTrackFromSettings()

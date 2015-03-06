@@ -17,46 +17,45 @@ class SailPlayerSettings : public QObject
 {
 	Q_OBJECT
 
-	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath)
+	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath NOTIFY defaultAddFilesDirectoryPathChanged)
 
 	// General
 
 	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath NOTIFY lastAddFilesDirectoryPathChanged)
-	Q_PROPERTY(int currentTrackIndex READ GetCurrentTrackIndex WRITE SetCurrentTrackIndex)
-	Q_PROPERTY(int currentPlayingPosition READ GetCurrentPlayingPosition WRITE SetCurrentPlayingPosition)
+	Q_PROPERTY(SailPlayer::PlayOrder playOrder READ GetPlayOrder WRITE SetPlayOrder NOTIFY playOrderChanged)
+	Q_PROPERTY(int lastTrackIndex READ GetLastTrackIndex WRITE SetLastTrackIndex)
+	Q_PROPERTY(int lastPlayingPosition READ GetLastPlayingPosition WRITE SetLastPlayingPosition)
 	Q_PROPERTY(bool restoreLastPlayingPosition READ GetRestoreLastPlayingPosition WRITE SetRestoreLastPlayingPosition NOTIFY restoreLastPlayingPositionChanged)
-	Q_PROPERTY(SailPlayer::PlayOrder currentPlayOrder READ GetCurrentPlayOrder WRITE SetCurrentPlayOrder NOTIFY currentPlayOrderChanged)
 
 	// Last.fm
 	Q_PROPERTY(bool scrobblingIsEnabled READ GetScrobblingIsEnabled WRITE SetScrobblingIsEnabled NOTIFY scrobblingIsEnabledChanged)
 	Q_PROPERTY(QString lastFmSessionKey READ GetLastFmSessionKey WRITE SetLastFmSessionKey NOTIFY lastFmSessionKeyChanged)
 
+
 public:
 	static SailPlayerSettings& Default();
 
 	QString GetDefaultAddFilesDirectoryPath() const { return DefaultAddFilesDirectoryPath; }
+
 	QString GetLastAddFilesDirectoryPath();
 	void SetLastAddFilesDirectoryPath(QString value);
+
+	// General
+
+	SailPlayer::PlayOrder GetPlayOrder();
+	void SetPlayOrder(SailPlayer::PlayOrder playOrder);
 
 	QList<Track*> GetPlaylist();
 	void SetPlaylist(QList<Track*> tracks);
 
-	QMap<QDateTime, Track*> GetCachedTracks();
-	void SetCachedTracks(QMap<QDateTime, Track*> tracks);
+	int GetLastTrackIndex();
+	void SetLastTrackIndex(int currentTrackIndex);
 
-	// General
-
-	int GetCurrentTrackIndex();
-	void SetCurrentTrackIndex(int currentTrackIndex);
-
-	int GetCurrentPlayingPosition();
-	void SetCurrentPlayingPosition(int currentPlayingPosition);
+	int GetLastPlayingPosition();
+	void SetLastPlayingPosition(int currentPlayingPosition);
 
 	bool GetRestoreLastPlayingPosition();
 	void SetRestoreLastPlayingPosition(bool restore);
-
-	SailPlayer::PlayOrder GetCurrentPlayOrder();
-	void SetCurrentPlayOrder(SailPlayer::PlayOrder playOrder);
 
 	// Last.fm
 
@@ -66,12 +65,15 @@ public:
 	QString GetLastFmSessionKey();
 	void SetLastFmSessionKey(QString key);
 
+	QMap<QDateTime, Track*> GetCachedTracks();
+	void SetCachedTracks(QMap<QDateTime, Track*> tracks);
+
 signals:
-	// General
+	void defaultAddFilesDirectoryPathChanged();
 
 	void lastAddFilesDirectoryPathChanged();
+	void playOrderChanged();
 	void restoreLastPlayingPositionChanged();
-	void currentPlayOrderChanged();
 
 	// Last.fm
 

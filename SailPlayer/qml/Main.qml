@@ -4,7 +4,7 @@ import harbour.sail.player.AudioPlayer 1.0
 import harbour.sail.player.AudioPlayerState 1.0
 import harbour.sail.player.PlaylistModel 1.0
 import harbour.sail.player.PlayDirection 1.0
-import harbour.sail.player.PlayOrder 1.0
+//import harbour.sail.player.PlayOrder 1.0
 import harbour.sail.player.SailPlayerSettings 1.0
 import harbour.sail.player.LastFmScrobbler 1.0
 import harbour.sail.player.LastFmError 1.0
@@ -13,7 +13,15 @@ import "controls"
 
 ApplicationWindow
 {
-	id: applicationWindow
+	PlaylistModel
+	{
+		id: playlist
+
+		Component.onCompleted: playOrder = settings.playOrder
+		Component.onDestruction: settings.playOrder = playlist.playOrder
+	}
+
+	SailPlayerSettings { id: settings }
 
 	AudioPlayer
 	{
@@ -31,8 +39,8 @@ ApplicationWindow
 			{
 				needToSetStartupPosition = false;
 
-				if(settings.currentPlayingPosition !== -1)
-					seek(settings.currentPlayingPosition);
+				if(settings.lastPlayingPosition !== -1)
+					seek(settings.lastPlayingPosition);
 
 				needToSetStartupTrackLastFmNowPlaying = true;
 			}
@@ -77,10 +85,10 @@ ApplicationWindow
 
 			playlist.loadPlaylist();
 
-			if(settings.restoreLastPlayingPosition && settings.currentTrackIndex !== -1)
+			if(settings.restoreLastPlayingPosition && settings.lastTrackIndex !== -1)
 			{
 				needToSetStartupPosition = true;
-				playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, settings.currentTrackIndex);
+				playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, settings.lastTrackIndex);
 				player.pause();
 			}
 		}
@@ -91,8 +99,8 @@ ApplicationWindow
 				player.pause();
 
 			playlist.savePlaylist();
-			settings.currentTrackIndex = playlist.getCurrentTrackIndex();
-			settings.currentPlayingPosition = player.getCurrentPosition();
+			settings.lastTrackIndex = playlist.getCurrentTrackIndex();
+			settings.lastPlayingPosition = player.getCurrentPosition();
 		}
 
 		function startScrobbleMotitoring()
@@ -124,16 +132,6 @@ ApplicationWindow
 			}
 		}
 	}
-
-	PlaylistModel
-	{
-		id: playlist
-
-		Component.onCompleted: playOrder = settings.currentPlayOrder
-		Component.onDestruction: settings.currentPlayOrder = playlist.playOrder
-	}
-
-	SailPlayerSettings { id: settings }
 
 	LastFmScrobbler
 	{
