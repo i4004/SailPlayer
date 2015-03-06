@@ -1,6 +1,8 @@
 #include "PlaylistModel.hpp"
 #include <QDebug>
 
+#include "../Playlist/PlaylistHelper.hpp"
+
 namespace Models
 {
 	PlaylistModel::PlaylistModel(QObject* parent)
@@ -56,7 +58,7 @@ namespace Models
 
 	bool PlaylistModel::calculateNextTrackToPlay(SailPlayer::PlayDirection direction, int customIndex)
 	{
-		int index = CalculateNextTrackIndex(direction, customIndex);
+		int index = PlaylistHelper::CalculateNextTrackIndex(direction, _currentPlayOrder, customIndex, _tracksList, _currentTrackToPlay);
 
 		if(index == -1)
 			return false;
@@ -148,77 +150,6 @@ namespace Models
 			return _nextTrackToPlay->GetEndPosition();
 		else
 			return -1;
-	}
-
-	int PlaylistModel::CalculateNextTrackIndex(SailPlayer::PlayDirection direction, int customIndex)
-	{
-		int trackIndex = -1;
-
-		if(_tracksList.count() == 0)
-			return -1;
-
-		if(direction == SailPlayer::ByIndex)
-			return customIndex;
-		else
-		{
-			if(_currentTrackToPlay == NULL)
-				return 0;
-			else
-			{
-				trackIndex = _tracksList.indexOf(_currentTrackToPlay);
-
-				if(direction == SailPlayer::Next || direction == SailPlayer::NextWithForce)
-				{
-					switch(_currentPlayOrder)
-					{
-						case SailPlayer::Default:
-						{
-							if(trackIndex < _tracksList.count() - 1 || direction == SailPlayer::NextWithForce)
-								trackIndex++;
-							else
-								return -1;
-
-							break;
-						}
-
-						case SailPlayer::RepeatPlaylist:
-							trackIndex++;
-						break;
-
-						case SailPlayer::RepeatTrack:
-						{
-							if(direction == SailPlayer::NextWithForce)
-								trackIndex++;
-
-							break;
-						}
-
-						case SailPlayer::Random:
-						{
-							int randomIndex;
-
-							while((randomIndex = rand() % _tracksList.count()) == trackIndex){}
-
-							trackIndex = randomIndex;
-
-							break;
-						}
-					}
-				}
-				else if(direction == SailPlayer::Previous)
-				{
-					trackIndex--;
-
-					if(trackIndex == -1)
-						trackIndex = _tracksList.count() - 1;
-				}
-			}
-		}
-
-		if(trackIndex >= _tracksList.count())
-			trackIndex = 0;
-
-		return trackIndex;
 	}
 
 	void PlaylistModel::ResetTracksData()
