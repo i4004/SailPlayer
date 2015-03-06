@@ -27,12 +27,12 @@ namespace Models
 
 	void PlaylistModel::clearPlaylist()
 	{
-		beginResetModel();
+		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
 
-		ResetCurrentTrack();
+		ResetTracksData();
 		Cleanup();
 
-		endResetModel();
+		endRemoveRows();
 	}
 
 	void PlaylistModel::loadPlaylist()
@@ -221,8 +221,9 @@ namespace Models
 		return trackIndex;
 	}
 
-	void PlaylistModel::ResetCurrentTrack()
+	void PlaylistModel::ResetTracksData()
 	{
+		_nextTrackToPlay = NULL;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
 	}

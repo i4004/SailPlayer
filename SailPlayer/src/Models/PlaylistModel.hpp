@@ -76,7 +76,7 @@ namespace Models
 
 		bool SetTrackToPlayFromNextTrack();
 		int CalculateNextTrackIndex(SailPlayer::PlayDirection direction, int customIndex);
-		void ResetCurrentTrack();
+		void ResetTracksData();
 
 		// Mark track to play as playing and unmarking previously playing track
 		void SetPlayingTrack(bool isPlaying);
