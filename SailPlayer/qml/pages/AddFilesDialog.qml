@@ -1,13 +1,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.FsRecordsListModel 1.0
-import harbour.sail.player.SailPlayerSettings 1.0
-import harbour.sail.player.FsHelper 1.0
 
 Dialog
-{	
-	SailPlayerSettings { id: settings }
-	FsHelper{ id: fsHelper }
+{
+	id: dialog
 
 	property string directoryPath: '';
 
@@ -22,7 +19,7 @@ Dialog
 		model: FsRecordsListModel
 		{
 			id: fsRecordsListModel
-			directoryPath: fsHelper.exists(settings.lastAddFilesDirectoryPath) ? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
+			directoryPath: dialog.directoryPath;
 		}
 
 		header: DialogHeader
@@ -77,9 +74,5 @@ Dialog
 		}
 	}
 
-	onAccepted:
-	{
-		settings.lastAddFilesDirectoryPath = fsRecordsListModel.directoryPath;
-		directoryPath = fsRecordsListModel.directoryPath;
-	}
+	onAccepted: directoryPath = fsRecordsListModel.directoryPath
 }

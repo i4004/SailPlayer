@@ -21,7 +21,7 @@ namespace Models
 		delete _tracksLoader;
 	}
 
-	void PlaylistModel::addTracks(QString directoryPath)
+	void PlaylistModel::addTracksFromPath(QString directoryPath)
 	{
 		_filesFactory.SetDirectoryPath(directoryPath);
 		AddTracks(_tracksLoader->Build());

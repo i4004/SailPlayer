@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.sail.player.FsHelper 1.0
 import harbour.sail.player.AudioPlayerState 1.0
 import harbour.sail.player.PlayDirection 1.0
 import "../controls"
@@ -11,15 +12,17 @@ Page
 
 	allowedOrientations: Orientation.All
 
+	FsHelper{ id: fsHelper }
+
 	SilicaListView
 	{
 		id: listView
 
 		anchors.fill: parent
 		anchors.bottomMargin: playerControlPanel.visible ? playerControlPanel.visibleSize : 0
-		header: PageHeader { title: "Default Playlist" }
-
 		clip: true
+
+		header: PageHeader { title: "Default Playlist" }
 
 		model: playlist
 
@@ -78,11 +81,16 @@ Page
 
 				onClicked:
 				{
-					var dialog = pageStack.push(Qt.resolvedUrl("AddFilesDialog.qml"));
+					var dialog = pageStack.push(Qt.resolvedUrl("AddFilesDialog.qml"),
+							{
+								directoryPath: fsHelper.exists(settings.lastAddFilesDirectoryPath)
+											   ? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
+							});
 
 					dialog.accepted.connect(function()
 					{
-						playlist.addTracks(dialog.directoryPath);
+						settings.lastAddFilesDirectoryPath = dialog.directoryPath;
+						playlist.addTracksFromPath(dialog.directoryPath);
 					});
 				}
 			}
