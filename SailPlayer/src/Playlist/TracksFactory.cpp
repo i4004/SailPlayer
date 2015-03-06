@@ -53,7 +53,11 @@ namespace Playlist
 		QList<Track*> items;
 
 		if(_filesLoadedViaCue.contains(fileInfo.absoluteFilePath()))
+		{
+			_filesLoadedViaCue.removeAll(fileInfo.absoluteFilePath());
+
 			return items;
+		}
 
 		FileRef f(fileInfo.absoluteFilePath().toLocal8Bit().data());
 
