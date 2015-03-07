@@ -142,23 +142,8 @@ ApplicationWindow
 		secret: "9fe3f69ecd90045d2d18fe6823803370"
 		sessionKey: settings.lastFmSessionKey
 
-		Component.onCompleted:
-		{
-			errorResponse.connect(onError);
-			loadSavedTracksToCache();
-		}
-
+		Component.onCompleted: loadSavedTracksToCache()
 		Component.onDestruction: saveCachedTracks()
-
-		function onError(error, description)
-		{
-			if(error === LastFmError.AuthenticationFailed)
-				notifiicationPanel.showText(qsTr('Invalid user name or password.'));
-			else if(error === LastFmError.NoInternetConnection)
-				notifiicationPanel.showText(qsTr('No internet connection.'));
-			else
-				notifiicationPanel.showText(description);
-		}
 	}
 
 	MessagePageDisplayer

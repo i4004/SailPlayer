@@ -130,6 +130,13 @@ Page
 					scrobbler.errorResponse.disconnect(onError);
 					lastFmBusyIndicator.running = false;
 					enabled = true;
+
+					if(error === LastFmError.AuthenticationFailed)
+						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
+					else if(error === LastFmError.NoInternetConnection)
+						notifiicationPanel.showText(qsTr('No internet connection.'));
+					else
+						notifiicationPanel.showText(description);
 				}
 			}
 
@@ -190,6 +197,13 @@ Page
 					scrobbler.errorResponse.disconnect(onError);
 					lastFmScrobbleBusyIndicator.running = false;
 					enabled = settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0;
+
+					if(error === LastFmError.AuthenticationFailed)
+						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
+					else if(error === LastFmError.NoInternetConnection)
+						notifiicationPanel.showText(qsTr('No internet connection.'));
+					else
+						notifiicationPanel.showText(description);
 				}
 			}
 
