@@ -213,6 +213,8 @@ namespace Net
 			index++;
 		}
 
+		saveCachedTracks();
+
 		emit numberOfScrobbleCacheItemsChanged();
 		emit tracksSubmitted();
 	}
