@@ -160,7 +160,7 @@ namespace Cue
 	{
 		data = data.mid(4);
 
-		if(data.indexOf(" ") == -1)
+        if(data.indexOf(" ") != -1)
 		{
 			name = data.mid(0, data.indexOf(" "));
 			value = data.mid(data.indexOf(" ") + 1).replace("\"", "");
