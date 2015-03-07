@@ -57,6 +57,8 @@ namespace Net
 
 		queryVariables["sk"] = _sessionKey;
 
+		delete currentPlayingTrack;
+
 		SendRequest("track.updateNowPlaying", queryVariables);
 	}
 
@@ -65,7 +67,7 @@ namespace Net
 		if(_sessionKey.isNull() || _sessionKey.isEmpty() || playedTrack == NULL)
 			return;
 
-		Track* track = new Track(*(Track*)playedTrack);
+		Track* track = (Track*)playedTrack;
 
 		QString artistName = track->GetArtistName();
 		QString trackName = track->GetName();

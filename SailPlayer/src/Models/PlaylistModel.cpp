@@ -101,6 +101,11 @@ namespace Models
 		return _tracksList.indexOf(_currentTrackToPlay);
 	}
 
+	QObject* PlaylistModel::getCurrentPlayingTrack()
+	{
+		return _currentPlayingTrack != NULL ? (QObject*)new Track(*_currentPlayingTrack) : NULL;
+	}
+
 	bool PlaylistModel::SetTrackToPlayFromNextTrack()
 	{
 		if(_nextTrackToPlay == NULL)

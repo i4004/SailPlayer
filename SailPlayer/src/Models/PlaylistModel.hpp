@@ -49,7 +49,8 @@ namespace Models
 		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
 		Q_INVOKABLE int getCurrentTrackIndex();
 
-		Q_INVOKABLE QObject* getCurrentPlayingTrack(){ return (QObject*)_currentPlayingTrack; }
+		// Return a copy of current playing track, shoube be delete by method user!
+		Q_INVOKABLE QObject* getCurrentPlayingTrack();
 
 	public slots:
 		Q_INVOKABLE void setPlayerState(AudioPlayer::AudioPlayerState state);
