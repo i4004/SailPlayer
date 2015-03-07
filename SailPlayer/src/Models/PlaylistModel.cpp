@@ -1,7 +1,6 @@
 #include "PlaylistModel.hpp"
 #include <QDebug>
 
-#include "../SailPlayerSettings.hpp"
 #include "../Playlist/PlaylistHelper.hpp"
 
 namespace Models
@@ -39,25 +38,6 @@ namespace Models
 		endRemoveRows();
 	}
 
-	void PlaylistModel::loadPlaylist()
-	{
-		AddTracks(SailPlayerSettings::Default().GetPlaylist());
-	}
-
-	void PlaylistModel::savePlaylist()
-	{
-		SailPlayerSettings::Default().SetPlaylist(_tracksList);
-	}
-
-	void PlaylistModel::toggleSelectTrack(int itemIndex)
-	{
-		Track* track = _tracksList.at(itemIndex);
-
-		track->SetSelected(!track->IsSelected());
-
-		emit dataChanged(index(itemIndex, 0), index(itemIndex, 0), QVector<int>(1, IsSelectedRole));
-	}
-
 	bool PlaylistModel::calculateNextTrackToPlay(SailPlayer::PlayDirection direction, int customIndex)
 	{
 		int index = PlaylistHelper::CalculateNextTrackIndex(direction, _currentPlayOrder, customIndex, _tracksList, _currentTrackToPlay);
@@ -79,7 +59,7 @@ namespace Models
 
 		SetTrackToPlayFromNextTrack();
 
-		emit currentTrackToPlayDataUpdated(_currentTrackToPlay->GetFullFilePath(), _currentTrackToPlay->GetStartPosition(), _currentTrackToPlay->GetEndPosition());
+		emit CurrentTrackToPlayDataUpdated(_currentTrackToPlay->GetFullFilePath(), _currentTrackToPlay->GetStartPosition(), _currentTrackToPlay->GetEndPosition());
 
 		return true;
 	}

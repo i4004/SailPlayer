@@ -25,7 +25,7 @@ namespace Audio
 
 	// Player controls
 
-	void AudioPlayer::play()
+	void AudioPlayer::Play()
 	{\
 		AudioPlayerState state = getCurrentState();
 
@@ -35,30 +35,30 @@ namespace Audio
 			_isStreamFromNextTrack = false;
 		}
 
-		AudioPlayerBase::play();
+		AudioPlayerBase::Play();
 
 		if(state == Paused)
 			_currentPositionTimer.start();
 	}
 
-	void AudioPlayer::pause()
+	void AudioPlayer::Pause()
 	{
-		AudioPlayerBase::pause();
+		AudioPlayerBase::Pause();
 
 		_currentPositionTimer.stop();
 	}
 
-	void AudioPlayer::stop()
+	void AudioPlayer::Stop()
 	{
 		_currentPositionTimer.stop();
 
-		AudioPlayerBase::stop();
+		AudioPlayerBase::Stop();
 
 		emit currentPositionUpdated(0);
 		emit currentDurationUpdated(0);
 	}
 
-	void AudioPlayer::setTrackToPlay(QString fullFilePath, int startPosition, int endPosition)
+	void AudioPlayer::SetTrackToPlay(QString fullFilePath, int startPosition, int endPosition)
 	{
 		_currentFilePath = fullFilePath;
 		_currentStartPosition = startPosition;
@@ -123,7 +123,7 @@ namespace Audio
 
 	void AudioPlayer::OnErrorMessage(QString message)
 	{
-		stop();
+		Stop();
 		AudioPlayerBase::OnErrorMessage(message);
 
 		emit playbackError(message);
@@ -212,12 +212,12 @@ namespace Audio
 				CalculateNeedToSetCurrentPosition();
 
 				if(fileChanging)
-					AudioPlayerBase::stop();
+					AudioPlayerBase::Stop();
 
 				SetFileToPlayFromNextTrack();
 
 				if(fileChanging)
-					AudioPlayerBase::play();
+					AudioPlayerBase::Play();
 				else
 					OnStreamStart();
 			}

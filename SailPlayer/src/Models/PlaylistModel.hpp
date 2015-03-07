@@ -21,19 +21,13 @@ namespace Models
 		explicit PlaylistModel(QObject* parent = 0);
 		~PlaylistModel();
 
+		void SetPlayOrder(SailPlayer::PlayOrder order) { _currentPlayOrder = order; }
+		SailPlayer::PlayOrder GetPlayOrder() { return _currentPlayOrder; }
+
 		// Playlist controls
 
 		Q_INVOKABLE void addTracksFromPath(QString directoryPath);
-
 		Q_INVOKABLE void clearPlaylist();
-
-		// Load playlist from settings
-		Q_INVOKABLE void loadPlaylist();
-
-		// Save playlist to settings
-		Q_INVOKABLE void savePlaylist();
-
-		Q_INVOKABLE void toggleSelectTrack(int itemIndex);
 
 		// Calculates next track to play
 		Q_INVOKABLE bool calculateNextTrackToPlay(SailPlayer::PlayDirection direction = SailPlayer::Next, int customIndex = -1);
@@ -41,12 +35,14 @@ namespace Models
 		// Calculates next track to play and sets current track to play from it
 		Q_INVOKABLE bool calculateAndSetTrackToPlay(SailPlayer::PlayDirection direction = SailPlayer::Next, int customIndex = -1);
 
-		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
-
 		Q_INVOKABLE QString requestNextTrack();
+		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
+
+		// Info
+
+		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
 		Q_INVOKABLE int getNextStartPosition();
 		Q_INVOKABLE int getNextEndPosition();
-		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
 		Q_INVOKABLE int getCurrentTrackIndex();
 
 		// Return a copy of current playing track, shoube be delete by method user!
@@ -56,7 +52,7 @@ namespace Models
 		Q_INVOKABLE void setPlayerState(AudioPlayer::AudioPlayerState state);
 
 	signals:
-		void currentTrackToPlayDataUpdated(QString filePath, int startPosition, int endPosition);
+		void CurrentTrackToPlayDataUpdated(QString filePath, int startPosition, int endPosition);
 		void playOrderChanged();
 
 	private:
@@ -77,9 +73,6 @@ namespace Models
 
 		// Mark track to play as playing and unmarking previously playing track
 		void SetPlayingTrack(bool isPlaying);
-
-		void SetPlayOrder(SailPlayer::PlayOrder order) { _currentPlayOrder = order; }
-		SailPlayer::PlayOrder GetPlayOrder() { return _currentPlayOrder; }
 	};
 }
 

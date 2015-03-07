@@ -35,9 +35,10 @@ namespace Audio
 
 		// Player controls
 
-		Q_INVOKABLE virtual void play();
-		Q_INVOKABLE virtual void pause();
-		Q_INVOKABLE virtual void stop();
+		virtual void Play();
+		virtual void Pause();
+		virtual void Stop();
+
 		Q_INVOKABLE AudioPlayerState getCurrentState() { return _currentState; }
 
 		virtual void OnStreamStart();

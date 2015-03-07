@@ -17,22 +17,22 @@ class SailPlayerSettings : public QObject
 {
 	Q_OBJECT
 
-	// Add files dialog
+//	// Add files dialog
 
-	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath NOTIFY defaultAddFilesDirectoryPathChanged)
-	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath NOTIFY lastAddFilesDirectoryPathChanged)
+//	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath NOTIFY defaultAddFilesDirectoryPathChanged)
+//	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath NOTIFY lastAddFilesDirectoryPathChanged)
 
-	// General
+//	// General
 
-	Q_PROPERTY(SailPlayer::PlayOrder playOrder READ GetPlayOrder WRITE SetPlayOrder NOTIFY playOrderChanged)
-	Q_PROPERTY(int lastTrackIndex READ GetLastTrackIndex WRITE SetLastTrackIndex)
-	Q_PROPERTY(int lastPlayingPosition READ GetLastPlayingPosition WRITE SetLastPlayingPosition)
-	Q_PROPERTY(bool restoreLastPlayingPosition READ GetRestoreLastPlayingPosition WRITE SetRestoreLastPlayingPosition NOTIFY restoreLastPlayingPositionChanged)
+//	Q_PROPERTY(SailPlayer::PlayOrder playOrder READ GetPlayOrder WRITE SetPlayOrder NOTIFY playOrderChanged)
+//	Q_PROPERTY(int lastTrackIndex READ GetLastTrackIndex WRITE SetLastTrackIndex)
+//	Q_PROPERTY(int lastPlayingPosition READ GetLastPlayingPosition WRITE SetLastPlayingPosition)
+//	Q_PROPERTY(bool restoreLastPlayingPosition READ GetRestoreLastPlayingPosition WRITE SetRestoreLastPlayingPosition NOTIFY restoreLastPlayingPositionChanged)
 
-	// Last.fm
+//	// Last.fm
 
-	Q_PROPERTY(bool scrobblingIsEnabled READ GetScrobblingIsEnabled WRITE SetScrobblingIsEnabled NOTIFY scrobblingIsEnabledChanged)
-	Q_PROPERTY(QString lastFmSessionKey READ GetLastFmSessionKey WRITE SetLastFmSessionKey NOTIFY lastFmSessionKeyChanged)
+//	Q_PROPERTY(bool scrobblingIsEnabled READ GetScrobblingIsEnabled WRITE SetScrobblingIsEnabled NOTIFY scrobblingIsEnabledChanged)
+//	Q_PROPERTY(QString lastFmSessionKey READ GetLastFmSessionKey WRITE SetLastFmSessionKey NOTIFY lastFmSessionKeyChanged)
 
 
 public:

@@ -3,6 +3,14 @@
 
 #include <QQuickView>
 
+#include "Audio/AudioPlayer.hpp"
+#include "Models/PlaylistModel.hpp"
+#include "PlayController.hpp"
+#include "SailPlayerSettings.hpp"
+
+using namespace Audio;
+using namespace Models;
+
 class SailPlayerController : public QObject
 {
 	Q_OBJECT
@@ -10,6 +18,16 @@ class SailPlayerController : public QObject
 public:
 	SailPlayerController(QQuickView* view, QObject* parent = 0);
 	~SailPlayerController();
+
+private:
+	SailPlayerSettings _settings;
+	PlaylistModel _playlist;
+	AudioPlayer _player;
+	PlayController* _playController;
+
+	void ExposeComponentsToQml(QQuickView* view);
+	void LoadStartupSettings();
+	void SaveOnExitSettings();
 };
 
 #endif // SAILPLAYERCONTROLLER_HPP

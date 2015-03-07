@@ -13,8 +13,8 @@ using namespace Net;
 //#include "Models/FsRecordsListModel.hpp"
 //#include "Models/PlaylistModel.hpp"
 //#include "Net/LastFmScrobbler.hpp"
-//#include "SailPlayer.hpp"
-//#include "SailPlayerSettings.hpp"
+#include "SailPlayer.hpp"
+#include "SailPlayerSettings.hpp"
 
 //using namespace Audio;
 //using namespace IO;
@@ -23,21 +23,20 @@ using namespace Net;
 
 int main(int argc, char *argv[])
 {
+	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayDirection", 1, 0, "PlayDirection");
+	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
+	qRegisterMetaType<SailPlayer::PlayDirection>("SailPlayer::PlayDirection");
+	qRegisterMetaType<SailPlayer::PlayOrder>("SailPlayer::PlayOrder");
+
+	qmlRegisterType<AudioPlayerBase>("harbour.sail.player.AudioPlayerState", 1, 0, "AudioPlayerState");
+	qRegisterMetaType<AudioPlayerBase::AudioPlayerState>("AudioPlayerBase::AudioPlayerState");
+	qRegisterMetaType<AudioPlayer::AudioPlayerState>("AudioPlayer::AudioPlayerState");
+
 //	qmlRegisterType<AudioPlayer>("harbour.sail.player.AudioPlayer", 1, 0, "AudioPlayer");
-//	qmlRegisterType<AudioPlayerBase>("harbour.sail.player.AudioPlayerState", 1, 0, "AudioPlayerState");
-//	qRegisterMetaType<AudioPlayerBase::AudioPlayerState>("AudioPlayerBase::AudioPlayerState");
-//	qRegisterMetaType<AudioPlayer::AudioPlayerState>("AudioPlayer::AudioPlayerState");
 
 //	qmlRegisterType<FsHelper>("harbour.sail.player.FsHelper", 1, 0, "FsHelper");
 //	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
 
-//	qmlRegisterType<PlaylistModel>("harbour.sail.player.PlaylistModel", 1, 0, "PlaylistModel");
-//	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayDirection", 1, 0, "PlayDirection");
-//	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
-//	qRegisterMetaType<SailPlayer::PlayDirection>("SailPlayer::PlayDirection");
-//	qRegisterMetaType<SailPlayer::PlayOrder>("SailPlayer::PlayOrder");
-
-//	qmlRegisterType<SailPlayerSettings>("harbour.sail.player.SailPlayerSettings", 1, 0, "SailPlayerSettings");
 //	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmScrobbler", 1, 0, "LastFmScrobbler");
 //	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmError", 1, 0, "LastFmError");
 //	qRegisterMetaType<LastFmScrobbler::LastFmError>("LastFmScrobbler::LastFmError");
@@ -55,15 +54,12 @@ int main(int argc, char *argv[])
 
 	QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 	QScopedPointer<QQuickView> view(SailfishApp::createView());
+	SailPlayerController* controller = new SailPlayerController(&(*view));
 
 	view->setSource(SailfishApp::pathTo("qml/Main.qml"));
 	view->show();
-
-	SailPlayerController* controller = new SailPlayerController(&(*view));
-
 	int result = app->exec();
 
 	delete controller;
-
 	return result;
 }

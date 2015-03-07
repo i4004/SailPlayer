@@ -30,7 +30,7 @@ namespace Audio
 
 	// Player controls
 
-	void AudioPlayerBase::play()
+	void AudioPlayerBase::Play()
 	{\
 		_audioResource->Connect();
 
@@ -40,7 +40,7 @@ namespace Audio
 		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
 	}
 
-	void AudioPlayerBase::pause()
+	void AudioPlayerBase::Pause()
 	{
 		_pausedByResourceBlock = false;
 
@@ -52,7 +52,7 @@ namespace Audio
 		_audioResource->Disconnect();
 	}
 
-	void AudioPlayerBase::stop()
+	void AudioPlayerBase::Stop()
 	{
 		gst_element_set_state (_pipeline, GST_STATE_READY);
 
@@ -276,11 +276,11 @@ namespace Audio
 		if(acquired)
 		{
 			if(_currentState == Paused && _pausedByResourceBlock)
-				play();
+				Play();
 		}
 		else if(_currentState == Playing)
 		{
-			pause();
+			Pause();
 
 			_pausedByResourceBlock = true;
 		}

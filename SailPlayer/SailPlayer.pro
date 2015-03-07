@@ -39,7 +39,8 @@ SOURCES += \
     src/Net/LastFmQueryBuilder.cpp \
     src/Net/LastFmRequestBuilder.cpp \
     src/Playlist/PlaylistHelper.cpp \
-    src/SailPlayerController.cpp
+    src/SailPlayerController.cpp \
+    src/PlayController.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -100,6 +101,7 @@ HEADERS += \
     src/Net/LastFmQueryBuilder.hpp \
     src/Net/LastFmRequestBuilder.hpp \
     src/Playlist/PlaylistHelper.hpp \
-    src/SailPlayerController.hpp
+    src/SailPlayerController.hpp \
+    src/PlayController.hpp
 
 INCLUDEPATH += $$PWD/include

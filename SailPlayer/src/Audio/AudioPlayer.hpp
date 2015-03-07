@@ -18,11 +18,10 @@ namespace Audio
 
 		// Player controls
 
-		Q_INVOKABLE virtual void play();
-		Q_INVOKABLE virtual void pause();
-		Q_INVOKABLE virtual void stop();
+		virtual void Play();
+		virtual void Pause();
+		virtual void Stop();
 
-		Q_INVOKABLE void setTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
 		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
 		Q_INVOKABLE void seek(int milliseconds);
 		Q_INVOKABLE bool hasTrackToPlay() { return !_currentFilePath.isNull() && !_currentFilePath.isEmpty(); }
@@ -33,6 +32,9 @@ namespace Audio
 		void OnAboutToFinish();
 		void OnEndOfStream();
 		void OnErrorMessage(QString message);
+
+	public slots:
+		void SetTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
 
 	signals:
 		void currentPositionUpdated(int milliseconds);

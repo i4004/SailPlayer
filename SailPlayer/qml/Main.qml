@@ -2,7 +2,6 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 //import harbour.sail.player.AudioPlayer 1.0
 //import harbour.sail.player.AudioPlayerState 1.0
-//import harbour.sail.player.PlaylistModel 1.0
 //import harbour.sail.player.PlayDirection 1.0
 //import harbour.sail.player.SailPlayerSettings 1.0
 //import harbour.sail.player.LastFmScrobbler 1.0
@@ -12,14 +11,6 @@ import "controls"
 
 ApplicationWindow
 {
-//	PlaylistModel
-//	{
-//		id: playlist
-
-//		Component.onCompleted: playOrder = settings.playOrder
-//		Component.onDestruction: settings.playOrder = playlist.playOrder
-//	}
-
 //	SailPlayerSettings { id: settings }
 
 //	AudioPlayer
@@ -73,29 +64,11 @@ ApplicationWindow
 //				elapseTimer.stop();
 //		}
 
-//		Component.onCompleted:
-//		{
-//			playlist.currentTrackToPlayDataUpdated.connect(player.setTrackToPlay);
-//			player.stateChanged.connect(playlist.setPlayerState);
-//			player.playbackError.connect(messagePage.displayMessage);
-
-//			playlist.loadPlaylist();
-
-//			if(settings.restoreLastPlayingPosition && settings.lastTrackIndex !== -1)
-//			{
-//				needToSetStartupPosition = true;
-//				playlist.calculateAndSetTrackToPlay(PlayDirection.ByIndex, settings.lastTrackIndex);
-//				player.pause();
-//			}
-//		}
-
 //		Component.onDestruction:
 //		{
 //			if(player.state === AudioPlayerState.Playing)
 //				player.pause();
 
-//			playlist.savePlaylist();
-//			settings.lastTrackIndex = playlist.getCurrentTrackIndex();
 //			settings.lastPlayingPosition = player.getCurrentPosition();
 //		}
 

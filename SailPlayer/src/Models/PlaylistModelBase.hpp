@@ -38,10 +38,14 @@ namespace Models
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
 
+		// Playlist control
+
+		void AddTracks(QList<Track*> tracks);
+		QList<Track*> GetTracks() { return _tracksList; }
+
 	protected:	
 		QList<Track*> _tracksList;
 
-		void AddTracks(QList<Track*> tracks);
 		void Cleanup();
 
 	private:
