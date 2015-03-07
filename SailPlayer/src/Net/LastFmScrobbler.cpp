@@ -77,6 +77,8 @@ namespace Net
 
 		_scrobbleCache.insert(playStartTime.toUTC(), track);
 
+		saveCachedTracks();
+
 		emit numberOfScrobbleCacheItemsChanged();
 
 		submitTracksFromCache();
