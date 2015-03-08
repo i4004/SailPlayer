@@ -3,7 +3,7 @@ import Sailfish.Silica 1.0
 //import harbour.sail.player.FsHelper 1.0
 //import harbour.sail.player.AudioPlayerState 1.0
 //import harbour.sail.player.PlayDirection 1.0
-//import "../controls"
+import "../controls"
 import "../controls/playlist"
 
 Page
@@ -19,7 +19,7 @@ Page
 		id: listView
 
 		anchors.fill: parent
-//		anchors.bottomMargin: playerControlPanel.visible ? playerControlPanel.visibleSize : 0
+		anchors.bottomMargin: playerControlPanel.visible ? playerControlPanel.visibleSize : 0
 		clip: true
 
 		header: PageHeader { title: "Default Playlist" }
@@ -35,7 +35,7 @@ Page
 
 		delegate: PlaylistItem
 		{
-//			onClicked: playerControlPanel.visibleSize == 0 ? playerControlPanel.show() : playerControlPanel.hide()
+			onClicked: playerControlPanel.visibleSize == 0 ? playerControlPanel.show() : playerControlPanel.hide()
 			onPushAndHold: { playController.playTrack(index); }
 		}
 
@@ -105,51 +105,30 @@ Page
 //					onClicked: remorse.execute(qsTr("Clearing"), function() { playlist.clearPlaylist() })
 				}
 
-//				PlayOrderControl
-//				{
-////					onOrderChange: playlist.playOrder = order
-////					Component.onCompleted: setOrder(playlist.playOrder)
-//				}
+				PlayOrderControl
+				{
+					onOrderChange: playlist.playOrder = order
+					Component.onCompleted: setOrder(playlist.playOrder)
+				}
 			}
 		}
 	}
 
-//	PlayerControlPanel
-//	{
-//		id: playerControlPanel
+	PlayerControlPanel
+	{
+		id: playerControlPanel
 
-//		Component.onCompleted:
-//		{
-//			player.currentDurationUpdated.connect(playerControlPanel.setTrackDuration);
-//			player.currentPositionUpdated.connect(playerControlPanel.setTrackPosition);
-//			player.stateChanged.connect(playerControlPanel.setPlayerState);
-//		}
+		Component.onCompleted:
+		{
+			player.CurrentDurationUpdated.connect(playerControlPanel.setTrackDuration);
+			player.CurrentPositionUpdated.connect(playerControlPanel.setTrackPosition);
+			player.StateChanged.connect(playerControlPanel.setPlayerState);
+		}
 
-//		Component.onDestruction:
-//		{
-//			player.stateChanged.disconnect(playerControlPanel.setPlayerState);
-//			player.currentDurationUpdated.disconnect(playerControlPanel.setTrackDuration);
-//			player.currentPositionUpdated.disconnect(playerControlPanel.setTrackPosition);
-//		}
-
-//		onPrevious: playController.previous();
-
-//		onPlayPause:
-//		{
-//			if(state == AudioPlayerState.Playing)
-//				player.pause();
-//			else
-//			{
-//				if(state == AudioPlayerState.Ready && !playlist.hasTrackToPlay())
-//					playlist.calculateAndSetTrackToPlay();
-
-//				if(player.hasTrackToPlay())
-//					playController.play();
-//			}
-//		}
-
-//		onStop: player.stop()
-//		onSeek: player.seek(milliseconds)
-//		onNext: playController.next()
-//	}
+		onPrevious: playController.previous()
+		onPlayPause: playController.playPause()
+		onStop: playController.stop()
+		onSeek: playController.seek(milliseconds)
+		onNext: playController.next()
+	}
 }

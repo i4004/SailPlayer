@@ -17,9 +17,11 @@ public:
 	PlayController(AudioPlayer& player, PlaylistModel& playlist);
 	~PlayController();
 
-	Q_INVOKABLE void playPause();
 	Q_INVOKABLE void previous();
+	Q_INVOKABLE void playPause();
 	Q_INVOKABLE void playTrack(int trackIndex);
+	Q_INVOKABLE void stop();
+	Q_INVOKABLE void seek(int position);
 	Q_INVOKABLE void next();
 
 private:

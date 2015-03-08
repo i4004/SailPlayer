@@ -34,7 +34,11 @@ OTHER_FILES += \
     qml/Util.js \
     qml/pages/MainPage.qml \
     qml/controls/playlist/PlaylistItem.qml \
-    qml/controls/playlist/PlaylistSectionHeader.qml
+    qml/controls/playlist/PlaylistSectionHeader.qml \
+    qml/controls/PlayOrderControl.qml \
+    qml/controls/radio/RadioGroup.qml \
+    qml/controls/radio/RadioSwitch.qml \
+    qml/controls/PlayerControlPanel.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 

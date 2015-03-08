@@ -58,6 +58,11 @@ namespace Audio
 		emit CurrentDurationUpdated(0);
 	}
 
+	void AudioPlayer::SeekInTrack(int trackPosition)
+	{
+		SeekMs(trackPosition + _currentStartPosition);
+	}
+
 	void AudioPlayer::SetTrackToPlay(QString fullFilePath, int startPosition, int endPosition)
 	{
 		_currentFilePath = fullFilePath;
@@ -72,11 +77,6 @@ namespace Audio
 //		_nextTrackStartPosition = startPosition;
 //		_nextTracktEndPosition = endPosition;
 //		_nextTrackDataReceived = true;
-//	}
-
-//	void AudioPlayer::seek(int milliseconds)
-//	{
-//		SeekMs(milliseconds + _currentStartPosition);
 //	}
 
 //	int AudioPlayer::getCurrentPosition()

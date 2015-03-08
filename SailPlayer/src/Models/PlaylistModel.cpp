@@ -9,7 +9,7 @@ namespace Models
 		_currentPlayOrder = PlaylistEnums::RepeatPlaylist;
 		_nextTrackToPlay = NULL;
 		_currentTrackToPlay = NULL;
-//		_currentPlayingTrack = NULL;
+		_currentPlayingTrack = NULL;
 
 //		_tracksLoader = new TracksLoader(_tracksFactory, _filesFactory);
 	}
@@ -102,13 +102,13 @@ namespace Models
 		return true;
 	}
 
-//	void PlaylistModel::setPlayerState(AudioPlayerEnums::AudioPlayerState state)
-//	{
-//		if(state == AudioPlayerEnums::Ready || state == AudioPlayerEnums::Paused)
-//			SetPlayingTrack(false);
-//		else
-//			SetPlayingTrack(true);
-//	}
+	void PlaylistModel::SetPlayerState(AudioPlayerEnums::AudioPlayerState state)
+	{
+		if(state == AudioPlayerEnums::Ready || state == AudioPlayerEnums::Paused)
+			SetPlayingTrack(false);
+		else
+			SetPlayingTrack(true);
+	}
 
 //	QString PlaylistModel::requestNextTrack()
 //	{
@@ -143,16 +143,16 @@ namespace Models
 //		_currentPlayingTrack = NULL;
 //	}
 
-//	void PlaylistModel::SetPlayingTrack(bool isPlaying)
-//	{
-//		if(_currentPlayingTrack != NULL)
-//			_currentPlayingTrack->SetPlaying(false);
+	void PlaylistModel::SetPlayingTrack(bool isPlaying)
+	{
+		if(_currentPlayingTrack != NULL)
+			_currentPlayingTrack->SetPlaying(false);
 
-//		_currentPlayingTrack = _currentTrackToPlay;
+		_currentPlayingTrack = _currentTrackToPlay;
 
-//		if(_currentPlayingTrack != NULL)
-//			_currentPlayingTrack->SetPlaying(isPlaying);
+		if(_currentPlayingTrack != NULL)
+			_currentPlayingTrack->SetPlaying(isPlaying);
 
-//		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsPlayingRole));
-//	}
+		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsPlayingRole));
+	}
 }

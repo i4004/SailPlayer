@@ -1,30 +1,30 @@
 #ifndef PLAYLISTMODEL_HPP
 #define PLAYLISTMODEL_HPP
 
-//#include "../Audio/AudioPlayerEnums.hpp"
+#include "../Audio/AudioPlayerEnums.hpp"
 //#include "../Playlist/TracksLoader.hpp"
 //#include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp"
 //#include "../Playlist/TracksFactory.hpp"
 #include "../Playlist/PlaylistEnums.hpp"
 #include "PlaylistModelBase.hpp"
 
-//using namespace Audio;
+using namespace Audio;
 
 namespace Models
 {
 	class PlaylistModel : public PlaylistModelBase
 	{
 		Q_OBJECT
-//		Q_PROPERTY(SailPlayer::PlayOrder playOrder READ GetPlayOrder WRITE SetPlayOrder NOTIFY playOrderChanged)
+		Q_PROPERTY(Playlist::PlaylistEnums::PlayOrder playOrder READ GetPlayOrder WRITE SetPlayOrder NOTIFY PlayOrderChanged)
 
 	public:
 		explicit PlaylistModel(QObject* parent = 0);
 		~PlaylistModel();
 
-//		void SetPlayOrder(SailPlayer::PlayOrder order) { _currentPlayOrder = order; }
-//		SailPlayer::PlayOrder GetPlayOrder() { return _currentPlayOrder; }
+		void SetPlayOrder(PlaylistEnums::PlayOrder order) { _currentPlayOrder = order; }
+		PlaylistEnums::PlayOrder GetPlayOrder() { return _currentPlayOrder; }
 
-//		// Playlist controls
+		// Playlist controls
 
 //		Q_INVOKABLE void addTracksFromPath(QString directoryPath);
 //		Q_INVOKABLE void clearPlaylist();
@@ -38,9 +38,9 @@ namespace Models
 //		Q_INVOKABLE QString requestNextTrack();
 //		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
 
-//		// Info
+		// Info
 
-//		Q_INVOKABLE bool hasTrackToPlay() { return _currentTrackToPlay != NULL; }
+		bool HasTrackToPlay() { return _currentTrackToPlay != NULL; }
 //		Q_INVOKABLE int getNextStartPosition();
 //		Q_INVOKABLE int getNextEndPosition();
 //		Q_INVOKABLE int getCurrentTrackIndex();
@@ -48,12 +48,12 @@ namespace Models
 //		// Return a copy of current playing track, shoube be delete by method user!
 //		Q_INVOKABLE QObject* getCurrentPlayingTrack();
 
-//	public slots:
-//		Q_INVOKABLE void setPlayerState(AudioPlayerEnums::AudioPlayerState state);
+	public slots:
+		void SetPlayerState(AudioPlayerEnums::AudioPlayerState state);
 
 	signals:
 		void CurrentTrackToPlayDataUpdated(QString filePath, int startPosition, int endPosition);
-//		void playOrderChanged();
+		void PlayOrderChanged();
 
 	private:
 //		TracksLoader* _tracksLoader;
@@ -66,13 +66,13 @@ namespace Models
 
 		Track* _nextTrackToPlay;
 		Track* _currentTrackToPlay;
-//		Track* _currentPlayingTrack;
+		Track* _currentPlayingTrack;
 
 		bool SetTrackToPlayFromNextTrack();
 //		void ResetTracksData();
 
-//		// Mark track to play as playing and unmarking previously playing track
-//		void SetPlayingTrack(bool isPlaying);
+		// Mark track to play as playing and unmarking previously playing track
+		void SetPlayingTrack(bool isPlaying);
 	};
 }
 

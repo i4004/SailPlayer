@@ -21,11 +21,11 @@ namespace Audio
 		void Play();
 		void Pause();
 		void Stop();
+		void SeekInTrack(int trackPosition);
 
 //		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
-//		Q_INVOKABLE void seek(int milliseconds);
 
-//		Q_INVOKABLE bool hasTrackToPlay() { return !_currentFilePath.isNull() && !_currentFilePath.isEmpty(); }
+		bool HasTrackToPlay() { return !_currentFilePath.isNull() && !_currentFilePath.isEmpty(); }
 //		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
 //		Q_INVOKABLE int getCurrentPosition();
 
