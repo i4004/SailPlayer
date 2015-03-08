@@ -19,8 +19,6 @@ PlayController::PlayController(AudioPlayer& player, PlaylistModel& playlist) : _
 	connect(&_player, SIGNAL(AboutToFinish()), this, SLOT(OnAboutToFinish()));
 	connect(&_player, SIGNAL(EndOfStream()), this, SLOT(OnEndOfStream()));
 	connect(&_player, SIGNAL(StateChanged(AudioPlayerEnums::AudioPlayerState)), this, SLOT(OnStateChanged(AudioPlayerEnums::AudioPlayerState)));
-
-//			player.playbackError.connect(messagePage.displayMessage);
 }
 
 PlayController::~PlayController()

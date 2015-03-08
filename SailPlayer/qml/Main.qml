@@ -1,9 +1,12 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
+import "controls"
 
 ApplicationWindow
 {
+	Component.onCompleted: player.PlaybackError.connect(messagePage.displayMessage);
+
 //	Timer
 //	{
 //		id: elapseTimer
@@ -42,11 +45,11 @@ ApplicationWindow
 //		Component.onDestruction: saveCachedTracks()
 //	}
 
-//	MessagePageDisplayer
-//	{
-//		id: messagePage
-//		title: qsTr("Playback error")
-//	}
+	MessagePageDisplayer
+	{
+		id: messagePage
+		title: qsTr("Playback error")
+	}
 
 //	NotificationPanel
 //	{
