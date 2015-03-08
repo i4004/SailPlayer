@@ -11,6 +11,7 @@ SailPlayerController::SailPlayerController(QQuickView* view)
 	LoadStartupSettings();
 
 	connect(&_settings, SIGNAL(LastFmSessionKeyChanged(QString)), &_scrobbler, SLOT(SetSessionKey(QString)));
+	connect(&_settings, SIGNAL(ScrobblingIsEnabledChanged(bool)), _playController, SLOT(SetScrobblingIsEnabled(bool)));
 
 	ExposeComponentsToQml(view);
 }
@@ -41,6 +42,7 @@ void SailPlayerController::LoadStartupSettings()
 	_playlist.AddTracks(_settings.GetPlaylist());
 
 	_scrobbler.SetSessionKey(_settings.GetLastFmSessionKey());
+	_playController->SetScrobblingIsEnabled(_settings.GetScrobblingIsEnabled());
 
 	bool restoreLastPlayingPosition = _settings.GetRestoreLastPlayingPosition();
 	int lastTrackIndex = _settings.GetLastTrackIndex();

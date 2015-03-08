@@ -32,6 +32,7 @@ public slots:
 	void OnAboutToFinish();
 	void OnEndOfStream();
 	void OnStateChanged(AudioPlayerEnums::AudioPlayerState state);
+	void SetScrobblingIsEnabled(bool enabled);
 
 private:
 	AudioPlayer& _player;
@@ -41,7 +42,17 @@ private:
 	bool _needToSetStartupPosition;
 	int _startupPosition;
 	int _startupTrackIndex;
-	//		property bool needToSetStartupTrackLastFmNowPlaying: false
+	bool _needToSetStartupTrackLastFmNowPlaying;
+	bool _scrobblingIsEnabled;
+	bool _isScrobbled;
+	QTimer _elapseTimer;
+	int _elapsed;
+	QDateTime _trackPlayStartTime;
+
+	void StartScrobbleMotitoring();
+
+private slots:
+	void OnElapseTimer();
 };
 
 #endif // PLAYCONTROLLER_HPP

@@ -16,6 +16,14 @@ public:
 	LastFmController();
 	LastFmController(LastFmScrobbler& scrobbler, SailPlayerSettings& settings);
 
+	Q_INVOKABLE void authenticate(QString userName, QString password);
+	Q_INVOKABLE void sendNowPlaying(Track* currentPlayingTrack);
+	Q_INVOKABLE void scrobbleTrack(Track* playedTrack, QDateTime playStartTime);
+
+public slots:
+	void OnAuthenticated(QString sessionKey);
+	void OnTracksSubmitted();
+
 private:
 	LastFmScrobbler& _scrobbler;
 	SailPlayerSettings& _settings;

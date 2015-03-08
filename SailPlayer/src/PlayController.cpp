@@ -11,6 +11,12 @@ using namespace Playlist;
 PlayController::PlayController(AudioPlayer& player, PlaylistModel& playlist, LastFmController& lastFmController) : _player(player), _playlist(playlist), _lastFmController(lastFmController)
 {
 	_needToSetStartupPosition = false;
+	_needToSetStartupTrackLastFmNowPlaying = false;
+	_scrobblingIsEnabled = false;
+	_isScrobbled = false;
+	_elapseTimer.setTimerType(Qt::VeryCoarseTimer);
+	_elapseTimer.setInterval(1000);
+	_elapsed = 0;
 
 	connect(&_playlist, SIGNAL(CurrentTrackToPlayDataUpdated(QString, int, int)), &_player, SLOT(SetTrackToPlay(QString, int, int)));
 	connect(&_player, SIGNAL(StateChanged(AudioPlayerEnums::AudioPlayerState)), &_playlist, SLOT(SetPlayerState(AudioPlayerEnums::AudioPlayerState)));
@@ -19,6 +25,8 @@ PlayController::PlayController(AudioPlayer& player, PlaylistModel& playlist, Las
 	connect(&_player, SIGNAL(AboutToFinish()), this, SLOT(OnAboutToFinish()));
 	connect(&_player, SIGNAL(EndOfStream()), this, SLOT(OnEndOfStream()));
 	connect(&_player, SIGNAL(StateChanged(AudioPlayerEnums::AudioPlayerState)), this, SLOT(OnStateChanged(AudioPlayerEnums::AudioPlayerState)));
+
+	connect(&_elapseTimer, SIGNAL(timeout()), this, SLOT(OnElapseTimer()));
 }
 
 PlayController::~PlayController()
@@ -109,13 +117,13 @@ void PlayController::OnStreamStarted()
 		if(_startupPosition != -1)
 			_player.SeekInTrack(_startupPosition);
 
-//		needToSetStartupTrackLastFmNowPlaying = true;
+		_needToSetStartupTrackLastFmNowPlaying = true;
 	}
 
 	if(_player.IsStreamFromNextTrack() && !_playlist.SetTrackToPlayAndPlayingFromNextTrack())
 		_player.Stop();
-//			else if(!needToSetStartupTrackLastFmNowPlaying && settings.scrobblingIsEnabled)
-//				startScrobbleMotitoring();
+	else if(!_needToSetStartupTrackLastFmNowPlaying && _scrobblingIsEnabled)
+		StartScrobbleMotitoring();
 }
 
 void PlayController::OnAboutToFinish()
@@ -130,30 +138,49 @@ void PlayController::OnEndOfStream()
 
 void PlayController::OnStateChanged(AudioPlayerEnums::AudioPlayerState state)
 {
-//	if(state == AudioPlayerState.Ready)
-//			needToSetStartupTrackLastFmNowPlaying = false;
+	if(state == AudioPlayerEnums::Ready)
+		_needToSetStartupTrackLastFmNowPlaying = false;
 
-	//			if(state == AudioPlayerState.Playing)
-	//			{
-	//				if(settings.scrobblingIsEnabled)
-	//				{
-	//					if(needToSetStartupTrackLastFmNowPlaying)
-	//					{
-	//						needToSetStartupTrackLastFmNowPlaying = false;
-	//						startScrobbleMotitoring();
-	//					}
+	if(state == AudioPlayerEnums::Playing)
+	{
+		if(_scrobblingIsEnabled)
+		{
+			if(_needToSetStartupTrackLastFmNowPlaying)
+			{
+				_needToSetStartupTrackLastFmNowPlaying = false;
+				StartScrobbleMotitoring();
+			}
 
-	//					elapseTimer.start();
-	//				}
-	//			}
-	//			else
-	//				elapseTimer.stop();
+			_elapseTimer.start();
+		}
+	}
+	else
+		_elapseTimer.stop();
+}
 
-	//		function startScrobbleMotitoring()
-	//		{
-	//			elapseTimer.startTime = new Date();
-	//			scrobbler.sendNowPlaying(playlist.getCurrentPlayingTrack());
-	//			elapseTimer.elapsed = 0;
-	//			scrobbler.scrobbled = false;
-	//		}
+void PlayController::SetScrobblingIsEnabled(bool enabled)
+{
+	_scrobblingIsEnabled = enabled;
+}
+
+void PlayController::StartScrobbleMotitoring()
+{
+	_trackPlayStartTime = QDateTime::currentDateTime();
+	_lastFmController.sendNowPlaying(_playlist.GetCurrentPlayingTrack());
+	_elapsed = 0;
+	_isScrobbled = false;
+}
+
+void PlayController::OnElapseTimer()
+{
+	_elapsed++;
+	int currentDuration = _player.GetCurrentDuration();
+
+	// If track duration is more than 5 seconds and is played more than half of track length or more than 4 minutes
+	if(!_isScrobbled && currentDuration > 5000 && (_elapsed * 1000 >= currentDuration / 2 || _elapsed >= 2401000))
+	{
+		_isScrobbled = true;
+		qDebug() << "scrobble!";
+//		_lastFmController.scrobbleTrack(_playlist.GetCurrentPlayingTrack(), _trackPlayStartTime);
+	}
 }

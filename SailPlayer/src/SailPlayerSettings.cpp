@@ -96,6 +96,8 @@ bool SailPlayerSettings::GetScrobblingIsEnabled()
 void SailPlayerSettings::SetScrobblingIsEnabled(bool enabled)
 {
 	settings.setValue("Last.fm/ScrobblingIsEnabled", enabled);
+
+	emit ScrobblingIsEnabledChanged(enabled);
 }
 
 QString SailPlayerSettings::GetLastFmSessionKey()

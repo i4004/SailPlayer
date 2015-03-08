@@ -37,9 +37,7 @@ namespace Models
 		int GetNextStartPosition();
 		int GetNextEndPosition();
 		int GetCurrentTrackIndex();
-
-//		// Return a copy of current playing track, shoube be delete by method user!
-//		Q_INVOKABLE QObject* getCurrentPlayingTrack();
+		Track* GetCurrentPlayingTrack();
 
 	public slots:
 		void SetPlayerState(AudioPlayerEnums::AudioPlayerState state);

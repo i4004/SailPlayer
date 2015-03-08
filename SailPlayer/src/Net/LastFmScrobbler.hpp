@@ -18,8 +18,8 @@ namespace Net
 	class LastFmScrobbler  : public QObject
 	{
 		Q_OBJECT
-//		Q_ENUMS(LastFmError)
-//		Q_PROPERTY(int numberOfScrobbleCacheItems READ GetScrobbleCacheItemsNumber NOTIFY numberOfScrobbleCacheItemsChanged)
+		Q_ENUMS(LastFmError)
+		Q_PROPERTY(int numberOfScrobbleCacheItems READ GetScrobbleCacheItemsNumber NOTIFY NumberOfScrobbleCacheItemsChanged)
 
 	public:
 		LastFmScrobbler();
@@ -45,25 +45,24 @@ namespace Net
 			RateLimitExceeded = 29
 		};
 
+		void Authenticate(QString userName, QString password);
+		void SendNowPlaying(Track* track);
+		bool AddToCache(Track* playedTrack, QDateTime playStartTime);
+		void AddToCache(QMap<QDateTime, Track*> tracks);
+		void ScrobbleTracksFromCache();
+
 		QString GetSessionKey() { return _sessionKey; }
+		QMap<QDateTime, Track*> GetCache(){ return _scrobbleCache; }
 
 	public slots:
 		void SetSessionKey(QString key) { _sessionKey = key; }
 
-//		Q_INVOKABLE void authenticate(QString userName, QString password);
-//		Q_INVOKABLE void sendNowPlaying(QObject* currentPlayingTrack);
-//		Q_INVOKABLE void scrobbleTrack(QObject* playedTrack, QDateTime playStartTime);
-
-//		Q_INVOKABLE void submitTracksFromCache();
-//		Q_INVOKABLE void loadSavedTracksToCache();
-//		Q_INVOKABLE void saveCachedTracks();
-
-//	signals:
-//		void authenticated(QString sessionKey);
-//		void nowPlaying();
-//		void errorResponse(LastFmError error, QString description);
-//		void numberOfScrobbleCacheItemsChanged();
-//		void tracksSubmitted();
+	signals:
+		void Authenticated(QString sessionKey);
+		void NowPlaying();
+		void ErrorResponse(LastFmError error, QString description);
+		void NumberOfScrobbleCacheItemsChanged();
+		void TracksSubmitted();
 
 	private:
 		LastFmQueryBuilder _queryBuilder;
