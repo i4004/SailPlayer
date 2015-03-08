@@ -42,4 +42,5 @@ HEADERS += \
     src/Playlist/Track.hpp \
     src/Playlist/PlaylistEnums.hpp \
     src/Models/PlaylistModelBase.hpp \
-    src/Models/PlaylistModel.hpp
+    src/Models/PlaylistModel.hpp \
+    src/Audio/AudioPlayerEnums.hpp
