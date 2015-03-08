@@ -43,4 +43,5 @@ HEADERS += \
     src/Playlist/PlaylistEnums.hpp \
     src/Models/PlaylistModelBase.hpp \
     src/Models/PlaylistModel.hpp \
-    src/Audio/AudioPlayerEnums.hpp
+    src/Audio/AudioPlayerEnums.hpp \
+    src/Audio/GstEqualizerBandState.hpp
