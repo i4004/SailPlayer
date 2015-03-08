@@ -29,21 +29,21 @@ namespace Audio
 //		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
 //		Q_INVOKABLE int getCurrentPosition();
 
-//		void OnStreamStart();
-//		void OnAboutToFinish();
-//		void OnEndOfStream();
-//		void OnErrorMessage(QString message);
+		void OnStreamStart();
+		void OnAboutToFinish();
+		void OnEndOfStream();
+		void OnErrorMessage(QString message);
 
 	public slots:
 		void SetTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
 
-//	signals:
-//		void currentPositionUpdated(int milliseconds);
-//		void currentDurationUpdated(int duration);
-//		void aboutToFinish();
-//		void streamStarted();
-//		void endOfStream();
-//		void playbackError(QString message);
+	signals:
+		void CurrentPositionUpdated(int milliseconds);
+		void CurrentDurationUpdated(int duration);
+		void AboutToFinish();
+		void StreamStarted();
+		void EndOfStream();
+		void PlaybackError(QString message);
 
 	private:
 		// Current state
@@ -51,32 +51,32 @@ namespace Audio
 		QString _currentFilePath;
 		int _currentStartPosition;
 		int _currentEndPosition;
-//		bool _needToSetCurrentPosition;
-//		QTimer _currentPositionTimer;
-//		bool _currentPositionReady;
+		bool _needToSetCurrentPosition;
+		QTimer _currentPositionTimer;
+		bool _currentPositionReady;
 
-//		QString _nextTrackFilePath;
-//		int _nextTrackStartPosition;
-//		int _nextTracktEndPosition;
-//		bool _nextTrackDataReceived;
-//		bool _isStreamFromNextTrack;
+		QString _nextTrackFilePath;
+		int _nextTrackStartPosition;
+		int _nextTracktEndPosition;
+		bool _nextTrackDataReceived;
+		bool _isStreamFromNextTrack;
 
-//		// Internal controls
+		// Internal controls
 
-//		int GetCurrentPositionMs();
-//		int GetCurrentDuration();
-//		int GetCurrentFileDurationMs();
+		int GetCurrentPositionMs();
+		int GetCurrentDuration();
+		int GetCurrentFileDurationMs();
 
-//		void SeekMs(int position);
-//		void SeekToCurrentPosition();
-//		void SetCurrentPositionsFromNextTrack();
-//		void SetFileToPlayFromNextTrack();
-//		void CalculateNeedToSetCurrentPosition();
+		void SeekMs(int position);
+		void SeekToCurrentPosition();
+		void SetCurrentPositionsFromNextTrack();
+		void SetFileToPlayFromNextTrack();
+		void CalculateNeedToSetCurrentPosition();
 
-//		void WaitForNextTrackData();
+		void WaitForNextTrackData();
 
-//	private slots:
-//		void OnCurrentPositionTimerCallback();
+	private slots:
+		void OnCurrentPositionTimerCallback();
 	};
 }
 
