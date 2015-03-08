@@ -24,9 +24,22 @@ public:
 	Q_INVOKABLE void seek(int position);
 	Q_INVOKABLE void next();
 
+	void SetStartupData(int trackIndex, int position);
+
+public slots:
+	void OnStreamStarted();
+	void OnAboutToFinish();
+	void OnEndOfStream();
+	void OnStateChanged(AudioPlayerEnums::AudioPlayerState state);
+
 private:
 	AudioPlayer& _player;
 	PlaylistModel& _playlist;
+
+	bool _needToSetStartupPosition;
+	int _startupPosition;
+	int _startupTrackIndex;
+	//		property bool needToSetStartupTrackLastFmNowPlaying: false
 };
 
 #endif // PLAYCONTROLLER_HPP

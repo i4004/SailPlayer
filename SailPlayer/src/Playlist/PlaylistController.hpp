@@ -19,6 +19,7 @@ namespace Playlist
 		~PlaylistController();
 
 		Q_INVOKABLE void addTracksFromPath(QString directoryPath);
+		Q_INVOKABLE void clear();
 
 	private:
 		PlaylistModel& _playlist;

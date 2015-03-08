@@ -11,7 +11,6 @@ namespace Audio
 	class AudioPlayer : public AudioPlayerBase
 	{
 		Q_OBJECT
-//		Q_PROPERTY(int currentDuration READ GetCurrentDuration NOTIFY currentDurationUpdated)
 
 	public:
 		AudioPlayer();
@@ -23,11 +22,12 @@ namespace Audio
 		void Stop();
 		void SeekInTrack(int trackPosition);
 
-//		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
+		void SetNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
 
 		bool HasTrackToPlay() { return !_currentFilePath.isNull() && !_currentFilePath.isEmpty(); }
-//		Q_INVOKABLE bool isStreamFromNextTrack() { return _isStreamFromNextTrack; }
-//		Q_INVOKABLE int getCurrentPosition();
+		bool IsStreamFromNextTrack() { return _isStreamFromNextTrack; }
+		int GetCurrentTrackPosition();
+		int GetCurrentDuration();
 
 		void OnStreamStart();
 		void OnAboutToFinish();
@@ -64,7 +64,6 @@ namespace Audio
 		// Internal controls
 
 		int GetCurrentPositionMs();
-		int GetCurrentDuration();
 		int GetCurrentFileDurationMs();
 
 		void SeekMs(int position);

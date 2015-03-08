@@ -20,9 +20,7 @@ namespace Models
 		void SetPlayOrder(PlaylistEnums::PlayOrder order) { _currentPlayOrder = order; }
 		PlaylistEnums::PlayOrder GetPlayOrder() { return _currentPlayOrder; }
 
-		// Playlist controls
-
-		Q_INVOKABLE void clearPlaylist();
+		void Clear();
 
 //		// Calculates next track to play
 		bool CalculateNextTrackToPlay(PlaylistEnums::PlayDirection direction = PlaylistEnums::Next, int customIndex = -1);
@@ -30,15 +28,15 @@ namespace Models
 		// Calculates next track to play and sets current track to play from it
 		bool CalculateAndSetTrackToPlay(PlaylistEnums::PlayDirection direction = PlaylistEnums::Next, int customIndex = -1);
 
-//		Q_INVOKABLE QString requestNextTrack();
-//		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
+		QString RequestNextTrack();
+		bool SetTrackToPlayAndPlayingFromNextTrack();
 
 		// Info
 
 		bool HasTrackToPlay() { return _currentTrackToPlay != NULL; }
-//		Q_INVOKABLE int getNextStartPosition();
-//		Q_INVOKABLE int getNextEndPosition();
-//		Q_INVOKABLE int getCurrentTrackIndex();
+		int GetNextStartPosition();
+		int GetNextEndPosition();
+		int GetCurrentTrackIndex();
 
 //		// Return a copy of current playing track, shoube be delete by method user!
 //		Q_INVOKABLE QObject* getCurrentPlayingTrack();

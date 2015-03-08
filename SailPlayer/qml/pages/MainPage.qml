@@ -100,7 +100,7 @@ Page
 				MenuItem
 				{
 					text: qsTr("Clear Playlist")
-					onClicked: remorse.execute(qsTr("Clearing"), function() { playlist.clearPlaylist() })
+					onClicked: remorse.execute(qsTr("Clearing"), function() { playlistController.clear() })
 				}
 
 				PlayOrderControl

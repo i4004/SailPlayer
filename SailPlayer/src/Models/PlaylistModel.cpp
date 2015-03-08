@@ -12,7 +12,7 @@ namespace Models
 		_currentPlayingTrack = NULL;
 	}
 
-	void PlaylistModel::clearPlaylist()
+	void PlaylistModel::Clear()
 	{
 		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
 
@@ -48,22 +48,22 @@ namespace Models
 		return true;
 	}
 
-//	bool PlaylistModel::setTrackToPlayAndPlayingFromNextTrack()
-//	{
-//		bool result = SetTrackToPlayFromNextTrack();
+	bool PlaylistModel::SetTrackToPlayAndPlayingFromNextTrack()
+	{
+		bool result = SetTrackToPlayFromNextTrack();
 
-//		SetPlayingTrack(true);
+		SetPlayingTrack(true);
 
-//		return result;
-//	}
+		return result;
+	}
 
-//	int PlaylistModel::getCurrentTrackIndex()
-//	{
-//		if(_currentTrackToPlay == NULL)
-//			return -1;
+	int PlaylistModel::GetCurrentTrackIndex()
+	{
+		if(_currentTrackToPlay == NULL)
+			return -1;
 
-//		return _tracksList.indexOf(_currentTrackToPlay);
-//	}
+		return _tracksList.indexOf(_currentTrackToPlay);
+	}
 
 //	QObject* PlaylistModel::getCurrentPlayingTrack()
 //	{
@@ -97,31 +97,31 @@ namespace Models
 			SetPlayingTrack(true);
 	}
 
-//	QString PlaylistModel::requestNextTrack()
-//	{
-//		bool result = calculateNextTrackToPlay();
+	QString PlaylistModel::RequestNextTrack()
+	{
+		bool result = CalculateNextTrackToPlay();
 
-//		if(result == true)
-//			return _nextTrackToPlay->GetFullFilePath();
+		if(result == true)
+			return _nextTrackToPlay->GetFullFilePath();
 
-//		return QString();
-//	}
+		return QString();
+	}
 
-//	int PlaylistModel::getNextStartPosition()
-//	{
-//		if(_nextTrackToPlay != NULL)
-//			return _nextTrackToPlay->GetStartPosition();
-//		else
-//			return -1;
-//	}
+	int PlaylistModel::GetNextStartPosition()
+	{
+		if(_nextTrackToPlay != NULL)
+			return _nextTrackToPlay->GetStartPosition();
+		else
+			return -1;
+	}
 
-//	int PlaylistModel::getNextEndPosition()
-//	{
-//		if(_nextTrackToPlay != NULL)
-//			return _nextTrackToPlay->GetEndPosition();
-//		else
-//			return -1;
-//	}
+	int PlaylistModel::GetNextEndPosition()
+	{
+		if(_nextTrackToPlay != NULL)
+			return _nextTrackToPlay->GetEndPosition();
+		else
+			return -1;
+	}
 
 	void PlaylistModel::ResetTracksData()
 	{

@@ -17,4 +17,9 @@ namespace Playlist
 		_filesFactory.SetDirectoryPath(directoryPath);
 		_playlist.AddTracks(_tracksLoader->Build());
 	}
+
+	void PlaylistController::clear()
+	{
+		_playlist.Clear();
+	}
 }

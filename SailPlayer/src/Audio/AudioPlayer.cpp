@@ -71,20 +71,13 @@ namespace Audio
 		SetFileToPlay(fullFilePath);
 	}
 
-//	void AudioPlayer::setNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition)
-//	{
-//		_nextTrackFilePath = fullFilePath;
-//		_nextTrackStartPosition = startPosition;
-//		_nextTracktEndPosition = endPosition;
-//		_nextTrackDataReceived = true;
-//	}
-
-//	int AudioPlayer::getCurrentPosition()
-//	{
-//		int position = GetCurrentPositionMs();
-
-//		return position == -1 ? -1 : position - _currentStartPosition;
-//	}
+	void AudioPlayer::SetNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition)
+	{
+		_nextTrackFilePath = fullFilePath;
+		_nextTrackStartPosition = startPosition;
+		_nextTracktEndPosition = endPosition;
+		_nextTrackDataReceived = true;
+	}
 
 	void AudioPlayer::OnStreamStart()
 	{
@@ -133,6 +126,13 @@ namespace Audio
 	{
 		gint64 position = GetCurrentPosition();
 		return position == -1 ? -1 : position / MillisecondsConvertion;
+	}
+
+	int AudioPlayer::GetCurrentTrackPosition()
+	{
+		int position = GetCurrentPositionMs();
+
+		return position < 1  ? -1 : position - _currentStartPosition;
 	}
 
 	int AudioPlayer::GetCurrentDuration()

@@ -33,21 +33,18 @@ void SailPlayerController::LoadStartupSettings()
 	_playlist.SetPlayOrder(_settings.GetPlayOrder());
 	_playlist.AddTracks(_settings.GetPlaylist());
 
-//	bool restoreLastPlayingPosition = _settings.GetRestoreLastPlayingPosition();
-//	bool lastTrackIndex = _settings.GetLastTrackIndex();
+	bool restoreLastPlayingPosition = _settings.GetRestoreLastPlayingPosition();
+	int lastTrackIndex = _settings.GetLastTrackIndex();
+	int lastPlayingPosition = _settings.GetLastPlayingPosition();
 
-//	if(restoreLastPlayingPosition && lastTrackIndex != -1)
-//	{
-////				needToSetStartupPosition = true;
-//		_playlist.CalculateAndSetTrackToPlay(SailPlayer::ByIndex, lastTrackIndex);
-////				player.pause();
-//	}
+	if(restoreLastPlayingPosition)
+		_playController->SetStartupData(lastTrackIndex, lastPlayingPosition);
 }
 
 void SailPlayerController::SaveOnExitSettings()
 {
 	_settings.SetPlayOrder(_playlist.GetPlayOrder());
 	_settings.SetPlaylist(_playlist.GetTracks());
-//	_settings.SetLastTrackIndex(_playlist.getCurrentTrackIndex());
-//	_settings.SetLastPlayingPosition(_player.getCurrentPosition());
+	_settings.SetLastTrackIndex(_playlist.GetCurrentTrackIndex());
+	_settings.SetLastPlayingPosition(_player.GetCurrentTrackPosition());
 }
