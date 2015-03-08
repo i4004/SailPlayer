@@ -14,15 +14,15 @@ void SailPlayerSettings::SetLastAddFilesDirectoryPath(QString value)
 	emit lastAddFilesDirectoryPathChanged();
 }
 
-//SailPlayer::PlayOrder SailPlayerSettings::GetPlayOrder()
-//{
-//	return (SailPlayer::PlayOrder)settings.value("PlayOrder", SailPlayer::RepeatPlaylist).toInt();
-//}
+PlaylistEnums::PlayOrder SailPlayerSettings::GetPlayOrder()
+{
+	return (PlaylistEnums::PlayOrder)settings.value("PlayOrder", PlaylistEnums::RepeatPlaylist).toInt();
+}
 
-//void SailPlayerSettings::SetPlayOrder(SailPlayer::PlayOrder playOrder)
-//{
-//	settings.setValue("PlayOrder", playOrder);
-//}
+void SailPlayerSettings::SetPlayOrder(PlaylistEnums::PlayOrder playOrder)
+{
+	settings.setValue("PlayOrder", playOrder);
+}
 
 QList<Track*> SailPlayerSettings::GetPlaylist()
 {

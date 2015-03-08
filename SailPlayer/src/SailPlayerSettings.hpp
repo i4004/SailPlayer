@@ -6,12 +6,10 @@
 #include <QSettings>
 #include <QString>
 
-//#include "Audio/AudioPlayer.hpp"
+#include "Playlist/PlaylistEnums.hpp"
 #include "Playlist/Track.hpp"
-//#include "SailPlayer.hpp"
 
 using namespace Playlist;
-//using namespace Audio;
 
 class SailPlayerSettings : public QObject
 {
@@ -48,8 +46,8 @@ public:
 	QList<Track*> GetPlaylist();
 	void SetPlaylist(QList<Track*> tracks);
 
-//	SailPlayer::PlayOrder GetPlayOrder();
-//	void SetPlayOrder(SailPlayer::PlayOrder playOrder);
+	PlaylistEnums::PlayOrder GetPlayOrder();
+	void SetPlayOrder(PlaylistEnums::PlayOrder playOrder);
 
 	int GetLastTrackIndex();
 	void SetLastTrackIndex(int currentTrackIndex);
