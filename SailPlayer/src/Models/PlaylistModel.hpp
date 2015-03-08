@@ -2,9 +2,6 @@
 #define PLAYLISTMODEL_HPP
 
 #include "../Audio/AudioPlayerEnums.hpp"
-//#include "../Playlist/TracksLoader.hpp"
-//#include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp"
-//#include "../Playlist/TracksFactory.hpp"
 #include "../Playlist/PlaylistEnums.hpp"
 #include "PlaylistModelBase.hpp"
 
@@ -19,15 +16,13 @@ namespace Models
 
 	public:
 		explicit PlaylistModel(QObject* parent = 0);
-		~PlaylistModel();
 
 		void SetPlayOrder(PlaylistEnums::PlayOrder order) { _currentPlayOrder = order; }
 		PlaylistEnums::PlayOrder GetPlayOrder() { return _currentPlayOrder; }
 
 		// Playlist controls
 
-//		Q_INVOKABLE void addTracksFromPath(QString directoryPath);
-//		Q_INVOKABLE void clearPlaylist();
+		Q_INVOKABLE void clearPlaylist();
 
 //		// Calculates next track to play
 		bool CalculateNextTrackToPlay(PlaylistEnums::PlayDirection direction = PlaylistEnums::Next, int customIndex = -1);
@@ -56,10 +51,6 @@ namespace Models
 		void PlayOrderChanged();
 
 	private:
-//		TracksLoader* _tracksLoader;
-//		TracksFactory _tracksFactory;
-//		DirectoryRecursiveMultimediaFilesListFactory _filesFactory;
-
 		// Current playing data
 
 		PlaylistEnums::PlayOrder _currentPlayOrder;
@@ -69,7 +60,7 @@ namespace Models
 		Track* _currentPlayingTrack;
 
 		bool SetTrackToPlayFromNextTrack();
-//		void ResetTracksData();
+		void ResetTracksData();
 
 		// Mark track to play as playing and unmarking previously playing track
 		void SetPlayingTrack(bool isPlaying);

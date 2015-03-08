@@ -2,46 +2,26 @@
 #include <QtQuick>
 #include <sailfishapp.h>
 
-//#include "Audio/AudioPlayerEnums.hpp"
-//#include "Net/LastFmRequestBuilder.hpp"
-//#include "SailPlayer.hpp"
+#include "IO/FsHelper.hpp"
+#include "Models/FsRecordsListModel.hpp"
 #include "Playlist/PlaylistEnums.hpp"
 #include "SailPlayerController.hpp"
-//#include "SailPlayerSettings.hpp"
 
-//using namespace Audio;
-//using namespace Net;
-
-//#include "Audio/AudioPlayer.hpp"
-//#include "Cue/CueSheetReader.hpp"
-//#include "IO/FsHelper.hpp"
-//#include "Models/FsRecordsListModel.hpp"
-//#include "Models/PlaylistModel.hpp"
-//#include "Net/LastFmScrobbler.hpp"
-
-//using namespace IO;
-//using namespace Models;
+using namespace IO;
 using namespace Playlist;
+
+//using namespace Models;
 
 int main(int argc, char *argv[])
 {
-//	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayDirection", 1, 0, "PlayDirection");
-//	qRegisterMetaType<SailPlayer::PlayDirection>("SailPlayer::PlayDirection");
-
 	qmlRegisterType<PlaylistEnums>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
 	qRegisterMetaType<PlaylistEnums::PlayOrder>("PlaylistEnums::PlayOrder");
 
 	qmlRegisterType<AudioPlayerEnums>("harbour.sail.player.AudioPlayerState", 1, 0, "AudioPlayerState");
 	qRegisterMetaType<AudioPlayerEnums::AudioPlayerState>("AudioPlayerEnums::AudioPlayerState");
 
-//	qmlRegisterType<AudioPlayer>("harbour.sail.player.AudioPlayer", 1, 0, "AudioPlayer");
-
-//	qmlRegisterType<FsHelper>("harbour.sail.player.FsHelper", 1, 0, "FsHelper");
-//	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
-
-//	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmScrobbler", 1, 0, "LastFmScrobbler");
-//	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmError", 1, 0, "LastFmError");
-//	qRegisterMetaType<LastFmScrobbler::LastFmError>("LastFmScrobbler::LastFmError");
+	qmlRegisterType<FsHelper>("harbour.sail.player.FsHelper", 1, 0, "FsHelper");
+	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
 
 	// Application description
 

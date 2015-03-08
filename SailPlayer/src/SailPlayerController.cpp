@@ -6,6 +6,7 @@
 SailPlayerController::SailPlayerController(QQuickView* view)
 {
 	_playController = new PlayController(_player, _playlist);
+	_playlistController = new PlaylistController(_playlist);
 
 	LoadStartupSettings();
 	ExposeComponentsToQml(view);
@@ -24,6 +25,7 @@ void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 	view->rootContext()->setContextProperty("playlist", &_playlist);
 	view->rootContext()->setContextProperty("player", &_player);
 	view->rootContext()->setContextProperty("playController", _playController);
+	view->rootContext()->setContextProperty("playlistController", _playlistController);
 }
 
 void SailPlayerController::LoadStartupSettings()

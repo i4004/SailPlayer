@@ -17,8 +17,8 @@ class SailPlayerSettings : public QObject
 
 //	// Add files dialog
 
-//	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath NOTIFY defaultAddFilesDirectoryPathChanged)
-//	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath NOTIFY lastAddFilesDirectoryPathChanged)
+	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath NOTIFY defaultAddFilesDirectoryPathChanged)
+	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath NOTIFY lastAddFilesDirectoryPathChanged)
 
 //	// General
 

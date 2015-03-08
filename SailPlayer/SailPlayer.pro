@@ -23,7 +23,22 @@ SOURCES += \
     src/Audio/AudioPlayerBase.cpp \
     src/Audio/AudioPlayer.cpp \
     src/PlayController.cpp \
-    src/Playlist/PlaylistHelper.cpp
+    src/Playlist/PlaylistHelper.cpp \
+    src/IO/FsHelper.cpp \
+    src/IO/FsRecordInfo.cpp \
+    src/IO/FsRecordsInfoFactory.cpp \
+    src/Playlist/PlaylistController.cpp \
+    src/Cue/CueFile.cpp \
+    src/Cue/CueIndex.cpp \
+    src/Cue/CueSheet.cpp \
+    src/Cue/CueSheetParser.cpp \
+    src/Cue/CueSheetReader.cpp \
+    src/Cue/CueTrack.cpp \
+    src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.cpp \
+    src/Playlist/TracksFactory.cpp \
+    src/Playlist/TracksLoader.cpp \
+    src/Models/FsRecordsListModel.cpp \
+    src/Util/FsRecordIconHelper.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -38,7 +53,15 @@ OTHER_FILES += \
     qml/controls/PlayOrderControl.qml \
     qml/controls/radio/RadioGroup.qml \
     qml/controls/radio/RadioSwitch.qml \
-    qml/controls/PlayerControlPanel.qml
+    qml/controls/PlayerControlPanel.qml \
+    qml/controls/InteractionBlocker.qml \
+    qml/controls/MessagePageDisplayer.qml \
+    qml/controls/NotificationPanel.qml \
+    qml/pages/AddFilesDialog.qml \
+    qml/pages/EqualizerPage.qml \
+    qml/pages/ManageTextItemDialog.qml \
+    qml/pages/MessagePage.qml \
+    qml/pages/SettingsPage.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
@@ -58,4 +81,25 @@ HEADERS += \
     src/Audio/AudioPlayerBase.hpp \
     src/Audio/AudioPlayer.hpp \
     src/PlayController.hpp \
-    src/Playlist/PlaylistHelper.hpp
+    src/Playlist/PlaylistHelper.hpp \
+    src/IO/FsHelper.hpp \
+    src/IO/FileType.hpp \
+    src/IO/FsRecordInfo.hpp \
+    src/IO/FsRecordsInfoFactory.hpp \
+    src/Playlist/PlaylistController.hpp \
+    src/Cue/CueFile.hpp \
+    src/Cue/CueFileType.hpp \
+    src/Cue/CueIndex.hpp \
+    src/Cue/CueSheet.hpp \
+    src/Cue/CueSheetParser.hpp \
+    src/Cue/CueSheetReader.hpp \
+    src/Cue/CueTrack.hpp \
+    src/Cue/CueTrackDataType.hpp \
+    src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp \
+    src/Playlist/IMultimediaFilesListFactory.hpp \
+    src/Playlist/ITracksFactory.hpp \
+    src/Playlist/ITracksLoader.hpp \
+    src/Playlist/TracksFactory.hpp \
+    src/Playlist/TracksLoader.hpp \
+    src/Models/FsRecordsListModel.hpp \
+    src/Util/FsRecordIconHelper.hpp

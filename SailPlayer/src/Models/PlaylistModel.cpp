@@ -10,30 +10,17 @@ namespace Models
 		_nextTrackToPlay = NULL;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
-
-//		_tracksLoader = new TracksLoader(_tracksFactory, _filesFactory);
 	}
 
-	PlaylistModel::~PlaylistModel()
+	void PlaylistModel::clearPlaylist()
 	{
-//		delete _tracksLoader;
+		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
+
+		ResetTracksData();
+		DeleteTracks();
+
+		endRemoveRows();
 	}
-
-//	void PlaylistModel::addTracksFromPath(QString directoryPath)
-//	{
-//		_filesFactory.SetDirectoryPath(directoryPath);
-//		AddTracks(_tracksLoader->Build());
-//	}
-
-//	void PlaylistModel::clearPlaylist()
-//	{
-//		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
-
-//		ResetTracksData();
-//		Cleanup();
-
-//		endRemoveRows();
-//	}
 
 	bool PlaylistModel::CalculateNextTrackToPlay(PlaylistEnums::PlayDirection direction, int customIndex)
 	{
@@ -136,12 +123,12 @@ namespace Models
 //			return -1;
 //	}
 
-//	void PlaylistModel::ResetTracksData()
-//	{
-//		_nextTrackToPlay = NULL;
-//		_currentTrackToPlay = NULL;
-//		_currentPlayingTrack = NULL;
-//	}
+	void PlaylistModel::ResetTracksData()
+	{
+		_nextTrackToPlay = NULL;
+		_currentTrackToPlay = NULL;
+		_currentPlayingTrack = NULL;
+	}
 
 	void PlaylistModel::SetPlayingTrack(bool isPlaying)
 	{

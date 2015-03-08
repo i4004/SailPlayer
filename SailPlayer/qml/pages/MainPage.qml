@@ -1,8 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-//import harbour.sail.player.FsHelper 1.0
-//import harbour.sail.player.AudioPlayerState 1.0
-//import harbour.sail.player.PlayDirection 1.0
+import harbour.sail.player.FsHelper 1.0
 import "../controls"
 import "../controls/playlist"
 
@@ -12,7 +10,7 @@ Page
 
 	allowedOrientations: Orientation.All
 
-//	FsHelper{ id: fsHelper }
+	FsHelper{ id: fsHelper }
 
 	SilicaListView
 	{
@@ -73,17 +71,17 @@ Page
 
 				onClicked:
 				{
-//					var dialog = pageStack.push(Qt.resolvedUrl("AddFilesDialog.qml"),
-//							{
-//								directoryPath: fsHelper.exists(settings.lastAddFilesDirectoryPath)
-//											   ? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
-//							});
+					var dialog = pageStack.push(Qt.resolvedUrl("AddFilesDialog.qml"),
+							{
+								directoryPath: fsHelper.exists(settings.lastAddFilesDirectoryPath)
+											   ? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
+							});
 
-//					dialog.accepted.connect(function()
-//					{
-//						settings.lastAddFilesDirectoryPath = dialog.directoryPath;
-//						playlist.addTracksFromPath(dialog.directoryPath);
-//					});
+					dialog.accepted.connect(function()
+					{
+						settings.lastAddFilesDirectoryPath = dialog.directoryPath;
+						playlistController.addTracksFromPath(dialog.directoryPath);
+					});
 				}
 			}
 		}
@@ -102,7 +100,7 @@ Page
 				MenuItem
 				{
 					text: qsTr("Clear Playlist")
-//					onClicked: remorse.execute(qsTr("Clearing"), function() { playlist.clearPlaylist() })
+					onClicked: remorse.execute(qsTr("Clearing"), function() { playlist.clearPlaylist() })
 				}
 
 				PlayOrderControl
