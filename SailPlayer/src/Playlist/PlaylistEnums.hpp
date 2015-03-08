@@ -5,7 +5,7 @@
 
 namespace Playlist
 {
-	class AudioPlayerEnums : public QObject
+	class PlaylistEnums : public QObject
 	{
 		Q_OBJECT
 		Q_ENUMS(PlayDirection)
