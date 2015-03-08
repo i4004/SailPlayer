@@ -35,4 +35,5 @@ INCLUDEPATH += $$PWD/include
 HEADERS += \
     src/SailPlayerController.hpp \
     src/SailPlayerSettings.hpp \
-    src/Playlist/Track.hpp
+    src/Playlist/Track.hpp \
+    src/Playlist/PlaylistEnums.hpp
