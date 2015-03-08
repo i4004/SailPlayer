@@ -132,7 +132,7 @@ namespace Audio
 	{
 		int position = GetCurrentPositionMs();
 
-		return position < 1  ? -1 : position - _currentStartPosition;
+		return position < 1  ? 0 : position - _currentStartPosition;
 	}
 
 	int AudioPlayer::GetCurrentDuration()
