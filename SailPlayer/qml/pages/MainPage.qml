@@ -24,7 +24,7 @@ Page
 
 		header: PageHeader { title: "Default Playlist" }
 
-//		model: playlist
+		model: playlist
 
 		ViewPlaceholder
 		{
