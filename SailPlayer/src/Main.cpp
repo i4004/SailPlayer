@@ -4,13 +4,13 @@
 
 #include "IO/FsHelper.hpp"
 #include "Models/FsRecordsListModel.hpp"
+#include "Net/LastFmRequestBuilder.hpp"
 #include "Playlist/PlaylistEnums.hpp"
 #include "SailPlayerController.hpp"
 
 using namespace IO;
+using namespace Net;
 using namespace Playlist;
-
-//using namespace Models;
 
 int main(int argc, char *argv[])
 {
@@ -28,9 +28,9 @@ int main(int argc, char *argv[])
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");
 
-//	LastFmRequestBuilder::SetApplicationName("Sail Player");
-//	LastFmRequestBuilder::SetApplicationVersion("0.2");
-//	LastFmRequestBuilder::SetContactUrl("https://github.com/i4004/SailPlayer");
+	LastFmRequestBuilder::SetApplicationName("Sail Player");
+	LastFmRequestBuilder::SetApplicationVersion("0.2");
+	LastFmRequestBuilder::SetContactUrl("https://github.com/i4004/SailPlayer");
 
 	// Startup
 

@@ -38,7 +38,10 @@ SOURCES += \
     src/Playlist/TracksFactory.cpp \
     src/Playlist/TracksLoader.cpp \
     src/Models/FsRecordsListModel.cpp \
-    src/Util/FsRecordIconHelper.cpp
+    src/Util/FsRecordIconHelper.cpp \
+    src/Net/LastFmQueryBuilder.cpp \
+    src/Net/LastFmRequestBuilder.cpp \
+    src/Net/LastFmScrobbler.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -102,4 +105,7 @@ HEADERS += \
     src/Playlist/TracksFactory.hpp \
     src/Playlist/TracksLoader.hpp \
     src/Models/FsRecordsListModel.hpp \
-    src/Util/FsRecordIconHelper.hpp
+    src/Util/FsRecordIconHelper.hpp \
+    src/Net/LastFmQueryBuilder.hpp \
+    src/Net/LastFmRequestBuilder.hpp \
+    src/Net/LastFmScrobbler.hpp
