@@ -1,11 +1,11 @@
 #ifndef PLAYLISTCONTROLLER_HPP
 #define PLAYLISTCONTROLLER_HPP
 
-#include "../Models/PlaylistModel.hpp"
-#include "../SailPlayerSettings.hpp"
-#include "DirectoryRecursiveMultimediaFilesListFactory.hpp"
-#include "TracksFactory.hpp"
-#include "TracksLoader.hpp"
+#include "Models/PlaylistModel.hpp"
+#include "SailPlayerSettings.hpp"
+#include "Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp"
+#include "Playlist/TracksFactory.hpp"
+#include "Playlist/TracksLoader.hpp"
 
 using namespace Models;
 

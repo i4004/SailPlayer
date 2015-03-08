@@ -4,8 +4,9 @@
 #include <QObject>
 #include <QQuickView>
 
+#include "LastFmController.hpp"
 #include "PlayController.hpp"
-#include "Playlist/PlaylistController.hpp"
+#include "PlaylistController.hpp"
 
 using namespace Audio;
 using namespace Models;
@@ -27,6 +28,7 @@ private:
 
 	PlayController* _playController;
 	PlaylistController* _playlistController;
+	LastFmController* _lastFmController;
 
 	void ExposeComponentsToQml(QQuickView* view);
 	void LoadStartupSettings();

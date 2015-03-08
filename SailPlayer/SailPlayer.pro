@@ -27,7 +27,6 @@ SOURCES += \
     src/IO/FsHelper.cpp \
     src/IO/FsRecordInfo.cpp \
     src/IO/FsRecordsInfoFactory.cpp \
-    src/Playlist/PlaylistController.cpp \
     src/Cue/CueFile.cpp \
     src/Cue/CueIndex.cpp \
     src/Cue/CueSheet.cpp \
@@ -41,7 +40,9 @@ SOURCES += \
     src/Util/FsRecordIconHelper.cpp \
     src/Net/LastFmQueryBuilder.cpp \
     src/Net/LastFmRequestBuilder.cpp \
-    src/Net/LastFmScrobbler.cpp
+    src/Net/LastFmScrobbler.cpp \
+    src/LastFmController.cpp \
+    src/PlaylistController.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -89,7 +90,6 @@ HEADERS += \
     src/IO/FileType.hpp \
     src/IO/FsRecordInfo.hpp \
     src/IO/FsRecordsInfoFactory.hpp \
-    src/Playlist/PlaylistController.hpp \
     src/Cue/CueFile.hpp \
     src/Cue/CueFileType.hpp \
     src/Cue/CueIndex.hpp \
@@ -108,4 +108,6 @@ HEADERS += \
     src/Util/FsRecordIconHelper.hpp \
     src/Net/LastFmQueryBuilder.hpp \
     src/Net/LastFmRequestBuilder.hpp \
-    src/Net/LastFmScrobbler.hpp
+    src/Net/LastFmScrobbler.hpp \
+    src/LastFmController.hpp \
+    src/PlaylistController.hpp

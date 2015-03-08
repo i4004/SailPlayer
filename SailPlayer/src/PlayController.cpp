@@ -8,7 +8,7 @@
 using namespace Audio;
 using namespace Playlist;
 
-PlayController::PlayController(AudioPlayer& player, PlaylistModel& playlist, LastFmScrobbler& scrobbler) : _player(player), _playlist(playlist), _scrobbler(scrobbler)
+PlayController::PlayController(AudioPlayer& player, PlaylistModel& playlist, LastFmController& lastFmController) : _player(player), _playlist(playlist), _lastFmController(lastFmController)
 {
 	_needToSetStartupPosition = false;
 

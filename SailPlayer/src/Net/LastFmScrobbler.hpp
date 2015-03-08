@@ -19,9 +19,6 @@ namespace Net
 	{
 		Q_OBJECT
 //		Q_ENUMS(LastFmError)
-//		Q_PROPERTY(QString apiKey READ GetApiKey WRITE SetApiKey)
-//		Q_PROPERTY(QString secret READ GetSecret WRITE SetSecret)
-//		Q_PROPERTY(QString sessionKey READ GetSessionKey WRITE SetSessionKey)
 //		Q_PROPERTY(int numberOfScrobbleCacheItems READ GetScrobbleCacheItemsNumber NOTIFY numberOfScrobbleCacheItemsChanged)
 
 	public:
@@ -88,7 +85,6 @@ namespace Net
 
 	private slots:
 		void OnNetworkAccessManagerReply(QNetworkReply*);
-
 	};
 }
 
