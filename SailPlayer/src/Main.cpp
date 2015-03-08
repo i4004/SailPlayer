@@ -2,10 +2,14 @@
 #include <QtQuick>
 #include <sailfishapp.h>
 
-#include "Net/LastFmRequestBuilder.hpp"
+//#include "Audio/AudioPlayerEnums.hpp"
+//#include "Net/LastFmRequestBuilder.hpp"
+//#include "SailPlayer.hpp"
 #include "SailPlayerController.hpp"
+//#include "SailPlayerSettings.hpp"
 
-using namespace Net;
+//using namespace Audio;
+//using namespace Net;
 
 //#include "Audio/AudioPlayer.hpp"
 //#include "Cue/CueSheetReader.hpp"
@@ -13,24 +17,20 @@ using namespace Net;
 //#include "Models/FsRecordsListModel.hpp"
 //#include "Models/PlaylistModel.hpp"
 //#include "Net/LastFmScrobbler.hpp"
-#include "SailPlayer.hpp"
-#include "SailPlayerSettings.hpp"
 
-//using namespace Audio;
 //using namespace IO;
 //using namespace Models;
 //using namespace Playlist;
 
 int main(int argc, char *argv[])
 {
-	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayDirection", 1, 0, "PlayDirection");
-	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
-	qRegisterMetaType<SailPlayer::PlayDirection>("SailPlayer::PlayDirection");
-	qRegisterMetaType<SailPlayer::PlayOrder>("SailPlayer::PlayOrder");
+//	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayDirection", 1, 0, "PlayDirection");
+//	qmlRegisterType<SailPlayer>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
+//	qRegisterMetaType<SailPlayer::PlayDirection>("SailPlayer::PlayDirection");
+//	qRegisterMetaType<SailPlayer::PlayOrder>("SailPlayer::PlayOrder");
 
-	qmlRegisterType<AudioPlayerBase>("harbour.sail.player.AudioPlayerState", 1, 0, "AudioPlayerState");
-	qRegisterMetaType<AudioPlayerBase::AudioPlayerState>("AudioPlayerBase::AudioPlayerState");
-	qRegisterMetaType<AudioPlayer::AudioPlayerState>("AudioPlayer::AudioPlayerState");
+//	qmlRegisterType<AudioPlayerEnums>("harbour.sail.player.AudioPlayerState", 1, 0, "AudioPlayerState");
+//	qRegisterMetaType<AudioPlayerEnums::AudioPlayerState>("AudioPlayerEnums::AudioPlayerState");
 
 //	qmlRegisterType<AudioPlayer>("harbour.sail.player.AudioPlayer", 1, 0, "AudioPlayer");
 
@@ -46,9 +46,9 @@ int main(int argc, char *argv[])
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");
 
-	LastFmRequestBuilder::SetApplicationName("Sail Player");
-	LastFmRequestBuilder::SetApplicationVersion("0.2");
-	LastFmRequestBuilder::SetContactUrl("https://github.com/i4004/SailPlayer");
+//	LastFmRequestBuilder::SetApplicationName("Sail Player");
+//	LastFmRequestBuilder::SetApplicationVersion("0.2");
+//	LastFmRequestBuilder::SetContactUrl("https://github.com/i4004/SailPlayer");
 
 	// Startup
 

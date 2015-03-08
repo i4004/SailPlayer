@@ -7,12 +7,10 @@ import Sailfish.Silica 1.0
 //import harbour.sail.player.LastFmScrobbler 1.0
 //import harbour.sail.player.LastFmError 1.0
 import "pages"
-import "controls"
+//import "controls"
 
 ApplicationWindow
 {
-//	SailPlayerSettings { id: settings }
-
 //	AudioPlayer
 //	{
 //		id: player
@@ -62,14 +60,6 @@ ApplicationWindow
 //			}
 //			else
 //				elapseTimer.stop();
-//		}
-
-//		Component.onDestruction:
-//		{
-//			if(player.state === AudioPlayerState.Playing)
-//				player.pause();
-
-//			settings.lastPlayingPosition = player.getCurrentPosition();
 //		}
 
 //		function startScrobbleMotitoring()

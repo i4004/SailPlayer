@@ -6,12 +6,12 @@
 #include <QSettings>
 #include <QString>
 
-#include "Audio/AudioPlayer.hpp"
+//#include "Audio/AudioPlayer.hpp"
 #include "Playlist/Track.hpp"
-#include "SailPlayer.hpp"
+//#include "SailPlayer.hpp"
 
 using namespace Playlist;
-using namespace Audio;
+//using namespace Audio;
 
 class SailPlayerSettings : public QObject
 {
@@ -36,8 +36,6 @@ class SailPlayerSettings : public QObject
 
 
 public:
-	static SailPlayerSettings& Default();
-
 	// Add files dialog
 
 	QString GetDefaultAddFilesDirectoryPath() const { return DefaultAddFilesDirectoryPath; }
@@ -50,8 +48,8 @@ public:
 	QList<Track*> GetPlaylist();
 	void SetPlaylist(QList<Track*> tracks);
 
-	SailPlayer::PlayOrder GetPlayOrder();
-	void SetPlayOrder(SailPlayer::PlayOrder playOrder);
+//	SailPlayer::PlayOrder GetPlayOrder();
+//	void SetPlayOrder(SailPlayer::PlayOrder playOrder);
 
 	int GetLastTrackIndex();
 	void SetLastTrackIndex(int currentTrackIndex);

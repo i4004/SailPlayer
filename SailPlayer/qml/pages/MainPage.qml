@@ -1,10 +1,10 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 //import harbour.sail.player.FsHelper 1.0
-import harbour.sail.player.AudioPlayerState 1.0
-import harbour.sail.player.PlayDirection 1.0
-import "../controls"
-import "../controls/playlist"
+//import harbour.sail.player.AudioPlayerState 1.0
+//import harbour.sail.player.PlayDirection 1.0
+//import "../controls"
+//import "../controls/playlist"
 
 Page
 {
@@ -19,12 +19,12 @@ Page
 		id: listView
 
 		anchors.fill: parent
-		anchors.bottomMargin: playerControlPanel.visible ? playerControlPanel.visibleSize : 0
+//		anchors.bottomMargin: playerControlPanel.visible ? playerControlPanel.visibleSize : 0
 		clip: true
 
 		header: PageHeader { title: "Default Playlist" }
 
-		model: playlist
+//		model: playlist
 
 		ViewPlaceholder
 		{
@@ -33,18 +33,18 @@ Page
 			hintText: qsTr("Pull down to add tracks")
 		}
 
-		delegate: PlaylistItem
-		{
-			id: itemp
-			onClicked: playerControlPanel.visibleSize == 0 ? playerControlPanel.show() : playerControlPanel.hide()
-			onPushAndHold: { playController.playTrack(index); }
-		}
+//		delegate: PlaylistItem
+//		{
+//			id: itemp
+//			onClicked: playerControlPanel.visibleSize == 0 ? playerControlPanel.show() : playerControlPanel.hide()
+//			onPushAndHold: { playController.playTrack(index); }
+//		}
 
-		section
-		{
-			property: "section"
-			delegate: PlaylistSectionHeader {}
-		}
+//		section
+//		{
+//			property: "section"
+//			delegate: PlaylistSectionHeader {}
+//		}
 
 		VerticalScrollDecorator {}
 
@@ -103,21 +103,21 @@ Page
 				MenuItem
 				{
 					text: qsTr("Clear Playlist")
-					onClicked: remorse.execute(qsTr("Clearing"), function() { playlist.clearPlaylist() })
+//					onClicked: remorse.execute(qsTr("Clearing"), function() { playlist.clearPlaylist() })
 				}
 
-				PlayOrderControl
-				{
-					onOrderChange: playlist.playOrder = order
-					Component.onCompleted: setOrder(playlist.playOrder)
-				}
+//				PlayOrderControl
+//				{
+////					onOrderChange: playlist.playOrder = order
+////					Component.onCompleted: setOrder(playlist.playOrder)
+//				}
 			}
 		}
 	}
 
-	PlayerControlPanel
-	{
-		id: playerControlPanel
+//	PlayerControlPanel
+//	{
+//		id: playerControlPanel
 
 //		Component.onCompleted:
 //		{
@@ -133,34 +133,24 @@ Page
 //			player.currentPositionUpdated.disconnect(playerControlPanel.setTrackPosition);
 //		}
 
-		onPrevious:
-		{
-			player.stop();
-			if(playlist.calculateAndSetTrackToPlay(PlayDirection.Previous) && state != AudioPlayerState.Ready)
-				player.play();
-		}
+//		onPrevious: playController.previous();
 
-		onPlayPause:
-		{
-			if(state == AudioPlayerState.Playing)
-				player.pause();
-			else
-			{
-				if(state == AudioPlayerState.Ready && !playlist.hasTrackToPlay())
-					playlist.calculateAndSetTrackToPlay();
+//		onPlayPause:
+//		{
+//			if(state == AudioPlayerState.Playing)
+//				player.pause();
+//			else
+//			{
+//				if(state == AudioPlayerState.Ready && !playlist.hasTrackToPlay())
+//					playlist.calculateAndSetTrackToPlay();
 
-				if(player.hasTrackToPlay())
-					player.play();
-			}
-		}
+//				if(player.hasTrackToPlay())
+//					playController.play();
+//			}
+//		}
 
-		onStop: player.stop()
-		onSeek: player.seek(milliseconds)
-		onNext:
-		{
-			player.stop();
-			if(playlist.calculateAndSetTrackToPlay(PlayDirection.NextWithForce) && state != AudioPlayerState.Ready)
-				player.play();
-		}
-	}
+//		onStop: player.stop()
+//		onSeek: player.seek(milliseconds)
+//		onNext: playController.next()
+//	}
 }

@@ -2,12 +2,6 @@
 
 QString SailPlayerSettings::DefaultAddFilesDirectoryPath = "/home/nemo";
 
-SailPlayerSettings& SailPlayerSettings::Default()
-{
-	static SailPlayerSettings settings;
-	return settings;
-}
-
 QString SailPlayerSettings::GetLastAddFilesDirectoryPath()
 {
 	return settings.value("AddFilesDialog/DirectoryPath", DefaultAddFilesDirectoryPath).toString();
@@ -20,15 +14,15 @@ void SailPlayerSettings::SetLastAddFilesDirectoryPath(QString value)
 	emit lastAddFilesDirectoryPathChanged();
 }
 
-SailPlayer::PlayOrder SailPlayerSettings::GetPlayOrder()
-{
-	return (SailPlayer::PlayOrder)settings.value("PlayOrder", SailPlayer::RepeatPlaylist).toInt();
-}
+//SailPlayer::PlayOrder SailPlayerSettings::GetPlayOrder()
+//{
+//	return (SailPlayer::PlayOrder)settings.value("PlayOrder", SailPlayer::RepeatPlaylist).toInt();
+//}
 
-void SailPlayerSettings::SetPlayOrder(SailPlayer::PlayOrder playOrder)
-{
-	settings.setValue("PlayOrder", playOrder);
-}
+//void SailPlayerSettings::SetPlayOrder(SailPlayer::PlayOrder playOrder)
+//{
+//	settings.setValue("PlayOrder", playOrder);
+//}
 
 QList<Track*> SailPlayerSettings::GetPlaylist()
 {
