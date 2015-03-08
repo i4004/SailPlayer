@@ -27,7 +27,9 @@ OTHER_FILES += \
     qml/Main.qml \
     qml/Cover.qml \
     qml/Util.js \
-    qml/pages/MainPage.qml
+    qml/pages/MainPage.qml \
+    qml/controls/playlist/PlaylistItem.qml \
+    qml/controls/playlist/PlaylistSectionHeader.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
