@@ -18,9 +18,9 @@ namespace Audio
 
 		// Player controls
 
-//		virtual void Play();
-//		virtual void Pause();
-//		virtual void Stop();
+		void Play();
+		void Pause();
+		void Stop();
 
 //		Q_INVOKABLE void setNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
 //		Q_INVOKABLE void seek(int milliseconds);
@@ -34,8 +34,8 @@ namespace Audio
 //		void OnEndOfStream();
 //		void OnErrorMessage(QString message);
 
-//	public slots:
-//		void SetTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
+	public slots:
+		void SetTrackToPlay(QString fullFilePath, int startPosition, int endPosition);
 
 //	signals:
 //		void currentPositionUpdated(int milliseconds);
@@ -45,12 +45,12 @@ namespace Audio
 //		void endOfStream();
 //		void playbackError(QString message);
 
-//	private:
-//		// Current state
+	private:
+		// Current state
 
-//		QString _currentFilePath;
-//		int _currentStartPosition;
-//		int _currentEndPosition;
+		QString _currentFilePath;
+		int _currentStartPosition;
+		int _currentEndPosition;
 //		bool _needToSetCurrentPosition;
 //		QTimer _currentPositionTimer;
 //		bool _currentPositionReady;

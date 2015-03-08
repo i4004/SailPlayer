@@ -8,10 +8,10 @@ namespace Audio
 {
 	AudioPlayer::AudioPlayer()
 	{
-//		_currentStartPosition = 0;
-//		_currentEndPosition = 0;
+		_currentFilePath = QString();
+		_currentStartPosition = 0;
+		_currentEndPosition = 0;
 //		_needToSetCurrentPosition = false;
-//		_currentFilePath = QString();
 //		_currentPositionTimer.setTimerType(Qt::VeryCoarseTimer);
 //		_currentPositionTimer.setInterval(1000);
 //		_currentPositionReady = false;
@@ -23,10 +23,10 @@ namespace Audio
 //		connect(&_currentPositionTimer, SIGNAL(timeout()), this, SLOT(OnCurrentPositionTimerCallback()));
 	}
 
-//	// Player controls
+	// Player controls
 
-//	void AudioPlayer::Play()
-//	{
+	void AudioPlayer::Play()
+	{
 //		AudioPlayerEnums::AudioPlayerState state = GetCurrentState();
 
 //		if(state == AudioPlayerEnums::Ready)
@@ -35,36 +35,36 @@ namespace Audio
 //			_isStreamFromNextTrack = false;
 //		}
 
-//		AudioPlayerBase::Play();
+		AudioPlayerBase::Play();
 
 //		if(state == AudioPlayerEnums::Paused)
 //			_currentPositionTimer.start();
-//	}
+	}
 
-//	void AudioPlayer::Pause()
-//	{
-//		AudioPlayerBase::Pause();
+	void AudioPlayer::Pause()
+	{
+		AudioPlayerBase::Pause();
 
 //		_currentPositionTimer.stop();
-//	}
+	}
 
-//	void AudioPlayer::Stop()
-//	{
+	void AudioPlayer::Stop()
+	{
 //		_currentPositionTimer.stop();
 
-//		AudioPlayerBase::Stop();
+		AudioPlayerBase::Stop();
 
 //		emit currentPositionUpdated(0);
 //		emit currentDurationUpdated(0);
-//	}
+	}
 
-//	void AudioPlayer::SetTrackToPlay(QString fullFilePath, int startPosition, int endPosition)
-//	{
-//		_currentFilePath = fullFilePath;
-//		_currentStartPosition = startPosition;
-//		_currentEndPosition = endPosition;
-//		SetFileToPlay(fullFilePath);
-//	}
+	void AudioPlayer::SetTrackToPlay(QString fullFilePath, int startPosition, int endPosition)
+	{
+		_currentFilePath = fullFilePath;
+		_currentStartPosition = startPosition;
+		_currentEndPosition = endPosition;
+		SetFileToPlay(fullFilePath);
+	}
 
 //	void AudioPlayer::setNextTrackToPlay(QString fullFilePath, int startPosition, int endPosition)
 //	{

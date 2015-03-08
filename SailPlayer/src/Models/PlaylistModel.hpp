@@ -5,8 +5,8 @@
 //#include "../Playlist/TracksLoader.hpp"
 //#include "../Playlist/DirectoryRecursiveMultimediaFilesListFactory.hpp"
 //#include "../Playlist/TracksFactory.hpp"
+#include "../Playlist/PlaylistEnums.hpp"
 #include "PlaylistModelBase.hpp"
-//#include "../SailPlayer.hpp"
 
 //using namespace Audio;
 
@@ -30,10 +30,10 @@ namespace Models
 //		Q_INVOKABLE void clearPlaylist();
 
 //		// Calculates next track to play
-//		Q_INVOKABLE bool calculateNextTrackToPlay(SailPlayer::PlayDirection direction = SailPlayer::Next, int customIndex = -1);
+		bool CalculateNextTrackToPlay(PlaylistEnums::PlayDirection direction = PlaylistEnums::Next, int customIndex = -1);
 
-//		// Calculates next track to play and sets current track to play from it
-//		bool CalculateAndSetTrackToPlay(SailPlayer::PlayDirection direction = SailPlayer::Next, int customIndex = -1);
+		// Calculates next track to play and sets current track to play from it
+		bool CalculateAndSetTrackToPlay(PlaylistEnums::PlayDirection direction = PlaylistEnums::Next, int customIndex = -1);
 
 //		Q_INVOKABLE QString requestNextTrack();
 //		Q_INVOKABLE bool setTrackToPlayAndPlayingFromNextTrack();
@@ -51,24 +51,24 @@ namespace Models
 //	public slots:
 //		Q_INVOKABLE void setPlayerState(AudioPlayerEnums::AudioPlayerState state);
 
-//	signals:
-//		void CurrentTrackToPlayDataUpdated(QString filePath, int startPosition, int endPosition);
+	signals:
+		void CurrentTrackToPlayDataUpdated(QString filePath, int startPosition, int endPosition);
 //		void playOrderChanged();
 
-//	private:
+	private:
 //		TracksLoader* _tracksLoader;
 //		TracksFactory _tracksFactory;
 //		DirectoryRecursiveMultimediaFilesListFactory _filesFactory;
 
-//		// Current playing data
+		// Current playing data
 
-//		SailPlayer::PlayOrder _currentPlayOrder;
+		PlaylistEnums::PlayOrder _currentPlayOrder;
 
-//		Track* _nextTrackToPlay;
-//		Track* _currentTrackToPlay;
+		Track* _nextTrackToPlay;
+		Track* _currentTrackToPlay;
 //		Track* _currentPlayingTrack;
 
-//		bool SetTrackToPlayFromNextTrack();
+		bool SetTrackToPlayFromNextTrack();
 //		void ResetTracksData();
 
 //		// Mark track to play as playing and unmarking previously playing track

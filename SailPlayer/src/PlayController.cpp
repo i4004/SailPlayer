@@ -9,8 +9,14 @@ using namespace Playlist;
 PlayController::PlayController(AudioPlayer& player, PlaylistModel& playlist) : _player(player), _playlist(playlist)
 {
 	connect(&_playlist, SIGNAL(CurrentTrackToPlayDataUpdated(QString, int, int)), &_player, SLOT(SetTrackToPlay(QString, int, int)));
-	connect(&_player, SIGNAL(stateChanged(AudioPlayerEnums::AudioPlayerState)), &_playlist, SLOT(setPlayerState(AudioPlayerEnums::AudioPlayerState)));
+//	connect(&_player, SIGNAL(stateChanged(AudioPlayerEnums::AudioPlayerState)), &_playlist, SLOT(setPlayerState(AudioPlayerEnums::AudioPlayerState)));
 	//			player.playbackError.connect(messagePage.displayMessage);
+}
+
+PlayController::~PlayController()
+{
+	if(_player.GetCurrentState() == AudioPlayerEnums::Playing)
+		_player.Pause();
 }
 
 void PlayController::playPause()
@@ -42,10 +48,13 @@ void PlayController::previous()
 
 void PlayController::playTrack(int trackIndex)
 {
-//	_player.Stop();
+	AudioPlayerEnums::AudioPlayerState state = _player.GetCurrentState();
 
-//	if(_playlist.CalculateAndSetTrackToPlay(PlaylistEnums::ByIndex, trackIndex))
-//		_player.Play();
+	if(state != AudioPlayerEnums::Ready)
+		_player.Stop();
+
+	if(_playlist.CalculateAndSetTrackToPlay(PlaylistEnums::ByIndex, trackIndex))
+		_player.Play();
 }
 
 void PlayController::next()

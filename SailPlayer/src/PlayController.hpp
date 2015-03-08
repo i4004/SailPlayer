@@ -15,6 +15,7 @@ class PlayController : public QObject
 
 public:
 	PlayController(AudioPlayer& player, PlaylistModel& playlist);
+	~PlayController();
 
 	Q_INVOKABLE void playPause();
 	Q_INVOKABLE void previous();

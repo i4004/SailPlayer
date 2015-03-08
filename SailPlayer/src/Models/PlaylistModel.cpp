@@ -1,14 +1,14 @@
 #include "PlaylistModel.hpp"
 
-//#include "../Playlist/PlaylistHelper.hpp"
+#include "../Playlist/PlaylistHelper.hpp"
 
 namespace Models
 {
 	PlaylistModel::PlaylistModel(QObject* parent) : PlaylistModelBase(parent)
 	{
-//		_currentPlayOrder = SailPlayer::RepeatPlaylist;
-//		_nextTrackToPlay = NULL;
-//		_currentTrackToPlay = NULL;
+		_currentPlayOrder = PlaylistEnums::RepeatPlaylist;
+		_nextTrackToPlay = NULL;
+		_currentTrackToPlay = NULL;
 //		_currentPlayingTrack = NULL;
 
 //		_tracksLoader = new TracksLoader(_tracksFactory, _filesFactory);
@@ -35,31 +35,31 @@ namespace Models
 //		endRemoveRows();
 //	}
 
-//	bool PlaylistModel::calculateNextTrackToPlay(SailPlayer::PlayDirection direction, int customIndex)
-//	{
-//		int index = PlaylistHelper::CalculateNextTrackIndex(direction, _currentPlayOrder, customIndex, _tracksList, _currentTrackToPlay);
+	bool PlaylistModel::CalculateNextTrackToPlay(PlaylistEnums::PlayDirection direction, int customIndex)
+	{
+		int index = PlaylistHelper::CalculateNextTrackIndex(direction, _currentPlayOrder, customIndex, _tracksList, _currentTrackToPlay);
 
-//		if(index == -1)
-//			return false;
+		if(index == -1)
+			return false;
 
-//		_nextTrackToPlay = _tracksList.at(index);
+		_nextTrackToPlay = _tracksList.at(index);
 
-//		return true;
-//	}
+		return true;
+	}
 
-//	bool PlaylistModel::CalculateAndSetTrackToPlay(SailPlayer::PlayDirection direction, int customIndex)
-//	{
-//		bool result = calculateNextTrackToPlay(direction, customIndex);
+	bool PlaylistModel::CalculateAndSetTrackToPlay(PlaylistEnums::PlayDirection direction, int customIndex)
+	{
+		bool result = CalculateNextTrackToPlay(direction, customIndex);
 
-//		if(result == false)
-//			return false;
+		if(result == false)
+			return false;
 
-//		SetTrackToPlayFromNextTrack();
+		SetTrackToPlayFromNextTrack();
 
-//		emit CurrentTrackToPlayDataUpdated(_currentTrackToPlay->GetFullFilePath(), _currentTrackToPlay->GetStartPosition(), _currentTrackToPlay->GetEndPosition());
+		emit CurrentTrackToPlayDataUpdated(_currentTrackToPlay->GetFullFilePath(), _currentTrackToPlay->GetStartPosition(), _currentTrackToPlay->GetEndPosition());
 
-//		return true;
-//	}
+		return true;
+	}
 
 //	bool PlaylistModel::setTrackToPlayAndPlayingFromNextTrack()
 //	{
@@ -83,24 +83,24 @@ namespace Models
 //		return _currentPlayingTrack != NULL ? (QObject*)new Track(*_currentPlayingTrack) : NULL;
 //	}
 
-//	bool PlaylistModel::SetTrackToPlayFromNextTrack()
-//	{
-//		if(_nextTrackToPlay == NULL)
-//			return false;
+	bool PlaylistModel::SetTrackToPlayFromNextTrack()
+	{
+		if(_nextTrackToPlay == NULL)
+			return false;
 
-//		if(_currentTrackToPlay != NULL)
-//			_currentTrackToPlay->SetAsTrackToPlay(false);
+		if(_currentTrackToPlay != NULL)
+			_currentTrackToPlay->SetAsTrackToPlay(false);
 
-//		_currentTrackToPlay = _nextTrackToPlay;
+		_currentTrackToPlay = _nextTrackToPlay;
 
-//		_currentTrackToPlay->SetAsTrackToPlay(true);
+		_currentTrackToPlay->SetAsTrackToPlay(true);
 
-//		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
+		emit dataChanged(index(0, 0), index(_tracksList.count() - 1, 0), QVector<int>(1, IsTrackToPlay));
 
-//		_nextTrackToPlay = NULL;
+		_nextTrackToPlay = NULL;
 
-//		return true;
-//	}
+		return true;
+	}
 
 //	void PlaylistModel::setPlayerState(AudioPlayerEnums::AudioPlayerState state)
 //	{

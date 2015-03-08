@@ -14,12 +14,9 @@ SailPlayerController::SailPlayerController(QQuickView* view)
 
 SailPlayerController::~SailPlayerController()
 {
-//	if(_player.GetCurrentState() == AudioPlayerEnums::Playing)
-//		_player.Pause();
+	delete _playController;
 
 	SaveOnExitSettings();
-
-	delete _playController;
 }
 
 void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
@@ -27,7 +24,7 @@ void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 //	view->rootContext()->setContextProperty("settings", &_settings);
 	view->rootContext()->setContextProperty("playlist", &_playlist);
 //	view->rootContext()->setContextProperty("player", &_player);
-//	view->rootContext()->setContextProperty("playController", _playController);
+	view->rootContext()->setContextProperty("playController", _playController);
 }
 
 void SailPlayerController::LoadStartupSettings()

@@ -22,7 +22,8 @@ SOURCES += \
     src/Audio/AudioResource.cpp \
     src/Audio/AudioPlayerBase.cpp \
     src/Audio/AudioPlayer.cpp \
-    src/PlayController.cpp
+    src/PlayController.cpp \
+    src/Playlist/PlaylistHelper.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -52,4 +53,5 @@ HEADERS += \
     src/Audio/AudioResource.hpp \
     src/Audio/AudioPlayerBase.hpp \
     src/Audio/AudioPlayer.hpp \
-    src/PlayController.hpp
+    src/PlayController.hpp \
+    src/Playlist/PlaylistHelper.hpp
