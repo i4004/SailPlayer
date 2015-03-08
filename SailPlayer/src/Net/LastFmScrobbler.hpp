@@ -48,12 +48,6 @@ namespace Net
 			RateLimitExceeded = 29
 		};
 
-		QString GetApiKey() { return _apiKey; }
-		void SetApiKey(QString key) { _apiKey = key; }
-
-		QString GetSecret() { return _secret; }
-		void SetSecret(QString secret) { _secret = secret; }
-
 		QString GetSessionKey() { return _sessionKey; }
 		void SetSessionKey(QString key) { _sessionKey = key; }
 
@@ -76,8 +70,6 @@ namespace Net
 		LastFmQueryBuilder _queryBuilder;
 		LastFmRequestBuilder _requestBuilder;
 
-		QString _apiKey;
-		QString _secret;
 		QString _sessionKey;
 
 		QMap<QDateTime, Track*> _scrobbleCache;

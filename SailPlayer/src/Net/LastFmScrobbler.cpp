@@ -139,7 +139,7 @@ namespace Net
 
 	void LastFmScrobbler::SendRequest(QString method, QMap<QString, QString> queryVariables)
 	{
-		QUrlQuery query = _queryBuilder.Build(method, _apiKey, _secret, queryVariables);
+		QUrlQuery query = _queryBuilder.Build(method, queryVariables);
 		QNetworkRequest request = _requestBuilder.Build();
 
 		_networkAccessManager->post(request, query.toString(QUrl::FullyEncoded).toUtf8());

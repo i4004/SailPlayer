@@ -4,11 +4,14 @@
 
 namespace Net
 {
+	QString LastFmQueryBuilder::ApiKey = "";
+	QString LastFmQueryBuilder::Secret = "";
+
 	LastFmQueryBuilder::LastFmQueryBuilder()
 	{
 	}
 
-	QUrlQuery LastFmQueryBuilder::Build(QString method, QString apiKey, QString secret, QMap<QString, QString> queryVariables)
+	QUrlQuery LastFmQueryBuilder::Build(QString method, QMap<QString, QString> queryVariables)
 	{
 		QUrlQuery query;
 		QString signatureInput = "";
@@ -16,7 +19,7 @@ namespace Net
 		QMap<QString, QString>::iterator i;
 
 		queryVariables.insert("method", method);
-		queryVariables.insert("api_key", apiKey);
+		queryVariables.insert("api_key", ApiKey);
 
 		for (i = queryVariables.begin(); i != queryVariables.end(); ++i)
 		{
@@ -24,7 +27,7 @@ namespace Net
 			signatureInput += i.key() + i.value();
 		}
 
-		signatureInputRaw.append(signatureInput + secret);
+		signatureInputRaw.append(signatureInput + Secret);
 
 		query.addQueryItem("api_sig", QCryptographicHash::hash(signatureInputRaw, QCryptographicHash::Md5).toHex());
 

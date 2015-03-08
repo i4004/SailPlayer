@@ -4,6 +4,7 @@
 
 #include "IO/FsHelper.hpp"
 #include "Models/FsRecordsListModel.hpp"
+#include "Net/LastFmQueryBuilder.hpp"
 #include "Net/LastFmRequestBuilder.hpp"
 #include "Playlist/PlaylistEnums.hpp"
 #include "SailPlayerController.hpp"
@@ -23,10 +24,13 @@ int main(int argc, char *argv[])
 	qmlRegisterType<FsHelper>("harbour.sail.player.FsHelper", 1, 0, "FsHelper");
 	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
 
-	// Application description
+	// Application description / data
 
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
 	QCoreApplication::setApplicationName("Sail Player");
+
+	LastFmQueryBuilder::SetApiKey("06b931aaed5fbf1f1558c165f3a08eb4");
+	LastFmQueryBuilder::SetSecret("9fe3f69ecd90045d2d18fe6823803370");
 
 	LastFmRequestBuilder::SetApplicationName("Sail Player");
 	LastFmRequestBuilder::SetApplicationVersion("0.2");
