@@ -27,7 +27,7 @@ class SailPlayerSettings : public QObject
 	// Last.fm
 
 	Q_PROPERTY(bool scrobblingIsEnabled READ GetScrobblingIsEnabled WRITE SetScrobblingIsEnabled NOTIFY ScrobblingIsEnabledChanged)
-//	Q_PROPERTY(QString lastFmSessionKey READ GetLastFmSessionKey WRITE SetLastFmSessionKey NOTIFY lastFmSessionKeyChanged)
+	Q_PROPERTY(QString lastFmSessionKey READ GetLastFmSessionKey WRITE SetLastFmSessionKey NOTIFY LastFmSessionKeyChanged)
 
 public:
 	// Add files dialog

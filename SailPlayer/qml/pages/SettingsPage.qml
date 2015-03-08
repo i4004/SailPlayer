@@ -45,12 +45,12 @@ Page
 
 			TextSwitch
 			{
-//				enabled: settings.lastFmSessionKey !== ""
-//				checked: settings.scrobblingIsEnabled
+				enabled: settings.lastFmSessionKey !== ""
+				checked: settings.scrobblingIsEnabled
 
 				text: qsTr("Scrobbling is enabled")
 
-//				onClicked: settings.scrobblingIsEnabled = !settings.scrobblingIsEnabled;
+				onClicked: settings.scrobblingIsEnabled = !settings.scrobblingIsEnabled;
 			}
 
 			Label
