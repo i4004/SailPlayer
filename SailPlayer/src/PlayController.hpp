@@ -4,9 +4,11 @@
 #include <QObject>
 
 #include "Audio/AudioPlayer.hpp"
+#include "Net/LastFmScrobbler.hpp"
 #include "Models/PlaylistModel.hpp"
 
 using namespace Audio;
+using namespace Net;
 using namespace Models;
 
 class PlayController : public QObject
@@ -14,7 +16,7 @@ class PlayController : public QObject
 	Q_OBJECT
 
 public:
-	PlayController(AudioPlayer& player, PlaylistModel& playlist);
+	PlayController(AudioPlayer& player, PlaylistModel& playlist, LastFmScrobbler& scrobbler);
 	~PlayController();
 
 	Q_INVOKABLE void previous();
@@ -35,6 +37,7 @@ public slots:
 private:
 	AudioPlayer& _player;
 	PlaylistModel& _playlist;
+	LastFmScrobbler& _scrobbler;
 
 	bool _needToSetStartupPosition;
 	int _startupPosition;

@@ -11,7 +11,7 @@ void SailPlayerSettings::SetLastAddFilesDirectoryPath(QString value)
 {
 	settings.setValue("AddFilesDialog/DirectoryPath", value);
 
-	emit lastAddFilesDirectoryPathChanged();
+	emit LastAddFilesDirectoryPathChanged();
 }
 
 PlaylistEnums::PlayOrder SailPlayerSettings::GetPlayOrder()
@@ -107,7 +107,7 @@ void SailPlayerSettings::SetLastFmSessionKey(QString key)
 {
 	settings.setValue("Last.fm/SessionKey", key);
 
-	emit lastFmSessionKeyChanged();
+	emit LastFmSessionKeyChanged(key);
 }
 
 QMap<QDateTime, Track*> SailPlayerSettings::GetCachedTracks()

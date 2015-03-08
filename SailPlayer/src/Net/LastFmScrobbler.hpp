@@ -49,6 +49,8 @@ namespace Net
 		};
 
 		QString GetSessionKey() { return _sessionKey; }
+
+	public slots:
 		void SetSessionKey(QString key) { _sessionKey = key; }
 
 //		Q_INVOKABLE void authenticate(QString userName, QString password);

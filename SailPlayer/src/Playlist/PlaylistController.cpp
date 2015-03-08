@@ -2,7 +2,7 @@
 
 namespace Playlist
 {
-	PlaylistController::PlaylistController(PlaylistModel& playlist) : _playlist(playlist)
+	PlaylistController::PlaylistController(PlaylistModel& playlist, SailPlayerSettings& settings) : _playlist(playlist), _settings(settings)
 	{
 		_tracksLoader = new TracksLoader(_tracksFactory, _filesFactory);
 	}
@@ -16,10 +16,14 @@ namespace Playlist
 	{
 		_filesFactory.SetDirectoryPath(directoryPath);
 		_playlist.AddTracks(_tracksLoader->Build());
+
+		_settings.SetPlaylist(_playlist.GetTracks());
 	}
 
 	void PlaylistController::clear()
 	{
 		_playlist.Clear();
+
+		_settings.SetPlaylist(_playlist.GetTracks());
 	}
 }

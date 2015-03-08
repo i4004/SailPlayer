@@ -2,6 +2,7 @@
 #define PLAYLISTCONTROLLER_HPP
 
 #include "../Models/PlaylistModel.hpp"
+#include "../SailPlayerSettings.hpp"
 #include "DirectoryRecursiveMultimediaFilesListFactory.hpp"
 #include "TracksFactory.hpp"
 #include "TracksLoader.hpp"
@@ -15,7 +16,7 @@ namespace Playlist
 		Q_OBJECT
 
 	public:
-		PlaylistController(PlaylistModel& playlist);
+		PlaylistController(PlaylistModel& playlist, SailPlayerSettings& settings);
 		~PlaylistController();
 
 		Q_INVOKABLE void addTracksFromPath(QString directoryPath);
@@ -23,6 +24,7 @@ namespace Playlist
 
 	private:
 		PlaylistModel& _playlist;
+		SailPlayerSettings& _settings;
 
 		ITracksLoader* _tracksLoader;
 

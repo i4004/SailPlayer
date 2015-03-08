@@ -31,17 +31,11 @@ ApplicationWindow
 //		}
 //	}
 
-//	LastFmScrobbler
-//	{
-//		id: scrobbler
 
 //		property bool scrobbled: false
 
-//		sessionKey: settings.lastFmSessionKey
-
 //		Component.onCompleted: loadSavedTracksToCache()
 //		Component.onDestruction: saveCachedTracks()
-//	}
 
 	MessagePageDisplayer
 	{

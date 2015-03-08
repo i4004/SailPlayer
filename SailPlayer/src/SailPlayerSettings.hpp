@@ -17,8 +17,8 @@ class SailPlayerSettings : public QObject
 
 //	// Add files dialog
 
-	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath NOTIFY defaultAddFilesDirectoryPathChanged)
-	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath NOTIFY lastAddFilesDirectoryPathChanged)
+	Q_PROPERTY(QString defaultAddFilesDirectoryPath READ GetDefaultAddFilesDirectoryPath NOTIFY DefaultAddFilesDirectoryPathChanged)
+	Q_PROPERTY(QString lastAddFilesDirectoryPath READ GetLastAddFilesDirectoryPath WRITE SetLastAddFilesDirectoryPath NOTIFY LastAddFilesDirectoryPathChanged)
 
 //	// General
 
@@ -72,18 +72,18 @@ public:
 signals:
 	// Add files dialog
 
-	void defaultAddFilesDirectoryPathChanged();
-	void lastAddFilesDirectoryPathChanged();
+	void DefaultAddFilesDirectoryPathChanged();
+	void LastAddFilesDirectoryPathChanged();
 
 	// General
 
-	void playOrderChanged();
-	void restoreLastPlayingPositionChanged();
+	void PlayOrderChanged();
+	void RestoreLastPlayingPositionChanged();
 
 	// Last.fm
 
-	void scrobblingIsEnabledChanged();
-	void lastFmSessionKeyChanged();
+	void ScrobblingIsEnabledChanged();
+	void LastFmSessionKeyChanged(QString key);
 
 private:
 	static QString DefaultAddFilesDirectoryPath;

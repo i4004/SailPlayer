@@ -1,20 +1,20 @@
 #ifndef SAILPLAYERCONTROLLER_HPP
 #define SAILPLAYERCONTROLLER_HPP
 
+#include <QObject>
 #include <QQuickView>
 
-#include "Audio/AudioPlayer.hpp"
-#include "Models/PlaylistModel.hpp"
 #include "PlayController.hpp"
 #include "Playlist/PlaylistController.hpp"
-#include "SailPlayerSettings.hpp"
 
 using namespace Audio;
 using namespace Models;
 using namespace Playlist;
 
-class SailPlayerController
+class SailPlayerController : public QObject
 {
+	Q_OBJECT
+
 public:
 	SailPlayerController(QQuickView* view);
 	~SailPlayerController();
@@ -23,6 +23,8 @@ private:
 	SailPlayerSettings _settings;
 	PlaylistModel _playlist;
 	AudioPlayer _player;
+	LastFmScrobbler _scrobbler;
+
 	PlayController* _playController;
 	PlaylistController* _playlistController;
 
