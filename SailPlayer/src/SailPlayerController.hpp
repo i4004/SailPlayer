@@ -5,7 +5,7 @@
 
 #include "Audio/AudioPlayer.hpp"
 #include "Models/PlaylistModel.hpp"
-//#include "PlayController.hpp"
+#include "PlayController.hpp"
 #include "SailPlayerSettings.hpp"
 
 using namespace Audio;
@@ -21,7 +21,7 @@ private:
 	SailPlayerSettings _settings;
 	PlaylistModel _playlist;
 	AudioPlayer _player;
-//	PlayController* _playController;
+	PlayController* _playController;
 
 	void ExposeComponentsToQml(QQuickView* view);
 	void LoadStartupSettings();

@@ -6,7 +6,7 @@
 
 SailPlayerController::SailPlayerController(QQuickView* view)
 {
-//	_playController = new PlayController(_player, _playlist);
+	_playController = new PlayController(_player, _playlist);
 
 	LoadStartupSettings();
 	ExposeComponentsToQml(view);
@@ -19,7 +19,7 @@ SailPlayerController::~SailPlayerController()
 
 	SaveOnExitSettings();
 
-//	delete _playController;
+	delete _playController;
 }
 
 void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
