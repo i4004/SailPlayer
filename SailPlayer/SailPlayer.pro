@@ -17,7 +17,8 @@ SOURCES += \
     src/SailPlayerController.cpp \
     src/SailPlayerSettings.cpp \
     src/Playlist/Track.cpp \
-    src/Models/PlaylistModelBase.cpp
+    src/Models/PlaylistModelBase.cpp \
+    src/Models/PlaylistModel.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -38,4 +39,5 @@ HEADERS += \
     src/SailPlayerSettings.hpp \
     src/Playlist/Track.hpp \
     src/Playlist/PlaylistEnums.hpp \
-    src/Models/PlaylistModelBase.hpp
+    src/Models/PlaylistModelBase.hpp \
+    src/Models/PlaylistModel.hpp
