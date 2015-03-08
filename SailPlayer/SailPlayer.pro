@@ -19,7 +19,8 @@ SOURCES += \
     src/Playlist/Track.cpp \
     src/Models/PlaylistModelBase.cpp \
     src/Models/PlaylistModel.cpp \
-    src/Audio/AudioResource.cpp
+    src/Audio/AudioResource.cpp \
+    src/Audio/AudioPlayerBase.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -46,4 +47,5 @@ HEADERS += \
     src/Models/PlaylistModel.hpp \
     src/Audio/AudioPlayerEnums.hpp \
     src/Audio/GstEqualizerBandState.hpp \
-    src/Audio/AudioResource.hpp
+    src/Audio/AudioResource.hpp \
+    src/Audio/AudioPlayerBase.hpp

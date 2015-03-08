@@ -11,7 +11,6 @@ namespace Audio
 		Q_ENUMS(AudioPlayerState)
 
 	public:
-
 		enum AudioPlayerState
 		{
 			Ready = 0,
