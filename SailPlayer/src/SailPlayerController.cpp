@@ -8,7 +8,7 @@ SailPlayerController::SailPlayerController(QQuickView* view)
 {
 //	_playController = new PlayController(_player, _playlist);
 
-//	LoadStartupSettings();
+	LoadStartupSettings();
 	ExposeComponentsToQml(view);
 }
 
@@ -17,7 +17,7 @@ SailPlayerController::~SailPlayerController()
 //	if(_player.GetCurrentState() == AudioPlayerEnums::Playing)
 //		_player.Pause();
 
-//	SaveOnExitSettings();
+	SaveOnExitSettings();
 
 //	delete _playController;
 }
@@ -33,7 +33,7 @@ void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 void SailPlayerController::LoadStartupSettings()
 {
 //	_playlist.SetPlayOrder(_settings.GetPlayOrder());
-//	_playlist.AddTracks(_settings.GetPlaylist());
+	_playlist.AddTracks(_settings.GetPlaylist());
 
 //	bool restoreLastPlayingPosition = _settings.GetRestoreLastPlayingPosition();
 //	bool lastTrackIndex = _settings.GetLastTrackIndex();
@@ -49,7 +49,7 @@ void SailPlayerController::LoadStartupSettings()
 void SailPlayerController::SaveOnExitSettings()
 {
 //	_settings.SetPlayOrder(_playlist.GetPlayOrder());
-//	_settings.SetPlaylist(_playlist.GetTracks());
+	_settings.SetPlaylist(_playlist.GetTracks());
 //	_settings.SetLastTrackIndex(_playlist.getCurrentTrackIndex());
 //	_settings.SetLastPlayingPosition(_player.getCurrentPosition());
 }

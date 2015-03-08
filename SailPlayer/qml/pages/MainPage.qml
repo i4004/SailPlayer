@@ -4,7 +4,7 @@ import Sailfish.Silica 1.0
 //import harbour.sail.player.AudioPlayerState 1.0
 //import harbour.sail.player.PlayDirection 1.0
 //import "../controls"
-//import "../controls/playlist"
+import "../controls/playlist"
 
 Page
 {
@@ -33,18 +33,17 @@ Page
 			hintText: qsTr("Pull down to add tracks")
 		}
 
-//		delegate: PlaylistItem
-//		{
-//			id: itemp
+		delegate: PlaylistItem
+		{
 //			onClicked: playerControlPanel.visibleSize == 0 ? playerControlPanel.show() : playerControlPanel.hide()
 //			onPushAndHold: { playController.playTrack(index); }
-//		}
+		}
 
-//		section
-//		{
-//			property: "section"
-//			delegate: PlaylistSectionHeader {}
-//		}
+		section
+		{
+			property: "section"
+			delegate: PlaylistSectionHeader {}
+		}
 
 		VerticalScrollDecorator {}
 
