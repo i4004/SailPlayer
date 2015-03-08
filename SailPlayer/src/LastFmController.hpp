@@ -19,9 +19,9 @@ public:
 	Q_INVOKABLE void authenticate(QString userName, QString password);
 	Q_INVOKABLE void sendNowPlaying(Track* currentPlayingTrack);
 	Q_INVOKABLE void scrobbleTrack(Track* playedTrack, QDateTime playStartTime);
+	Q_INVOKABLE void scrobbleTracksFromCache();
 
 public slots:
-	void OnAuthenticated(QString sessionKey);
 	void OnTracksSubmitted();
 
 private:

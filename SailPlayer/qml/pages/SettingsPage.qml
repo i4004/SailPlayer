@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-//import harbour.sail.player.SailPlayerSettings 1.0
-//import harbour.sail.player.LastFmError 1.0
+import harbour.sail.player.LastFmError 1.0
 import "../controls"
 
 Page
@@ -96,48 +95,49 @@ Page
 
 				anchors.horizontalCenter: parent.horizontalCenter
 
-//				enabled: settings.lastFmSessionKey !== "" || (settings.lastFmSessionKey === "" && lastFmUserName.text != "" && lastFmPassword.text != "")
+				enabled: settings.lastFmSessionKey !== "" || (settings.lastFmSessionKey === "" && lastFmUserName.text != "" && lastFmPassword.text != "")
 
-//				text: settings.lastFmSessionKey === "" ? qsTr('Authenticate on Last.fm') : qsTr('Clear Last.fm authentication')
+				text: settings.lastFmSessionKey === "" ? qsTr('Authenticate on Last.fm') : qsTr('Clear Last.fm authentication')
 
-//				Component.onCompleted: scrobbler.authenticated.connect(onAuthenticated)
+				Component.onCompleted: scrobbler.Authenticated.connect(onAuthenticated)
 
-//				onClicked:
-//				{
-//					if(settings.lastFmSessionKey !== "")
-//						remorse.execute(qsTr("Clearing"), function() { settings.lastFmSessionKey = ""; })
-//					else
-//					{
-//						scrobbler.errorResponse.connect(onError);
-//						enabled = false;
-//						lastFmBusyIndicator.running = true;
-//						scrobbler.authenticate(lastFmUserName.text, lastFmPassword.text);
-//					}
-//				}
+				onClicked:
+				{
+					if(settings.lastFmSessionKey !== "")
+						remorse.execute(qsTr("Clearing"), function() { settings.lastFmSessionKey = ""; })
+					else
+					{
+						scrobbler.ErrorResponse.connect(onError);
+						enabled = false;
+						lastFmBusyIndicator.running = true;
+						lastFmController.authenticate(lastFmUserName.text, lastFmPassword.text);
+					}
+				}
 
-//				function onAuthenticated(key)
-//				{
-//					lastFmBusyIndicator.running = false;
-//					enabled = true;
-//					lastFmUserName.text = "";
-//					lastFmPassword.text = "";
+				function onAuthenticated(key)
+				{
+					scrobbler.ErrorResponse.disconnect(onError);
+					lastFmBusyIndicator.running = false;
+					enabled = true;
+					lastFmUserName.text = "";
+					lastFmPassword.text = "";
 
-//					settings.lastFmSessionKey = key;
-//				}
+					settings.lastFmSessionKey = key;
+				}
 
-//				function onError(error, description)
-//				{
-//					scrobbler.errorResponse.disconnect(onError);
-//					lastFmBusyIndicator.running = false;
-//					enabled = true;
+				function onError(error, description)
+				{
+					scrobbler.ErrorResponse.disconnect(onError);
+					lastFmBusyIndicator.running = false;
+					enabled = true;
 
-//					if(error === LastFmError.AuthenticationFailed)
-//						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
-//					else if(error === LastFmError.NoInternetConnection)
-//						notifiicationPanel.showText(qsTr('No internet connection.'));
-//					else
-//						notifiicationPanel.showText(description);
-//				}
+					if(error === LastFmError.AuthenticationFailed)
+						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
+					else if(error === LastFmError.NoInternetConnection)
+						notifiicationPanel.showText(qsTr('No internet connection.'));
+					else
+						notifiicationPanel.showText(description);
+				}
 			}
 
 			BusyIndicator
@@ -160,51 +160,51 @@ Page
 				wrapMode: Text.WordWrap
 				color: Theme.secondaryColor
 
-//				text: qsTr("Manual cached tracks scrobble.") + (scrobbler.numberOfScrobbleCacheItems > 0 ? qsTr(" You have ") + scrobbler.numberOfScrobbleCacheItems +  qsTr(" tracks to scrobble.") : qsTr(' Nothing to scrobble.'))
+				text: qsTr("Manual scrobble of cached tracks.") + (scrobbler.numberOfScrobbleCacheItems > 0 ? qsTr(" You have ") + scrobbler.numberOfScrobbleCacheItems +  qsTr(" tracks to scrobble.") : qsTr(' Nothing to scrobble.'))
 			}
 
 			Button
 			{
 				id: lastFmScrobbleButton
 
-//				anchors.horizontalCenter: parent.horizontalCenter
+				anchors.horizontalCenter: parent.horizontalCenter
 
-//				text: qsTr("Scrobble")
+				property bool working: false
 
-//				Component.onCompleted:
-//				{
-//					scrobbler.tracksSubmitted.connect(onTracksSubmitted);
-//					enabled = settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0;
-//				}
+				text: qsTr("Scrobble")
 
-//				onClicked:
-//				{
-//					scrobbler.errorResponse.connect(onError);
-//					enabled = false;
-//					lastFmScrobbleBusyIndicator.running = true;
-//					scrobbler.submitTracksFromCache();
-//				}
+				enabled: settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0 && !working
 
-//				function onTracksSubmitted()
-//				{
-//					scrobbler.errorResponse.disconnect(onError);
-//					lastFmScrobbleBusyIndicator.running = false;
-//					enabled = settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0;
-//				}
+				Component.onCompleted: scrobbler.TracksSubmitted.connect(onTracksSubmitted)
 
-//				function onError(error, description)
-//				{
-//					scrobbler.errorResponse.disconnect(onError);
-//					lastFmScrobbleBusyIndicator.running = false;
-//					enabled = settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0;
+				onClicked:
+				{
+					scrobbler.ErrorResponse.connect(onError);
+					working = true;
+					lastFmScrobbleBusyIndicator.running = true;
+					lastFmController.scrobbleTracksFromCache();
+				}
 
-//					if(error === LastFmError.AuthenticationFailed)
-//						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
-//					else if(error === LastFmError.NoInternetConnection)
-//						notifiicationPanel.showText(qsTr('No internet connection.'));
-//					else
-//						notifiicationPanel.showText(description);
-//				}
+				function onTracksSubmitted()
+				{
+					scrobbler.ErrorResponse.disconnect(onError);
+					lastFmScrobbleBusyIndicator.running = false;
+					working = false;
+				}
+
+				function onError(error, description)
+				{
+					scrobbler.ErrorResponse.disconnect(onError);
+					lastFmScrobbleBusyIndicator.running = false;
+					working = false;
+
+					if(error === LastFmError.AuthenticationFailed)
+						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
+					else if(error === LastFmError.NoInternetConnection)
+						notifiicationPanel.showText(qsTr('No internet connection.'));
+					else
+						notifiicationPanel.showText(description);
+				}
 			}
 
 			BusyIndicator

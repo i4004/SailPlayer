@@ -2,7 +2,7 @@
 
 LastFmController::LastFmController(LastFmScrobbler& scrobbler, SailPlayerSettings& settings) : _scrobbler(scrobbler), _settings(settings)
 {
-	connect(&_scrobbler, SIGNAL(Authenticated(QString)), this, SLOT(OnAuthenticated(QString)));
+	connect(&_scrobbler, SIGNAL(TracksSubmitted()), this, SLOT(OnTracksSubmitted()));
 
 	_scrobbler.AddToCache(_settings.GetCachedTracks());
 }
@@ -19,7 +19,7 @@ void LastFmController::sendNowPlaying(Track* currentPlayingTrack)
 
 void LastFmController::scrobbleTrack(Track* playedTrack, QDateTime playStartTime)
 {
-	bool result = _scrobbler.AddToCache(playedTrack, playStartTime);
+	bool result = _scrobbler.AddToCache(new Track(*playedTrack), playStartTime);
 
 	if(result)
 		_settings.SetCachedTracks(_scrobbler.GetCache());
@@ -27,9 +27,9 @@ void LastFmController::scrobbleTrack(Track* playedTrack, QDateTime playStartTime
 	_scrobbler.ScrobbleTracksFromCache();
 }
 
-void LastFmController::OnAuthenticated(QString sessionKey)
+void LastFmController::scrobbleTracksFromCache()
 {
-	_settings.SetLastFmSessionKey(sessionKey);
+	_scrobbler.ScrobbleTracksFromCache();
 }
 
 void LastFmController::OnTracksSubmitted()

@@ -3,8 +3,6 @@
 
 #include "PlayController.hpp"
 
-#include <QDebug>
-
 using namespace Audio;
 using namespace Playlist;
 
@@ -180,7 +178,6 @@ void PlayController::OnElapseTimer()
 	if(!_isScrobbled && currentDuration > 5000 && (_elapsed * 1000 >= currentDuration / 2 || _elapsed >= 2401000))
 	{
 		_isScrobbled = true;
-		qDebug() << "scrobble!";
-//		_lastFmController.scrobbleTrack(_playlist.GetCurrentPlayingTrack(), _trackPlayStartTime);
+		_lastFmController.scrobbleTrack(_playlist.GetCurrentPlayingTrack(), _trackPlayStartTime);
 	}
 }

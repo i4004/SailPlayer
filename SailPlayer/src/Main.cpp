@@ -6,6 +6,7 @@
 #include "Models/FsRecordsListModel.hpp"
 #include "Net/LastFmQueryBuilder.hpp"
 #include "Net/LastFmRequestBuilder.hpp"
+#include "Net/LastFmScrobbler.hpp"
 #include "Playlist/PlaylistEnums.hpp"
 #include "SailPlayerController.hpp"
 
@@ -23,6 +24,9 @@ int main(int argc, char *argv[])
 
 	qmlRegisterType<FsHelper>("harbour.sail.player.FsHelper", 1, 0, "FsHelper");
 	qmlRegisterType<FsRecordsListModel>("harbour.sail.player.FsRecordsListModel", 1, 0, "FsRecordsListModel");
+
+	qmlRegisterType<LastFmScrobbler>("harbour.sail.player.LastFmError", 1, 0, "LastFmError");
+	qRegisterMetaType<LastFmScrobbler::LastFmError>("LastFmScrobbler::LastFmError");
 
 	// Application description / data
 

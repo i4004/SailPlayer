@@ -9,7 +9,7 @@ namespace Playlist
 	{
 	public:
 		Track(QString artistName, QString albumName, int albumYear, int number, QString name, int startPosition /* msec */, int endPosition /* msec */, QString fileName, QString fullFilePath);
-//		Track(Track& track);
+		Track(Track& track);
 
 		QString GetArtistName(){ return _artistName; }
 		QString GetAlbumName(){ return _albumName; }
