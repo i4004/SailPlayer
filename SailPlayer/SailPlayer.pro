@@ -18,7 +18,8 @@ SOURCES += \
     src/SailPlayerSettings.cpp \
     src/Playlist/Track.cpp \
     src/Models/PlaylistModelBase.cpp \
-    src/Models/PlaylistModel.cpp
+    src/Models/PlaylistModel.cpp \
+    src/Audio/AudioResource.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -44,4 +45,5 @@ HEADERS += \
     src/Models/PlaylistModelBase.hpp \
     src/Models/PlaylistModel.hpp \
     src/Audio/AudioPlayerEnums.hpp \
-    src/Audio/GstEqualizerBandState.hpp
+    src/Audio/GstEqualizerBandState.hpp \
+    src/Audio/AudioResource.hpp
