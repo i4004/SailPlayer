@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sail.player.LastFmError 1.0
-import "../controls"
+import "../../controls"
 
 Page
 {
@@ -21,26 +21,9 @@ Page
 			anchors.left: parent.left
 			anchors.right: parent.right
 
-			PageHeader { title: qsTr("Settings") }
+			PageHeader { title: qsTr("Last.fm Settings") }
 
-			SectionHeader
-			{
-				text: qsTr('General')
-			}
-
-			TextSwitch
-			{
-				checked: settings.restoreLastPlayingPosition
-
-				text: qsTr("Restore last playing position on startup")
-
-				onClicked: settings.restoreLastPlayingPosition = !settings.restoreLastPlayingPosition;
-			}
-
-			SectionHeader
-			{
-				text: qsTr('Last.fm')
-			}
+			SectionHeader { text: qsTr('General') }
 
 			TextSwitch
 			{
@@ -51,6 +34,8 @@ Page
 
 				onClicked: settings.scrobblingIsEnabled = !settings.scrobblingIsEnabled;
 			}
+
+			SectionHeader { text: qsTr('Authentication') }
 
 			Label
 			{
@@ -65,6 +50,8 @@ Page
 
 				text: qsTr("Enter your last.fm credentials if you want to scrobble your songs to Last.fm. Only Last.fm session key will be saved on the device.")
 			}
+
+			VerticalSpacer { height: Theme.paddingLarge }
 
 			TextField
 			{
@@ -150,6 +137,8 @@ Page
 				running: false
 			}
 
+			SectionHeader { text: qsTr('Manual scrobble') }
+
 			Label
 			{
 				anchors.left: parent.left
@@ -160,7 +149,7 @@ Page
 				wrapMode: Text.WordWrap
 				color: Theme.secondaryColor
 
-				text: qsTr("Manual scrobble of cached tracks.") + (scrobbler.numberOfScrobbleCacheItems > 0 ? qsTr(" You have ") + scrobbler.numberOfScrobbleCacheItems +  qsTr(" tracks to scrobble.") : qsTr(' Nothing to scrobble.'))
+				text: scrobbler.numberOfScrobbleCacheItems > 0 ? qsTr(" You have ") + scrobbler.numberOfScrobbleCacheItems +  qsTr(" tracks to scrobble.") : qsTr(' Nothing to scrobble.')
 			}
 
 			Button

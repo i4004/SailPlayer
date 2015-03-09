@@ -65,7 +65,9 @@ OTHER_FILES += \
     qml/pages/EqualizerPage.qml \
     qml/pages/ManageTextItemDialog.qml \
     qml/pages/MessagePage.qml \
-    qml/pages/SettingsPage.qml
+    qml/pages/settings/LastFmSettings.qml \
+    qml/pages/settings/SettingsMain.qml \
+    qml/controls/VerticalSpacer.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 
