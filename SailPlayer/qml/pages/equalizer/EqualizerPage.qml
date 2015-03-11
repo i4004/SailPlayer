@@ -17,13 +17,13 @@ Page
 			anchors.left: parent.left
 			anchors.right: parent.right
 
-			PageHeader
-			{
-				id: head
-				title: qsTr("Equalizer")
-			}
+			PageHeader { title: qsTr("Equalizer") }
+
+			SectionHeader { text: qsTr('General') }
 
 			TextSwitch { text: "Equalizer is enabled" }
+
+			SectionHeader { text: qsTr('Presets') }
 
 			ComboBox
 			{

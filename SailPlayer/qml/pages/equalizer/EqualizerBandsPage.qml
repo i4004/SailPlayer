@@ -21,18 +21,18 @@ Page
 			ListElement { gain: 0; frequency: 160 }
 			ListElement { gain: 5; frequency: 524 }
 			ListElement { gain: 5; frequency: 524 }
-			ListElement { gain: 5; frequency: 524 }
+			ListElement { gain: 7; frequency: 524 }
 			ListElement { gain: 5; frequency: 1200 }
 			ListElement { gain: 5; frequency: 524 }
-			ListElement { gain: 5; frequency: 1200 }
+			ListElement { gain: 10; frequency: 1200 }
 			ListElement { gain: 5; frequency: 524 }
 			ListElement { gain: 5; frequency: 1200 }
-			ListElement { gain: 15; frequency: 6128 }
+			ListElement { gain: 12; frequency: 6128 }
 			ListElement { gain: 5; frequency: 1200 }
 			ListElement { gain: 0; frequency: 11000 }
 			ListElement { gain: -14; frequency: 14250 }
 			ListElement { gain: -14; frequency: 15000 }
-			ListElement { gain: -14; frequency: 17000 }
+			ListElement { gain: -20; frequency: 17000 }
 		}
 
 		delegate: ListItem
@@ -61,9 +61,9 @@ Page
 				anchors.rightMargin: -30
 				anchors.verticalCenter: parent.verticalCenter
 
-				maximumValue: 40
-				value: gain + 20
-				valueText: parseInt(value) - 20
+				maximumValue: 36
+				value: gain + 24
+				valueText: parseInt(value) - 24
 			}
 
 			IconButton
