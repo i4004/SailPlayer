@@ -62,12 +62,13 @@ OTHER_FILES += \
     qml/controls/MessagePageDisplayer.qml \
     qml/controls/NotificationPanel.qml \
     qml/pages/AddFilesDialog.qml \
-    qml/pages/EqualizerPage.qml \
     qml/pages/ManageTextItemDialog.qml \
     qml/pages/MessagePage.qml \
     qml/pages/settings/LastFmSettings.qml \
     qml/pages/settings/SettingsMain.qml \
-    qml/controls/VerticalSpacer.qml
+    qml/controls/VerticalSpacer.qml \
+    qml/pages/equalizer/EqualizerBandsPage.qml \
+    qml/pages/equalizer/EqualizerPage.qml
 
 TRANSLATIONS += translations/harbour-sail-player-de.ts
 

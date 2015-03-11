@@ -62,7 +62,7 @@ Page
 			MenuItem
 			{
 				text: qsTr("Equalizer")
-				onClicked: pageStack.push(Qt.resolvedUrl("EqualizerPage.qml"))
+				onClicked: pageStack.push(Qt.resolvedUrl("equalizer/EqualizerPage.qml"))
 			}
 
 			MenuItem
