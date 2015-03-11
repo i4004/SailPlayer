@@ -6,9 +6,11 @@
 #include <QSettings>
 #include <QString>
 
+#include "Equalizer/EqualizerPreset.hpp"
 #include "Playlist/PlaylistEnums.hpp"
 #include "Playlist/Track.hpp"
 
+using namespace Equalizer;
 using namespace Playlist;
 
 class SailPlayerSettings : public QObject
@@ -64,6 +66,10 @@ public:
 
 	QMap<QDateTime, Track*> GetCachedTracks();
 	void SetCachedTracks(QMap<QDateTime, Track*> tracks);
+
+	// Equalizer
+
+	QList<EqualizerPreset*> GetEqualizerPresets();
 
 signals:
 	// Add files dialog

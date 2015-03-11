@@ -42,7 +42,9 @@ SOURCES += \
     src/Net/LastFmRequestBuilder.cpp \
     src/Net/LastFmScrobbler.cpp \
     src/LastFmController.cpp \
-    src/PlaylistController.cpp
+    src/PlaylistController.cpp \
+    src/Equalizer/EqualizerPreset.cpp \
+    src/Equalizer/EqualizerBand.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -113,4 +115,6 @@ HEADERS += \
     src/Net/LastFmRequestBuilder.hpp \
     src/Net/LastFmScrobbler.hpp \
     src/LastFmController.hpp \
-    src/PlaylistController.hpp
+    src/PlaylistController.hpp \
+    src/Equalizer/EqualizerPreset.hpp \
+    src/Equalizer/EqualizerBand.hpp

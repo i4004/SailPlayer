@@ -149,6 +149,14 @@ void SailPlayerSettings::SetCachedTracks(QMap<QDateTime, Track*> tracks)
 	settings.endArray();
 }
 
+// Equalizer
+
+QList<EqualizerPreset*> SailPlayerSettings::GetEqualizerPresets()
+{
+	QList<EqualizerPreset*> presets;
+	return presets;
+}
+
 Track* SailPlayerSettings::GetTrackFromSettings()
 {
 	return new Track(settings.value("ArtistName").toString(),
