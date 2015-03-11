@@ -74,7 +74,7 @@ Page
 				anchors.verticalCenter: parent.verticalCenter
 
 				icon.source: "image://theme/icon-m-clear"
-				onClicked: gainSlider.value = 20
+				onClicked: gainSlider.value = 24
 			}
 		}
 
