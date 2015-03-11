@@ -10,6 +10,7 @@ namespace Models
 		_nextTrackToPlay = NULL;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
+		_trackRequested = false;
 	}
 
 	void PlaylistModel::Clear()
@@ -50,6 +51,8 @@ namespace Models
 
 	bool PlaylistModel::SetTrackToPlayAndPlayingFromNextTrack()
 	{
+		_trackRequested = false;
+
 		bool result = SetTrackToPlayFromNextTrack();
 
 		SetPlayingTrack(true);
@@ -99,6 +102,8 @@ namespace Models
 
 	QString PlaylistModel::RequestNextTrack()
 	{
+		_trackRequested = true;
+
 		bool result = CalculateNextTrackToPlay();
 
 		if(result == true)

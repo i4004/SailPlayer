@@ -22,7 +22,7 @@ namespace Models
 
 		void Clear();
 
-//		// Calculates next track to play
+		// Calculates next track to play
 		bool CalculateNextTrackToPlay(PlaylistEnums::PlayDirection direction = PlaylistEnums::Next, int customIndex = -1);
 
 		// Calculates next track to play and sets current track to play from it
@@ -38,6 +38,7 @@ namespace Models
 		int GetNextEndPosition();
 		int GetCurrentTrackIndex();
 		Track* GetCurrentPlayingTrack();
+		bool IstTrackRequested() { return _trackRequested; }
 
 	public slots:
 		void SetPlayerState(AudioPlayerEnums::AudioPlayerState state);
@@ -54,6 +55,7 @@ namespace Models
 		Track* _nextTrackToPlay;
 		Track* _currentTrackToPlay;
 		Track* _currentPlayingTrack;
+		bool _trackRequested;
 
 		bool SetTrackToPlayFromNextTrack();
 		void ResetTracksData();

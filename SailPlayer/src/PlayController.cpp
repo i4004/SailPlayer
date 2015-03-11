@@ -118,7 +118,7 @@ void PlayController::OnStreamStarted()
 		_needToSetStartupTrackLastFmNowPlaying = true;
 	}
 
-	if(_player.IsStreamFromNextTrack() && !_playlist.SetTrackToPlayAndPlayingFromNextTrack())
+	if(_playlist.IstTrackRequested() && !_playlist.SetTrackToPlayAndPlayingFromNextTrack())
 		_player.Stop();
 	else if(!_needToSetStartupTrackLastFmNowPlaying && _scrobblingIsEnabled)
 		StartScrobbleMotitoring();
