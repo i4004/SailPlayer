@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQuickView>
 
+#include "EqualizerController.hpp"
 #include "LastFmController.hpp"
 #include "PlayController.hpp"
 #include "PlaylistController.hpp"
@@ -25,6 +26,7 @@ private:
 	PlaylistModel _playlist;
 	AudioPlayer _player;
 	LastFmScrobbler _scrobbler;
+	EqualizerController _equalizerController;
 
 	PlayController* _playController;
 	PlaylistController* _playlistController;

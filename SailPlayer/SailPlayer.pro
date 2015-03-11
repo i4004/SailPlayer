@@ -44,7 +44,8 @@ SOURCES += \
     src/LastFmController.cpp \
     src/PlaylistController.cpp \
     src/Equalizer/EqualizerPreset.cpp \
-    src/Equalizer/EqualizerBand.cpp
+    src/Equalizer/EqualizerBand.cpp \
+    src/EqualizerController.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -117,4 +118,5 @@ HEADERS += \
     src/LastFmController.hpp \
     src/PlaylistController.hpp \
     src/Equalizer/EqualizerPreset.hpp \
-    src/Equalizer/EqualizerBand.hpp
+    src/Equalizer/EqualizerBand.hpp \
+    src/EqualizerController.hpp
