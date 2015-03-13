@@ -8,14 +8,18 @@ namespace Playlist
 {
 	DirectoryRecursiveMultimediaFilesListFactory::DirectoryRecursiveMultimediaFilesListFactory()
 	{
-		_supportedFormats.append(Flac);
-		_supportedFormats.append(Ogg);
-		_supportedFormats.append(Mp3);
-		_supportedFormats.append(Wav);
+		_supportedFormats.append(Aac);
+		_supportedFormats.append(Aiff);
 		_supportedFormats.append(Ape);
-		_supportedFormats.append(Mp4);
-		_supportedFormats.append(Wv);
 		_supportedFormats.append(Cue);
+		_supportedFormats.append(Flac);
+		_supportedFormats.append(Mp3);
+		_supportedFormats.append(Mp4);
+		_supportedFormats.append(Ogg);
+		_supportedFormats.append(M4a);
+		_supportedFormats.append(Wav);
+		_supportedFormats.append(Wma);
+		_supportedFormats.append(Wv);
 	}
 
 	QList<QFileInfo> DirectoryRecursiveMultimediaFilesListFactory::Build()
