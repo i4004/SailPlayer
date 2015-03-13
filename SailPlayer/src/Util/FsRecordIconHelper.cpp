@@ -13,14 +13,18 @@ namespace Util
 	{
 		switch (fileType)
 		{
-			case Flac:
-			case Ogg:
-			case Mp3:
-			case Wav:
+			case Aac:
+			case Aiff:
 			case Ape:
-			case Mp4:
-			case Wv:
 			case Cue:
+			case Flac:
+			case Mp3:
+			case Mp4:
+			case M4a:
+			case Ogg:
+			case Wav:
+			case Wma:
+			case Wv:
 				return "file-audio";
 
 			case Undefined:
