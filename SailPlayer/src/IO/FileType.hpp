@@ -7,14 +7,18 @@ namespace IO
 	{
 		Undefined,
 		Unknown,
-		Flac,
-		Ogg,
-		Mp3,
-		Wav,
+		Aac,
+		Aiff,
 		Ape,
+		Cue,
+		Flac,
+		Mp3,
 		Mp4,
-		Wv,
-		Cue
+		M4a,
+		Ogg,
+		Wav,
+		Wma,
+		Wv
 	};
 }
 
