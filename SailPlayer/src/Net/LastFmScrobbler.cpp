@@ -13,8 +13,7 @@ namespace Net
 
 	LastFmScrobbler::~LastFmScrobbler()
 	{
-		qDeleteAll(_scrobbleCache);
-		_scrobbleCache.clear();
+		ClearCache();
 
 		delete _networkAccessManager;
 	}
@@ -123,6 +122,14 @@ namespace Net
 		}
 
 		SendRequest("track.scrobble", queryVariables);
+	}
+
+	void LastFmScrobbler::ClearCache()
+	{
+		qDeleteAll(_scrobbleCache);
+		_scrobbleCache.clear();
+
+		emit NumberOfScrobbleCacheItemsChanged();
 	}
 
 	void LastFmScrobbler::SendRequest(QString method, QMap<QString, QString> queryVariables)

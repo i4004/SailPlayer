@@ -66,6 +66,7 @@ public:
 
 	QMap<QDateTime, Track*> GetCachedTracks();
 	void SetCachedTracks(QMap<QDateTime, Track*> tracks);
+	void ClearCachedTracks();
 
 	// Equalizer
 

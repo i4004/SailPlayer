@@ -131,7 +131,7 @@ QMap<QDateTime, Track*> SailPlayerSettings::GetCachedTracks()
 
 void SailPlayerSettings::SetCachedTracks(QMap<QDateTime, Track*> tracks)
 {
-	settings.remove("CachedTracksToScrobble");
+	ClearCachedTracks();
 	settings.beginWriteArray("CachedTracksToScrobble", tracks.count());
 
 	QMap<QDateTime, Track*>::iterator i;
@@ -147,6 +147,11 @@ void SailPlayerSettings::SetCachedTracks(QMap<QDateTime, Track*> tracks)
 	}
 
 	settings.endArray();
+}
+
+void SailPlayerSettings::ClearCachedTracks()
+{
+	settings.remove("CachedTracksToScrobble");
 }
 
 // Equalizer

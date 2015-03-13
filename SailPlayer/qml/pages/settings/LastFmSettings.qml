@@ -152,47 +152,58 @@ Page
 				text: scrobbler.numberOfScrobbleCacheItems > 0 ? qsTr(" You have ") + scrobbler.numberOfScrobbleCacheItems +  qsTr(" tracks to scrobble.") : qsTr(' Nothing to scrobble.')
 			}
 
-			Button
+			Row
 			{
-				id: lastFmScrobbleButton
-
 				anchors.horizontalCenter: parent.horizontalCenter
 
-				property bool working: false
-
-				text: qsTr("Scrobble")
-
-				enabled: settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0 && !working
-
-				Component.onCompleted: scrobbler.TracksSubmitted.connect(onTracksSubmitted)
-
-				onClicked:
+				Button
 				{
-					scrobbler.ErrorResponse.connect(onError);
-					working = true;
-					lastFmScrobbleBusyIndicator.running = true;
-					lastFmController.scrobbleTracksFromCache();
+					id: lastFmScrobbleButton
+
+					property bool working: false
+
+					text: qsTr("Scrobble")
+
+					enabled: settings.lastFmSessionKey !== "" && scrobbler.numberOfScrobbleCacheItems > 0 && !working
+
+					Component.onCompleted: scrobbler.TracksSubmitted.connect(onTracksSubmitted)
+
+					onClicked:
+					{
+						scrobbler.ErrorResponse.connect(onError);
+						working = true;
+						lastFmScrobbleBusyIndicator.running = true;
+						lastFmController.scrobbleTracksFromCache();
+					}
+
+					function onTracksSubmitted()
+					{
+						scrobbler.ErrorResponse.disconnect(onError);
+						lastFmScrobbleBusyIndicator.running = false;
+						working = false;
+					}
+
+					function onError(error, description)
+					{
+						scrobbler.ErrorResponse.disconnect(onError);
+						lastFmScrobbleBusyIndicator.running = false;
+						working = false;
+
+						if(error === LastFmError.AuthenticationFailed)
+							notifiicationPanel.showText(qsTr('Invalid user name or password.'));
+						else if(error === LastFmError.NoInternetConnection)
+							notifiicationPanel.showText(qsTr('No internet connection.'));
+						else
+							notifiicationPanel.showText(description);
+					}
 				}
 
-				function onTracksSubmitted()
+				Button
 				{
-					scrobbler.ErrorResponse.disconnect(onError);
-					lastFmScrobbleBusyIndicator.running = false;
-					working = false;
-				}
+					text: qsTr("Clear cache")
 
-				function onError(error, description)
-				{
-					scrobbler.ErrorResponse.disconnect(onError);
-					lastFmScrobbleBusyIndicator.running = false;
-					working = false;
-
-					if(error === LastFmError.AuthenticationFailed)
-						notifiicationPanel.showText(qsTr('Invalid user name or password.'));
-					else if(error === LastFmError.NoInternetConnection)
-						notifiicationPanel.showText(qsTr('No internet connection.'));
-					else
-						notifiicationPanel.showText(description);
+					enabled: scrobbler.numberOfScrobbleCacheItems > 0 && !lastFmScrobbleButton.working
+					onClicked: remorse.execute(qsTr("Clearing"), function() { lastFmController.clearCache(); })
 				}
 			}
 

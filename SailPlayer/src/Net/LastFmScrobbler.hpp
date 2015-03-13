@@ -50,6 +50,7 @@ namespace Net
 		bool AddToCache(Track* playedTrack, QDateTime playStartTime);
 		void AddToCache(QMap<QDateTime, Track*> tracks);
 		void ScrobbleTracksFromCache();
+		void ClearCache();
 
 		QString GetSessionKey() { return _sessionKey; }
 		QMap<QDateTime, Track*> GetCache(){ return _scrobbleCache; }

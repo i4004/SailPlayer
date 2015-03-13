@@ -20,6 +20,7 @@ public:
 	Q_INVOKABLE void sendNowPlaying(Track* currentPlayingTrack);
 	Q_INVOKABLE void scrobbleTrack(Track* playedTrack, QDateTime playStartTime);
 	Q_INVOKABLE void scrobbleTracksFromCache();
+	Q_INVOKABLE void clearCache();
 
 public slots:
 	void OnTracksSubmitted();

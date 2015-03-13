@@ -32,6 +32,12 @@ void LastFmController::scrobbleTracksFromCache()
 	_scrobbler.ScrobbleTracksFromCache();
 }
 
+void LastFmController::clearCache()
+{
+	_scrobbler.ClearCache();
+	_settings.ClearCachedTracks();
+}
+
 void LastFmController::OnTracksSubmitted()
 {
 	_settings.SetCachedTracks(_scrobbler.GetCache());
