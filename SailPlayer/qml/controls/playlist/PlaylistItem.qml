@@ -41,8 +41,8 @@ ListItem
 		anchors.verticalCenter: parent.verticalCenter
 		text: trackName != "" ? trackName : trackFileName
 		color: item.highlighted || isTrackToPlay ? Theme.highlightColor : Theme.primaryColor
-        wrapMode: Text.NoWrap
-        truncationMode: TruncationMode.Fade
+		wrapMode: Text.NoWrap
+		truncationMode: TruncationMode.Fade
 	}
 
 	Label
