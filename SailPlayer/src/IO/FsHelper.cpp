@@ -8,29 +8,41 @@ namespace IO
 	{
 		QString suffix = fileNameSuffix.toLower();
 
-		if(suffix == "flac")
-			return Flac;
+		if(suffix == "aac")
+			return Aac;
 
-		if(suffix == "ogg")
-			return Ogg;
-
-		if(suffix == "mp3")
-			return Mp3;
-
-		if(suffix == "wav")
-			return Wav;
+		if(suffix == "aiff")
+			return Aiff;
 
 		if(suffix == "ape")
 			return Ape;
 
+		if(suffix == "cue")
+			return Cue;
+
+		if(suffix == "flac")
+			return Flac;
+
+		if(suffix == "mp3")
+			return Mp3;
+
 		if(suffix == "mp4")
 			return Mp4;
 
+		if(suffix == "m4a")
+			return M4a;
+
+		if(suffix == "ogg")
+			return Ogg;
+
+		if(suffix == "wav")
+			return Wav;
+
+		if(suffix == "wma")
+			return Wma;
+
 		if(suffix == "wv")
 			return Wv;
-
-		if(suffix == "cue")
-			return Cue;
 
 		return Undefined;
 	}
