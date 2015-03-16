@@ -17,8 +17,6 @@ SOURCES += \
     src/SailPlayerController.cpp \
     src/SailPlayerSettings.cpp \
     src/Playlist/Track.cpp \
-    src/Models/PlaylistModelBase.cpp \
-    src/Models/PlaylistModel.cpp \
     src/Audio/AudioResource.cpp \
     src/Audio/AudioPlayerBase.cpp \
     src/Audio/AudioPlayer.cpp \
@@ -36,7 +34,6 @@ SOURCES += \
     src/Playlist/DirectoryRecursiveMultimediaFilesListFactory.cpp \
     src/Playlist/TracksFactory.cpp \
     src/Playlist/TracksLoader.cpp \
-    src/Models/FsRecordsListModel.cpp \
     src/Util/FsRecordIconHelper.cpp \
     src/Net/LastFmQueryBuilder.cpp \
     src/Net/LastFmRequestBuilder.cpp \
@@ -45,7 +42,10 @@ SOURCES += \
     src/PlaylistController.cpp \
     src/Equalizer/EqualizerPreset.cpp \
     src/Equalizer/EqualizerBand.cpp \
-    src/EqualizerController.cpp
+    src/EqualizerController.cpp \
+    src/IO/FsRecordsListModel.cpp \
+    src/Playlist/PlaylistModel.cpp \
+    src/Playlist/PlaylistModelBase.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -83,8 +83,6 @@ HEADERS += \
     src/SailPlayerSettings.hpp \
     src/Playlist/Track.hpp \
     src/Playlist/PlaylistEnums.hpp \
-    src/Models/PlaylistModelBase.hpp \
-    src/Models/PlaylistModel.hpp \
     src/Audio/AudioPlayerEnums.hpp \
     src/Audio/GstEqualizerBandState.hpp \
     src/Audio/AudioResource.hpp \
@@ -110,7 +108,6 @@ HEADERS += \
     src/Playlist/ITracksLoader.hpp \
     src/Playlist/TracksFactory.hpp \
     src/Playlist/TracksLoader.hpp \
-    src/Models/FsRecordsListModel.hpp \
     src/Util/FsRecordIconHelper.hpp \
     src/Net/LastFmQueryBuilder.hpp \
     src/Net/LastFmRequestBuilder.hpp \
@@ -119,4 +116,7 @@ HEADERS += \
     src/PlaylistController.hpp \
     src/Equalizer/EqualizerPreset.hpp \
     src/Equalizer/EqualizerBand.hpp \
-    src/EqualizerController.hpp
+    src/EqualizerController.hpp \
+    src/IO/FsRecordsListModel.hpp \
+    src/Playlist/PlaylistModel.hpp \
+    src/Playlist/PlaylistModelBase.hpp

@@ -2,12 +2,12 @@
 #define PLAYLISTMODEL_HPP
 
 #include "../Audio/AudioPlayerEnums.hpp"
-#include "../Playlist/PlaylistEnums.hpp"
+#include "PlaylistEnums.hpp"
 #include "PlaylistModelBase.hpp"
 
 using namespace Audio;
 
-namespace Models
+namespace Playlist
 {
 	class PlaylistModel : public PlaylistModelBase
 	{

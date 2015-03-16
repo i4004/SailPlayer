@@ -5,10 +5,10 @@
 
 #include "Audio/AudioPlayer.hpp"
 #include "LastFmController.hpp"
-#include "Models/PlaylistModel.hpp"
+#include "Playlist/PlaylistModel.hpp"
 
 using namespace Audio;
-using namespace Models;
+using namespace Playlist;
 
 class PlayController : public QObject
 {

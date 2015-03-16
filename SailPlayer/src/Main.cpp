@@ -3,7 +3,7 @@
 #include <sailfishapp.h>
 
 #include "IO/FsHelper.hpp"
-#include "Models/FsRecordsListModel.hpp"
+#include "IO/FsRecordsListModel.hpp"
 #include "Net/LastFmQueryBuilder.hpp"
 #include "Net/LastFmRequestBuilder.hpp"
 #include "Net/LastFmScrobbler.hpp"

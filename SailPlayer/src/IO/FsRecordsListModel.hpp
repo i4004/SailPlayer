@@ -4,12 +4,10 @@
 #include <QAbstractListModel>
 #include <QDir>
 
-#include "../IO/FsRecordInfo.hpp"
-#include "../IO/FsRecordsInfoFactory.hpp"
+#include "FsRecordInfo.hpp"
+#include "FsRecordsInfoFactory.hpp"
 
-using namespace IO;
-
-namespace Models
+namespace IO
 {
 	class FsRecordsListModel : public QAbstractListModel
 	{

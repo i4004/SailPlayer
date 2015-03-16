@@ -3,11 +3,9 @@
 
 #include <QAbstractListModel>
 
-#include "../Playlist/Track.hpp"
+#include "Track.hpp"
 
-using namespace Playlist;
-
-namespace Models
+namespace Playlist
 {
 	enum PlaylistModelRoles
 	{

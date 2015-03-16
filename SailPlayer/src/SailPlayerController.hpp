@@ -9,10 +9,6 @@
 #include "PlayController.hpp"
 #include "PlaylistController.hpp"
 
-using namespace Audio;
-using namespace Models;
-using namespace Playlist;
-
 class SailPlayerController : public QObject
 {
 	Q_OBJECT

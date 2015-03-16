@@ -1,8 +1,7 @@
+#include "PlaylistHelper.hpp"
 #include "PlaylistModel.hpp"
 
-#include "../Playlist/PlaylistHelper.hpp"
-
-namespace Models
+namespace Playlist
 {
 	PlaylistModel::PlaylistModel(QObject* parent) : PlaylistModelBase(parent)
 	{
