@@ -49,7 +49,7 @@ namespace Audio
 		_currentState = AudioPlayerEnums::Paused;
 		emit StateChanged(AudioPlayerEnums::Paused);
 
-		_audioResource->Disconnect();
+//		_audioResource->Disconnect();
 	}
 
 	void AudioPlayerBase::Stop()
