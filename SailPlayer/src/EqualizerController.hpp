@@ -18,8 +18,10 @@ public:
 public slots:
 	void SetPresets(QList<EqualizerPreset*> presets);
 
+	Q_INVOKABLE QList<QObject*> getPresets() { return (QList<QObject*>)_presets; }
+
 private:
-	QList<EqualizerPreset*> _presets;
+	QList<QObject*> _presets;
 
 	void DeletePresets();
 };

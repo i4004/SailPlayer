@@ -37,6 +37,7 @@ Page
 					MenuItem { text: "Rock" }
 					MenuItem { text: "Pop" }
 				}
+//				model: equalizerPresets
 			}
 
 			Row

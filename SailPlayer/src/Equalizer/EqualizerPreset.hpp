@@ -1,6 +1,7 @@
 #ifndef EQUALIZERPRESET_HPP
 #define EQUALIZERPRESET_HPP
 
+#include <QObject>
 #include <QString>
 #include <QList>
 
@@ -8,17 +9,23 @@
 
 namespace Equalizer
 {
-	class EqualizerPreset
+	class EqualizerPreset : public QObject
 	{
+		Q_OBJECT
+		Q_PROPERTY(QString text READ GetName WRITE SetName NOTIFY NameChanged)
+
 	public:
 		EqualizerPreset(QString name);
 		~EqualizerPreset();
 
-		QString GetWidth() { return _name; }
-		void SetWidth(QString name) { _name = name; }
+		QString GetName() { return _name; }
+		void SetName(QString name) { _name = name; }
 
 		void SetBands(QList<EqualizerBand*> bands);
 		QList<EqualizerBand*> GetBands() { return _bands; }
+
+	signals:
+		void NameChanged();
 
 	private:
 		QString _name;
