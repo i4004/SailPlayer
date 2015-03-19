@@ -12,7 +12,9 @@ EqualizerController::~EqualizerController()
 void EqualizerController::SetPresets(QList<EqualizerPreset*> presets)
 {
 	DeletePresets();
-//	_presets = presets;
+
+	foreach (EqualizerPreset* preset, presets)
+		_presets.append((QObject*)preset);
 }
 
 void EqualizerController::DeletePresets()
