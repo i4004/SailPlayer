@@ -14,14 +14,14 @@ CoverBackground
 	{
 		CoverAction
 		{
-			iconSource: "image://theme/icon-cover-next-song"
-			onTriggered: playController.next()
+			iconSource: player.state === AudioPlayerState.Playing ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
+			onTriggered: playController.playPause()
 		}
 
 		CoverAction
 		{
-			iconSource: player.state === AudioPlayerState.Playing ? "image://theme/icon-cover-pause" : "image://theme/icon-cover-play"
-			onTriggered: playController.playPause()
+			iconSource: "image://theme/icon-cover-next-song"
+			onTriggered: playController.next()
 		}
 	}
 }
