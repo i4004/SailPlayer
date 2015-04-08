@@ -2,6 +2,12 @@
 #include <QtQuick>
 #include <sailfishapp.h>
 
+#include <stdio.h>
+#include <execinfo.h>
+#include <inttypes.h>
+#include <signal.h>
+#include <QDebug>
+
 #include "IO/FsHelper.hpp"
 #include "IO/FsRecordsListModel.hpp"
 #include "Net/LastFmQueryBuilder.hpp"
@@ -14,8 +20,26 @@ using namespace IO;
 using namespace Net;
 using namespace Playlist;
 
+void print_backtrace(void)
+{
+void* buf[64];
+int size = backtrace(buf, 64);
+printf("backtrace(%d):\n", size);
+for (int i = 0; i < size; ++i)
+printf(" %lx\n", (unsigned long)buf[i]);
+}
+
+void posix_death_signal(int signum)
+{
+	qDebug() << "error!";
+	signal(signum, SIG_DFL);
+	exit(3);
+}
+
 int main(int argc, char *argv[])
 {
+	signal(SIGSEGV, posix_death_signal);
+
 	qmlRegisterType<PlaylistEnums>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
 	qRegisterMetaType<PlaylistEnums::PlayOrder>("PlaylistEnums::PlayOrder");
 
@@ -53,3 +77,4 @@ int main(int argc, char *argv[])
 	delete controller;
 	return result;
 }
+
