@@ -23,6 +23,7 @@ PkgConfigBR:
 
 Requires:
   - sailfishsilica-qt5 >= 0.10.9
+  - gstreamer1.0-plugins-good
 
 # All installed files
 Files:
