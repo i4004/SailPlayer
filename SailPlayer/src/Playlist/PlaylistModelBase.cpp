@@ -30,17 +30,9 @@ namespace Playlist
 
 	int PlaylistModelBase::rowCount(const QModelIndex &parent) const
 	{
-		#ifdef _DEBUG
-		qDebug() << "Begin";
-		#endif
-
 		Q_UNUSED(parent);
 
 		return _tracksList.count();
-
-		#ifdef _DEBUG
-		qDebug() << "End";
-		#endif
 	}
 
 	QVariant PlaylistModelBase::data(const QModelIndex &index, int role) const

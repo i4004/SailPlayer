@@ -2,6 +2,10 @@
 
 #include "AudioPlayer.hpp"
 
+#ifdef _DEBUG
+#include <QDebug>
+#endif
+
 const int MillisecondsConvertion = 1000000;
 
 namespace Audio
@@ -20,6 +24,10 @@ namespace Audio
 
 	void AudioPlayer::Play()
 	{
+		#ifdef _DEBUG
+		qDebug() << "Begin";
+		#endif
+
 		AudioPlayerEnums::AudioPlayerState state = GetCurrentState();
 
 		if(state == AudioPlayerEnums::Ready)
@@ -32,23 +40,43 @@ namespace Audio
 
 		if(state == AudioPlayerEnums::Paused)
 			_currentPositionTimer.start();
+
+		#ifdef _DEBUG
+		qDebug() << "End";
+		#endif
 	}
 
 	void AudioPlayer::Pause()
 	{
+		#ifdef _DEBUG
+		qDebug() << "Begin";
+		#endif
+
 		AudioPlayerBase::Pause();
 
 		_currentPositionTimer.stop();
+
+		#ifdef _DEBUG
+		qDebug() << "End";
+		#endif
 	}
 
 	void AudioPlayer::Stop()
 	{
+		#ifdef _DEBUG
+		qDebug() << "Begin";
+		#endif
+
 		_currentPositionTimer.stop();
 
 		AudioPlayerBase::Stop();
 
 		emit CurrentPositionUpdated(0);
 		emit CurrentDurationUpdated(0);
+
+		#ifdef _DEBUG
+		qDebug() << "End";
+		#endif
 	}
 
 	void AudioPlayer::SeekInTrack(int trackPosition)

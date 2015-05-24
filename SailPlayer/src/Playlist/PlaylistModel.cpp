@@ -18,9 +18,9 @@ namespace Playlist
 
 	void PlaylistModel::Clear()
 	{
-        #ifdef _DEBUG
+		#ifdef _DEBUG
 		qDebug() << "Begin";
-        #endif
+		#endif
 
 		beginResetModel();
 

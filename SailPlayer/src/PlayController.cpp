@@ -54,10 +54,22 @@ void PlayController::playPause()
 	else
 	{
 		if(state == AudioPlayerEnums::Ready && !_playlist.HasTrackToPlay())
+		{
+			#ifdef _DEBUG
+			qDebug() << "CalculateAndSetTrackToPlay";
+			#endif
+
 			_playlist.CalculateAndSetTrackToPlay();
+		}
 
 		if(_player.HasTrackToPlay())
+		{
+			#ifdef _DEBUG
+			qDebug() << "HasTrackToPlay";
+			#endif
+
 			_player.Play();
+		}
 	}
 
 	#ifdef _DEBUG
