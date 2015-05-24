@@ -19,7 +19,7 @@ namespace Playlist
 	void PlaylistModel::Clear()
 	{
         #ifdef _DEBUG
-        qDebug() << "Clear playlist";
+		qDebug() << "Begin";
         #endif
 
 		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
@@ -28,6 +28,10 @@ namespace Playlist
 		DeleteTracks();
 
 		endRemoveRows();
+
+		#ifdef _DEBUG
+		qDebug() << "End";
+		#endif
 	}
 
 	bool PlaylistModel::CalculateNextTrackToPlay(PlaylistEnums::PlayDirection direction, int customIndex)
