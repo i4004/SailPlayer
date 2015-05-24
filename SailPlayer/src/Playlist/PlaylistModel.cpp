@@ -14,12 +14,12 @@ namespace Playlist
 
 	void PlaylistModel::Clear()
 	{
-		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
+		beginResetModel();
 
 		ResetTracksData();
 		DeleteTracks();
 
-		endRemoveRows();
+		endResetModel();
 	}
 
 	bool PlaylistModel::CalculateNextTrackToPlay(PlaylistEnums::PlayDirection direction, int customIndex)
