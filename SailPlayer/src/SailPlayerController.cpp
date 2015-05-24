@@ -2,6 +2,10 @@
 
 #include "SailPlayerController.hpp"
 
+#ifdef _DEBUG
+#include <QDebug>
+#endif
+
 SailPlayerController::SailPlayerController(QQuickView* view)
 {
 	_lastFmController = new LastFmController(_scrobbler, _settings);
@@ -18,6 +22,10 @@ SailPlayerController::SailPlayerController(QQuickView* view)
 
 SailPlayerController::~SailPlayerController()
 {
+    #ifdef _DEBUG
+    qDebug() << "Destruction";
+    #endif
+
 	delete _playController;
 	delete _playlistController;
 	delete _lastFmController;

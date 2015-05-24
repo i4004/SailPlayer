@@ -16,6 +16,8 @@ using namespace Playlist;
 
 int main(int argc, char *argv[])
 {
+    // QML types registration
+
 	qmlRegisterType<PlaylistEnums>("harbour.sail.player.PlayOrder", 1, 0, "PlayOrder");
 	qRegisterMetaType<PlaylistEnums::PlayOrder>("PlaylistEnums::PlayOrder");
 
