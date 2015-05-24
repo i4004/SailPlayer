@@ -3,6 +3,10 @@
 
 #include "PlayController.hpp"
 
+#ifdef _DEBUG
+#include <QDebug>
+#endif
+
 using namespace Audio;
 using namespace Playlist;
 
@@ -29,12 +33,20 @@ PlayController::PlayController(AudioPlayer& player, PlaylistModel& playlist, Las
 
 PlayController::~PlayController()
 {
+	#ifdef _DEBUG
+	qDebug() << "Destruction";
+	#endif
+
 	if(_player.GetCurrentState() == AudioPlayerEnums::Playing)
 		_player.Pause();
 }
 
 void PlayController::playPause()
 {
+	#ifdef _DEBUG
+	qDebug() << "Begin";
+	#endif
+
 	AudioPlayerEnums::AudioPlayerState state = _player.GetCurrentState();
 
 	if(state == AudioPlayerEnums::Playing)
@@ -47,14 +59,26 @@ void PlayController::playPause()
 		if(_player.HasTrackToPlay())
 			_player.Play();
 	}
+
+	#ifdef _DEBUG
+	qDebug() << "End";
+	#endif
 }
 
 void PlayController::stop()
 {
+	#ifdef _DEBUG
+	qDebug() << "Begin";
+	#endif
+
 	AudioPlayerEnums::AudioPlayerState state = _player.GetCurrentState();
 
 	if(state != AudioPlayerEnums::Ready)
 		_player.Stop();
+
+	#ifdef _DEBUG
+	qDebug() << "End";
+	#endif
 }
 
 void PlayController::previous()
@@ -70,6 +94,10 @@ void PlayController::previous()
 
 void PlayController::playTrack(int trackIndex)
 {
+	#ifdef _DEBUG
+	qDebug() << "Begin";
+	#endif
+
 	AudioPlayerEnums::AudioPlayerState state = _player.GetCurrentState();
 
 	if(state != AudioPlayerEnums::Ready)
@@ -77,6 +105,10 @@ void PlayController::playTrack(int trackIndex)
 
 	if(_playlist.CalculateAndSetTrackToPlay(PlaylistEnums::ByIndex, trackIndex))
 		_player.Play();
+
+	#ifdef _DEBUG
+	qDebug() << "End";
+	#endif
 }
 
 void PlayController::next()
@@ -92,6 +124,10 @@ void PlayController::next()
 
 void PlayController::SetStartupData(int trackIndex, int position)
 {
+	#ifdef _DEBUG
+	qDebug() << "Begin";
+	#endif
+
 	if(trackIndex != -1)
 	{
 		_needToSetStartupPosition = true;
@@ -99,6 +135,10 @@ void PlayController::SetStartupData(int trackIndex, int position)
 		_playlist.CalculateAndSetTrackToPlay(PlaylistEnums::ByIndex, trackIndex);
 		_player.Pause();
 	}
+
+	#ifdef _DEBUG
+	qDebug() << "End";
+	#endif
 }
 
 void PlayController::seek(int position)

@@ -91,6 +91,15 @@ namespace Playlist
 		endInsertRows();
 	}
 
+	QList<Track*> PlaylistModelBase::GetTracks()
+	{
+		#ifdef _DEBUG
+		qDebug() << "Get playlist tracks";
+		#endif
+
+		return _tracksList;
+	}
+
 	void PlaylistModelBase::DeleteTracks()
 	{
         #ifdef _DEBUG

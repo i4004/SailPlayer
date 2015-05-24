@@ -72,7 +72,7 @@ void SailPlayerSettings::SetPlaylist(QList<Track*> tracks)
 	settings.endArray();
 
     #ifdef _DEBUG
-    qDebug() << "Playlsit saved";
+    qDebug() << "Playlist saved";
     #endif
 }
 

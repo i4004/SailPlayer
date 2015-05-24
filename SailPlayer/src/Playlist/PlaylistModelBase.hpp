@@ -38,7 +38,7 @@ namespace Playlist
 		// Playlist control
 
 		void AddTracks(QList<Track*> tracks);
-		QList<Track*> GetTracks() { return _tracksList; }
+		QList<Track*> GetTracks();
 
 	protected:	
 		QList<Track*> _tracksList;
