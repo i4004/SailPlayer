@@ -160,6 +160,10 @@ void PlayController::seek(int position)
 
 void PlayController::OnStreamStarted()
 {
+	#ifdef _DEBUG
+	qDebug() << "Begin";
+	#endif
+
 	if(_needToSetStartupPosition)
 	{
 		_needToSetStartupPosition = false;
@@ -174,6 +178,10 @@ void PlayController::OnStreamStarted()
 		_player.Stop();
 	else if(!_needToSetStartupTrackLastFmNowPlaying && _scrobblingIsEnabled)
 		StartScrobbleMotitoring();
+
+	#ifdef _DEBUG
+	qDebug() << "End";
+	#endif
 }
 
 void PlayController::OnAboutToFinish()
@@ -183,6 +191,10 @@ void PlayController::OnAboutToFinish()
 
 void PlayController::OnEndOfStream()
 {
+	#ifdef _DEBUG
+	qDebug() << "EOS";
+	#endif
+
 	_player.Stop();
 }
 

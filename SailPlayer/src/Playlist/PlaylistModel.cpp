@@ -10,10 +10,8 @@ namespace Playlist
 	PlaylistModel::PlaylistModel(QObject* parent) : PlaylistModelBase(parent)
 	{
 		_currentPlayOrder = PlaylistEnums::RepeatPlaylist;
-		_nextTrackToPlay = NULL;
-		_currentTrackToPlay = NULL;
-		_currentPlayingTrack = NULL;
-		_trackRequested = false;
+
+		ResetTracksData();
 	}
 
 	void PlaylistModel::Clear()
@@ -24,8 +22,8 @@ namespace Playlist
 
 		beginResetModel();
 
-		ResetTracksData();
 		DeleteTracks();
+		ResetTracksData();
 
 		endResetModel();
 
@@ -48,6 +46,7 @@ namespace Playlist
 
 	bool PlaylistModel::CalculateAndSetTrackToPlay(PlaylistEnums::PlayDirection direction, int customIndex)
 	{
+		_trackRequested = false;
 		bool result = CalculateNextTrackToPlay(direction, customIndex);
 
 		if(result == false)
@@ -156,6 +155,7 @@ namespace Playlist
 		_nextTrackToPlay = NULL;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
+		_trackRequested = false;
 
 		#ifdef _DEBUG
 		qDebug() << "End";

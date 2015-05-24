@@ -137,6 +137,10 @@ namespace Audio
 
 	void AudioPlayer::OnErrorMessage(QString message)
 	{
+		#ifdef _DEBUG
+		qDebug() << "On error message";
+		#endif
+
 		Stop();
 		AudioPlayerBase::OnErrorMessage(message);
 
@@ -241,6 +245,10 @@ namespace Audio
 
 			if(!_nextTrackFilePath.isNull())
 			{
+				#ifdef _DEBUG
+				qDebug() << "On CUE about to finish";
+				#endif
+
 				bool fileChanging = _nextTrackFilePath != _currentFilePath;
 
 				CalculateNeedToSetCurrentPosition();
@@ -257,6 +265,10 @@ namespace Audio
 			}
 			else
 			{
+				#ifdef _DEBUG
+				qDebug() << "EOS CUE";
+				#endif
+
 				Stop();
 				ResetTracksData();
 			}
