@@ -1,5 +1,9 @@
 #include "PlaylistModelBase.hpp"
 
+#ifdef _DEBUG
+#include <QDebug>
+#endif
+
 namespace Playlist
 {
 	QChar PlaylistModelBase::SectionSeparator = 0x0001;
@@ -89,7 +93,15 @@ namespace Playlist
 
 	void PlaylistModelBase::DeleteTracks()
 	{
+        #ifdef _DEBUG
+        qDebug() << "Delete tracks";
+        #endif
+
 		while (!_tracksList.isEmpty())
 			delete _tracksList.takeFirst();
+
+        #ifdef _DEBUG
+        qDebug() << "Tracks deleted";
+        #endif
 	}
 }

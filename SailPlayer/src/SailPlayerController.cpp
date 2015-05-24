@@ -30,6 +30,10 @@ SailPlayerController::~SailPlayerController()
 	delete _playlistController;
 	delete _lastFmController;
 
+    #ifdef _DEBUG
+    qDebug() << "Destructed";
+    #endif
+
 	SaveOnExitSettings();
 }
 
@@ -62,7 +66,15 @@ void SailPlayerController::LoadStartupSettings()
 
 void SailPlayerController::SaveOnExitSettings()
 {
+    #ifdef _DEBUG
+    qDebug() << "Save settings on exit";
+    #endif
+
 	_settings.SetPlayOrder(_playlist.GetPlayOrder());
 	_settings.SetLastTrackIndex(_playlist.GetCurrentTrackIndex());
 	_settings.SetLastPlayingPosition(_player.GetCurrentTrackPosition());
+
+    #ifdef _DEBUG
+    qDebug() << "Settings on exit saved";
+    #endif
 }

@@ -1,6 +1,10 @@
 #include "PlaylistHelper.hpp"
 #include "PlaylistModel.hpp"
 
+#ifdef _DEBUG
+#include <QDebug>
+#endif
+
 namespace Playlist
 {
 	PlaylistModel::PlaylistModel(QObject* parent) : PlaylistModelBase(parent)
@@ -14,6 +18,10 @@ namespace Playlist
 
 	void PlaylistModel::Clear()
 	{
+        #ifdef _DEBUG
+        qDebug() << "Clear playlist";
+        #endif
+
 		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
 
 		ResetTracksData();

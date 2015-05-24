@@ -1,5 +1,9 @@
 #include "SailPlayerSettings.hpp"
 
+#ifdef _DEBUG
+#include <QDebug>
+#endif
+
 QString SailPlayerSettings::DefaultAddFilesDirectoryPath = "/home/nemo";
 
 QString SailPlayerSettings::GetLastAddFilesDirectoryPath()
@@ -26,6 +30,10 @@ void SailPlayerSettings::SetPlayOrder(PlaylistEnums::PlayOrder playOrder)
 
 QList<Track*> SailPlayerSettings::GetPlaylist()
 {
+    #ifdef _DEBUG
+    qDebug() << "Load playlist";
+    #endif
+
 	QList<Track*> tracks;
 	int size = settings.beginReadArray("Playlist");
 
@@ -43,8 +51,16 @@ QList<Track*> SailPlayerSettings::GetPlaylist()
 
 void SailPlayerSettings::SetPlaylist(QList<Track*> tracks)
 {
+    #ifdef _DEBUG
+    qDebug() << "Save playlist";
+    #endif
+
 	settings.remove("Playlist");
 	settings.beginWriteArray("Playlist", tracks.count());
+
+    #ifdef _DEBUG
+    qDebug() << "Begin write tracks to playlist";
+    #endif
 
 	for(int i = 0; i < tracks.count(); ++i)
 	{
@@ -54,6 +70,10 @@ void SailPlayerSettings::SetPlaylist(QList<Track*> tracks)
 	}
 
 	settings.endArray();
+
+    #ifdef _DEBUG
+    qDebug() << "Playlsit saved";
+    #endif
 }
 
 int SailPlayerSettings::GetLastTrackIndex()
