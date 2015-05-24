@@ -30,13 +30,25 @@ namespace Playlist
 
 	int PlaylistModelBase::rowCount(const QModelIndex &parent) const
 	{
+		#ifdef _DEBUG
+		qDebug() << "Begin";
+		#endif
+
 		Q_UNUSED(parent);
 
 		return _tracksList.count();
+
+		#ifdef _DEBUG
+		qDebug() << "End";
+		#endif
 	}
 
 	QVariant PlaylistModelBase::data(const QModelIndex &index, int role) const
 	{
+//		#ifdef _DEBUG
+//		qDebug() << "Get data";
+//		#endif
+
 		if (!index.isValid() || index.row() >= _tracksList.count())
 			return QVariant();
 
@@ -103,14 +115,14 @@ namespace Playlist
 	void PlaylistModelBase::DeleteTracks()
 	{
         #ifdef _DEBUG
-        qDebug() << "Delete tracks";
+		qDebug() << "Begin";
         #endif
 
 		while (!_tracksList.isEmpty())
 			delete _tracksList.takeFirst();
 
         #ifdef _DEBUG
-        qDebug() << "Tracks deleted";
+		qDebug() << "End";
         #endif
 	}
 }

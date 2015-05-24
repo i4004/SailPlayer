@@ -22,12 +22,14 @@ namespace Playlist
 		qDebug() << "Begin";
         #endif
 
-		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
+		beginResetModel();
+//		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
 
 		ResetTracksData();
 		DeleteTracks();
 
-		endRemoveRows();
+//		endRemoveRows();
+		endResetModel();
 
 		#ifdef _DEBUG
 		qDebug() << "End";
@@ -73,10 +75,18 @@ namespace Playlist
 
 	int PlaylistModel::GetCurrentTrackIndex()
 	{
+		#ifdef _DEBUG
+		qDebug() << "Begin";
+		#endif
+
 		if(_currentTrackToPlay == NULL)
 			return -1;
 
 		return _tracksList.indexOf(_currentTrackToPlay);
+
+		#ifdef _DEBUG
+		qDebug() << "End";
+		#endif
 	}
 
 	Track* PlaylistModel::GetCurrentPlayingTrack()
@@ -141,9 +151,17 @@ namespace Playlist
 
 	void PlaylistModel::ResetTracksData()
 	{
+		#ifdef _DEBUG
+		qDebug() << "Begin";
+		#endif
+
 		_nextTrackToPlay = NULL;
 		_currentTrackToPlay = NULL;
 		_currentPlayingTrack = NULL;
+
+		#ifdef _DEBUG
+		qDebug() << "End";
+		#endif
 	}
 
 	void PlaylistModel::SetPlayingTrack(bool isPlaying)
