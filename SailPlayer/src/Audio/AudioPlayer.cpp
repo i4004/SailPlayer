@@ -8,17 +8,10 @@ namespace Audio
 {
 	AudioPlayer::AudioPlayer()
 	{
-		_currentFilePath = QString();
-		_currentStartPosition = 0;
-		_currentEndPosition = 0;
-		_needToSetCurrentPosition = false;
+		ResetTracksData();
+
 		_currentPositionTimer.setTimerType(Qt::VeryCoarseTimer);
 		_currentPositionTimer.setInterval(1000);
-		_currentPositionReady = false;
-		_nextTrackStartPosition = 0;
-		_nextTracktEndPosition = 0;
-		_nextTrackDataReceived = false;
-		_isStreamFromNextTrack = false;
 
 		connect(&_currentPositionTimer, SIGNAL(timeout()), this, SLOT(OnCurrentPositionTimerCallback()));
 	}
@@ -172,6 +165,19 @@ namespace Audio
 		_currentFilePath = _nextTrackFilePath;
 	}
 
+	void AudioPlayer::ResetTracksData()
+	{
+		_currentFilePath = QString();
+		_currentStartPosition = 0;
+		_currentEndPosition = 0;
+		_needToSetCurrentPosition = false;
+		_currentPositionReady = false;
+		_nextTrackStartPosition = 0;
+		_nextTracktEndPosition = 0;
+		_nextTrackDataReceived = false;
+		_isStreamFromNextTrack = false;
+	}
+
 	void AudioPlayer::CalculateNeedToSetCurrentPosition()
 	{
 		if((_nextTrackFilePath != _currentFilePath && _nextTrackStartPosition != 0) ||
@@ -220,6 +226,11 @@ namespace Audio
 					AudioPlayerBase::Play();
 				else
 					OnStreamStart();
+			}
+			else
+			{
+				Stop();
+				ResetTracksData();
 			}
 		}
 		else

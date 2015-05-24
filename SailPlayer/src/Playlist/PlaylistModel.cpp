@@ -23,12 +23,10 @@ namespace Playlist
         #endif
 
 		beginResetModel();
-//		beginRemoveRows(QModelIndex(), 0, _tracksList.count() - 1);
 
 		ResetTracksData();
 		DeleteTracks();
 
-//		endRemoveRows();
 		endResetModel();
 
 		#ifdef _DEBUG
