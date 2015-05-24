@@ -34,6 +34,7 @@ namespace Playlist
 
 	bool PlaylistModel::CalculateAndSetTrackToPlay(PlaylistEnums::PlayDirection direction, int customIndex)
 	{
+		_trackRequested = false;
 		bool result = CalculateNextTrackToPlay(direction, customIndex);
 
 		if(result == false)
