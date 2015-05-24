@@ -70,6 +70,7 @@ namespace Audio
 		void SeekToCurrentPosition();
 		void SetCurrentPositionsFromNextTrack();
 		void SetFileToPlayFromNextTrack();
+		void ResetTracksData();
 		void CalculateNeedToSetCurrentPosition();
 
 		void WaitForNextTrackData();
