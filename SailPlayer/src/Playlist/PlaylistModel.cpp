@@ -6,10 +6,8 @@ namespace Playlist
 	PlaylistModel::PlaylistModel(QObject* parent) : PlaylistModelBase(parent)
 	{
 		_currentPlayOrder = PlaylistEnums::RepeatPlaylist;
-		_nextTrackToPlay = NULL;
-		_currentTrackToPlay = NULL;
-		_currentPlayingTrack = NULL;
-		_trackRequested = false;
+
+		ResetTracksData();
 	}
 
 	void PlaylistModel::Clear()
@@ -131,7 +129,8 @@ namespace Playlist
 	{
 		_nextTrackToPlay = NULL;
 		_currentTrackToPlay = NULL;
-		_currentPlayingTrack = NULL;
+		_currentPlayingTrack = NULL;	
+		_trackRequested = false;
 	}
 
 	void PlaylistModel::SetPlayingTrack(bool isPlaying)
