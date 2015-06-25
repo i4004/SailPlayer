@@ -26,8 +26,6 @@ namespace Audio
 		audioresource_acquire(_resource);
 		WaitForAnAudioResourceCallback();
 
-		_isConnected = true;
-
 		return _audioResourceAcquired;
 	}
 
@@ -41,13 +39,12 @@ namespace Audio
 		audioresource_release(_resource);
 		WaitForAnAudioResourceCallback();
 
-		_isConnected = false;
-
 		return _audioResourceAcquired;
 	}
 
 	void AudioResource::SetAcquireState(bool acquired)
 	{
+		_isConnected = acquired;
 		_audioResourceGotReply = true;
 		_audioResourceAcquired = acquired;
 
