@@ -14,7 +14,8 @@ Component
 			width: parent.width
 			x: Theme.paddingMedium
 			text: sectionSplit[0] !== "" ? sectionSplit[0] : "?"
-			wrapMode: Text.WordWrap
+			wrapMode: Text.NoWrap
+			truncationMode: TruncationMode.Fade
 			color: Theme.highlightColor
 			font.pixelSize: Theme.fontSizeLarge
 		}
@@ -24,7 +25,8 @@ Component
 			width: parent.width
 			x: Theme.paddingMedium
 			text: (sectionSplit[1] !== 0 ? "[" + sectionSplit[1] + "] " : "?") + sectionSplit[2]
-			wrapMode: Text.WordWrap
+			wrapMode: Text.NoWrap
+			truncationMode: TruncationMode.Fade
 			color: Theme.secondaryColor
 			font.pixelSize: Theme.fontSizeTiny
 		}
