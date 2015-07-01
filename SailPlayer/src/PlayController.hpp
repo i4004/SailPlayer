@@ -47,7 +47,6 @@ private:
 	bool _isScrobbled;
 	QTimer _elapseTimer;
 	int _elapsed;
-	QDateTime _trackPlayStartTime;
 
 	void StartScrobbleMotitoring();
 

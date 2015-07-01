@@ -15,10 +15,11 @@ class LastFmController : public QObject
 public:
 	LastFmController();
 	LastFmController(LastFmScrobbler& scrobbler, SailPlayerSettings& settings);
+	~LastFmController();
 
 	Q_INVOKABLE void authenticate(QString userName, QString password);
-	Q_INVOKABLE void sendNowPlaying(Track* currentPlayingTrack);
-	Q_INVOKABLE void scrobbleTrack(Track* playedTrack, QDateTime playStartTime);
+	Q_INVOKABLE void sendNowPlaying(Track* track, QDateTime trackPlayStartTime);
+	Q_INVOKABLE void scrobbleCurrentPlayingTrack();
 	Q_INVOKABLE void scrobbleTracksFromCache();
 	Q_INVOKABLE void clearCache();
 
@@ -28,6 +29,11 @@ public slots:
 private:
 	LastFmScrobbler& _scrobbler;
 	SailPlayerSettings& _settings;
+
+	Track* _currentPlayingTrack;
+	QDateTime _currentPlayingTrackPlayStartTime;
+
+	void CleanupCurrentPlayingTrack();
 };
 
 #endif // LASTFMCONTROLLER_HPP

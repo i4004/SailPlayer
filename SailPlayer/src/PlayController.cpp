@@ -163,8 +163,7 @@ void PlayController::SetScrobblingIsEnabled(bool enabled)
 
 void PlayController::StartScrobbleMotitoring()
 {
-	_trackPlayStartTime = QDateTime::currentDateTime();
-	_lastFmController.sendNowPlaying(_playlist.GetCurrentPlayingTrack());
+	_lastFmController.sendNowPlaying(_playlist.GetCurrentPlayingTrack(), QDateTime::currentDateTime());
 	_elapsed = 0;
 	_isScrobbled = false;
 }
@@ -178,6 +177,6 @@ void PlayController::OnElapseTimer()
 	if(!_isScrobbled && currentDuration > 5000 && (_elapsed * 1000 >= currentDuration / 2 || _elapsed >= 2401000))
 	{
 		_isScrobbled = true;
-		_lastFmController.scrobbleTrack(_playlist.GetCurrentPlayingTrack(), _trackPlayStartTime);
+		_lastFmController.scrobbleCurrentPlayingTrack();
 	}
 }
