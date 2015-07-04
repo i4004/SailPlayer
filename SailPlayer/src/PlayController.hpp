@@ -25,7 +25,8 @@ public:
 	Q_INVOKABLE void seek(int position);
 	Q_INVOKABLE void next();
 
-	void SetStartupData(int trackIndex, int position);
+	void SetStartupTrackPosition(int position);
+	void SetStartupTrack(int trackIndex);
 
 public slots:
 	void OnStreamStarted();

@@ -76,14 +76,28 @@ void SailPlayerSettings::SetLastPlayingPosition(int currentPlayingPosition)
 	settings.setValue("LastPlayingPosition", currentPlayingPosition);
 }
 
-bool SailPlayerSettings::GetRestoreLastPlayingPosition()
+bool SailPlayerSettings::GetRestoreLastPlayingTrack()
 {
-	return settings.value("RestoreLastPlayingPosition", true).toBool();
+	return settings.value("RestoreLastPlayingTrack", true).toBool();
 }
 
-void SailPlayerSettings::SetRestoreLastPlayingPosition(bool restore)
+void SailPlayerSettings::SetRestoreLastPlayingTrack(bool restore)
 {
-	settings.setValue("RestoreLastPlayingPosition", restore);
+	settings.setValue("RestoreLastPlayingTrack", restore);
+
+	emit RestoreLastPlayingTrackChanged();
+}
+
+bool SailPlayerSettings::GetRestoreLastPlayingTrackPosition()
+{
+	return settings.value("RestoreLastPlayingTrackPosition", true).toBool();
+}
+
+void SailPlayerSettings::SetRestoreLastPlayingTrackPosition(bool restore)
+{
+	settings.setValue("RestoreLastPlayingTrackPosition", restore);
+
+	emit RestoreLastPlayingTrackPositionChanged();
 }
 
 // Last.fm

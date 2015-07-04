@@ -90,12 +90,19 @@ void PlayController::next()
 		_player.Play();
 }
 
-void PlayController::SetStartupData(int trackIndex, int position)
+void PlayController::SetStartupTrackPosition(int position)
 {
-	if(trackIndex != -1)
+	if(position != -1)
 	{
 		_needToSetStartupPosition = true;
 		_startupPosition = position;
+	}
+}
+
+void PlayController::SetStartupTrack(int trackIndex)
+{
+	if(trackIndex != -1)
+	{
 		_playlist.CalculateAndSetTrackToPlay(PlaylistEnums::ByIndex, trackIndex);
 		_player.Pause();
 	}

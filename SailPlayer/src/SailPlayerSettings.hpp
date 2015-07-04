@@ -24,7 +24,8 @@ class SailPlayerSettings : public QObject
 
 	// General
 
-	Q_PROPERTY(bool restoreLastPlayingPosition READ GetRestoreLastPlayingPosition WRITE SetRestoreLastPlayingPosition NOTIFY RestoreLastPlayingPositionChanged)
+	Q_PROPERTY(bool restoreLastPlayingTrack READ GetRestoreLastPlayingTrack WRITE SetRestoreLastPlayingTrack NOTIFY RestoreLastPlayingTrackChanged)
+	Q_PROPERTY(bool restoreLastPlayingTrackPosition READ GetRestoreLastPlayingTrackPosition WRITE SetRestoreLastPlayingTrackPosition NOTIFY RestoreLastPlayingTrackPositionChanged)
 
 	// Last.fm
 
@@ -53,8 +54,11 @@ public:
 	int GetLastPlayingPosition();
 	void SetLastPlayingPosition(int currentPlayingPosition);
 
-	bool GetRestoreLastPlayingPosition();
-	void SetRestoreLastPlayingPosition(bool restore);
+	bool GetRestoreLastPlayingTrack();
+	void SetRestoreLastPlayingTrack(bool restore);
+
+	bool GetRestoreLastPlayingTrackPosition();
+	void SetRestoreLastPlayingTrackPosition(bool restore);
 
 	// Last.fm
 
@@ -81,7 +85,8 @@ signals:
 	// General
 
 	void PlayOrderChanged();
-	void RestoreLastPlayingPositionChanged();
+	void RestoreLastPlayingTrackChanged();
+	void RestoreLastPlayingTrackPositionChanged();
 
 	// Last.fm
 
