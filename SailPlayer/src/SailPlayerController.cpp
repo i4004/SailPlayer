@@ -44,12 +44,11 @@ void SailPlayerController::LoadStartupSettings()
 	_scrobbler.SetSessionKey(_settings.GetLastFmSessionKey());
 	_playController->SetScrobblingIsEnabled(_settings.GetScrobblingIsEnabled());
 
-	bool restoreLastPlayingPosition = _settings.GetRestoreLastPlayingPosition();
-	int lastTrackIndex = _settings.GetLastTrackIndex();
-	int lastPlayingPosition = _settings.GetLastPlayingPosition();
-
-	if(restoreLastPlayingPosition)
-		_playController->SetStartupData(lastTrackIndex, lastPlayingPosition);
+	if(_settings.GetRestoreLastPlayingTrack())
+	{
+		_playController->SetStartupTrackPosition(_settings.GetRestoreLastPlayingTrackPosition() ? _settings.GetLastPlayingPosition() : 0);
+		_playController->SetStartupTrack(_settings.GetLastTrackIndex());
+	}
 }
 
 void SailPlayerController::SaveOnExitSettings()

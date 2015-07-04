@@ -25,7 +25,8 @@ public:
 	Q_INVOKABLE void seek(int position);
 	Q_INVOKABLE void next();
 
-	void SetStartupData(int trackIndex, int position);
+	void SetStartupTrackPosition(int position);
+	void SetStartupTrack(int trackIndex);
 
 public slots:
 	void OnStreamStarted();
@@ -47,7 +48,6 @@ private:
 	bool _isScrobbled;
 	QTimer _elapseTimer;
 	int _elapsed;
-	QDateTime _trackPlayStartTime;
 
 	void StartScrobbleMotitoring();
 

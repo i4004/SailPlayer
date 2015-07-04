@@ -2,9 +2,16 @@
 
 LastFmController::LastFmController(LastFmScrobbler& scrobbler, SailPlayerSettings& settings) : _scrobbler(scrobbler), _settings(settings)
 {
+	_currentPlayingTrack = NULL;
+
 	connect(&_scrobbler, SIGNAL(TracksSubmitted()), this, SLOT(OnTracksSubmitted()));
 
 	_scrobbler.AddToCache(_settings.GetCachedTracks());
+}
+
+LastFmController::~LastFmController()
+{
+	CleanupCurrentPlayingTrack();
 }
 
 void LastFmController::authenticate(QString userName, QString password)
@@ -12,19 +19,29 @@ void LastFmController::authenticate(QString userName, QString password)
 	_scrobbler.Authenticate(userName, password);
 }
 
-void LastFmController::sendNowPlaying(Track* currentPlayingTrack)
+void LastFmController::sendNowPlaying(Track* track, QDateTime trackPlayStartTime)
 {
-	_scrobbler.SendNowPlaying(currentPlayingTrack);
+	CleanupCurrentPlayingTrack();
+
+	_currentPlayingTrack = new Track(*track);
+	_currentPlayingTrackPlayStartTime = trackPlayStartTime;
+
+	_scrobbler.SendNowPlaying(_currentPlayingTrack);
 }
 
-void LastFmController::scrobbleTrack(Track* playedTrack, QDateTime playStartTime)
+void LastFmController::scrobbleCurrentPlayingTrack()
 {
-	bool result = _scrobbler.AddToCache(new Track(*playedTrack), playStartTime);
+	if(_currentPlayingTrack == NULL)
+		return;
+
+	bool result = _scrobbler.AddToCache(_currentPlayingTrack, _currentPlayingTrackPlayStartTime);
 
 	if(result)
 		_settings.SetCachedTracks(_scrobbler.GetCache());
 
 	_scrobbler.ScrobbleTracksFromCache();
+
+	_currentPlayingTrack = NULL;
 }
 
 void LastFmController::scrobbleTracksFromCache()
@@ -41,4 +58,10 @@ void LastFmController::clearCache()
 void LastFmController::OnTracksSubmitted()
 {
 	_settings.SetCachedTracks(_scrobbler.GetCache());
+}
+
+void LastFmController::CleanupCurrentPlayingTrack()
+{
+	if(_currentPlayingTrack != NULL)
+		delete _currentPlayingTrack;
 }

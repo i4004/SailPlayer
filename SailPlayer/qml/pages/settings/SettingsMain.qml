@@ -27,11 +27,21 @@ Page
 
 			TextSwitch
 			{
-				checked: settings.restoreLastPlayingPosition
+				checked: settings.restoreLastPlayingTrack
 
-				text: qsTr("Restore last playing position on startup")
+				text: qsTr("Restore last playing track on startup")
 
-				onClicked: settings.restoreLastPlayingPosition = !settings.restoreLastPlayingPosition;
+				onClicked: settings.restoreLastPlayingTrack = !settings.restoreLastPlayingTrack;
+			}
+
+			TextSwitch
+			{
+				enabled: settings.restoreLastPlayingTrack
+				checked: settings.restoreLastPlayingTrackPosition
+
+				text: qsTr("Restore last playing track position on startup")
+
+				onClicked: settings.restoreLastPlayingTrackPosition = !settings.restoreLastPlayingTrackPosition;
 			}
 
 			SectionHeader { text: qsTr('Last.fm') }
