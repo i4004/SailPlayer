@@ -25,4 +25,4 @@ Makefile*
 *.qmlproject.user
 *.qmlproject.user.*
 
-rpm/*.spec
+src/rpm/*.spec
