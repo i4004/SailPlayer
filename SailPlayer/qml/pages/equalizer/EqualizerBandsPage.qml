@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "../../Util.js" as Util
 
-Page
+Dialog
 {
 	allowedOrientations: Orientation.All
 
@@ -12,7 +12,13 @@ Page
 
 		anchors.fill: parent
 
-		header: PageHeader { title: qsTr("Equalizer: My preset 1") }
+		header: DialogHeader
+		{
+			id: dialogHeader
+
+			title: qsTr("Equalizer: My preset 1")
+			acceptText: qsTr("Ok")
+		}
 
 		model: ListModel
 		{
