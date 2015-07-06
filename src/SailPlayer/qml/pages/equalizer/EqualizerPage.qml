@@ -31,13 +31,13 @@ Page
 
 				label: "Preset"
 
-				menu: ContextMenu
-				{
-					MenuItem { text: "My preset 1" }
-					MenuItem { text: "Rock" }
-					MenuItem { text: "Pop" }
-				}
-//				model: equalizerPresets
+//				menu: ContextMenu
+//				{
+//					MenuItem { text: "My preset 1" }
+//					MenuItem { text: "Rock" }
+//					MenuItem { text: "Pop" }
+//				}
+				model: equalizerPresetsModel
 			}
 
 			Row

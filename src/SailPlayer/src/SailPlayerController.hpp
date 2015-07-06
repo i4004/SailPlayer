@@ -22,11 +22,12 @@ private:
 	PlaylistModel _playlist;
 	AudioPlayer _player;
 	LastFmScrobbler _scrobbler;
-	EqualizerController _equalizerController;
+	EqualizerPresetsModel _equalizerPresetsModel;
 
 	PlayController* _playController;
 	PlaylistController* _playlistController;
 	LastFmController* _lastFmController;
+	EqualizerController* _equalizerController;
 
 	void ExposeComponentsToQml(QQuickView* view);
 	void LoadStartupSettings();

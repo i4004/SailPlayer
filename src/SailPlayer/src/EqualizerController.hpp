@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "Equalizer/EqualizerPreset.hpp"
+#include "Equalizer/EqualizerPresetsModel.hpp"
 
 using namespace Equalizer;
 
@@ -12,18 +12,11 @@ class EqualizerController : public QObject
 	Q_OBJECT
 
 public:
-	EqualizerController();
+	EqualizerController(EqualizerPresetsModel& equalizerPresetsModel);
 	~EqualizerController();
 
-public slots:
-	void SetPresets(QList<EqualizerPreset*> presets);
-
-	Q_INVOKABLE QList<QObject*> getPresets() { return _presets; }
-
 private:
-	QList<QObject*> _presets;
-
-	void DeletePresets();
+	EqualizerPresetsModel& _model;
 };
 
 #endif // EQUALIZERCONTROLLER_HPP
