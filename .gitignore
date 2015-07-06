@@ -26,3 +26,4 @@ Makefile*
 *.qmlproject.user.*
 
 src/rpm/*.spec
+*.dia~
