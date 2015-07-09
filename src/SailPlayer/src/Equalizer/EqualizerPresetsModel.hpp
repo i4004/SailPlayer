@@ -7,6 +7,12 @@
 
 namespace Equalizer
 {
+	enum EqualizerPresetsRoles
+	{
+		IdRole = Qt::UserRole + 1,
+		NameRole = Qt::UserRole + 2
+	};
+
 	class EqualizerPresetsModel : public QAbstractListModel
 	{
 		Q_OBJECT
@@ -17,14 +23,15 @@ namespace Equalizer
 
 		int rowCount(const QModelIndex &parent = QModelIndex()) const;
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
 
-		//public slots:
-		//	Q_INVOKABLE QList<QObject*> getPresets() { return _presets; }
-
+		void AddPreset(EqualizerPreset* preset);
 		void SetPresets(QList<EqualizerPreset*> presets);
+		QList<EqualizerPreset*> GetPresets() { return _presets; }
 
 	private:
 		QList<EqualizerPreset*> _presets;
+		QHash<int, QByteArray> _rolesNames;
 
 		void DeletePresets();
 	};

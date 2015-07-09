@@ -7,7 +7,7 @@ SailPlayerController::SailPlayerController(QQuickView* view)
 	_lastFmController = new LastFmController(_scrobbler, _settings);
 	_playlistController = new PlaylistController(_playlist, _settings);
 	_playController = new PlayController(_player, _playlist, *_lastFmController);
-	_equalizerController = new EqualizerController(_equalizerPresetsModel);
+	_equalizerController = new EqualizerController(_equalizerPresetsModel, _settings);
 
 	LoadStartupSettings();
 
@@ -44,6 +44,8 @@ void SailPlayerController::LoadStartupSettings()
 {
 	_playlist.SetPlayOrder(_settings.GetPlayOrder());
 	_playlist.AddTracks(_settings.GetPlaylist());
+
+	_equalizerController->LoadPresets();
 
 	_scrobbler.SetSessionKey(_settings.GetLastFmSessionKey());
 	_playController->SetScrobblingIsEnabled(_settings.GetScrobblingIsEnabled());

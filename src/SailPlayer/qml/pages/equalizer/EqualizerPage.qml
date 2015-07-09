@@ -31,13 +31,18 @@ Page
 
 				label: "Preset"
 
-//				menu: ContextMenu
-//				{
-//					MenuItem { text: "My preset 1" }
-//					MenuItem { text: "Rock" }
-//					MenuItem { text: "Pop" }
-//				}
-				model: equalizerPresetsModel
+				menu: ContextMenu
+				{
+					Repeater
+					{
+						model: equalizerPresetsModel
+
+						MenuItem
+						{
+							text: model.presetName
+						}
+					}
+				}
 			}
 
 			Row
@@ -97,6 +102,8 @@ Page
 
 					dialog.accepted.connect(function()
 					{
+						equalizerController.addNewPreset(dialog.value);
+						equalizerController.savePresets();
 					});
 				}
 			}

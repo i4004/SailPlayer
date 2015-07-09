@@ -18,6 +18,11 @@ namespace Equalizer
 		_bands.append(bands);
 	}
 
+	void EqualizerPreset::AddBand(EqualizerBand* band)
+	{
+		_bands.append(band);
+	}
+
 	void EqualizerPreset::DeleteBands()
 	{
 		while (!_bands.isEmpty())

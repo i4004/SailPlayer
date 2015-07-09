@@ -21,6 +21,8 @@ namespace Equalizer
 		QString GetName() { return _name; }
 		void SetName(QString name) { _name = name; }
 
+		void AddBand(EqualizerBand* band);
+
 		void SetBands(QList<EqualizerBand*> bands);
 		QList<EqualizerBand*> GetBands() { return _bands; }
 

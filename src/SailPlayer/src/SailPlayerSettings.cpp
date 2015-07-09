@@ -173,6 +173,38 @@ void SailPlayerSettings::ClearCachedTracks()
 QList<EqualizerPreset*> SailPlayerSettings::GetEqualizerPresets()
 {
 	QList<EqualizerPreset*> presets;
+
+	int presetsCount = settings.beginReadArray("EqualizerPresets");
+
+	for (int i = 0; i < presetsCount; ++i)
+	{
+		settings.setArrayIndex(i);
+
+		QString name = settings.value("Name").toString();
+
+		if(name.isNull() || name.isEmpty())
+			continue;
+
+		EqualizerPreset* preset = new EqualizerPreset(name);
+
+		int bandsCount = settings.beginReadArray("Bands");
+
+		for (int j = 0; j < bandsCount; ++j)
+		{
+			settings.setArrayIndex(j);
+
+			preset->AddBand(new EqualizerBand(settings.value("Frequency").toFloat(),
+											  settings.value("Gain").toFloat(),
+											  settings.value("Width").toFloat()));
+		}
+
+		settings.endArray();
+
+		presets.append(preset);
+	}
+
+	settings.endArray();
+
 	return presets;
 }
 
@@ -190,7 +222,7 @@ void SailPlayerSettings::SetEqualizerPresets(QList<EqualizerPreset*> presets)
 
 		settings.setValue("Name", preset->GetName());
 
-		settings.beginWriteArray("Band", presets.count());
+		settings.beginWriteArray("Bands", bands.count());
 
 		for(int j = 0; j < bands.count(); ++j)
 		{
