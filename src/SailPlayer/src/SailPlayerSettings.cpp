@@ -176,6 +176,44 @@ QList<EqualizerPreset*> SailPlayerSettings::GetEqualizerPresets()
 	return presets;
 }
 
+void SailPlayerSettings::SetEqualizerPresets(QList<EqualizerPreset*> presets)
+{
+	ClearEqualizerPresets();
+	settings.beginWriteArray("EqualizerPresets", presets.count());
+
+	for(int i = 0; i < presets.count(); ++i)
+	{
+		EqualizerPreset* preset = presets.at(i);
+		QList<EqualizerBand*> bands = preset->GetBands();
+
+		settings.setArrayIndex(i);
+
+		settings.setValue("Name", preset->GetName());
+
+		settings.beginWriteArray("Band", presets.count());
+
+		for(int j = 0; j < bands.count(); ++j)
+		{
+			EqualizerBand* band = bands.at(j);
+
+			settings.setArrayIndex(j);
+
+			settings.setValue("Frequency", band->GetFrequency());
+			settings.setValue("Gain", band->GetGain());
+			settings.setValue("Width", band->GetWidth());
+		}
+
+		settings.endArray();
+	}
+
+	settings.endArray();
+}
+
+void SailPlayerSettings::ClearEqualizerPresets()
+{
+	settings.remove("EqualizerPresets");
+}
+
 Track* SailPlayerSettings::GetTrackFromSettings()
 {
 	return new Track(settings.value("ArtistName").toString(),

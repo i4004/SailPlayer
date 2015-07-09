@@ -75,6 +75,8 @@ public:
 	// Equalizer
 
 	QList<EqualizerPreset*> GetEqualizerPresets();
+	void SetEqualizerPresets(QList<EqualizerPreset*> presets);
+	void ClearEqualizerPresets();
 
 signals:
 	// Add files dialog
