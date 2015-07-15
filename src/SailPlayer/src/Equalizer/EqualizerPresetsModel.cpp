@@ -4,8 +4,8 @@ namespace Equalizer
 {
 	EqualizerPresetsModel::EqualizerPresetsModel(QObject* parent) : QAbstractListModel(parent)
 	{
+		_currentPreset = NULL;
 		_rolesNames = QAbstractListModel::roleNames();
-		_rolesNames.insert(IdRole, QByteArray("presetID"));
 		_rolesNames.insert(NameRole, QByteArray("presetName"));
 	}
 
@@ -31,9 +31,6 @@ namespace Equalizer
 		switch (role)
 		{
 			case Qt::DisplayRole:
-
-//			case IdRole:
-//				return item->GetName();
 
 			case NameRole:
 				return item->GetName();
@@ -62,6 +59,14 @@ namespace Equalizer
 			_presets.append(preset);
 
 		endResetModel();
+	}
+
+	int EqualizerPresetsModel::GetCurrentPresetIndex()
+	{
+		if(_currentPreset == NULL)
+			return -1;
+
+		return _presets.indexOf(_currentPreset);
 	}
 
 	void EqualizerPresetsModel::DeletePresets()

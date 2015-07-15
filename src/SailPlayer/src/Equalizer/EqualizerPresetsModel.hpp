@@ -9,8 +9,7 @@ namespace Equalizer
 {
 	enum EqualizerPresetsRoles
 	{
-		IdRole = Qt::UserRole + 1,
-		NameRole = Qt::UserRole + 2
+		NameRole = Qt::UserRole + 1
 	};
 
 	class EqualizerPresetsModel : public QAbstractListModel
@@ -29,9 +28,12 @@ namespace Equalizer
 		void SetPresets(QList<EqualizerPreset*> presets);
 		QList<EqualizerPreset*> GetPresets() { return _presets; }
 
+		int GetCurrentPresetIndex();
+
 	private:
 		QList<EqualizerPreset*> _presets;
 		QHash<int, QByteArray> _rolesNames;
+		EqualizerPreset* _currentPreset;
 
 		void DeletePresets();
 	};
