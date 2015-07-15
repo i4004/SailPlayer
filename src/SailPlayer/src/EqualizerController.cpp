@@ -44,7 +44,7 @@ const QList<float> EqualizerController::BaseWidths = QList<float>()
 	<< 6000
 	<< 6000;
 
-EqualizerController::EqualizerController(EqualizerPresetsModel& equalizerPresetsModel, SailPlayerSettings& settings) : _model(equalizerPresetsModel), _settings(settings)
+EqualizerController::EqualizerController(EqualizerPresetsModel& equalizerPresetsModel, SailPlayerSettings& settings, AudioPlayerBase& player) : _model(equalizerPresetsModel), _settings(settings), _player(player)
 {
 }
 

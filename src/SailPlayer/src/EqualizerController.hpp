@@ -2,10 +2,12 @@
 #define EQUALIZERCONTROLLER_HPP
 
 #include <QObject>
+#include "Audio/AudioPlayer.hpp"
 #include "SailPlayerSettings.hpp"
 
 #include "Equalizer/EqualizerPresetsModel.hpp"
 
+using namespace Audio;
 using namespace Equalizer;
 
 class EqualizerController : public QObject
@@ -13,7 +15,7 @@ class EqualizerController : public QObject
 	Q_OBJECT
 
 public:
-	EqualizerController(EqualizerPresetsModel& equalizerPresetsModel, SailPlayerSettings& settings);
+	EqualizerController(EqualizerPresetsModel& equalizerPresetsModel, SailPlayerSettings& settings, AudioPlayerBase& player);
 	~EqualizerController();
 
 	static const QList<float> BaseFrequencies;
@@ -26,6 +28,7 @@ public:
 private:
 	EqualizerPresetsModel& _model;
 	SailPlayerSettings& _settings;
+	AudioPlayerBase& _player;
 };
 
 #endif // EQUALIZERCONTROLLER_HPP

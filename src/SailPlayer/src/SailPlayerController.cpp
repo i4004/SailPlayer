@@ -8,7 +8,7 @@ SailPlayerController::SailPlayerController(QQuickView* view)
 	_lastFmController = new LastFmController(_scrobbler, _settings);
 	_playlistController = new PlaylistController(_playlist, _settings);
 	_playController = new PlayController(*_player, _playlist, *_lastFmController);
-	_equalizerController = new EqualizerController(_equalizerPresetsModel, _settings);
+	_equalizerController = new EqualizerController(_equalizerPresetsModel, _settings, *_player);
 
 	LoadStartupSettings();
 
