@@ -194,8 +194,8 @@ QList<EqualizerPreset*> SailPlayerSettings::GetEqualizerPresets()
 			settings.setArrayIndex(j);
 
 			preset->AddBand(new EqualizerBand(settings.value("Frequency").toFloat(),
-											  settings.value("Gain").toFloat(),
-											  settings.value("Width").toFloat()));
+											  settings.value("Width").toFloat(),
+											  settings.value("Gain").toFloat()));
 		}
 
 		settings.endArray();
