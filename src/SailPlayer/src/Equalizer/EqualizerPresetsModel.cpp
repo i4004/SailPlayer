@@ -61,6 +61,13 @@ namespace Equalizer
 		endResetModel();
 	}
 
+	void EqualizerPresetsModel::DeletePreset(int presetIndex)
+	{
+		beginResetModel();
+		_presets.removeAt(presetIndex);
+		endResetModel();
+	}
+
 	int EqualizerPresetsModel::GetCurrentPresetIndex()
 	{
 		if(_currentPreset == NULL)

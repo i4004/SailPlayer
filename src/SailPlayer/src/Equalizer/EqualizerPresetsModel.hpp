@@ -26,6 +26,7 @@ namespace Equalizer
 
 		void AddPreset(EqualizerPreset* preset);
 		void SetPresets(QList<EqualizerPreset*> presets);
+		void DeletePreset(int presetIndex);
 		QList<EqualizerPreset*> GetPresets() { return _presets; }
 
 		int GetCurrentPresetIndex();

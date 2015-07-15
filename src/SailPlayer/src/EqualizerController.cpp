@@ -69,8 +69,15 @@ void EqualizerController::savePresets()
 	_settings.SetEqualizerPresets(_model.GetPresets());
 }
 
+void EqualizerController::deletePreset(int presetIndex)
+{
+	_model.DeletePreset(presetIndex);
+}
+
 void EqualizerController::LoadPresets()
 {
 	_model.SetPresets(_settings.GetEqualizerPresets());
+
+	_player.SetEqualizer(_model.GetPresets().first());
 }
 
