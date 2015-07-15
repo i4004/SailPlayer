@@ -4,9 +4,10 @@
 
 SailPlayerController::SailPlayerController(QQuickView* view)
 {
+	_player = new AudioPlayer(EqualizerController::BaseFrequencies.count());
 	_lastFmController = new LastFmController(_scrobbler, _settings);
 	_playlistController = new PlaylistController(_playlist, _settings);
-	_playController = new PlayController(_player, _playlist, *_lastFmController);
+	_playController = new PlayController(*_player, _playlist, *_lastFmController);
 	_equalizerController = new EqualizerController(_equalizerPresetsModel, _settings);
 
 	LoadStartupSettings();
@@ -23,6 +24,7 @@ SailPlayerController::~SailPlayerController()
 	delete _playlistController;
 	delete _lastFmController;
 	delete _equalizerController;
+	delete _player;
 
 	SaveOnExitSettings();
 }
@@ -31,7 +33,7 @@ void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 {
 	view->rootContext()->setContextProperty("settings", &_settings);
 	view->rootContext()->setContextProperty("playlist", &_playlist);
-	view->rootContext()->setContextProperty("player", &_player);
+	view->rootContext()->setContextProperty("player", _player);
 	view->rootContext()->setContextProperty("scrobbler", &_scrobbler);
 	view->rootContext()->setContextProperty("playController", _playController);
 	view->rootContext()->setContextProperty("playlistController", _playlistController);
@@ -62,5 +64,5 @@ void SailPlayerController::SaveOnExitSettings()
 {
 	_settings.SetPlayOrder(_playlist.GetPlayOrder());
 	_settings.SetLastTrackIndex(_playlist.GetCurrentTrackIndex());
-	_settings.SetLastPlayingPosition(_player.GetCurrentTrackPosition());
+	_settings.SetLastPlayingPosition(_player->GetCurrentTrackPosition());
 }

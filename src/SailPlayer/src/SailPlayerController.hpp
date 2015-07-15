@@ -20,10 +20,10 @@ public:
 private:
 	SailPlayerSettings _settings;
 	PlaylistModel _playlist;
-	AudioPlayer _player;
 	LastFmScrobbler _scrobbler;
 	EqualizerPresetsModel _equalizerPresetsModel;
 
+	AudioPlayer* _player;
 	PlayController* _playController;
 	PlaylistController* _playlistController;
 	LastFmController* _lastFmController;

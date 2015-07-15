@@ -6,7 +6,7 @@ const int MillisecondsConvertion = 1000000;
 
 namespace Audio
 {
-	AudioPlayer::AudioPlayer()
+	AudioPlayer::AudioPlayer(int equalizerBandsNumber) : AudioPlayerBase(equalizerBandsNumber)
 	{
 		ResetTracksData();
 

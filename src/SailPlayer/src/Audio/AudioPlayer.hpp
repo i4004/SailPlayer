@@ -13,7 +13,7 @@ namespace Audio
 		Q_OBJECT
 
 	public:
-		AudioPlayer();
+		AudioPlayer(int equalizerBandsNumber);
 
 		// Player controls
 

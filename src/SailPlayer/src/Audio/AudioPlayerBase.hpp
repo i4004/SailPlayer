@@ -7,6 +7,10 @@
 #include "AudioResource.hpp"
 #include "GstEqualizerBandState.hpp"
 
+#include "../Equalizer/EqualizerPreset.hpp"
+
+using namespace Equalizer;
+
 namespace Audio
 {
 	class AudioPlayerBase : public QObject
@@ -15,7 +19,7 @@ namespace Audio
 		Q_PROPERTY(Audio::AudioPlayerEnums::AudioPlayerState state READ GetCurrentState NOTIFY StateChanged)
 
 	public:
-		AudioPlayerBase();
+		AudioPlayerBase(int equalizerBandsNumber);
 		~AudioPlayerBase();
 
 		// Player controls
@@ -31,6 +35,8 @@ namespace Audio
 		virtual void OnAboutToFinish();
 		virtual void OnEndOfStream();
 		virtual void OnErrorMessage(QString message);
+
+		virtual void SetEqualizer(EqualizerPreset* preset);
 
 	signals:
 		void StateChanged(AudioPlayerEnums::AudioPlayerState state);
@@ -54,18 +60,14 @@ namespace Audio
 
 		GstFormat _gstTimeFormat;
 
+		int _equalizerBandsNumber;
+
 		// Current state
 
 		AudioPlayerEnums::AudioPlayerState _currentState;
 		bool _pausedByResourceBlock;
 
-		// Equalizer
-
-		static int EqualizerBandsNumber;
-		GstEqualizerBandState _equalizerData[];
-
 		bool Init();
-		void SetEqualizerData();
 
 		// Gstreamer callbacks
 
