@@ -83,6 +83,7 @@ void EqualizerController::SetPresets(QList<EqualizerPreset*> presets)
 
 void EqualizerController::setSelectedPreset(int presetIndex)
 {
-	_model.SetSelectedPreset(presetIndex);
+	if(_model.SetSelectedPreset(presetIndex))
+		_settings.SetSelectedEqualizerPresetIndex(_model.getCurrentPresetIndex());
 }
 

@@ -32,6 +32,9 @@ class SailPlayerSettings : public QObject
 	Q_PROPERTY(bool scrobblingIsEnabled READ GetScrobblingIsEnabled WRITE SetScrobblingIsEnabled NOTIFY ScrobblingIsEnabledChanged)
 	Q_PROPERTY(QString lastFmSessionKey READ GetLastFmSessionKey WRITE SetLastFmSessionKey NOTIFY LastFmSessionKeyChanged)
 
+	// Equalizer
+	Q_PROPERTY(int selectedEqualizerPresetIndex READ GetSelectedEqualizerPresetIndex NOTIFY SelectedEqualizerPresetIndexChanged)
+
 public:
 	// Add files dialog
 
@@ -97,6 +100,10 @@ signals:
 
 	void ScrobblingIsEnabledChanged(bool enabled);
 	void LastFmSessionKeyChanged(QString key);
+
+	// Equalizer
+
+	void SelectedEqualizerPresetIndexChanged(int index);
 
 private:
 	static QString DefaultAddFilesDirectoryPath;

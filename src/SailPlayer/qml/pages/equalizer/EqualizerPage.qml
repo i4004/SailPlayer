@@ -46,11 +46,15 @@ Page
 
 				onCurrentItemChanged:
 				{
-					console.log(currentIndex);
+					console.log("changed");
 					equalizerController.setSelectedPreset(currentIndex);
 				}
 
-				Component.onCompleted: currentIndex = equalizerPresetsModel.getCurrentPresetIndex()
+				Component.onCompleted:
+				{
+					console.log(equalizerPresetsModel.getCurrentPresetIndex());
+					currentIndex = equalizerController.setSelectedPreset(settings.selectedEqualizerPresetIndex);
+				}
 			}
 
 			Row

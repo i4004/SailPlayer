@@ -72,12 +72,14 @@ namespace Equalizer
 		endResetModel();
 	}
 
-	void EqualizerPresetsModel::SetSelectedPreset(int presetIndex)
+	bool EqualizerPresetsModel::SetSelectedPreset(int presetIndex)
 	{
 		if(_presets.count() == 0)
-			return;
+			return false;
 
 		_currentPreset = _presets.at(presetIndex);
+
+		return true;
 	}
 
 	int EqualizerPresetsModel::getCurrentPresetIndex()
