@@ -246,6 +246,16 @@ void SailPlayerSettings::ClearEqualizerPresets()
 	settings.remove("EqualizerPresets");
 }
 
+void SailPlayerSettings::SetSelectedEqualizerPresetIndex(int index)
+{
+	settings.setValue("SelectedEqualizerPresetIndex", index);
+}
+
+int SailPlayerSettings::GetSelectedEqualizerPresetIndex()
+{
+	return settings.value("SelectedEqualizerPresetIndex", -1).toInt();
+}
+
 Track* SailPlayerSettings::GetTrackFromSettings()
 {
 	return new Track(settings.value("ArtistName").toString(),
