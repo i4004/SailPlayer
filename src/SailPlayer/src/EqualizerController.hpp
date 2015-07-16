@@ -24,9 +24,9 @@ public:
 	Q_INVOKABLE void addNewPreset(QString name);
 	Q_INVOKABLE void savePresets();
 	Q_INVOKABLE void deletePreset(int presetIndex);
+	Q_INVOKABLE void setSelectedPreset(int presetIndex);
 
 	void SetPresets(QList<EqualizerPreset*> presets);
-
 private:
 	EqualizerPresetsModel& _model;
 	SailPlayerSettings& _settings;

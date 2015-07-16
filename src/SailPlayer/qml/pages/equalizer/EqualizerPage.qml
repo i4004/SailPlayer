@@ -43,6 +43,14 @@ Page
 						}
 					}
 				}
+
+				onCurrentItemChanged:
+				{
+					console.log(currentIndex);
+					equalizerController.setSelectedPreset(currentIndex);
+				}
+
+				Component.onCompleted: currentIndex = equalizerPresetsModel.getCurrentPresetIndex()
 			}
 
 			Row

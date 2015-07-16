@@ -24,12 +24,13 @@ namespace Equalizer
 		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
 
+		Q_INVOKABLE int getCurrentPresetIndex();
+
 		void AddPreset(EqualizerPreset* preset);
 		void SetPresets(QList<EqualizerPreset*> presets);
 		void DeletePreset(int presetIndex);
+		void SetSelectedPreset(int presetIndex);
 		QList<EqualizerPreset*> GetPresets() { return _presets; }
-
-		int GetCurrentPresetIndex();
 
 	private:
 		QList<EqualizerPreset*> _presets;

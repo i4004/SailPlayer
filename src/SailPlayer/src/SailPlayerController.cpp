@@ -50,6 +50,11 @@ void SailPlayerController::LoadStartupSettings()
 
 	_equalizerController->SetPresets(_settings.GetEqualizerPresets());
 
+	int selectedPresetIndex = _settings.GetSelectedEqualizerPresetIndex();
+
+	if(selectedPresetIndex != -1)
+		_equalizerController->setSelectedPreset(selectedPresetIndex);
+
 	_scrobbler.SetSessionKey(_settings.GetLastFmSessionKey());
 	_playController->SetScrobblingIsEnabled(_settings.GetScrobblingIsEnabled());
 	int lastTrackIndex = _settings.GetLastTrackIndex();
