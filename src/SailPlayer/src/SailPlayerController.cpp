@@ -24,9 +24,10 @@ SailPlayerController::~SailPlayerController()
 	delete _playlistController;
 	delete _lastFmController;
 	delete _equalizerController;
-	delete _player;
 
 	SaveOnExitSettings();
+
+	delete _player;
 }
 
 void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
