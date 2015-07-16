@@ -64,7 +64,11 @@ namespace Equalizer
 	void EqualizerPresetsModel::DeletePreset(int presetIndex)
 	{
 		beginResetModel();
-		_presets.removeAt(presetIndex);
+
+		EqualizerPreset* _preset = _presets.at(presetIndex);
+		_presets.removeOne(_preset);
+		delete _preset;
+
 		endResetModel();
 	}
 

@@ -65,4 +65,5 @@ void SailPlayerController::SaveOnExitSettings()
 	_settings.SetPlayOrder(_playlist.GetPlayOrder());
 	_settings.SetLastTrackIndex(_playlist.GetCurrentTrackIndex());
 	_settings.SetLastPlayingPosition(_player->GetCurrentTrackPosition());
+	_equalizerController->savePresets();
 }

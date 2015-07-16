@@ -61,7 +61,7 @@ Page
 		{
 			MenuItem
 			{
-				enabled: presetsComboBox.currentIndex > 0
+				enabled: presetsComboBox.currentItem != null
 				text: qsTr("Delete Current Preset")
 				onClicked:
 				{
