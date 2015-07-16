@@ -22,6 +22,8 @@ namespace Playlist
 		Q_INVOKABLE void addTracksFromPath(QString directoryPath);
 		Q_INVOKABLE void clear();
 
+		Q_INVOKABLE void setPlayOrder(PlaylistEnums::PlayOrder order);
+
 	private:
 		PlaylistModel& _playlist;
 		SailPlayerSettings& _settings;

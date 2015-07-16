@@ -25,7 +25,7 @@ public:
 	Q_INVOKABLE void savePresets();
 	Q_INVOKABLE void deletePreset(int presetIndex);
 
-	void LoadPresets();
+	void SetPresets(QList<EqualizerPreset*> presets);
 
 private:
 	EqualizerPresetsModel& _model;

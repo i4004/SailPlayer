@@ -26,4 +26,10 @@ namespace Playlist
 
 		_settings.SetPlaylist(_playlist.GetTracks());
 	}
+
+	void PlaylistController::setPlayOrder(PlaylistEnums::PlayOrder order)
+	{
+		_playlist.SetPlayOrder(order);
+		_settings.SetPlayOrder(order);
+	}
 }

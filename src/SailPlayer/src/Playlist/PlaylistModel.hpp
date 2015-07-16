@@ -12,7 +12,7 @@ namespace Playlist
 	class PlaylistModel : public PlaylistModelBase
 	{
 		Q_OBJECT
-		Q_PROPERTY(Playlist::PlaylistEnums::PlayOrder playOrder READ GetPlayOrder WRITE SetPlayOrder NOTIFY PlayOrderChanged)
+		Q_PROPERTY(Playlist::PlaylistEnums::PlayOrder playOrder READ GetPlayOrder NOTIFY PlayOrderChanged)
 
 	public:
 		explicit PlaylistModel(QObject* parent = 0);

@@ -47,7 +47,7 @@ void SailPlayerController::LoadStartupSettings()
 	_playlist.SetPlayOrder(_settings.GetPlayOrder());
 	_playlist.AddTracks(_settings.GetPlaylist());
 
-	_equalizerController->LoadPresets();
+	_equalizerController->SetPresets(_settings.GetEqualizerPresets());
 
 	_scrobbler.SetSessionKey(_settings.GetLastFmSessionKey());
 	_playController->SetScrobblingIsEnabled(_settings.GetScrobblingIsEnabled());
@@ -62,8 +62,7 @@ void SailPlayerController::LoadStartupSettings()
 
 void SailPlayerController::SaveOnExitSettings()
 {
-	_settings.SetPlayOrder(_playlist.GetPlayOrder());
 	_settings.SetLastTrackIndex(_playlist.GetCurrentTrackIndex());
 	_settings.SetLastPlayingPosition(_player->GetCurrentTrackPosition());
-	_equalizerController->savePresets();
+//	_equalizerController->savePresets();
 }
