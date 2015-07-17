@@ -81,9 +81,14 @@ void EqualizerController::SetPresets(QList<EqualizerPreset*> presets)
 //	_player.SetEqualizer(_model.GetPresets().first());
 }
 
-void EqualizerController::setSelectedPreset(int presetIndex)
+bool EqualizerController::setSelectedPreset(int presetIndex)
 {
 	if(_model.SetSelectedPreset(presetIndex))
+	{
 		_settings.SetSelectedEqualizerPresetIndex(_model.getCurrentPresetIndex());
+		return true;
+	}
+
+	return false;
 }
 

@@ -52,8 +52,8 @@ Page
 
 				Component.onCompleted:
 				{
-					console.log(equalizerPresetsModel.getCurrentPresetIndex());
-					currentIndex = equalizerController.setSelectedPreset(settings.selectedEqualizerPresetIndex);
+					if(equalizerController.setSelectedPreset(settings.selectedEqualizerPresetIndex))
+						currentIndex = settings.selectedEqualizerPresetIndex;
 				}
 			}
 
