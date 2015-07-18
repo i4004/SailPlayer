@@ -30,14 +30,7 @@ Page
 				id: presetsComboBox
 
 				label: "Preset"
-				currentIndex:
-				{
-					console.log(settings.selectedEqualizerPresetIndex);
-					if(equalizerController.setSelectedPreset(settings.selectedEqualizerPresetIndex))
-						return settings.selectedEqualizerPresetIndex;
-
-					return 0;
-				}
+				currentIndex: equalizerController.setSelectedPreset(settings.selectedEqualizerPresetIndex) ? settings.selectedEqualizerPresetIndex : 0
 
 				menu: ContextMenu
 				{
@@ -52,11 +45,7 @@ Page
 					}
 				}
 
-				onCurrentItemChanged:
-				{
-					console.log("changed");
-					equalizerController.setSelectedPreset(currentIndex);
-				}
+				onCurrentItemChanged: equalizerController.setSelectedPreset(currentIndex);
 			}
 
 			Row
