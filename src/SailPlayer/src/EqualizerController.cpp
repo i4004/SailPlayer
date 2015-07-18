@@ -69,9 +69,19 @@ void EqualizerController::savePresets()
 	_settings.SetEqualizerPresets(_model.GetPresets());
 }
 
-void EqualizerController::deletePreset(int presetIndex)
+bool EqualizerController::deletePreset(int presetIndex)
 {
-	_model.DeletePreset(presetIndex);
+	if(_model.DeletePreset(presetIndex))
+	{
+		_settings.SetEqualizerPresets(_model.GetPresets());
+
+		if(!setSelectedPreset(presetIndex - 1))
+			setSelectedPreset(presetIndex + 1);
+
+		return true;
+	}
+
+	return false;
 }
 
 void EqualizerController::SetPresets(QList<EqualizerPreset*> presets)

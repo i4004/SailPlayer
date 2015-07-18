@@ -66,10 +66,7 @@ Page
 			{
 				enabled: presetsComboBox.currentItem != null
 				text: qsTr("Delete Current Preset")
-				onClicked:
-				{
-					equalizerController.deletePreset(presetsComboBox.currentIndex);
-				}
+				onClicked: equalizerController.deletePreset(presetsComboBox.currentIndex)
 			}
 
 			MenuItem

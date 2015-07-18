@@ -61,20 +61,29 @@ namespace Equalizer
 		endResetModel();
 	}
 
-	void EqualizerPresetsModel::DeletePreset(int presetIndex)
+	bool EqualizerPresetsModel::DeletePreset(int presetIndex)
 	{
+		EqualizerPreset* _preset = _presets.at(presetIndex);
+
+		if(_preset == NULL)
+			return false;
+
 		beginResetModel();
 
-		EqualizerPreset* _preset = _presets.at(presetIndex);
 		_presets.removeOne(_preset);
 		delete _preset;
 
 		endResetModel();
+
+		return true;
 	}
 
 	bool EqualizerPresetsModel::SetSelectedPreset(int presetIndex)
 	{
 		if(_presets.count() == 0)
+			return false;
+
+		if(presetIndex < 0 || presetIndex >= _presets.count())
 			return false;
 
 		_currentPreset = _presets.at(presetIndex);
