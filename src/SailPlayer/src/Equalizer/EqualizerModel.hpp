@@ -15,6 +15,9 @@ namespace Equalizer
 		explicit EqualizerModel(QObject* parent = 0);
 		~EqualizerModel();
 
+		void SetBands(QList<EqualizerBand*> bands);
+		QList<EqualizerBand*> GetBands();
+
 	private:
 		QList<EqualizerBand*> _bands;
 

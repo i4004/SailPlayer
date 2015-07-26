@@ -8,6 +8,7 @@ namespace Equalizer
 	public:
 		EqualizerBand();
 		EqualizerBand(float frequency, float width, float gain);
+		EqualizerBand(EqualizerBand& band);
 
 		float GetFrequency() { return _frequency; }
 		void SetFrequency(float frequency) { _frequency = frequency; }
