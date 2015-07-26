@@ -46,7 +46,8 @@ SOURCES += \
     src/IO/FsRecordsListModel.cpp \
     src/Playlist/PlaylistModel.cpp \
     src/Playlist/PlaylistModelBase.cpp \
-    src/Equalizer/EqualizerPresetsModel.cpp
+    src/Equalizer/EqualizerPresetsModel.cpp \
+    src/Equalizer/EqualizerModel.cpp
 
 OTHER_FILES += \
     qml/cover/CoverPage.qml \
@@ -121,4 +122,5 @@ HEADERS += \
     src/IO/FsRecordsListModel.hpp \
     src/Playlist/PlaylistModel.hpp \
     src/Playlist/PlaylistModelBase.hpp \
-    src/Equalizer/EqualizerPresetsModel.hpp
+    src/Equalizer/EqualizerPresetsModel.hpp \
+    src/Equalizer/EqualizerModel.hpp

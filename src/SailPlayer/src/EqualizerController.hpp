@@ -5,6 +5,7 @@
 #include "Audio/AudioPlayer.hpp"
 #include "SailPlayerSettings.hpp"
 
+#include "Equalizer/EqualizerModel.hpp"
 #include "Equalizer/EqualizerPresetsModel.hpp"
 
 using namespace Audio;
