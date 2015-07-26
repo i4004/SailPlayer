@@ -8,7 +8,7 @@ SailPlayerController::SailPlayerController(QQuickView* view)
 	_lastFmController = new LastFmController(_scrobbler, _settings);
 	_playlistController = new PlaylistController(_playlist, _settings);
 	_playController = new PlayController(*_player, _playlist, *_lastFmController);
-	_equalizerController = new EqualizerController(_equalizerPresetsModel, _settings, *_player);
+	_equalizerController = new EqualizerController(_equalizerPresetsModel, _settings, *_player, _equalizerModel);
 
 	LoadStartupSettings();
 
@@ -41,6 +41,7 @@ void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 	view->rootContext()->setContextProperty("lastFmController", _lastFmController);
 	view->rootContext()->setContextProperty("equalizerController", _equalizerController);
 	view->rootContext()->setContextProperty("equalizerPresetsModel", &_equalizerPresetsModel);
+	view->rootContext()->setContextProperty("equalizerModel", &_equalizerModel);
 }
 
 void SailPlayerController::LoadStartupSettings()

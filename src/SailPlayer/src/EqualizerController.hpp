@@ -16,7 +16,7 @@ class EqualizerController : public QObject
 	Q_OBJECT
 
 public:
-	EqualizerController(EqualizerPresetsModel& equalizerPresetsModel, SailPlayerSettings& settings, AudioPlayerBase& player);
+	EqualizerController(EqualizerPresetsModel& equalizerPresetsModel, SailPlayerSettings& settings, AudioPlayerBase& player, EqualizerModel& equalizerModel);
 	~EqualizerController();
 
 	static const QList<float> BaseFrequencies;
@@ -33,6 +33,7 @@ private:
 	EqualizerPresetsModel& _model;
 	SailPlayerSettings& _settings;
 	AudioPlayerBase& _player;
+	EqualizerModel& _equalizerModel;
 };
 
 #endif // EQUALIZERCONTROLLER_HPP

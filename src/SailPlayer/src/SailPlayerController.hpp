@@ -22,6 +22,7 @@ private:
 	PlaylistModel _playlist;
 	LastFmScrobbler _scrobbler;
 	EqualizerPresetsModel _equalizerPresetsModel;
+	EqualizerModel _equalizerModel;
 
 	AudioPlayer* _player;
 	PlayController* _playController;
