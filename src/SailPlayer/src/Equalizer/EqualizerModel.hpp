@@ -14,7 +14,6 @@ namespace Equalizer
 		GainRole = Qt::UserRole + 3
 	};
 
-
 	class EqualizerModel : public QAbstractListModel
 	{
 		Q_OBJECT
