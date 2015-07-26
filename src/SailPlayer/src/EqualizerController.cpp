@@ -102,3 +102,14 @@ bool EqualizerController::setSelectedPreset(int presetIndex)
 	return false;
 }
 
+bool EqualizerController::setCurrentPresetName(QString name)
+{
+	if(_model.SetCurrentPresetName(name))
+	{
+		savePresets();
+		return true;
+	}
+
+	return false;
+}
+

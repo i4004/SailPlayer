@@ -91,12 +91,32 @@ namespace Equalizer
 		return true;
 	}
 
+	bool EqualizerPresetsModel::SetCurrentPresetName(QString name)
+	{
+		if(_currentPreset == NULL)
+			return false;
+
+		beginResetModel();
+		_currentPreset->SetName(name);
+		endResetModel();
+
+		return true;
+	}
+
 	int EqualizerPresetsModel::getCurrentPresetIndex()
 	{
 		if(_currentPreset == NULL)
 			return -1;
 
 		return _presets.indexOf(_currentPreset);
+	}
+
+	QString EqualizerPresetsModel::getCurrentPresetName()
+	{
+		if(_currentPreset == NULL)
+			return QString();
+
+		return _currentPreset->GetName();
 	}
 
 	void EqualizerPresetsModel::DeletePresets()

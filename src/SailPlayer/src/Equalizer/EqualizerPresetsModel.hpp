@@ -25,11 +25,13 @@ namespace Equalizer
 		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
 
 		Q_INVOKABLE int getCurrentPresetIndex();
+		Q_INVOKABLE QString getCurrentPresetName();
 
 		void AddPreset(EqualizerPreset* preset);
 		void SetPresets(QList<EqualizerPreset*> presets);
 		bool DeletePreset(int presetIndex);
 		bool SetSelectedPreset(int presetIndex);
+		bool SetCurrentPresetName(QString name);
 		QList<EqualizerPreset*> GetPresets() { return _presets; }
 
 	private:

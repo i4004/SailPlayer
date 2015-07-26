@@ -85,14 +85,16 @@ Page
 
 			MenuItem
 			{
+				enabled: presetsComboBox.currentItem != null
 				text: qsTr("Edit Current Preset Name")
 				onClicked:
 				{
 					var dialog = pageStack.push(Qt.resolvedUrl("../ManageTextItemDialog.qml"),
-												{ inputName: qsTr("Preset Name"), dialogTitle: qsTr("Edit Preset Name") });
+												{ inputName: qsTr("Preset Name"), value: equalizerPresetsModel.getCurrentPresetName(), dialogTitle: qsTr("Edit Preset Name") });
 
 					dialog.accepted.connect(function()
 					{
+						onClicked: equalizerController.setCurrentPresetName(dialog.value)
 					});
 				}
 			}
