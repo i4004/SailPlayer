@@ -3,6 +3,8 @@
 
 #include <QAbstractListModel>
 
+#include "EqualizerBand.hpp"
+
 namespace Equalizer
 {
 	class EqualizerModel : public QAbstractListModel
@@ -11,6 +13,12 @@ namespace Equalizer
 
 	public:
 		explicit EqualizerModel(QObject* parent = 0);
+		~EqualizerModel();
+
+	private:
+		QList<EqualizerBand*> _bands;
+
+		void DeleteBands();
 	};
 }
 
