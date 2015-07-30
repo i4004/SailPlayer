@@ -115,3 +115,11 @@ bool EqualizerController::setCurrentPresetName(QString name)
 	return false;
 }
 
+void EqualizerController::setPreliminaryEqualizerBand(float frequency, float width, float gain)
+{
+	int bandID = _equalizerModel.SetBandData(frequency, gain);
+
+	_player.SetEqualizerBand(frequency, width, gain, bandID);
+}
+
+

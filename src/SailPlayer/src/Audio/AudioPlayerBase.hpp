@@ -36,7 +36,8 @@ namespace Audio
 		virtual void OnEndOfStream();
 		virtual void OnErrorMessage(QString message);
 
-		virtual void SetEqualizer(EqualizerPreset* preset);
+		virtual void SetEqualizer(QList<EqualizerBand*> bands);
+		virtual void SetEqualizerBand(float frequency, float width, float gain, int bandID);
 
 	signals:
 		void StateChanged(AudioPlayerEnums::AudioPlayerState state);

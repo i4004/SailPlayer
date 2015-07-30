@@ -61,6 +61,28 @@ namespace Equalizer
 		endResetModel();
 	}
 
+	int EqualizerModel::SetBandData(float frequency, float gain)
+	{
+		int bandID = -1;
+
+//		beginResetModel();
+
+		for(int i = 0; i < _bands.count(); i++)
+		{
+			EqualizerBand* band = _bands.at(i);
+
+			if(band->GetFrequency() == frequency)
+			{
+				band->SetGain(gain);
+				bandID = i;
+			}
+		}
+
+//		endResetModel();
+
+		return bandID;
+	}
+
 	QList<EqualizerBand*> EqualizerModel::GetBands()
 	{
 		QList<EqualizerBand*> newBands;

@@ -25,6 +25,8 @@ Dialog
 		delegate: ListItem
 		{
 			contentHeight: 90
+			property var tempFrequency: bandFrequency
+			property var tempWidth: bandWidth
 
 			Label
 			{
@@ -51,6 +53,15 @@ Dialog
 				maximumValue: 36
 				value: bandGain + 24
 				valueText: parseInt(value) - 24
+
+				onValueChanged:
+				{
+					var newGain = parseInt(value) - 24;
+					if(bandGain != newGain)
+					{
+						equalizerController.setPreliminaryEqualizerBand(tempFrequency, tempWidth, newGain);
+					}
+				}
 			}
 
 			IconButton

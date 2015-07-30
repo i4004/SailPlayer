@@ -27,6 +27,7 @@ public:
 	Q_INVOKABLE bool deletePreset(int presetIndex);
 	Q_INVOKABLE bool setSelectedPreset(int presetIndex);
 	Q_INVOKABLE bool setCurrentPresetName(QString name);
+	Q_INVOKABLE void setPreliminaryEqualizerBand(float frequency, float width, float gain);
 
 	void SetPresets(QList<EqualizerPreset*> presets);
 private:

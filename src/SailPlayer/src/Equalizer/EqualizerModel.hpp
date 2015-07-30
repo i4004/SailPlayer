@@ -27,6 +27,7 @@ namespace Equalizer
 		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
 
 		void SetBands(QList<EqualizerBand*> bands);
+		int SetBandData(float frequency, float gain);
 		QList<EqualizerBand*> GetBands();
 
 	private:
