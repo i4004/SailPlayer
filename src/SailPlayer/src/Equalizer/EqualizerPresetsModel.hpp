@@ -33,6 +33,7 @@ namespace Equalizer
 		bool SetSelectedPreset(int presetIndex);
 		bool SetCurrentPresetName(QString name);
 		QList<EqualizerPreset*> GetPresets() { return _presets; }
+		EqualizerPreset* GetCurrentPreset();
 
 	private:
 		QList<EqualizerPreset*> _presets;

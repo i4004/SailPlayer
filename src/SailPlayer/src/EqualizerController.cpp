@@ -96,6 +96,7 @@ bool EqualizerController::setSelectedPreset(int presetIndex)
 {
 	if(_model.SetSelectedPreset(presetIndex))
 	{
+		_equalizerModel.SetBands(_model.GetCurrentPreset()->GetBands());
 		_settings.SetSelectedEqualizerPresetIndex(_model.getCurrentPresetIndex());
 		return true;
 	}

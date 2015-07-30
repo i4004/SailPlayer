@@ -119,6 +119,14 @@ namespace Equalizer
 		return _currentPreset->GetName();
 	}
 
+	EqualizerPreset* EqualizerPresetsModel::GetCurrentPreset()
+	{
+		if(_currentPreset == NULL)
+			return NULL;
+
+		return _currentPreset;
+	}
+
 	void EqualizerPresetsModel::DeletePresets()
 	{
 		while (!_presets.isEmpty())

@@ -20,26 +20,7 @@ Dialog
 			acceptText: qsTr("Ok")
 		}
 
-		model: ListModel
-		{
-			ListElement { gain: -5; frequency: 80 }
-			ListElement { gain: 5; frequency: 524 }
-			ListElement { gain: 0; frequency: 160 }
-			ListElement { gain: 5; frequency: 524 }
-			ListElement { gain: 5; frequency: 524 }
-			ListElement { gain: 7; frequency: 524 }
-			ListElement { gain: 5; frequency: 1200 }
-			ListElement { gain: 5; frequency: 524 }
-			ListElement { gain: 10; frequency: 1200 }
-			ListElement { gain: 5; frequency: 524 }
-			ListElement { gain: 5; frequency: 1200 }
-			ListElement { gain: 12; frequency: 6128 }
-			ListElement { gain: 5; frequency: 1200 }
-			ListElement { gain: 0; frequency: 11000 }
-			ListElement { gain: -14; frequency: 14250 }
-			ListElement { gain: -14; frequency: 15000 }
-			ListElement { gain: -20; frequency: 17000 }
-		}
+		model: equalizerModel
 
 		delegate: ListItem
 		{
@@ -54,7 +35,7 @@ Dialog
 				horizontalAlignment: Text.AlignRight
 				width: 100
 
-				text: Util.formatFequency(frequency)
+				text: Util.formatFequency(bandFrequency)
 			}
 
 			Slider
@@ -68,7 +49,7 @@ Dialog
 				anchors.verticalCenter: parent.verticalCenter
 
 				maximumValue: 36
-				value: gain + 24
+				value: bandGain + 24
 				valueText: parseInt(value) - 24
 			}
 
