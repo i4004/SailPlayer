@@ -90,7 +90,7 @@ namespace Audio
 
 		g_object_set(G_OBJECT(_equalizer), "num-bands", _equalizerBandsNumber, NULL);
 
-		for (i = 0; i < bands.count(); i++)
+		for (int i = 0; i < bands.count(); i++)
 		{
 			EqualizerBand* band = bands.at(i);
 
