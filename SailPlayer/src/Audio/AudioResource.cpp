@@ -53,11 +53,11 @@ namespace Audio
 
 	void AudioResource::WaitForAnAudioResourceCallback()
 	{
-		 while (!_audioResourceGotReply)
-		 {
-			 g_main_context_iteration(NULL, false);
-			 usleep(1000);
-		 }
+		while (!_audioResourceGotReply)
+		{
+			g_main_context_iteration(NULL, false);
+			nanosleep(&ResourceWaiter, NULL);
+		}
 	}
 
 	void AudioResource::OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData)

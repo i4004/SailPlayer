@@ -6,6 +6,8 @@
 
 namespace Audio
 {
+	const struct timespec ResourceWaiter = {0, 1000000};
+
 	class AudioResource : public QObject
 	{
 		Q_OBJECT

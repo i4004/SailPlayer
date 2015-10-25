@@ -190,7 +190,7 @@ namespace Audio
 	void AudioPlayer::WaitForNextTrackData()
 	{
 		while (!_nextTrackDataReceived)
-			usleep(1000);
+			nanosleep(&ResourceWaiter, NULL);
 	}
 
 	void AudioPlayer::OnCurrentPositionTimerCallback()
