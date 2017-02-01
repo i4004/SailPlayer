@@ -1,10 +1,10 @@
-Name: harbour-sail-player
+Name: harbour-sail-player-dev
 Summary: Sailfish OS audio player
-Version: 0.2
+Version: 0.3
 Release: 1
 Group: Qt/Qt
 URL: https://github.com/i4004/SailPlayer
-License: LICENSE
+License: GNU/GPL
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |

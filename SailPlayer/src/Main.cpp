@@ -31,13 +31,13 @@ int main(int argc, char *argv[])
 	// Application description / data
 
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
-	QCoreApplication::setApplicationName("Sail Player");
+	QCoreApplication::setApplicationName("Sail Player Dev");
 
 	LastFmQueryBuilder::SetApiKey("06b931aaed5fbf1f1558c165f3a08eb4");
 	LastFmQueryBuilder::SetSecret("9fe3f69ecd90045d2d18fe6823803370");
 
-	LastFmRequestBuilder::SetApplicationName("Sail Player");
-	LastFmRequestBuilder::SetApplicationVersion("0.2");
+	LastFmRequestBuilder::SetApplicationName("Sail Player Dev");
+	LastFmRequestBuilder::SetApplicationVersion("0.3");
 	LastFmRequestBuilder::SetContactUrl("https://github.com/i4004/SailPlayer");
 
 	// Startup
