@@ -22,6 +22,4 @@ OTHER_FILES += \
     SailPlayer-dev.desktop
 
 # Icons
-SAILFISHAPP_ICONS = 256x256
-
-
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
