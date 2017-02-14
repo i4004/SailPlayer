@@ -10,6 +10,7 @@ desktop.path = /usr/share/applications
 
 # Configuration
 CONFIG += sailfishapp
+QT += core quick qml xml
 
 # Files
 
