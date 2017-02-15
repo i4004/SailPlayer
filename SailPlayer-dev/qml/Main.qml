@@ -4,8 +4,7 @@ import "pages"
 
 ApplicationWindow
 {
-	initialPage: Component { PlaylistPage { } }
-	cover: Qt.resolvedUrl("Cover.qml")
-	allowedOrientations: defaultAllowedOrientations
-}
+	initialPage: Component { PlaylistPage {} }
 
+	cover: Qt.resolvedUrl("Cover.qml")
+}
