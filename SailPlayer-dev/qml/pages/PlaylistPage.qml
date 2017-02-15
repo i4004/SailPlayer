@@ -14,6 +14,8 @@ Page
 
 		Column
 		{
+			id: column
+
 			width: page.width
 
 			PageHeader
