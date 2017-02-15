@@ -9,18 +9,18 @@ qml.path = $$DEPLOYMENT_PATH
 desktop.path = /usr/share/applications
 
 # Configuration
+
 CONFIG += sailfishapp
 QT += core quick qml xml
+
+SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
 # Files
 
 SOURCES += src/SailPlayer.cpp
 
-OTHER_FILES += \
+DISTFILES += \
+    qml/pages/PlaylistPage.qml \
     qml/Cover.qml \
-    qml/SailPlayer-dev.qml \
-    qml/pages/FirstPage.qml \
-    SailPlayer-dev.desktop
-
-# Icons
-SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
+    SailPlayer-dev.desktop \
+    qml/Main.qml
