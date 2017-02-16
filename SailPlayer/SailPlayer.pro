@@ -1,4 +1,4 @@
-TARGET = SailPlayer-dev
+TARGET = harbour-sail-player-dev
 
 # Paths
 
@@ -17,10 +17,11 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
 # Files
 
-SOURCES += src/SailPlayer.cpp
+SOURCES += \
+    src/Main.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
     qml/Cover.qml \
-    SailPlayer-dev.desktop \
-    qml/Main.qml
+    qml/Main.qml \
+    harbour-sail-player-dev.desktop

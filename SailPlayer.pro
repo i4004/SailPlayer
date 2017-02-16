@@ -1,7 +1,6 @@
 TEMPLATE = subdirs
-SUBDIRS = SailPlayer-dev
-
+SUBDIRS = SailPlayer
 CONFIG += ordered
 
 OTHER_FILES += \
-    rpm/SailPlayer.yaml
+    rpm/SailPlayer-dev.yaml

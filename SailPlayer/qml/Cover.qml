@@ -6,6 +6,6 @@ CoverBackground
 	CoverPlaceholder
 	{
 		text: qsTrId("Sail Player")
-		icon.source: "/usr/share/icons/hicolor/86x86/apps/SailPlayer-dev.png"
+		icon.source: "/usr/share/icons/hicolor/86x86/apps/harbour-sail-player-dev.png"
 	}
 }
