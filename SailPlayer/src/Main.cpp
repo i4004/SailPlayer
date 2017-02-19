@@ -3,6 +3,7 @@
 #endif
 
 #include <sailfishapp.h>
+#include "SailPlayerController.hpp"
 
 void SetApplicationDescription()
 {
@@ -18,9 +19,11 @@ int main(int argc, char *argv[])
 
 	QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 	QScopedPointer<QQuickView> view(SailfishApp::createView());
+	QScopedPointer<SailPlayerController> rootController(new SailPlayerController());
 
 	// Run
 
+	rootController->ExposeComponentsToQml(&(*view));
 	view->setSource(SailfishApp::pathTo("qml/Main.qml"));
 	view->show();
 
