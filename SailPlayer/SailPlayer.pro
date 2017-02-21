@@ -12,7 +12,7 @@ desktop.path = /usr/share/applications
 
 CONFIG += sailfishapp
 QT += core quick qml
-PKGCONFIG += audioresource
+PKGCONFIG += audioresource gstreamer-1.0
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
@@ -21,7 +21,8 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 SOURCES += \
     src/Main.cpp \
     src/SailPlayerController.cpp \
-    src/Audio/AudioResource.cpp
+    src/Audio/AudioResource.cpp \
+    src/Audio/AudioPlayer.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -31,4 +32,5 @@ DISTFILES += \
 
 HEADERS += \
     src/SailPlayerController.hpp \
-    src/Audio/AudioResource.hpp
+    src/Audio/AudioResource.hpp \
+    src/Audio/AudioPlayer.hpp

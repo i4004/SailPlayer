@@ -18,9 +18,12 @@ PkgConfigBR:
   - Qt5Core
   - Qt5Qml
   - Qt5Quick
+  - audioresource
+  - gstreamer-1.0
 
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
+  - gstreamer-1.0
 
 Files:
   - '%{_bindir}'
