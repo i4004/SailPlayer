@@ -4,14 +4,14 @@
 
 SailPlayerController::SailPlayerController()
 {
-	_audioResource = new AudioResource();
-	_audioPlayer = new AudioPlayer(_audioResource);
+//	_audioResource = new AudioResource();
+//	_audioPlayer = new GstAudioPlayer(_audioResource);
 }
 
 SailPlayerController::~SailPlayerController()
 {
-	delete _audioPlayer;
-	delete _audioResource;
+//	delete _audioPlayer;
+//	delete _audioResource;
 }
 
 void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
