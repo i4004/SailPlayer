@@ -16,8 +16,6 @@ namespace Audio
 	//		_gstTimeFormat = GST_FORMAT_TIME;
 	//		_pausedByResourceBlock = false;
 
-			gst_init(NULL, NULL);
-
 	//		connect(_audioResource, SIGNAL(AquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
 
 			if(!Init())

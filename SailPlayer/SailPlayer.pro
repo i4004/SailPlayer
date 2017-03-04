@@ -27,7 +27,8 @@ SOURCES += \
     src/Audio/AudioPlayerBase.cpp \
     src/Audio/Gst/GBus.cpp \
     src/Audio/Gst/GPipeline.cpp \
-    src/Audio/Gst/GAudioPlayer.cpp
+    src/Audio/Gst/GAudioPlayer.cpp \
+    src/Audio/Gst/GInit.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -46,4 +47,5 @@ HEADERS += \
     src/Audio/Gst/GPipeline.hpp \
     src/Audio/Gst/GEqualizer.hpp \
     src/Audio/Gst/GEqualizerBand.hpp \
-    src/Audio/Gst/GAudioPlayer.hpp
+    src/Audio/Gst/GAudioPlayer.hpp \
+    src/Audio/Gst/GInit.hpp

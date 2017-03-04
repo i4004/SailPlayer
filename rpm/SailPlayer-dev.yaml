@@ -23,7 +23,6 @@ PkgConfigBR:
 
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
-  - gstreamer-1.0
 
 Files:
   - '%{_bindir}'
