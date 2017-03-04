@@ -16,7 +16,6 @@ namespace Audio
 			~GPipeline();
 
 			GstElement* Get() { return _element; }
-			bool IsInitialized() { return _element; }
 
 			void SetFileToPlay(QString fullFilePath);
 

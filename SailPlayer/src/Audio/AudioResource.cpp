@@ -39,9 +39,9 @@ namespace Audio
 	{
 		_acquired = acquired;
 
-#ifdef QT_DEBUG
+		#ifdef QT_DEBUG
 		qDebug() << "Acquired: " << QString(acquired);
-#endif
+		#endif
 
 		emit AquiredChanged(acquired);
 	}

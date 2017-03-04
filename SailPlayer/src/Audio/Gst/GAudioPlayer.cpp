@@ -1,5 +1,9 @@
 #include "GAudioPlayer.hpp"
 
+#ifdef QT_DEBUG
+#include <QDebug>
+#endif
+
 namespace Audio
 {
 	namespace Gst
@@ -12,10 +16,14 @@ namespace Audio
 	//		_gstTimeFormat = GST_FORMAT_TIME;
 	//		_pausedByResourceBlock = false;
 
-	//		gst_init(NULL, NULL);
+			gst_init(NULL, NULL);
 
 	//		connect(_audioResource, SIGNAL(AquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
-	//		Init();
+
+			if(!Init())
+			{
+
+			}
 		}
 
 		GAudioPlayer::~GAudioPlayer()

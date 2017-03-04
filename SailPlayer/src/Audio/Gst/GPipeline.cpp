@@ -6,13 +6,16 @@ namespace Audio
 	{
 		GPipeline::GPipeline()
 		{
-	//		_element = gst_parse_launch("playbin", NULL);
+			_element = gst_parse_launch("playbin", NULL);
+
+			if(!_element)
+				qFatal("GPipeline playbin launch failed");
 		}
 
 		GPipeline::~GPipeline()
 		{
-	//		gst_element_set_state(_element, GST_STATE_NULL);
-	//		gst_object_unref(GST_OBJECT(_element));
+			gst_element_set_state(_element, GST_STATE_NULL);
+			gst_object_unref(GST_OBJECT(_element));
 		}
 
 
