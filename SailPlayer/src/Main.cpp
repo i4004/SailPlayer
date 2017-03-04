@@ -1,8 +1,6 @@
-#ifdef QT_QML_DEBUG
 #include <QtQuick>
-#endif
-
 #include <sailfishapp.h>
+
 #include "SailPlayerController.hpp"
 
 void SetApplicationDescription()
