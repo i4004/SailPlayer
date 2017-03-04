@@ -18,7 +18,6 @@ namespace Audio
 			gst_object_unref(GST_OBJECT(_element));
 		}
 
-
 		void GPipeline::SetFileToPlay(QString fullFilePath)
 		{
 	//		g_object_set(_element, "uri", QString("file://" + fullFilePath).toLocal8Bit().data(), NULL);

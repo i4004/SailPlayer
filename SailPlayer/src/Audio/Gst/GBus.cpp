@@ -6,17 +6,16 @@ namespace Audio
 	{
 		GBus::GBus(GPipeline* pipeline)
 		{
-	//		GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline->Get()));
+			GstBus* bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline->Get()));
 
-	//		gst_bus_add_watch(bus, OnBusCall, this);
+			gst_bus_add_watch(bus, OnBusCall, this);
 
-	//		gst_object_unref(bus);
+			gst_object_unref(bus);
 		}
 
 		GBus::~GBus()
 		{
 		}
-
 
 		gboolean GBus::OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData)
 		{
