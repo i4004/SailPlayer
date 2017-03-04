@@ -22,10 +22,12 @@ SOURCES += \
     src/Main.cpp \
     src/SailPlayerController.cpp \
     src/Audio/AudioResource.cpp \
-    src/Audio/GstEqualizer.cpp \
-    src/Audio/GstAudioPlayer.cpp \
+    src/Audio/Gst/GEqualizer.cpp \
     src/Audio/AudioPlayer.cpp \
-    src/Audio/AudioPlayerBase.cpp
+    src/Audio/AudioPlayerBase.cpp \
+    src/Audio/Gst/GBus.cpp \
+    src/Audio/Gst/GPipeline.cpp \
+    src/Audio/Gst/GAudioPlayer.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -36,10 +38,12 @@ DISTFILES += \
 HEADERS += \
     src/SailPlayerController.hpp \
     src/Audio/AudioResource.hpp \
-    src/Audio/GstEqualizerBandState.hpp \
-    src/Audio/GstEequalizer.hpp \
-    src/Audio/GstAudioPlayer.hpp \
     src/Audio/AudioPlayer.hpp \
     src/Audio/IAudioPlayer.hpp \
     src/Audio/AudioPlayerBase.hpp \
-    src/Audio/AudioPlayerEnums.hpp
+    src/Audio/AudioPlayerEnums.hpp \
+    src/Audio/Gst/GBus.hpp \
+    src/Audio/Gst/GPipeline.hpp \
+    src/Audio/Gst/GEqualizer.hpp \
+    src/Audio/Gst/GEqualizerBand.hpp \
+    src/Audio/Gst/GAudioPlayer.hpp

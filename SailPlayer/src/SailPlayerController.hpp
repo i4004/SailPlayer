@@ -4,9 +4,9 @@
 #include <QObject>
 #include <QQuickView>
 
-//#include "Audio/GstAudioPlayer.hpp"
+#include "Audio/Gst/GAudioPlayer.hpp"
 
-//using namespace Audio;
+using namespace Audio::Gst;
 
 class SailPlayerController : public QObject
 {
@@ -20,7 +20,9 @@ public:
 
 private:
 //	AudioResource* _audioResource;
-//	GstAudioPlayer* _audioPlayer;
+	GBus* _bus;
+	GPipeline* _pipeline;
+	GAudioPlayer* _audioPlayer;
 };
 
 #endif // SAILPLAYERCONTROLLER_HPP

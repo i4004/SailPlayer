@@ -5,12 +5,16 @@
 SailPlayerController::SailPlayerController()
 {
 //	_audioResource = new AudioResource();
-//	_audioPlayer = new GstAudioPlayer(_audioResource);
+	_pipeline = new GPipeline();
+	_bus = new GBus(_pipeline);
+	_audioPlayer = new GAudioPlayer(_bus, _pipeline);
 }
 
 SailPlayerController::~SailPlayerController()
 {
-//	delete _audioPlayer;
+	delete _audioPlayer;
+	delete _bus;
+	delete _pipeline;
 //	delete _audioResource;
 }
 
