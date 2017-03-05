@@ -17,8 +17,13 @@ namespace Audio
 			GBus(GPipeline* pipeline);
 			~GBus();
 
+			virtual void OnStreamStart();
+			virtual void OnAsyncDone();
+			virtual void OnEndOfStream();
+			virtual void OnErrorMessage(QString message);
+
 		private:
-			static gboolean OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData);
+			static gboolean OnBusCall(GstBus* gstBus, GstMessage* msg, gpointer userData);
 		};
 	}
 }

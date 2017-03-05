@@ -24,6 +24,10 @@ namespace Audio
 		if(_acquired)
 			return;
 
+		#ifdef QT_DEBUG
+		qDebug() << "Aquiring";
+		#endif
+
 		audioresource_acquire(_resource);
 	}
 
@@ -31,6 +35,10 @@ namespace Audio
 	{
 		if(!_acquired)
 			return;
+
+		#ifdef QT_DEBUG
+		qDebug() << "Releasing";
+		#endif
 
 		audioresource_release(_resource);
 	}
@@ -40,7 +48,7 @@ namespace Audio
 		_acquired = acquired;
 
 		#ifdef QT_DEBUG
-		qDebug() << "Acquired: " << QString(acquired);
+		qDebug() << "Acquired:" << QString(acquired);
 		#endif
 
 		emit AquiredChanged(acquired);

@@ -16,6 +16,8 @@ namespace Audio
 			~GPipeline();
 
 			void SetFileToPlay(QString fullFilePath);
+
+//			virtual void OnAboutToFinish();
 		};
 	}
 }

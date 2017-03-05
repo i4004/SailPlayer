@@ -45,27 +45,6 @@ namespace Audio
 			gst_element_set_state (_pipeline->Get(), GST_STATE_READY);
 		}
 
-	//	void AudioPlayerBase::OnStreamStart()
-	//	{
-	//	}
-
-	//	void AudioPlayerBase::OnAsyncDone()
-	//	{
-	//	}
-
-	//	void AudioPlayerBase::OnEndOfStream()
-	//	{
-	//	}
-
-	//	void AudioPlayerBase::OnAboutToFinish()
-	//	{
-	//	}
-
-	//	void AudioPlayerBase::OnErrorMessage(QString message)
-	//	{
-	//		Q_UNUSED(message);
-	//	}
-
 	//	// Player internal controls
 
 	//	void AudioPlayerBase::Seek(gint64 nanoseconds)

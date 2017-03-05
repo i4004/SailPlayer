@@ -22,12 +22,6 @@ namespace Audio
 			virtual void Pause();
 			virtual void Stop();
 
-	//		virtual void OnStreamStart();
-	//		virtual void OnAsyncDone();
-	//		virtual void OnAboutToFinish();
-	//		virtual void OnEndOfStream();
-	//		virtual void OnErrorMessage(QString message);
-
 	//	protected:
 	//		void Seek(gint64 nanoseconds);
 	//		void SetFileToPlay(QString fullFilePath);

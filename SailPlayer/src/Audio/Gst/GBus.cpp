@@ -1,5 +1,9 @@
 #include "GBus.hpp"
 
+#ifdef QT_DEBUG
+#include <QDebug>
+#endif
+
 namespace Audio
 {
 	namespace Gst
@@ -15,50 +19,81 @@ namespace Audio
 
 		GBus::~GBus()
 		{
+		}	
+
+		void GBus::OnStreamStart()
+		{
+			#ifdef QT_DEBUG
+			qDebug() << "Stream started";
+			#endif
 		}
 
-		gboolean GBus::OnBusCall(GstBus* bus, GstMessage* msg, gpointer userData)
+		void GBus::OnAsyncDone()
 		{
-			Q_UNUSED(bus);
-			Q_UNUSED(msg);
-			Q_UNUSED(userData);
+			#ifdef QT_DEBUG
+			qDebug() << "Async done";
+			#endif
+		}
 
-	//		switch (GST_MESSAGE_TYPE (msg))
-	//		{
-	//			case GST_MESSAGE_EOS:
-	//			{
-	//				static_cast<AudioPlayerBase*>(userData)->OnEndOfStream();
-	//				break;
-	//			}
+		void GBus::OnEndOfStream()
+		{
+			#ifdef QT_DEBUG
+			qDebug() << "End of stream";
+			#endif
+		}
 
-	//			case GST_MESSAGE_ASYNC_DONE:
-	//			{
-	//				static_cast<AudioPlayerBase*>(userData)->OnAsyncDone();
-	//				break;
-	//			}
+		void GBus::OnErrorMessage(QString message)
+		{
+			#ifdef QT_DEBUG
+			qDebug() << "Error: " << message;
+			#endif
+		}
 
-	//			case GST_MESSAGE_STREAM_START:
-	//			{
-	//				static_cast<AudioPlayerBase*>(userData)->OnStreamStart();
-	//				break;
-	//			}
+		gboolean GBus::OnBusCall(GstBus* gstBus, GstMessage* msg, gpointer userData)
+		{
+			Q_UNUSED(gstBus);
 
-	//			case GST_MESSAGE_ERROR:
-	//			{
-	//				gchar* debug;
-	//				GError* error;
+			GBus* bus = static_cast<GBus*>(userData);
 
-	//				gst_message_parse_error (msg, &error, &debug);
-	//				g_free (debug);
+			switch (GST_MESSAGE_TYPE (msg))
+			{
 
-	//				static_cast<AudioPlayerBase*>(userData)->OnErrorMessage(error->message);
-	//				g_error_free (error);
-	//				break;
-	//			}
+				case GST_MESSAGE_STREAM_START:
+				{
+					bus->OnStreamStart();
+					break;
+				}
 
-	//			default:
-	//				break;
-	//		}
+				case GST_MESSAGE_ASYNC_DONE:
+				{
+					bus->OnAsyncDone();
+					break;
+				}
+
+				case GST_MESSAGE_EOS:
+				{
+					bus->OnEndOfStream();
+					break;
+				}
+
+				case GST_MESSAGE_ERROR:
+				{
+					gchar* debug;
+					GError* error;
+
+					gst_message_parse_error(msg, &error, &debug);
+
+					bus->OnErrorMessage(error->message);
+
+					g_free (debug);
+					g_error_free (error);
+
+					break;
+				}
+
+				default:
+					break;
+			}
 
 			return TRUE;
 		}

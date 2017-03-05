@@ -22,5 +22,9 @@ namespace Audio
 		{
 			g_object_set(_element, "uri", QString("file://" + fullFilePath).toLocal8Bit().data(), NULL);
 		}
+
+//		void AudioPlayerBase::OnAboutToFinish()
+//		{
+//		}
 	}
 }
