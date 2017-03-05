@@ -14,45 +14,36 @@ namespace Audio
 			_pipeline = pipeline;
 
 	//		_gstTimeFormat = GST_FORMAT_TIME;
-	//		_pausedByResourceBlock = false;
 
 	//		connect(_audioResource, SIGNAL(AquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
-
-			if(!Init())
-			{
-
-			}
 		}
 
 		GAudioPlayer::~GAudioPlayer()
 		{
-	//		_audioResource->Disconnect();
 		}
 
 		// Player controls
 
-	//	void AudioPlayerBase::Play()
-	//	{
-	//		_audioResource->Connect();
+		void GAudioPlayer::Play()
+		{
+			gst_element_set_state(_pipeline->Get(), GST_STATE_PLAYING);
 
-	//		gst_element_set_state(_pipeline, GST_STATE_PLAYING);
-	//	}
+			AudioPlayerBase::Play();
+		}
 
-	//	void AudioPlayerBase::Pause()
-	//	{
-	//		_pausedByResourceBlock = false;
+		void GAudioPlayer::Pause()
+		{
+			AudioPlayerBase::Pause();
 
-	//		gst_element_set_state (_pipeline, GST_STATE_PAUSED);
+			gst_element_set_state (_pipeline->Get(), GST_STATE_PAUSED);
+		}
 
-	////		_audioResource->Disconnect();
-	//	}
+		void GAudioPlayer::Stop()
+		{
+			AudioPlayerBase::Stop();
 
-	//	void AudioPlayerBase::Stop()
-	//	{
-	//		gst_element_set_state (_pipeline, GST_STATE_READY);
-
-	//		_audioResource->Disconnect();
-	//	}
+			gst_element_set_state (_pipeline->Get(), GST_STATE_READY);
+		}
 
 	//	void AudioPlayerBase::OnStreamStart()
 	//	{
@@ -102,15 +93,15 @@ namespace Audio
 	//		return -1;
 	//	}
 
-		bool GAudioPlayer::Init()
-		{
+//		bool GAudioPlayer::Init()
+//		{
 	//		SetEqualizerData();
 
 	//		// Subsribe to next track gapless playing handling
 	//		g_signal_connect(_pipeline, "about-to-finish", G_CALLBACK(OnPipelineAboutToFinish), this);
 
-			return true;
-		}
+//			return true;
+//		}
 
 	//	void AudioPlayerBase::OnPipelineAboutToFinish(GstElement* pipeline, gpointer userData)
 	//	{

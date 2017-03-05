@@ -1,22 +1,26 @@
 #ifndef GAUDIOPLAYER_HPP
 #define GAUDIOPLAYER_HPP
 
+#include "../AudioPlayerBase.hpp"
 #include "GBus.hpp"
 #include "GPipeline.hpp"
 #include "GEqualizer.hpp"
 
 //#include "AudioPlayerEnums.hpp"
-//#include "AudioPlayerBase.hpp"
 
 namespace Audio
 {
 	namespace Gst
 	{
-		class GAudioPlayer// : public AudioPlayerBase
+		class GAudioPlayer : public AudioPlayerBase
 		{
 		public:
 			GAudioPlayer(GBus* bus, GPipeline* pipeline);
 			~GAudioPlayer();
+
+			virtual void Play();
+			virtual void Pause();
+			virtual void Stop();
 
 	//		virtual void OnStreamStart();
 	//		virtual void OnAsyncDone();
@@ -36,19 +40,7 @@ namespace Audio
 			GPipeline* _pipeline;
 			GEqualizer* _equalizer;
 
-	//		GstElement* _additionalPlugins;
-
 	//		GstFormat _gstTimeFormat;
-
-	//		// Current state
-
-	//		bool _pausedByResourceBlock;
-
-	//		// Equalizer
-
-	//		GstEqualizerBandState _equalizerData[];
-
-			bool Init();
 
 	//		// Gstreamer callbacks
 

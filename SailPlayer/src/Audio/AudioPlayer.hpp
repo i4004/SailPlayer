@@ -12,9 +12,16 @@ namespace Audio
 	{
 	public:
 		AudioPlayer(AudioResource* audioResource, GBus* bus, GPipeline* pipeline);
+		~AudioPlayer();
+
+		void Play();
+		void Pause();
+		void Stop();
 
 	private:
 		AudioResource* _audioResource;
+
+//		bool _pausedByResourceBlock;
 	};
 }
 
