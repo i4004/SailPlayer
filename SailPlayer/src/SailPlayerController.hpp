@@ -5,6 +5,7 @@
 #include <QQuickView>
 
 #include "Audio/Gst/GInit.hpp"
+#include "Audio/Gst/GPlugins.hpp"
 #include "Audio/Gst/GAudioPlayer.hpp"
 
 using namespace Audio::Gst;
@@ -22,8 +23,11 @@ public:
 private:
 //	AudioResource* _audioResource;
 	GInit* _gstreamerInit;
-	GBus* _bus;
 	GPipeline* _pipeline;
+	GBus* _bus;
+	GEqualizer* _equalizer;
+	GAutoSink* _sink;
+	GPlugins* _pluginsLinkController;
 	GAudioPlayer* _audioPlayer;
 };
 

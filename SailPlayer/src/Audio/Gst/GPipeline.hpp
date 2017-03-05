@@ -3,24 +3,19 @@
 
 #include <QString>
 
-#include <gst/gst.h>
+#include "GElement.hpp"
 
 namespace Audio
 {
 	namespace Gst
 	{
-		class GPipeline
+		class GPipeline : public GElement
 		{
 		public:
 			GPipeline();
 			~GPipeline();
 
-			GstElement* Get() { return _element; }
-
 			void SetFileToPlay(QString fullFilePath);
-
-		private:
-			GstElement* _element;
 		};
 	}
 }

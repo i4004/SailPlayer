@@ -104,35 +104,6 @@ namespace Audio
 
 		bool GAudioPlayer::Init()
 		{
-	//		_sink = gst_element_factory_make("autoaudiosink", NULL);
-
-	//		if (!_pipeline || !_equalizer || !_sink)
-	//		{
-	//			g_warning("Failed to initialize elements!");
-	//			return false;
-	//		}
-
-	//		// Initializing additional plugins bin
-
-	//		_additionalPlugins = gst_bin_new("additional_plugins");
-	//		gst_bin_add_many(GST_BIN(_additionalPlugins), _equalizer, _sink, NULL);
-
-	//		if (!gst_element_link_many(_equalizer, _sink, NULL))
-	//		{
-	//			g_warning("Failed to link elements!");
-	//			return false;
-	//		}
-
-	//		// Connecting with additional plugins bin
-
-	//		GstPad* pad = gst_element_get_static_pad(_equalizer, "sink");
-	//		GstPad* ghost_pad = gst_ghost_pad_new("sink", pad);
-	//		gst_pad_set_active(ghost_pad, TRUE);
-	//		gst_element_add_pad(_additionalPlugins, ghost_pad);
-	//		gst_object_unref(pad);
-
-	//		g_object_set(GST_OBJECT(_pipeline), "audio-sink", _additionalPlugins, NULL);
-
 	//		SetEqualizerData();
 
 	//		// Subsribe to next track gapless playing handling

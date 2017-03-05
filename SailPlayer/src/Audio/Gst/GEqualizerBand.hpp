@@ -1,8 +1,6 @@
 #ifndef GEQUALIZERBAND_HPP
 #define GEQUALIZERBAND_HPP
 
-#include <gst/gst.h>
-
 namespace Audio
 {
 	namespace Gst

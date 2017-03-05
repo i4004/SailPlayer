@@ -1,8 +1,6 @@
 #ifndef GAUDIOPLAYER_HPP
 #define GAUDIOPLAYER_HPP
 
-#include <gst/gst.h>
-
 #include "GBus.hpp"
 #include "GPipeline.hpp"
 #include "GEqualizer.hpp"
