@@ -18,6 +18,8 @@ namespace Audio
 
 		GAudioPlayer::~GAudioPlayer()
 		{
+			if(GetCurrentState() != AudioPlayerEnums::Ready)
+				Stop();
 		}
 
 		// Player controls
