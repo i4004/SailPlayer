@@ -6,8 +6,9 @@
 
 #include "Audio/Gst/GInit.hpp"
 #include "Audio/Gst/GPlugins.hpp"
-#include "Audio/Gst/GAudioPlayer.hpp"
+#include "Audio/AudioPlayer.hpp"
 
+using namespace Audio;
 using namespace Audio::Gst;
 
 class SailPlayerController : public QObject
@@ -21,14 +22,14 @@ public:
 	void ExposeComponentsToQml(QQuickView* view);
 
 private:
-//	AudioResource* _audioResource;
 	GInit* _gstreamerInit;
 	GPipeline* _pipeline;
 	GBus* _bus;
 	GEqualizer* _equalizer;
 	GAutoSink* _sink;
 	GPlugins* _pluginsLinkController;
-	GAudioPlayer* _audioPlayer;
+	AudioResource* _audioResource;
+	AudioPlayer* _audioPlayer;
 };
 
 #endif // SAILPLAYERCONTROLLER_HPP
