@@ -14,8 +14,6 @@ namespace Audio
 			_pipeline = pipeline;
 
 	//		_gstTimeFormat = GST_FORMAT_TIME;
-
-	//		connect(_audioResource, SIGNAL(AquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
 		}
 
 		GAudioPlayer::~GAudioPlayer()
@@ -108,21 +106,6 @@ namespace Audio
 	//		Q_UNUSED(pipeline);
 
 	//		static_cast<AudioPlayerBase*>(userData)->OnAboutToFinish();
-	//	}
-
-	//	void AudioPlayerBase::OnAudioResourceAquireStateChanged(bool acquired)
-	//	{
-	//		if(acquired)
-	//		{
-	//			if(_currentState == AudioPlayerEnums::Paused && _pausedByResourceBlock)
-	//				Play();
-	//		}
-	//		else if(_currentState == AudioPlayerEnums::Playing)
-	//		{
-	//			Pause();
-
-	//			_pausedByResourceBlock = true;
-	//		}
 	//	}
 	}
 }

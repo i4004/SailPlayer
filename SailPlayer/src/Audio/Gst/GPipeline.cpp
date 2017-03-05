@@ -20,7 +20,7 @@ namespace Audio
 
 		void GPipeline::SetFileToPlay(QString fullFilePath)
 		{
-	//		g_object_set(_element, "uri", QString("file://" + fullFilePath).toLocal8Bit().data(), NULL);
+			g_object_set(_element, "uri", QString("file://" + fullFilePath).toLocal8Bit().data(), NULL);
 		}
 	}
 }

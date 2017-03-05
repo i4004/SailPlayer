@@ -29,4 +29,7 @@ SailPlayerController::~SailPlayerController()
 void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 {
 	Q_UNUSED(view);
+
+	_pipeline->SetFileToPlay("/home/nemo/Music/Ringtones/Biosfear.flac");
+	_audioPlayer->Play();
 }

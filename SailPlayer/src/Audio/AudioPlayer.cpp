@@ -7,11 +7,15 @@ namespace Audio
 		_audioResource = audioResource;
 
 		//		_pausedByResourceBlock = false;
+		//		connect(_audioResource, SIGNAL(AquireStateChanged(bool)), this, SLOT(OnAudioResourceAquireStateChanged(bool)));
 	}
 
 	AudioPlayer::~AudioPlayer()
 	{
 		_audioResource->Release();
+
+		if(GetCurrentState() != AudioPlayerEnums::Ready)
+			Stop();
 	}
 
 	void AudioPlayer::Play()
@@ -37,4 +41,19 @@ namespace Audio
 
 		_audioResource->Release();
 	}
+
+	//	void AudioPlayerBase::OnAudioResourceAquireStateChanged(bool acquired)
+	//	{
+	//		if(acquired)
+	//		{
+	//			if(_currentState == AudioPlayerEnums::Paused && _pausedByResourceBlock)
+	//				Play();
+	//		}
+	//		else if(_currentState == AudioPlayerEnums::Playing)
+	//		{
+	//			Pause();
+
+	//			_pausedByResourceBlock = true;
+	//		}
+	//	}
 }
