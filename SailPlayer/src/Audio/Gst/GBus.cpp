@@ -19,7 +19,7 @@ namespace Audio
 
 		GBus::~GBus()
 		{
-		}	
+		}
 
 		void GBus::OnStreamStart()
 		{

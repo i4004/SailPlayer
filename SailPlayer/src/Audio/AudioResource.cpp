@@ -40,7 +40,11 @@ namespace Audio
 		qDebug() << "Releasing";
 		#endif
 
+		_acquired = false;
+
 		audioresource_release(_resource);
+
+		emit AquiredChanged(false);
 	}
 
 	void AudioResource::SetAcquired(bool acquired)
