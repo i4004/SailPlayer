@@ -15,7 +15,7 @@ namespace Audio
 		{
 		public:
 			GBus(GPipeline* pipeline);
-			~GBus();
+			virtual ~GBus();
 
 			virtual void OnStreamStart();
 			virtual void OnAsyncDone();
