@@ -13,7 +13,7 @@ namespace Audio
 		public:
 			GEqualizer();
 
-			void SetUp();\
+			void SetUp();
 
 		private:
 			static int EqualizerBandsNumber;

@@ -30,8 +30,8 @@ SOURCES += \
     src/Audio/Gst/GAudioPlayer.cpp \
     src/Audio/Gst/GInit.cpp \
     src/Audio/Gst/GAutoSink.cpp \
-    src/Audio/Gst/GElementt.cpp \
-    src/Audio/Gst/GPlugins.cpp
+    src/Audio/Gst/GPlugins.cpp \
+    src/Audio/Gst/GElement.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \

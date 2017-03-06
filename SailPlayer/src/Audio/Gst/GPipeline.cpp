@@ -9,7 +9,7 @@ namespace Audio
 			_element = gst_parse_launch("playbin", NULL);
 
 			if(!_element)
-				qFatal("GPipeline playbin launch failed");
+				qFatal("GPipeline playbin init failed");
 		}
 
 		GPipeline::~GPipeline()

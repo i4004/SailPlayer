@@ -25,7 +25,7 @@ namespace Audio
 			return;
 
 		#ifdef QT_DEBUG
-		qDebug() << "Aquiring";
+		qDebug() << "Acquiring";
 		#endif
 
 		audioresource_acquire(_resource);
