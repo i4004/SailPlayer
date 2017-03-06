@@ -7,21 +7,22 @@ Page
 
 	allowedOrientations: Orientation.All
 
-	SilicaFlickable
+	SilicaListView
 	{
+		id: listView
+
 		anchors.fill: parent
-		contentHeight: column.height
 
-		Column
+		header: PageHeader
 		{
-			id: column
+			title: qsTr("Playlist")
+		}
 
-			width: page.width
-
-			PageHeader
-			{
-				title: qsTr("Playlist")
-			}
+		ViewPlaceholder
+		{
+			enabled: listView.count == 0
+			text: qsTr("No tracks in playlist")
+			hintText: qsTr("Pull down to add tracks")
 		}
 	}
 }
