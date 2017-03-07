@@ -37,7 +37,9 @@ DISTFILES += \
     qml/pages/PlaylistPage.qml \
     qml/Cover.qml \
     qml/Main.qml \
-    harbour-sail-player-dev.desktop
+    harbour-sail-player-dev.desktop \
+    qml/pages/PlaylistsPage.qml \
+    qml/pages/TrackInfoPage.qml
 
 HEADERS += \
     src/SailPlayerController.hpp \

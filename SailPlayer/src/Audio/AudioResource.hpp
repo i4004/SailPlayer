@@ -2,6 +2,7 @@
 #define AUDIORRSOIRCE_HPP
 
 #include <QObject>
+
 #include <audioresource.h>
 
 namespace Audio
@@ -25,6 +26,7 @@ namespace Audio
 
 	private:
 		audioresource_t* _resource;
+
 		bool _acquired;
 
 		static void OnAudioResourceCallback(audioresource_t* audioResource, bool acquired, void* userData);

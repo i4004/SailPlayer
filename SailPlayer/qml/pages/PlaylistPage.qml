@@ -7,6 +7,14 @@ Page
 
 	allowedOrientations: Orientation.All
 
+//	onStatusChanged:
+//	{
+//		if((status !== PageStatus.Active) || canNavigateForward)
+//			return;
+
+//		pageStack.pushAttached(Qt.resolvedUrl("TrackInfoPage.qml"));
+//	}
+
 	SilicaListView
 	{
 		id: listView
@@ -16,6 +24,15 @@ Page
 		header: PageHeader
 		{
 			title: qsTr("Playlist")
+		}
+
+		PullDownMenu
+		{		
+			MenuItem
+			{
+				text: qsTr("Playlists")
+				onClicked: pageStack.push(Qt.resolvedUrl("PlaylistsPage.qml"))
+			}
 		}
 
 		ViewPlaceholder
