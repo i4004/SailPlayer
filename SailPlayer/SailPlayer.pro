@@ -31,7 +31,14 @@ SOURCES += \
     src/Audio/Gst/GInit.cpp \
     src/Audio/Gst/GAutoSink.cpp \
     src/Audio/Gst/GPlugins.cpp \
-    src/Audio/Gst/GElement.cpp
+    src/Audio/Gst/GElement.cpp \
+    src/Playlist/Track.cpp \
+    src/Cue/CueFile.cpp \
+    src/Cue/CueTrack.cpp \
+    src/Cue/CueIndex.cpp \
+    src/Cue/CueSheet.cpp \
+    src/Cue/CueSheetParser.cpp \
+    src/Cue/CueSheetReader.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -56,4 +63,13 @@ HEADERS += \
     src/Audio/Gst/GInit.hpp \
     src/Audio/Gst/GAutoSink.hpp \
     src/Audio/Gst/GElement.hpp \
-    src/Audio/Gst/GPlugins.hpp
+    src/Audio/Gst/GPlugins.hpp \
+    src/Playlist/Track.hpp \
+    src/Cue/CueFile.hpp \
+    src/Cue/CueTrack.hpp \
+    src/Cue/CueFileType.hpp \
+    src/Cue/CueIndex.hpp \
+    src/Cue/CueSheet.hpp \
+    src/Cue/CueSheetParser.hpp \
+    src/Cue/CueSheetReader.hpp \
+    src/Cue/CueTrackDataType.hpp
