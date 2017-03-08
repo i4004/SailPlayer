@@ -14,10 +14,20 @@ SailPlayerController::SailPlayerController()
 	_pluginsLinkController = new GPlugins(_pipeline, _equalizer, _sink);
 	_audioResource = new AudioResource();
 	_audioPlayer = new AudioPlayer(_audioResource, _bus, _pipeline);
+
+	// Core controllers
+
+	_playlistsController = new PlaylistsController(&_playlistsModel);
 }
 
 SailPlayerController::~SailPlayerController()
 {
+	// Core controllers
+
+	delete _playlistsController;
+
+	// Audio
+
 	delete _audioPlayer;
 	delete _audioResource;
 	delete _pluginsLinkController;
@@ -31,6 +41,7 @@ SailPlayerController::~SailPlayerController()
 void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 {
 	view->rootContext()->setContextProperty("playlistsModel", &_playlistsModel);
+	view->rootContext()->setContextProperty("playlistsController", _playlistsController);
 
 //	_pipeline->SetFileToPlay("/home/nemo/Music/Ringtones/Biosfear.flac");
 //	_audioPlayer->Play();

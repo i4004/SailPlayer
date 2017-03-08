@@ -41,7 +41,8 @@ SOURCES += \
     src/Cue/CueSheetReader.cpp \
     src/Tracks/Playlist.cpp \
     src/Model/PlaylistModel.cpp \
-    src/Model/PlaylistsModel.cpp
+    src/Model/PlaylistsModel.cpp \
+    src/PlaylistsController.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -81,4 +82,5 @@ HEADERS += \
     src/Model/ListModel.hpp \
     src/Model/PlaylistModel.hpp \
     src/Model/PlaylistsModel.hpp \
-    src/Tracks/Playlist.hpp
+    src/Tracks/Playlist.hpp \
+    src/PlaylistsController.hpp

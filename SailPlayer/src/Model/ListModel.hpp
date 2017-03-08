@@ -55,6 +55,15 @@ namespace Model
 		inline QList<T*> GetItems() { return _items; }
 		virtual QVariant GetItemData(int role, T* item) const = 0;
 
+		void DeleteItem(int i)
+		{
+			beginRemoveRows(QModelIndex(), i, i);
+
+			_items.removeAt(i);
+
+			endRemoveRows();
+		}
+
 	protected:
 		void DeleteItems()
 		{

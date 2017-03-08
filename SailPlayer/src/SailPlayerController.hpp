@@ -8,6 +8,7 @@
 #include "Audio/Gst/GInit.hpp"
 #include "Audio/Gst/GPlugins.hpp"
 #include "Model/PlaylistsModel.hpp"
+#include "PlaylistsController.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
@@ -38,6 +39,11 @@ private:
 	// Models
 
 	PlaylistsModel _playlistsModel;
+
+	// Core controllers
+
+	PlaylistsController* _playlistsController;
+
 };
 
 #endif // SAILPLAYERCONTROLLER_HPP
