@@ -72,4 +72,6 @@ HEADERS += \
     src/Cue/CueSheet.hpp \
     src/Cue/CueSheetParser.hpp \
     src/Cue/CueSheetReader.hpp \
-    src/Cue/CueTrackDataType.hpp
+    src/Cue/CueTrackDataType.hpp \
+    src/Playlist/ITracksFactory.hpp \
+    src/Playlist/IFilesFactory.hpp
