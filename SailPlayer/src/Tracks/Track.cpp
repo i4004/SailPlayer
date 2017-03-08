@@ -1,6 +1,6 @@
 #include "Track.hpp"
 
-namespace Playlist
+namespace Tracks
 {
 	Track::Track(QString artistName,
 				 QString albumName,

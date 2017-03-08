@@ -32,13 +32,16 @@ SOURCES += \
     src/Audio/Gst/GAutoSink.cpp \
     src/Audio/Gst/GPlugins.cpp \
     src/Audio/Gst/GElement.cpp \
-    src/Playlist/Track.cpp \
+    src/Tracks/Track.cpp \
     src/Cue/CueFile.cpp \
     src/Cue/CueTrack.cpp \
     src/Cue/CueIndex.cpp \
     src/Cue/CueSheet.cpp \
     src/Cue/CueSheetParser.cpp \
-    src/Cue/CueSheetReader.cpp
+    src/Cue/CueSheetReader.cpp \
+    src/Tracks/Playlist.cpp \
+    src/Model/PlaylistModel.cpp \
+    src/Model/PlaylistsModel.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -64,7 +67,7 @@ HEADERS += \
     src/Audio/Gst/GAutoSink.hpp \
     src/Audio/Gst/GElement.hpp \
     src/Audio/Gst/GPlugins.hpp \
-    src/Playlist/Track.hpp \
+    src/Tracks/Track.hpp \
     src/Cue/CueFile.hpp \
     src/Cue/CueTrack.hpp \
     src/Cue/CueFileType.hpp \
@@ -73,5 +76,9 @@ HEADERS += \
     src/Cue/CueSheetParser.hpp \
     src/Cue/CueSheetReader.hpp \
     src/Cue/CueTrackDataType.hpp \
-    src/Playlist/ITracksFactory.hpp \
-    src/Playlist/IFilesFactory.hpp
+    src/Tracks/ITracksFactory.hpp \
+    src/IO/IFilesFactory.hpp \
+    src/Model/ListModel.hpp \
+    src/Model/PlaylistModel.hpp \
+    src/Model/PlaylistsModel.hpp \
+    src/Tracks/Playlist.hpp

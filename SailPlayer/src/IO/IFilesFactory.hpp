@@ -4,7 +4,7 @@
 #include <QList>
 #include <QFileInfo>
 
-namespace Playlist
+namespace IO
 {
 	class IFilesFactory
 	{

@@ -5,7 +5,7 @@
 
 #include "Track.hpp"
 
-namespace Playlist
+namespace Tracks
 {
 	class ITracksFactory
 	{
