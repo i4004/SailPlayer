@@ -1,7 +1,7 @@
 #ifndef GBUS_H
 #define GBUS_H
 
-#include <QObject>
+#include <QString>
 
 #include <gst/gst.h>
 
