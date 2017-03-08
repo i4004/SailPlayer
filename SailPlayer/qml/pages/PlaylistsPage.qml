@@ -33,18 +33,7 @@ Page
 			hintText: qsTr("Pull down to create new playlists")
 		}
 
-		model: ListModel
-		{
-			ListElement
-			{
-				name: "Dream Theater"
-			}
-
-			ListElement
-			{
-				name: "Communic"
-			}
-		}
+		model: playlistsModel
 
 		delegate: ListItem
 		{

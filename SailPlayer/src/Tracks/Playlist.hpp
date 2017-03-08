@@ -8,7 +8,7 @@ namespace Tracks
 	class Playlist
 	{
 	public:
-		Playlist();
+		Playlist(QString name);
 
 		inline QString GetName() { return _name; }
 

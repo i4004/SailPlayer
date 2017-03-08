@@ -4,6 +4,8 @@
 
 SailPlayerController::SailPlayerController()
 {
+	// Audio
+
 	_gstreamerInit = new GInit();
 	_pipeline = new GPipeline();
 	_bus = new GBus(_pipeline);
@@ -28,7 +30,7 @@ SailPlayerController::~SailPlayerController()
 
 void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 {
-	Q_UNUSED(view);
+	view->rootContext()->setContextProperty("playlistsModel", &_playlistsModel);
 
 //	_pipeline->SetFileToPlay("/home/nemo/Music/Ringtones/Biosfear.flac");
 //	_audioPlayer->Play();

@@ -4,12 +4,14 @@
 #include <QObject>
 #include <QQuickView>
 
+#include "Audio/AudioPlayer.hpp"
 #include "Audio/Gst/GInit.hpp"
 #include "Audio/Gst/GPlugins.hpp"
-#include "Audio/AudioPlayer.hpp"
+#include "Model/PlaylistsModel.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
+using namespace Model;
 
 class SailPlayerController : public QObject
 {
@@ -22,6 +24,8 @@ public:
 	void ExposeComponentsToQml(QQuickView* view);
 
 private:
+	// Audio
+
 	GInit* _gstreamerInit;
 	GPipeline* _pipeline;
 	GBus* _bus;
@@ -30,6 +34,10 @@ private:
 	GPlugins* _pluginsLinkController;
 	AudioResource* _audioResource;
 	AudioPlayer* _audioPlayer;
+
+	// Models
+
+	PlaylistsModel _playlistsModel;
 };
 
 #endif // SAILPLAYERCONTROLLER_HPP

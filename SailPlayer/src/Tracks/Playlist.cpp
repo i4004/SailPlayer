@@ -2,7 +2,8 @@
 
 namespace Tracks
 {
-	Playlist::Playlist()
+	Playlist::Playlist(QString name)
+		: _name(name)
 	{
 	}
 }
