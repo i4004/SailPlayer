@@ -13,11 +13,6 @@ Page
 
 		anchors.fill: parent
 
-		header: PageHeader
-		{
-			title: qsTr("Playlists")
-		}
-
 		PullDownMenu
 		{
 			MenuItem
@@ -26,11 +21,9 @@ Page
 			}
 		}
 
-		ViewPlaceholder
+		header: PageHeader
 		{
-			enabled: list.count == 0
-			text: qsTr("No playlists")
-			hintText: qsTr("Pull down to create new playlists")
+			title: qsTr("Playlists")
 		}
 
 		model: playlistsModel
@@ -56,22 +49,19 @@ Page
 				text: name
 			}
 
-			Component
+			ContextMenu
 			{
 				id: itemContextMenu
 
-				ContextMenu
+				MenuItem
 				{
-					MenuItem
-					{
-						text: qsTr("Rename")
-					}
+					text: qsTr("Rename")
+				}
 
-					MenuItem
-					{
-						text: qsTr("Delete")
-						onClicked: remorseItem.execute(item, qsTr("Deleting"), function() { })
-					}
+				MenuItem
+				{
+					text: qsTr("Delete")
+					onClicked: remorseItem.execute(item, qsTr("Deleting"), function() { playlistsController.deletePlaylist(index); })
 				}
 			}
 
@@ -79,6 +69,13 @@ Page
 			{
 				id: remorseItem
 			}
+		}
+
+		ViewPlaceholder
+		{
+			enabled: list.count == 0
+			text: qsTr("No playlists")
+			hintText: qsTr("Pull down to create new playlists")
 		}
 	}
 }
