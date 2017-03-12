@@ -52,7 +52,7 @@ DISTFILES += \
     harbour-sail-player-dev.desktop \
     qml/pages/PlaylistsPage.qml \
     qml/pages/TrackInfoPage.qml \
-    qml/dialogs/ManageTextItemDialog.qml
+    qml/dialogs/TextItemDialog.qml
 
 HEADERS += \
     src/SailPlayerController.hpp \

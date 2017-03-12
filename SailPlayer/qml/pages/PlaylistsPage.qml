@@ -20,7 +20,7 @@ Page
 				text: qsTr("Create")
 				onClicked:
 				{
-					var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/ManageTextItemDialog.qml"),
+					var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/TextItemDialog.qml"),
 					{
 						placeholder: qsTr("Playlist Name"),
 						title: qsTr("Create New Playlist")
