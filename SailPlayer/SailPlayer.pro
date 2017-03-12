@@ -11,7 +11,7 @@ desktop.path = /usr/share/applications
 # Configuration
 
 CONFIG += sailfishapp
-QT += core quick qml
+QT += core quick qml sql
 PKGCONFIG += audioresource gstreamer-1.0
 
 SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
@@ -43,7 +43,8 @@ SOURCES += \
     src/Model/PlaylistModel.cpp \
     src/Model/PlaylistsModel.cpp \
     src/Controllers/PlaylistsController.cpp \
-    src/Tracks/PlaylistFactory.cpp
+    src/Tracks/PlaylistFactory.cpp \
+    src/Database/SQLiteConnection.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -86,4 +87,5 @@ HEADERS += \
     src/Model/PlaylistsModel.hpp \
     src/Tracks/Playlist.hpp \
     src/Controllers/PlaylistsController.hpp \
-    src/Tracks/PlaylistFactory.hpp
+    src/Tracks/PlaylistFactory.hpp \
+    src/Database/SQLiteConnection.hpp

@@ -9,11 +9,13 @@
 #include "Audio/Gst/GPlugins.hpp"
 #include "Controllers/PlaylistsController.hpp"
 #include "Model/PlaylistsModel.hpp"
+#include "Database/SqLiteConnection.hpp"
 #include "Tracks/PlaylistFactory.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
 using namespace Controllers;
+using namespace Database;
 using namespace Model;
 
 class SailPlayerController : public QObject
@@ -45,6 +47,10 @@ private:
 	// Factories
 
 	PlaylistFactory* _playlistFactory;
+
+	// Database
+
+	SQLiteConnection* _dbConnection;
 
 	// Core controllers
 

@@ -19,6 +19,10 @@ SailPlayerController::SailPlayerController()
 
 	_playlistFactory = new PlaylistFactory();
 
+	// Database
+
+	_dbConnection = new SQLiteConnection("Test");
+
 	// Core controllers
 
 	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistFactory);
@@ -29,6 +33,10 @@ SailPlayerController::~SailPlayerController()
 	// Core controllers
 
 	delete _playlistsController;
+
+	// Database
+
+	delete _dbConnection;
 
 	// Factories
 
