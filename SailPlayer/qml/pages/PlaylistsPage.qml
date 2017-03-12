@@ -17,7 +17,17 @@ Page
 		{
 			MenuItem
 			{
-				text: qsTr("Add New")
+				text: qsTr("Create")
+				onClicked:
+				{
+					var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/ManageTextItemDialog.qml"),
+					{
+						placeholder: qsTr("Playlist Name"),
+						title: qsTr("Create New Playlist")
+					});
+
+					dialog.accepted.connect(function() { playlistsController.createPlaylist(dialog.value); })
+				}
 			}
 		}
 

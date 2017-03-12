@@ -40,6 +40,15 @@ namespace Model
 
 		// Items control
 
+		void AddItem(T* item)
+		{
+			beginInsertRows(QModelIndex(), _items.count(), _items.count());
+
+			_items.append(item);
+
+			endInsertRows();
+		}
+
 		void AddItems(QList<T*> items)
 		{
 			if(items.count() == 0)

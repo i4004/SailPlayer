@@ -15,9 +15,13 @@ SailPlayerController::SailPlayerController()
 	_audioResource = new AudioResource();
 	_audioPlayer = new AudioPlayer(_audioResource, _bus, _pipeline);
 
+	// Factories
+
+	_playlistFactory = new PlaylistFactory();
+
 	// Core controllers
 
-	_playlistsController = new PlaylistsController(&_playlistsModel);
+	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistFactory);
 }
 
 SailPlayerController::~SailPlayerController()
@@ -25,6 +29,10 @@ SailPlayerController::~SailPlayerController()
 	// Core controllers
 
 	delete _playlistsController;
+
+	// Factories
+
+	delete _playlistFactory;
 
 	// Audio
 

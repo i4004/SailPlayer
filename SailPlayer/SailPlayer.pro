@@ -42,7 +42,8 @@ SOURCES += \
     src/Tracks/Playlist.cpp \
     src/Model/PlaylistModel.cpp \
     src/Model/PlaylistsModel.cpp \
-    src/PlaylistsController.cpp
+    src/Controllers/PlaylistsController.cpp \
+    src/Tracks/PlaylistFactory.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -84,4 +85,5 @@ HEADERS += \
     src/Model/PlaylistModel.hpp \
     src/Model/PlaylistsModel.hpp \
     src/Tracks/Playlist.hpp \
-    src/PlaylistsController.hpp
+    src/Controllers/PlaylistsController.hpp \
+    src/Tracks/PlaylistFactory.hpp
