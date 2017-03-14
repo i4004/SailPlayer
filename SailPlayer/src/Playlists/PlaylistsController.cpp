@@ -1,6 +1,6 @@
 #include "PlaylistsController.hpp"
 
-namespace Controllers
+namespace Playlists
 {
 	PlaylistsController::PlaylistsController(PlaylistsModel* model, PlaylistFactory* factory)
 		: _model(model), _factory(factory)

@@ -15,34 +15,28 @@ SailPlayerController::SailPlayerController()
 	_audioResource = new AudioResource();
 	_audioPlayer = new AudioPlayer(_audioResource, _bus, _pipeline);
 
-	// Factories
-
-	_playlistFactory = new PlaylistFactory();
-
 	// Database
 
 	_dbConnectionManager = new SailPlayerConnectionManager();
+
+	// Playlists
+
+	_playlistFactory = new PlaylistFactory();
 	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection());
-
-	// Core controllers
-
 	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistFactory);
 }
 
 SailPlayerController::~SailPlayerController()
 {
-	// Core controllers
+	// Playlists
 
 	delete _playlistsController;
+	delete _playlistsRepository;
+	delete _playlistFactory;
 
 	// Database
 
-	delete _playlistsRepository;
 	delete _dbConnectionManager;
-
-	// Factories
-
-	delete _playlistFactory;
 
 	// Audio
 

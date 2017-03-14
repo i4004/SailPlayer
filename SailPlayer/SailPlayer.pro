@@ -39,12 +39,12 @@ SOURCES += \
     src/Cue/CueSheet.cpp \
     src/Cue/CueSheetParser.cpp \
     src/Cue/CueSheetReader.cpp \
-    src/Tracks/Playlist.cpp \
-    src/Model/PlaylistModel.cpp \
-    src/Model/PlaylistsModel.cpp \
-    src/Controllers/PlaylistsController.cpp \
-    src/Tracks/PlaylistFactory.cpp \
-    src/Database/Repositories/PlaylistsRepository.cpp \
+    src/Playlists/Playlist.cpp \
+    src/Playlists/PlaylistModel.cpp \
+    src/Playlists/PlaylistsModel.cpp \
+    src/Playlists/PlaylistsController.cpp \
+    src/Playlists/PlaylistFactory.cpp \
+    src/Playlists/PlaylistsRepository.cpp \
     src/Database/SqlConnection.cpp \
     src/Database/SailPlayerConnectionManager.cpp \
     src/Database/SailPlayerConnection.cpp
@@ -86,12 +86,12 @@ HEADERS += \
     src/Tracks/ITracksFactory.hpp \
     src/IO/IFilesFactory.hpp \
     src/Model/ListModel.hpp \
-    src/Model/PlaylistModel.hpp \
-    src/Model/PlaylistsModel.hpp \
-    src/Tracks/Playlist.hpp \
-    src/Controllers/PlaylistsController.hpp \
-    src/Tracks/PlaylistFactory.hpp \
-    src/Database/Repositories/PlaylistsRepository.hpp \
+    src/Playlists/PlaylistModel.hpp \
+    src/Playlists/PlaylistsModel.hpp \
+    src/Playlists/Playlist.hpp \
+    src/Playlists/PlaylistsController.hpp \
+    src/Playlists/PlaylistFactory.hpp \
+    src/Playlists/PlaylistsRepository.hpp \
     src/Database/SqlConnection.hpp \
     src/Database/SailPlayerConnectionManager.hpp \
     src/Database/SailPlayerConnection.hpp

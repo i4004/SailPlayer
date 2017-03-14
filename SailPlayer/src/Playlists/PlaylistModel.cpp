@@ -1,6 +1,6 @@
 #include "PlaylistModel.hpp"
 
-namespace Model
+namespace Playlists
 {
 	QChar PlaylistModel::SectionSeparator = 0x0001;
 

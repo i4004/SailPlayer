@@ -1,6 +1,6 @@
 #include "PlaylistsModel.hpp"
 
-namespace Model
+namespace Playlists
 {
 	PlaylistsModel::PlaylistsModel(QObject* parent) : ListModel<Playlist>(parent)
 	{

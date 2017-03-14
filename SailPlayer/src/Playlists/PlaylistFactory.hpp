@@ -3,7 +3,7 @@
 
 #include "Playlist.hpp"
 
-namespace Tracks
+namespace Playlists
 {
 	class PlaylistFactory
 	{

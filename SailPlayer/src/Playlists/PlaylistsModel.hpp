@@ -1,12 +1,12 @@
 #ifndef PLAYLISTSMODEL_H
 #define PLAYLISTSMODEL_H
 
-#include "ListModel.hpp"
-#include "../Tracks/Playlist.hpp"
+#include "../Model/ListModel.hpp"
+#include "../Playlists/Playlist.hpp"
 
-using namespace Tracks;
+using namespace Model;
 
-namespace Model
+namespace Playlists
 {
 	enum PlaylistsModelRoles
 	{

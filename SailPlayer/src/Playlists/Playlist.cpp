@@ -1,6 +1,6 @@
 #include "Playlist.hpp"
 
-namespace Tracks
+namespace Playlists
 {
 	Playlist::Playlist(QString name)
 		: _name(name)

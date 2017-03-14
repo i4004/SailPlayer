@@ -1,12 +1,12 @@
 #ifndef PLAYLISTSCONTROLLER_H
 #define PLAYLISTSCONTROLLER_H
 
-#include "../Model/PlaylistsModel.hpp"
-#include "../Tracks/PlaylistFactory.hpp"
+#include "PlaylistFactory.hpp"
+#include "PlaylistsModel.hpp"
 
 using namespace Model;
 
-namespace Controllers
+namespace Playlists
 {
 	class PlaylistsController : public QObject
 	{

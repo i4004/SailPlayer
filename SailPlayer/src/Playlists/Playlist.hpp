@@ -3,7 +3,7 @@
 
 #include <QString>
 
-namespace Tracks
+namespace Playlists
 {
 	class Playlist
 	{

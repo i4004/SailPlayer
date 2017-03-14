@@ -1,6 +1,6 @@
 #include "PlaylistFactory.hpp"
 
-namespace Tracks
+namespace Playlists
 {
 	Playlist* PlaylistFactory::Create(QString name)
 	{
