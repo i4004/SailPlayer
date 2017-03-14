@@ -44,7 +44,10 @@ SOURCES += \
     src/Model/PlaylistsModel.cpp \
     src/Controllers/PlaylistsController.cpp \
     src/Tracks/PlaylistFactory.cpp \
-    src/Database/SQLiteConnection.cpp
+    src/Database/Repositories/PlaylistsRepository.cpp \
+    src/Database/SqlConnection.cpp \
+    src/Database/SailPlayerConnectionManager.cpp \
+    src/Database/SailPlayerConnection.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -88,4 +91,7 @@ HEADERS += \
     src/Tracks/Playlist.hpp \
     src/Controllers/PlaylistsController.hpp \
     src/Tracks/PlaylistFactory.hpp \
-    src/Database/SQLiteConnection.hpp
+    src/Database/Repositories/PlaylistsRepository.hpp \
+    src/Database/SqlConnection.hpp \
+    src/Database/SailPlayerConnectionManager.hpp \
+    src/Database/SailPlayerConnection.hpp

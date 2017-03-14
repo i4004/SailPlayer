@@ -9,7 +9,7 @@
 #include "Audio/Gst/GPlugins.hpp"
 #include "Controllers/PlaylistsController.hpp"
 #include "Model/PlaylistsModel.hpp"
-#include "Database/SqLiteConnection.hpp"
+#include "Database/SailPlayerConnectionManager.hpp"
 #include "Tracks/PlaylistFactory.hpp"
 
 using namespace Audio;
@@ -50,7 +50,7 @@ private:
 
 	// Database
 
-	SQLiteConnection* _dbConnection;
+	SailPlayerConnectionManager* _dbConnectionManager;
 
 	// Core controllers
 

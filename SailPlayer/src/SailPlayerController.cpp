@@ -21,7 +21,7 @@ SailPlayerController::SailPlayerController()
 
 	// Database
 
-	_dbConnection = new SQLiteConnection("Test");
+	_dbConnectionManager = new SailPlayerConnectionManager();
 
 	// Core controllers
 
@@ -36,7 +36,7 @@ SailPlayerController::~SailPlayerController()
 
 	// Database
 
-	delete _dbConnection;
+	delete _dbConnectionManager;
 
 	// Factories
 
