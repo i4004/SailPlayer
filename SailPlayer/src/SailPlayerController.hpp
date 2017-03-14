@@ -8,14 +8,16 @@
 #include "Audio/Gst/GInit.hpp"
 #include "Audio/Gst/GPlugins.hpp"
 #include "Controllers/PlaylistsController.hpp"
-#include "Model/PlaylistsModel.hpp"
+#include "Database/Repositories/PlaylistsRepository.hpp"
 #include "Database/SailPlayerConnectionManager.hpp"
+#include "Model/PlaylistsModel.hpp"
 #include "Tracks/PlaylistFactory.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
 using namespace Controllers;
 using namespace Database;
+using namespace Database::Repositories;
 using namespace Model;
 
 class SailPlayerController : public QObject
@@ -51,6 +53,7 @@ private:
 	// Database
 
 	SailPlayerConnectionManager* _dbConnectionManager;
+	PlaylistsRepository* _playlistsRepository;
 
 	// Core controllers
 

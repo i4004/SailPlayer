@@ -17,7 +17,7 @@ namespace Database
 		public:
 			PlaylistsRepository(SqlConnection* connection);
 
-			void AddItem(QString name);
+			int AddItem(QString name);
 
 			QList<Playlist*> GetItems();
 

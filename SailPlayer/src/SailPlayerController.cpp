@@ -22,6 +22,7 @@ SailPlayerController::SailPlayerController()
 	// Database
 
 	_dbConnectionManager = new SailPlayerConnectionManager();
+	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection());
 
 	// Core controllers
 
@@ -36,6 +37,7 @@ SailPlayerController::~SailPlayerController()
 
 	// Database
 
+	delete _playlistsRepository;
 	delete _dbConnectionManager;
 
 	// Factories

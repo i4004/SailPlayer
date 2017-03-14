@@ -1,4 +1,5 @@
 #include <QSqlQuery>
+#include <QVariant>
 
 #include "PlaylistsRepository.hpp"
 
@@ -13,10 +14,13 @@ namespace Database
 		{
 		}
 
-		void PlaylistsRepository::AddItem(QString name)
+		int PlaylistsRepository::AddItem(QString name)
 		{
-//			_connection->ExecuteQuery(QString("INSERT INTO %1 VALUES(NULL,'%2')")
-//			.arg(TableName).arg(name));
+			if(_connection->ExecuteQuery(QString("INSERT INTO %1 VALUES(NULL,'%2')")
+			.arg(TableName).arg(name)))
+				return _connection->GetLastQuery().lastInsertId().toInt();
+			else
+				return -1;
 		}
 
 		QList<Playlist*> PlaylistsRepository::GetItems()

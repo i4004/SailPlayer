@@ -3,6 +3,7 @@
 
 #include <QSqlDatabase>
 #include <QSqlError>
+#include <QSqlQuery>
 
 namespace Database
 {
@@ -14,11 +15,13 @@ namespace Database
 
 		virtual bool ExecuteQuery(QString query);
 
-		virtual QSqlError GetLastError();
+		virtual QSqlQuery GetLastQuery() { return _lastQuery; }
+		virtual QSqlError GetLastError() { return _lastError; }
 
 	protected:
 		QSqlDatabase _db;
 
+		QSqlQuery _lastQuery;
 		QSqlError _lastError;
 	};
 }
