@@ -85,7 +85,7 @@ Page
 		{
 			enabled: list.count == 0
 			text: qsTr("No playlists")
-			hintText: qsTr("Pull down to create new playlists")
+			hintText: qsTr("Pull down to create new playlist")
 		}
 	}
 }
