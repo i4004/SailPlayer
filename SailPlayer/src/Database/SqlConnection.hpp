@@ -2,6 +2,7 @@
 #define SQLCONNECTION_H
 
 #include <QSqlDatabase>
+#include <QSqlError>
 
 namespace Database
 {
@@ -13,8 +14,12 @@ namespace Database
 
 		virtual bool ExecuteQuery(QString query);
 
+		virtual QSqlError GetLastError();
+
 	protected:
 		QSqlDatabase _db;
+
+		QSqlError _lastError;
 	};
 }
 

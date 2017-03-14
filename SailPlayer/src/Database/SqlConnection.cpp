@@ -17,6 +17,16 @@ namespace Database
 		QSqlQuery q(_db);
 //		QSqlQuery q2 = new QSqlQuery(_db);
 
-		return q.exec(query);
+		bool result = q.exec(query);
+
+		if(!result)
+			_lastError = q.lastError();
+
+		return result;
+	}
+
+	QSqlError SqlConnection::GetLastError()
+	{
+		return _lastError;
 	}
 }

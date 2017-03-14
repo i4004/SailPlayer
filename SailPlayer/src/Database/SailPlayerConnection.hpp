@@ -7,7 +7,7 @@
 
 namespace Database
 {
-	class SailPlayerConnection : SqlConnection
+	class SailPlayerConnection : public SqlConnection
 	{
 	public:
 		SailPlayerConnection(QString databaseFilePath);

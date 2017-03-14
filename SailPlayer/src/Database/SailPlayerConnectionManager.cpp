@@ -45,5 +45,23 @@ namespace Database
 
 	void SailPlayerConnectionManager::ExportDatabaseSchemaIfNotExist()
 	{
+		static QStringList queries = QStringList() <<
+			"PRAGMA foreign_keys = ON;" <<
+
+			"CREATE TABLE IF NOT EXISTS Playlists(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT);" <<
+
+			"CREATE TABLE IF NOT EXISTS Tracks"
+			"("
+			"ID INTEGER PRIMARY KEY AUTOINCREMENT,"
+			"PlaylistID INTEGER,"\
+			"Name TEXT,"
+			"FOREIGN KEY(PlaylistID) REFERENCES Playlists(ID)"
+			");";
+
+		foreach (QString query, queries)
+		{
+			if (!_connection->ExecuteQuery(query))
+				qFatal("Unable to execute database schema export query: '%s'", QString(query + ", error: '" + _connection->GetLastError().text() + "'").toUtf8().constData());
+		}
 	}
 }
