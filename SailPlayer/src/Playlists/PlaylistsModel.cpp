@@ -31,14 +31,7 @@ namespace Playlists
 		{
 			if (item->GetID() == id)
 			{
-				int index = _items.indexOf(item);
-
-				beginRemoveRows(QModelIndex(), index, index);
-
-				_items.removeAt(index);
-
-				endRemoveRows();
-
+				DeleteItem(_items.indexOf(item));
 				return true;
 			}
 		}

@@ -68,7 +68,7 @@ namespace Model
 		{
 			beginRemoveRows(QModelIndex(), i, i);
 
-			_items.removeAt(i);
+			delete _items.takeAt(i);
 
 			endRemoveRows();
 		}
