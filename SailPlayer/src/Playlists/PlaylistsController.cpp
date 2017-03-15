@@ -13,8 +13,9 @@ namespace Playlists
 		_model->AddItem(_factory->Create(1, name));
 	}
 
-	void PlaylistsController::deletePlaylist(int playlistIndex)
+	void PlaylistsController::deletePlaylist(int id)
 	{
-		_model->DeleteItem(playlistIndex);
+		_repository->DeleteItem(id);
+		_model->DeleteItemByID(id);
 	}
 }

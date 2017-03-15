@@ -10,7 +10,8 @@ namespace Playlists
 {
 	enum PlaylistsModelRoles
 	{
-		NameRole = Qt::UserRole + 1
+		IdRole = Qt::UserRole + 1,
+		NameRole = Qt::UserRole + 2
 	};
 
 	class PlaylistsModel : public ListModel<Playlist>
@@ -21,6 +22,8 @@ namespace Playlists
 		PlaylistsModel(QObject* parent = 0);
 
 		QVariant GetItemData(int role, Playlist* item) const;
+
+		bool DeleteItemByID(int id);
 	};
 }
 

@@ -94,4 +94,5 @@ HEADERS += \
     src/Playlists/PlaylistsRepository.hpp \
     src/Database/SqlConnection.hpp \
     src/Database/SailPlayerConnectionManager.hpp \
-    src/Database/SailPlayerConnection.hpp
+    src/Database/SailPlayerConnection.hpp \
+    src/Model/IdentityObject.hpp

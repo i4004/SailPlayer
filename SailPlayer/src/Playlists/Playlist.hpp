@@ -3,18 +3,20 @@
 
 #include <QString>
 
+#include "../Model/IdentityObject.hpp"
+
+using namespace Model;
+
 namespace Playlists
 {
-	class Playlist
+	class Playlist : public IdentityObject
 	{
 	public:
 		Playlist(int id, QString name);
 
-		inline int GetID() { return _id; }
 		inline QString GetName() { return _name; }
 
 	private:
-		int _id;
 		QString _name;
 	};
 }

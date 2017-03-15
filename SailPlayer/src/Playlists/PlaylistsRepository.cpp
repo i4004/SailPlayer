@@ -38,6 +38,11 @@ namespace Playlists
 
 		return items;
 	}
+
+	bool PlaylistsRepository::DeleteItem(int id)
+	{
+		return _connection->ExecuteQuery(QString("DELETE FROM %1 WHERE ID = %2").arg(TableName).arg(id));
+	}
 }
 
 

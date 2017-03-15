@@ -71,7 +71,7 @@ Page
 				MenuItem
 				{
 					text: qsTr("Delete")
-					onClicked: remorseItem.execute(item, qsTr("Deleting"), function() { playlistsController.deletePlaylist(index); })
+					onClicked: remorseItem.execute(item, qsTr("Deleting"), function() { playlistsController.deletePlaylist(id); })
 				}
 			}
 
