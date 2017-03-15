@@ -5,6 +5,7 @@
 
 #include "../Database/SqlConnection.hpp"
 #include "Playlist.hpp"
+#include "PlaylistFactory.hpp"
 
 using namespace Database;
 
@@ -13,7 +14,7 @@ namespace Playlists
 	class PlaylistsRepository
 	{
 	public:
-		PlaylistsRepository(SqlConnection* connection);
+		PlaylistsRepository(SqlConnection* connection, PlaylistFactory* factory);
 
 		int AddItem(QString name);
 
@@ -23,6 +24,7 @@ namespace Playlists
 		static QString TableName;
 
 		SqlConnection* _connection;
+		PlaylistFactory* _factory;
 	};
 }
 

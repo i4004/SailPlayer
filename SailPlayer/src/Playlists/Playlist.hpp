@@ -8,11 +8,13 @@ namespace Playlists
 	class Playlist
 	{
 	public:
-		Playlist(QString name);
+		Playlist(int id, QString name);
 
+		inline int GetID() { return _id; }
 		inline QString GetName() { return _name; }
 
 	private:
+		int _id;
 		QString _name;
 	};
 }

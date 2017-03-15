@@ -22,8 +22,8 @@ SailPlayerController::SailPlayerController()
 	// Playlists
 
 	_playlistFactory = new PlaylistFactory();
-	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection());
-	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistFactory);
+	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection(), _playlistFactory);
+	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistsRepository, _playlistFactory);
 }
 
 SailPlayerController::~SailPlayerController()

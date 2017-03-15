@@ -3,6 +3,7 @@
 
 #include "PlaylistFactory.hpp"
 #include "PlaylistsModel.hpp"
+#include "PlaylistsRepository.hpp"
 
 using namespace Model;
 
@@ -13,13 +14,14 @@ namespace Playlists
 		Q_OBJECT
 
 	public:
-		PlaylistsController(PlaylistsModel* model, PlaylistFactory* factory);
+		PlaylistsController(PlaylistsModel* model, PlaylistsRepository* repository, PlaylistFactory* factory);
 
 		Q_INVOKABLE void createPlaylist(QString name);
 		Q_INVOKABLE void deletePlaylist(int playlistIndex);
 
 	private:
 		PlaylistsModel* _model;
+		PlaylistsRepository* _repository;
 		PlaylistFactory* _factory;
 	};
 }

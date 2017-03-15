@@ -2,8 +2,8 @@
 
 namespace Playlists
 {
-	Playlist::Playlist(QString name)
-		: _name(name)
+	Playlist::Playlist(int id, QString name)
+		: _id(id), _name(name)
 	{
 	}
 }

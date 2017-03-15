@@ -2,8 +2,8 @@
 
 namespace Playlists
 {
-	Playlist* PlaylistFactory::Create(QString name)
+	Playlist* PlaylistFactory::Create(int id, QString name)
 	{
-		return new Playlist(name);
+		return new Playlist(id, name);
 	}
 }

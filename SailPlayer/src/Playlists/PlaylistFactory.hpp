@@ -8,7 +8,7 @@ namespace Playlists
 	class PlaylistFactory
 	{
 	public:
-		Playlist* Create(QString name);
+		Playlist* Create(int id, QString name);
 	};
 }
 

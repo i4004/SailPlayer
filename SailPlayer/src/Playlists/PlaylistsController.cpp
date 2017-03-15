@@ -2,14 +2,15 @@
 
 namespace Playlists
 {
-	PlaylistsController::PlaylistsController(PlaylistsModel* model, PlaylistFactory* factory)
-		: _model(model), _factory(factory)
+	PlaylistsController::PlaylistsController(PlaylistsModel* model, PlaylistsRepository* repository, PlaylistFactory* factory)
+		: _model(model), _repository(repository), _factory(factory)
 	{
+		_model->AddItems(_repository->GetItems());
 	}
 
 	void PlaylistsController::createPlaylist(QString name)
 	{
-		_model->AddItem(_factory->Create(name));
+		_model->AddItem(_factory->Create(1, name));
 	}
 
 	void PlaylistsController::deletePlaylist(int playlistIndex)
