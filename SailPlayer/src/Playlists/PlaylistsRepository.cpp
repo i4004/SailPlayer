@@ -39,6 +39,11 @@ namespace Playlists
 		return items;
 	}
 
+	bool PlaylistsRepository::UpdateItem(int id, QString name)
+	{
+		return _connection->ExecuteQuery(QString("UPDATE %1 SET Name = '%3' WHERE ID = %2").arg(TableName).arg(id).arg(name));
+	}
+
 	bool PlaylistsRepository::DeleteItem(int id)
 	{
 		return _connection->ExecuteQuery(QString("DELETE FROM %1 WHERE ID = %2").arg(TableName).arg(id));

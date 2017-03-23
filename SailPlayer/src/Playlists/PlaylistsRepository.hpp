@@ -20,6 +20,8 @@ namespace Playlists
 
 		QList<Playlist*> GetItems();
 
+		bool UpdateItem(int id, QString name);
+
 		bool DeleteItem(int id);
 
 	private:
