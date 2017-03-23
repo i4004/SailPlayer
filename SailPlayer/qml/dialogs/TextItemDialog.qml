@@ -26,6 +26,7 @@ Dialog
 
 			placeholderText: placeholder
 			text: value
+			focus: true
 		}
 	}
 
