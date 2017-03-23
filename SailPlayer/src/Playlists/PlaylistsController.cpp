@@ -10,7 +10,7 @@ namespace Playlists
 
 	void PlaylistsController::createPlaylist(QString name)
 	{
-		_model->AddItem(_factory->Create(1, name));
+		_model->AddItem(_factory->Create(_repository->AddItem(name), name));
 	}
 
 	void PlaylistsController::deletePlaylist(int id)
