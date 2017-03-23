@@ -19,25 +19,6 @@ namespace Model
 			DeleteItems();
 		}
 
-		// List View methods
-
-		int rowCount(const QModelIndex &parent = QModelIndex()) const
-		{
-			Q_UNUSED(parent);
-
-			return _items.count();
-		}
-
-		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const
-				{
-			if (!index.isValid() || index.row() >= _items.count())
-				return QVariant();
-
-			return GetItemData(role, _items.at(index.row()));
-		}
-
-		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
-
 		// Items control
 
 		void AddItem(T* item)
@@ -61,7 +42,7 @@ namespace Model
 			endInsertRows();
 		}
 
-		inline QList<T*> GetItems() { return _items; }
+		const QList<T*> GetItems() { return _items; }
 		virtual QVariant GetItemData(int role, T* item) const = 0;
 
 		void DeleteItem(int i)
@@ -73,13 +54,52 @@ namespace Model
 			endRemoveRows();
 		}
 
+		// List View service methods
+
+		int rowCount(const QModelIndex &parent = QModelIndex()) const
+		{
+			Q_UNUSED(parent);
+
+			return _items.count();
+		}
+
+		QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const
+				{
+			if (!index.isValid() || index.row() >= _items.count())
+				return QVariant();
+
+			return GetItemData(role, _items.at(index.row()));
+		}
+
+		QHash<int, QByteArray> roleNames() const { return _rolesNames; }
+
 	protected:
+		// Items control
+
+		int GetItemIndex(T* item)
+		{
+			return _items.indexOf(item);
+		}
+
+		void RefreshItem(int itemIndex)
+		{
+			emit dataChanged(index(itemIndex) , index(itemIndex));
+		}
+
 		void DeleteItems()
 		{
 			while (!_items.isEmpty())
 				delete _items.takeFirst();
 		}
 
+		// Roles control
+
+		void AddRole(int id, QByteArray name)
+		{
+			_rolesNames.insert(id, name);
+		}
+
+	private:
 		QList<T*> _items;
 		QHash<int, QByteArray> _rolesNames;
 	};
