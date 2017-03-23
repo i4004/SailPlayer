@@ -66,6 +66,17 @@ Page
 				MenuItem
 				{
 					text: qsTr("Rename")
+					onClicked:
+					{
+						var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/TextItemDialog.qml"),
+						{
+							placeholder: qsTr("Playlist Name"),
+							title: qsTr("Playlist Name"),
+							value:  name
+						});
+
+						dialog.accepted.connect(function() { playlistsController.renamePlaylist(id, dialog.value); })
+					}
 				}
 
 				MenuItem

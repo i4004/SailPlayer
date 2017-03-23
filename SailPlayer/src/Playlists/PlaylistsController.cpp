@@ -13,6 +13,12 @@ namespace Playlists
 		_model->AddItem(_factory->Create(_repository->AddItem(name), name));
 	}
 
+	void PlaylistsController::renamePlaylist(int id, QString name)
+	{
+		_repository->UpdateItem(id, name);
+		_model->RenameItem(id, name);
+	}
+
 	void PlaylistsController::deletePlaylist(int id)
 	{
 		_repository->DeleteItem(id);

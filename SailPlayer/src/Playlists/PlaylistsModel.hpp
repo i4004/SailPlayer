@@ -23,7 +23,12 @@ namespace Playlists
 
 		QVariant GetItemData(int role, Playlist* item) const;
 
+		void RenameItem(int id, QString name);
+
 		bool DeleteItemByID(int id);
+
+	private:
+		Playlist* GetItem(int id);
 	};
 }
 

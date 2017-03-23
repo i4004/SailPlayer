@@ -6,16 +6,17 @@ namespace Playlists
 
 	PlaylistModel::PlaylistModel(QObject* parent) : ListModel<Track>(parent)
 	{
-		_rolesNames.insert(ArtistNameRole, QByteArray("artistName"));
-		_rolesNames.insert(AlbumNameRole, QByteArray("albumName"));
-		_rolesNames.insert(AlbumYearRole, QByteArray("albumYear"));
-		_rolesNames.insert(TrackNumberRole, QByteArray("trackNumber"));
-		_rolesNames.insert(TrackNameRole, QByteArray("trackName"));
-		_rolesNames.insert(TrackDurationRole, QByteArray("trackDuration"));
-		_rolesNames.insert(TrackFileName, QByteArray("trackFileName"));
-		_rolesNames.insert(SectionRole, QByteArray("section"));
-//		_rolesNames.insert(IsTrackToPlay, QByteArray("isTrackToPlay"));
-//		_rolesNames.insert(IsPlayingRole, QByteArray("isPlaying"));
+		AddRole(ArtistNameRole, QByteArray("artistName"));
+		AddRole(AlbumNameRole, QByteArray("albumName"));
+		AddRole(AlbumYearRole, QByteArray("albumYear"));
+		AddRole(TrackNumberRole, QByteArray("trackNumber"));
+		AddRole(TrackNameRole, QByteArray("trackName"));
+		AddRole(TrackDurationRole, QByteArray("trackDuration"));
+		AddRole(TrackFileName, QByteArray("trackFileName"));
+		AddRole(SectionRole, QByteArray("section"));
+
+//		AddRole(IsTrackToPlay, QByteArray("isTrackToPlay"));
+//		AddRole(IsPlayingRole, QByteArray("isPlaying"));
 	}
 
 	QVariant PlaylistModel::GetItemData(int role, Track* item) const

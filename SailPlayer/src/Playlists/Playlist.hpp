@@ -15,6 +15,7 @@ namespace Playlists
 		Playlist(int id, QString name);
 
 		inline QString GetName() { return _name; }
+		inline void SetName(QString name) { _name =  name; }
 
 	private:
 		QString _name;

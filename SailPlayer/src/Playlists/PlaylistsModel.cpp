@@ -4,8 +4,8 @@ namespace Playlists
 {
 	PlaylistsModel::PlaylistsModel(QObject* parent) : ListModel<Playlist>(parent)
 	{
-		_rolesNames.insert(IdRole, QByteArray("id"));
-		_rolesNames.insert(NameRole, QByteArray("name"));
+		AddRole(IdRole, QByteArray("id"));
+		AddRole(NameRole, QByteArray("name"));
 	}
 
 	QVariant PlaylistsModel::GetItemData(int role, Playlist* item) const
@@ -25,17 +25,38 @@ namespace Playlists
 		}
 	}
 
+	void PlaylistsModel::RenameItem(int id, QString name)
+	{
+		Playlist* item = GetItem(id);
+
+		if (!item)
+			return;
+
+		item->SetName(name);
+
+		RefreshItem(GetItemIndex(item));
+	}
+
 	bool PlaylistsModel::DeleteItemByID(int id)
 	{
-		foreach (Playlist* item, _items)
+		Playlist* item = GetItem(id);
+
+		if (!item)
+			return false;
+
+		DeleteItem(GetItemIndex(item));
+
+		return true;
+	}
+
+	Playlist* PlaylistsModel::GetItem(int id)
+	{
+		foreach (Playlist* item, GetItems())
 		{
 			if (item->GetID() == id)
-			{
-				DeleteItem(_items.indexOf(item));
-				return true;
-			}
+				return item;
 		}
 
-		return false;
+		return NULL;
 	}
 }
