@@ -1,5 +1,5 @@
-#ifndef SAILPLAYERCONTROLLER_HPP
-#define SAILPLAYERCONTROLLER_HPP
+#ifndef REGISTRATOR_HPP
+#define REGISTRATOR_HPP
 
 #include <QObject>
 #include <QQuickView>
@@ -20,13 +20,13 @@ using namespace Audio::Gst;
 using namespace Database;
 using namespace Playlists;
 
-class SailPlayerController : public QObject
+class Registrator : public QObject
 {
 	Q_OBJECT
 
 public:
-	SailPlayerController();
-	~SailPlayerController();
+	Registrator();
+	~Registrator();
 
 	void ExposeComponentsToQml(QQuickView* view);
 
@@ -56,4 +56,4 @@ private:
 	PlaylistsController* _playlistsController;
 };
 
-#endif // SAILPLAYERCONTROLLER_HPP
+#endif // REGISTRATOR_HPP

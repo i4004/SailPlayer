@@ -1,7 +1,7 @@
 #include <QtQuick>
 #include <sailfishapp.h>
 
-#include "SailPlayerController.hpp"
+#include "Registrator.hpp"
 
 void SetApplicationDescription()
 {
@@ -17,11 +17,11 @@ int main(int argc, char *argv[])
 
 	QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 	QScopedPointer<QQuickView> view(SailfishApp::createView());
-	QScopedPointer<SailPlayerController> rootController(new SailPlayerController());
+	QScopedPointer<Registrator> registrator(new Registrator());
 
 	// Run
 
-	rootController->ExposeComponentsToQml(&(*view));
+	registrator->ExposeComponentsToQml(&(*view));
 	view->setSource(SailfishApp::pathTo("qml/Main.qml"));
 	view->show();
 

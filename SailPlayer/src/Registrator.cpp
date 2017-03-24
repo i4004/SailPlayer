@@ -1,8 +1,8 @@
 #include <QQmlContext>
 
-#include "SailPlayerController.hpp"
+#include "Registrator.hpp"
 
-SailPlayerController::SailPlayerController()
+Registrator::Registrator()
 {
 	// Audio
 
@@ -27,7 +27,7 @@ SailPlayerController::SailPlayerController()
 	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistsRepository, _playlistFactory);
 }
 
-SailPlayerController::~SailPlayerController()
+Registrator::~Registrator()
 {
 	// Playlists
 
@@ -52,7 +52,7 @@ SailPlayerController::~SailPlayerController()
 	delete _gstreamerInit;
 }
 
-void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
+void Registrator::ExposeComponentsToQml(QQuickView* view)
 {
 	view->rootContext()->setContextProperty("playlistModel", &_playlistModel);
 	view->rootContext()->setContextProperty("playlistsModel", &_playlistsModel);

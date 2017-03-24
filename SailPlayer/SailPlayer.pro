@@ -20,7 +20,6 @@ SAILFISHAPP_ICONS = 86x86 108x108 128x128 256x256
 
 SOURCES += \
     src/Main.cpp \
-    src/SailPlayerController.cpp \
     src/Audio/AudioResource.cpp \
     src/Audio/Gst/GEqualizer.cpp \
     src/Audio/AudioPlayer.cpp \
@@ -48,7 +47,8 @@ SOURCES += \
     src/Database/SqlConnection.cpp \
     src/Database/SailPlayerConnectionManager.cpp \
     src/Database/SailPlayerConnection.cpp \
-    src/Playlists/PlaylistController.cpp
+    src/Playlists/PlaylistController.cpp \
+    src/Registrator.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -60,7 +60,6 @@ DISTFILES += \
     qml/dialogs/TextItemDialog.qml
 
 HEADERS += \
-    src/SailPlayerController.hpp \
     src/Audio/AudioResource.hpp \
     src/Audio/AudioPlayer.hpp \
     src/Audio/IAudioPlayer.hpp \
@@ -97,4 +96,5 @@ HEADERS += \
     src/Database/SailPlayerConnectionManager.hpp \
     src/Database/SailPlayerConnection.hpp \
     src/Model/IdentityObject.hpp \
-    src/Playlists/PlaylistController.hpp
+    src/Playlists/PlaylistController.hpp \
+    src/Registrator.hpp
