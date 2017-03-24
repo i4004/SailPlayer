@@ -10,16 +10,23 @@ using namespace Playlists;
 class SailPlayerState : public QObject
 {
 	Q_OBJECT
+
 	Q_PROPERTY(bool isPlaylistActive READ GetIsPlaylistActive)
 	Q_PROPERTY(int activePlaylistID READ GetActivePlaylistID)
-	Q_PROPERTY(QString activePlaylistName READ GetActivePlaylistName)
+	Q_PROPERTY(QString activePlaylistName READ GetActivePlaylistName NOTIFY ActivePlaylistNameChanged)
 
 public:
 	SailPlayerState();
 
+	// Active playlist
+
+	void SetActivePlaylist(Playlist* playlist);
 	bool GetIsPlaylistActive();
 	int GetActivePlaylistID();
 	QString GetActivePlaylistName();
+
+signals:
+	void ActivePlaylistNameChanged();
 
 private:
 	Playlist* _activePlaylist;

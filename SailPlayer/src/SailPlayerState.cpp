@@ -5,6 +5,13 @@ SailPlayerState::SailPlayerState()
 	_activePlaylist = NULL;
 }
 
+void SailPlayerState::SetActivePlaylist(Playlist* playlist)
+{
+	_activePlaylist = playlist;
+
+	emit ActivePlaylistNameChanged();
+}
+
 bool SailPlayerState::GetIsPlaylistActive()
 {
 	return _activePlaylist;
