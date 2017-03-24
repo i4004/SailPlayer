@@ -23,7 +23,7 @@ Page
 
 		header: PageHeader
 		{
-			title: qsTr("Playlist")
+			title: spState.activePlaylistName
 		}
 
 		PullDownMenu

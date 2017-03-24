@@ -14,6 +14,7 @@
 #include "Playlists/PlaylistsController.hpp"
 #include "Playlists/PlaylistsModel.hpp"
 #include "Playlists/PlaylistsRepository.hpp"
+#include "SailPlayerController.hpp"
 #include "SailPlayerState.hpp"
 
 using namespace Audio;
@@ -55,6 +56,8 @@ private:
 	PlaylistsRepository* _playlistsRepository;
 	PlaylistController* _playlistController;
 	PlaylistsController* _playlistsController;
+
+	SailPlayerController* _sailPlayerController;
 
 	SailPlayerState _state;
 };

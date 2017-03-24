@@ -59,6 +59,8 @@ Page
 				text: name
 			}
 
+			onClicked: controller.activatePlaylist(id)
+
 			ContextMenu
 			{
 				id: itemContextMenu

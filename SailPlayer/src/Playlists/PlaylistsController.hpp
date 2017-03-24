@@ -17,6 +17,7 @@ namespace Playlists
 		PlaylistsController(PlaylistsModel* model, PlaylistsRepository* repository, PlaylistFactory* factory);
 
 		Q_INVOKABLE void createPlaylist(QString name);
+		Playlist* GetPlaylist(int id);
 		Q_INVOKABLE void renamePlaylist(int id, QString name);
 		Q_INVOKABLE void deletePlaylist(int id);
 

@@ -25,10 +25,14 @@ Registrator::Registrator()
 	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection(), _playlistFactory);
 	_playlistController = new PlaylistController(&_playlistModel);
 	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistsRepository, _playlistFactory);
+
+	_sailPlayerController = new SailPlayerController(&_state, _playlistsController);
 }
 
 Registrator::~Registrator()
 {
+	delete _sailPlayerController;
+
 	// Playlists
 
 	delete _playlistsController;
@@ -54,11 +58,12 @@ Registrator::~Registrator()
 
 void Registrator::ExposeComponentsToQml(QQuickView* view)
 {
-	view->rootContext()->setContextProperty("state", &_state);
+	view->rootContext()->setContextProperty("spState", &_state);
 	view->rootContext()->setContextProperty("playlistModel", &_playlistModel);
 	view->rootContext()->setContextProperty("playlistsModel", &_playlistsModel);
 	view->rootContext()->setContextProperty("playlistController", _playlistController);
 	view->rootContext()->setContextProperty("playlistsController", _playlistsController);
+	view->rootContext()->setContextProperty("controller", _sailPlayerController);
 
 //	_pipeline->SetFileToPlay("/home/nemo/Music/Ringtones/Biosfear.flac");
 //	_audioPlayer->Play();

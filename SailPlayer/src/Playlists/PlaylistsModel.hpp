@@ -21,14 +21,16 @@ namespace Playlists
 	public:
 		PlaylistsModel(QObject* parent = 0);
 
-		QVariant GetItemData(int role, Playlist* item) const;
+		// Item control
+
+		Playlist* GetItem(int id);
 
 		void RenameItem(int id, QString name);
 
 		bool DeleteItemByID(int id);
 
-	private:
-		Playlist* GetItem(int id);
+		// Service methods
+		QVariant GetItemData(int role, Playlist* item) const;
 	};
 }
 
