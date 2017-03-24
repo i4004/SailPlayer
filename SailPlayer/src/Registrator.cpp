@@ -54,6 +54,7 @@ Registrator::~Registrator()
 
 void Registrator::ExposeComponentsToQml(QQuickView* view)
 {
+	view->rootContext()->setContextProperty("state", &_state);
 	view->rootContext()->setContextProperty("playlistModel", &_playlistModel);
 	view->rootContext()->setContextProperty("playlistsModel", &_playlistsModel);
 	view->rootContext()->setContextProperty("playlistController", _playlistController);

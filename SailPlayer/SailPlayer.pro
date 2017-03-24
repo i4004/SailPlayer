@@ -48,7 +48,8 @@ SOURCES += \
     src/Database/SailPlayerConnectionManager.cpp \
     src/Database/SailPlayerConnection.cpp \
     src/Playlists/PlaylistController.cpp \
-    src/Registrator.cpp
+    src/Registrator.cpp \
+    src/SailPlayerState.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -97,4 +98,5 @@ HEADERS += \
     src/Database/SailPlayerConnection.hpp \
     src/Model/IdentityObject.hpp \
     src/Playlists/PlaylistController.hpp \
-    src/Registrator.hpp
+    src/Registrator.hpp \
+    src/SailPlayerState.hpp
