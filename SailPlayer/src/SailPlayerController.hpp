@@ -8,10 +8,12 @@
 #include "Audio/Gst/GInit.hpp"
 #include "Audio/Gst/GPlugins.hpp"
 #include "Database/SailPlayerConnectionManager.hpp"
+#include "Playlists/PlaylistController.hpp"
+#include "Playlists/PlaylistFactory.hpp"
+#include "Playlists/PlaylistModel.hpp"
+#include "Playlists/PlaylistsController.hpp"
 #include "Playlists/PlaylistsModel.hpp"
 #include "Playlists/PlaylistsRepository.hpp"
-#include "Playlists/PlaylistsController.hpp"
-#include "Playlists/PlaylistFactory.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
@@ -47,8 +49,10 @@ private:
 	// Playlists
 
 	PlaylistsModel _playlistsModel;
+	PlaylistModel _playlistModel;
 	PlaylistFactory* _playlistFactory;
 	PlaylistsRepository* _playlistsRepository;
+	PlaylistController* _playlistController;
 	PlaylistsController* _playlistsController;
 };
 

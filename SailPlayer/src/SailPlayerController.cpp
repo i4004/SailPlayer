@@ -23,6 +23,7 @@ SailPlayerController::SailPlayerController()
 
 	_playlistFactory = new PlaylistFactory();
 	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection(), _playlistFactory);
+	_playlistController = new PlaylistController(&_playlistModel);
 	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistsRepository, _playlistFactory);
 }
 
@@ -31,6 +32,7 @@ SailPlayerController::~SailPlayerController()
 	// Playlists
 
 	delete _playlistsController;
+	delete _playlistController;
 	delete _playlistsRepository;
 	delete _playlistFactory;
 
@@ -52,7 +54,9 @@ SailPlayerController::~SailPlayerController()
 
 void SailPlayerController::ExposeComponentsToQml(QQuickView* view)
 {
+	view->rootContext()->setContextProperty("playlistModel", &_playlistModel);
 	view->rootContext()->setContextProperty("playlistsModel", &_playlistsModel);
+	view->rootContext()->setContextProperty("playlistController", _playlistController);
 	view->rootContext()->setContextProperty("playlistsController", _playlistsController);
 
 //	_pipeline->SetFileToPlay("/home/nemo/Music/Ringtones/Biosfear.flac");
