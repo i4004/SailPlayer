@@ -54,6 +54,12 @@ namespace Model
 			endRemoveRows();
 		}
 
+		void DeleteItems()
+		{
+			while (!_items.isEmpty())
+				delete _items.takeFirst();
+		}
+
 		// List View service methods
 
 		int rowCount(const QModelIndex &parent = QModelIndex()) const
@@ -84,12 +90,6 @@ namespace Model
 		void RefreshItem(int itemIndex)
 		{
 			emit dataChanged(index(itemIndex) , index(itemIndex));
-		}
-
-		void DeleteItems()
-		{
-			while (!_items.isEmpty())
-				delete _items.takeFirst();
 		}
 
 		// Roles control
