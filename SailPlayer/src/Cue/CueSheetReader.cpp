@@ -12,12 +12,12 @@ namespace Cue
 	CueSheet* CueSheetReader::Read(QString cueFileName)
 	{
 		if(!QFile::exists(cueFileName))
-			return NULL;
+			return nullptr;
 
 		QStringList items = ReadFileData(cueFileName);
 
 		if(items.count() == 0)
-			return NULL;
+			return nullptr;
 
 		return parser.Parse(items);
 	}

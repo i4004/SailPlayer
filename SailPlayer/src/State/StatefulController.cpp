@@ -17,18 +17,21 @@ namespace State
 
 	void StatefulController::deletePlaylist(int id)
 	{
-		_state->SetActivePlaylist(NULL);
-		emit _state->ActivePlaylistChanged();
+		if(id == _state->GetActivePlaylistID())
+		{
+			_state->SetActivePlaylist();
+			emit _state->ActivePlaylistChanged();
+		}
 
 		SailPlayerController::deletePlaylist(id);
 	}
 
-	void StatefulController::activatePlaylist(int playlistID)
+	void StatefulController::activatePlaylist(int id)
 	{
-		Playlist* item = _playlistsController->GetPlaylist(playlistID);
+		Playlist* item = _playlistsController->GetPlaylist(id);
 
 		if(!item)
-			qFatal("Playlist not found, playlist id: '%s'", QString(playlistID).toUtf8().constData());
+			qFatal("Playlist not found, id: '%s'", QString(id).toUtf8().constData());
 
 		_state->SetActivePlaylist(item);
 	}

@@ -57,6 +57,6 @@ namespace Playlists
 				return item;
 		}
 
-		return NULL;
+		return nullptr;
 	}
 }

@@ -9,8 +9,8 @@ namespace Cue
 	CueSheet* CueSheetParser::Parse(QStringList cueSheetData)
 	{
 		CueSheet* cueSheet = new CueSheet();
-		CueFile* currentFile = NULL;
-		CueTrack* currentTrack = NULL;
+		CueFile* currentFile = nullptr;
+		CueTrack* currentTrack = nullptr;
 
 		foreach(QString rawItem, cueSheetData)
 		{
@@ -18,14 +18,14 @@ namespace Cue
 
 			if(item.startsWith("FILE"))
 			{
-				if(currentFile != NULL)
+				if(currentFile != nullptr)
 					cueSheet->AddFile(currentFile);
 
 				currentFile = ParseFileHeader(item);
 			}
 			else if(item.startsWith("TRACK"))
 			{
-				if(currentTrack != NULL)
+				if(currentTrack != nullptr)
 					currentFile->AddTrack(currentTrack);
 
 				currentTrack = ParseTrackHeader(item);
@@ -34,14 +34,14 @@ namespace Cue
 				currentTrack->AddIndex(ParseIndex(item));
 			else if(item.startsWith("TITLE"))
 			{
-				if(currentTrack != NULL)
+				if(currentTrack != nullptr)
 					currentTrack->SetTitle(ParseKeyValueStringValue(item));
 				else
 					cueSheet->SetTitle(ParseKeyValueStringValue(item));
 			}
 			else if(item.startsWith("PERFORMER"))
 			{
-				if(currentTrack != NULL)
+				if(currentTrack != nullptr)
 					currentTrack->SetPerformer(ParseKeyValueStringValue(item));
 				else
 					cueSheet->SetPerformer(ParseKeyValueStringValue(item));
@@ -56,9 +56,9 @@ namespace Cue
 			}
 		}
 
-		if(currentFile != NULL)
+		if(currentFile != nullptr)
 		{
-			if(currentTrack != NULL)
+			if(currentTrack != nullptr)
 				currentFile->AddTrack(currentTrack);
 
 			cueSheet->AddFile(currentFile);

@@ -4,7 +4,7 @@ namespace State
 {
 	SailPlayerState::SailPlayerState()
 	{
-		_activePlaylist = NULL;
+		_activePlaylist = nullptr;
 	}
 
 	void SailPlayerState::SetActivePlaylist(Playlist* playlist)

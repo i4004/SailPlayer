@@ -22,7 +22,7 @@ namespace State
 
 		// Active playlist
 
-		void SetActivePlaylist(Playlist* playlist);
+		void SetActivePlaylist(Playlist* playlist = nullptr);
 		bool GetIsPlaylistActive();
 		int GetActivePlaylistID();
 		QString GetActivePlaylistName();

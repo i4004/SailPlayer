@@ -13,7 +13,7 @@ namespace State
 
 		void renamePlaylist(int id, QString name);
 		void deletePlaylist(int id);
-		void activatePlaylist(int playlistID);
+		void activatePlaylist(int id);
 
 	private:
 		SailPlayerState* _state;

@@ -1,5 +1,6 @@
 #include <QQmlContext>
 
+#include "Settings/SettingsController.hpp"
 #include "Registrator.hpp"
 
 Registrator::Registrator()
@@ -26,7 +27,7 @@ Registrator::Registrator()
 	_playlistController = new PlaylistController(&_playlistModel);
 	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistsRepository, _playlistFactory);
 
-	_sailPlayerController = new StatefulController(&_state, _playlistsController);
+	_sailPlayerController = new SettingsController(&_settings, &_state, _playlistsController);
 }
 
 Registrator::~Registrator()

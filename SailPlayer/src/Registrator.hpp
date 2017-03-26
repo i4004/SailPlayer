@@ -14,13 +14,15 @@
 #include "Playlists/PlaylistsController.hpp"
 #include "Playlists/PlaylistsModel.hpp"
 #include "Playlists/PlaylistsRepository.hpp"
-#include "State/StatefulController.hpp"
+#include "Settings/SailPlayerSettings.hpp"
 #include "State/SailPlayerState.hpp"
+#include "SailPlayerController.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
 using namespace Database;
 using namespace Playlists;
+using namespace Settings;
 using namespace State;
 
 class Registrator : public QObject
@@ -58,9 +60,10 @@ private:
 	PlaylistController* _playlistController;
 	PlaylistsController* _playlistsController;
 
-	SailPlayerController* _sailPlayerController;
-
 	SailPlayerState _state;
+	SailPlayerSettings _settings;
+
+	SailPlayerController* _sailPlayerController;
 };
 
 #endif // REGISTRATOR_HPP
