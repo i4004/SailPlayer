@@ -5,6 +5,14 @@ SailPlayerController::SailPlayerController(SailPlayerState* state, PlaylistsCont
 {
 }
 
+void SailPlayerController::renamePlaylist(int id, QString name)
+{
+	_playlistsController->renamePlaylist(id, name);
+
+	if(id == _state->GetActivePlaylistID())
+		emit _state->ActivePlaylistChanged();
+}
+
 void SailPlayerController::activatePlaylist(int playlistID)
 {
 	Playlist* item = _playlistsController->GetPlaylist(playlistID);

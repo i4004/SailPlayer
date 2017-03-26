@@ -13,6 +13,7 @@ class SailPlayerController : public QObject
 public:
 	SailPlayerController(SailPlayerState* state, PlaylistsController* playlistsController);
 
+	Q_INVOKABLE void renamePlaylist(int id, QString name);
 	Q_INVOKABLE void activatePlaylist(int playlistID);
 
 private:

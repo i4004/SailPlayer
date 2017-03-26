@@ -41,7 +41,7 @@ ListItem
 					value:  name
 				});
 
-				dialog.accepted.connect(function() { playlistsController.renamePlaylist(id, dialog.value); })
+				dialog.accepted.connect(function() { controller.renamePlaylist(id, dialog.value); })
 			}
 		}
 
