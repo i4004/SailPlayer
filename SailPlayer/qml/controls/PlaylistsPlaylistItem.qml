@@ -23,7 +23,7 @@ ListItem
 		text: name
 	}
 
-	onClicked: controller.activatePlaylist(id)
+	onClicked: spController.activatePlaylist(id)
 
 	ContextMenu
 	{
@@ -41,14 +41,14 @@ ListItem
 					value:  name
 				});
 
-				dialog.accepted.connect(function() { controller.renamePlaylist(id, dialog.value); })
+				dialog.accepted.connect(function() { spController.renamePlaylist(id, dialog.value); })
 			}
 		}
 
 		MenuItem
 		{
 			text: qsTr("Delete")
-			onClicked: remorseItem.execute(item, qsTr("Deleting"), function() { playlistsController.deletePlaylist(id); })
+			onClicked: remorseItem.execute(item, qsTr("Deleting"), function() { spController.deletePlaylist(id); })
 		}
 	}
 

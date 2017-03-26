@@ -5,10 +5,8 @@
 
 namespace Playlists
 {
-	class PlaylistController : public QObject
+	class PlaylistController
 	{
-		Q_OBJECT
-
 	public:
 		PlaylistController(PlaylistModel* model);
 

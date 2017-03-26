@@ -12,7 +12,9 @@ class SailPlayerController : public QObject
 public:
 	SailPlayerController(PlaylistsController* playlistsController);
 
+	Q_INVOKABLE virtual void createPlaylist(QString name);
 	Q_INVOKABLE virtual void renamePlaylist(int id, QString name);
+	Q_INVOKABLE virtual void deletePlaylist(int id);
 	Q_INVOKABLE virtual void activatePlaylist(int playlistID) = 0;
 
 private:

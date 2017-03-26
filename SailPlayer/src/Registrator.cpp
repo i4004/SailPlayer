@@ -61,9 +61,7 @@ void Registrator::ExposeComponentsToQml(QQuickView* view)
 	view->rootContext()->setContextProperty("spState", &_state);
 	view->rootContext()->setContextProperty("playlistModel", &_playlistModel);
 	view->rootContext()->setContextProperty("playlistsModel", &_playlistsModel);
-	view->rootContext()->setContextProperty("playlistController", _playlistController);
-	view->rootContext()->setContextProperty("playlistsController", _playlistsController);
-	view->rootContext()->setContextProperty("controller", _sailPlayerController);
+	view->rootContext()->setContextProperty("spController", _sailPlayerController);
 
 //	_pipeline->SetFileToPlay("/home/nemo/Music/Ringtones/Biosfear.flac");
 //	_audioPlayer->Play();

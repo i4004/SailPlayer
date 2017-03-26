@@ -9,17 +9,15 @@ using namespace Model;
 
 namespace Playlists
 {
-	class PlaylistsController : public QObject
+	class PlaylistsController
 	{
-		Q_OBJECT
-
 	public:
 		PlaylistsController(PlaylistsModel* model, PlaylistsRepository* repository, PlaylistFactory* factory);
 
-		Q_INVOKABLE void createPlaylist(QString name);
+		void CreatePlaylist(QString name);
 		Playlist* GetPlaylist(int id);
-		void renamePlaylist(int id, QString name);
-		Q_INVOKABLE void deletePlaylist(int id);
+		void RenamePlaylist(int id, QString name);
+		void DeletePlaylist(int id);
 
 	private:
 		PlaylistsModel* _model;

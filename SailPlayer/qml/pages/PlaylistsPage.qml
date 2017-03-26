@@ -28,7 +28,7 @@ Page
 						title: qsTr("Create New Playlist")
 					});
 
-					dialog.accepted.connect(function() { playlistsController.createPlaylist(dialog.value); })
+					dialog.accepted.connect(function() { spController.createPlaylist(dialog.value); })
 				}
 			}
 		}
