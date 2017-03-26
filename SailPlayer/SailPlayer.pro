@@ -50,7 +50,8 @@ SOURCES += \
     src/Playlists/PlaylistController.cpp \
     src/Registrator.cpp \
     src/SailPlayerState.cpp \
-    src/SailPlayerController.cpp
+    src/SailPlayerController.cpp \
+    src/StatefulController.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -102,4 +103,5 @@ HEADERS += \
     src/Playlists/PlaylistController.hpp \
     src/Registrator.hpp \
     src/SailPlayerState.hpp \
-    src/SailPlayerController.hpp
+    src/SailPlayerController.hpp \
+    src/StatefulController.hpp

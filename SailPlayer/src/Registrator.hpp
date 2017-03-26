@@ -14,7 +14,7 @@
 #include "Playlists/PlaylistsController.hpp"
 #include "Playlists/PlaylistsModel.hpp"
 #include "Playlists/PlaylistsRepository.hpp"
-#include "SailPlayerController.hpp"
+#include "StatefulController.hpp"
 #include "SailPlayerState.hpp"
 
 using namespace Audio;
