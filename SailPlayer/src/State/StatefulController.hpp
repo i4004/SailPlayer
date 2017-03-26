@@ -12,6 +12,7 @@ namespace State
 		StatefulController(SailPlayerState* state, PlaylistsController* playlistsController);
 
 		void renamePlaylist(int id, QString name);
+		void deletePlaylist(int id);
 		void activatePlaylist(int playlistID);
 
 	private:

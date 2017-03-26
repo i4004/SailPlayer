@@ -15,6 +15,14 @@ namespace State
 			emit _state->ActivePlaylistChanged();
 	}
 
+	void StatefulController::deletePlaylist(int id)
+	{
+		_state->SetActivePlaylist(NULL);
+		emit _state->ActivePlaylistChanged();
+
+		SailPlayerController::deletePlaylist(id);
+	}
+
 	void StatefulController::activatePlaylist(int playlistID)
 	{
 		Playlist* item = _playlistsController->GetPlaylist(playlistID);
