@@ -9,7 +9,7 @@ void SailPlayerState::SetActivePlaylist(Playlist* playlist)
 {
 	_activePlaylist = playlist;
 
-	emit ActivePlaylistNameChanged();
+	emit ActivePlaylistChanged();
 }
 
 bool SailPlayerState::GetIsPlaylistActive()

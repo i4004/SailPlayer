@@ -11,9 +11,9 @@ class SailPlayerState : public QObject
 {
 	Q_OBJECT
 
-	Q_PROPERTY(bool isPlaylistActive READ GetIsPlaylistActive)
-	Q_PROPERTY(int activePlaylistID READ GetActivePlaylistID)
-	Q_PROPERTY(QString activePlaylistName READ GetActivePlaylistName NOTIFY ActivePlaylistNameChanged)
+	Q_PROPERTY(bool isPlaylistActive READ GetIsPlaylistActive NOTIFY ActivePlaylistChanged)
+	Q_PROPERTY(int activePlaylistID READ GetActivePlaylistID NOTIFY ActivePlaylistChanged)
+	Q_PROPERTY(QString activePlaylistName READ GetActivePlaylistName NOTIFY ActivePlaylistChanged)
 
 public:
 	SailPlayerState();
@@ -26,7 +26,7 @@ public:
 	QString GetActivePlaylistName();
 
 signals:
-	void ActivePlaylistNameChanged();
+	void ActivePlaylistChanged();
 
 private:
 	Playlist* _activePlaylist;

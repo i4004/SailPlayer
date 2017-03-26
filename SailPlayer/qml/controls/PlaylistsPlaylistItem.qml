@@ -18,6 +18,7 @@ ListItem
 		}
 
 		wrapMode: Text.WordWrap
+		color: item.highlighted || spState.activePlaylistID == id ? Theme.highlightColor : Theme.primaryColor
 
 		text: name
 	}

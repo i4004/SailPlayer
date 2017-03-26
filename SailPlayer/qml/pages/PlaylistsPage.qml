@@ -40,7 +40,10 @@ Page
 
 		model: playlistsModel
 
-		delegate: PlaylistsPlaylistItem {}
+		delegate: PlaylistsPlaylistItem
+		{
+			onClicked: pageStack.pop()
+		}
 
 		ViewPlaceholder
 		{
