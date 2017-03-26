@@ -10,7 +10,7 @@ void SailPlayerController::activatePlaylist(int playlistID)
 	Playlist* item = _playlistsController->GetPlaylist(playlistID);
 
 	if(!item)
-		qFatal("Playlist not found, playlsit id: '%s'", QString(playlistID).toUtf8().constData());
+		qFatal("Playlist not found, playlist id: '%s'", QString(playlistID).toUtf8().constData());
 
 	_state->SetActivePlaylist(item);
 }
