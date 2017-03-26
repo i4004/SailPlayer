@@ -2,7 +2,6 @@
 #define SAILPLAYERCONTROLLER_H
 
 #include "Playlists/PlaylistsController.hpp"
-#include "SailPlayerState.hpp"
 
 using namespace Playlists;
 

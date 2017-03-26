@@ -14,13 +14,14 @@
 #include "Playlists/PlaylistsController.hpp"
 #include "Playlists/PlaylistsModel.hpp"
 #include "Playlists/PlaylistsRepository.hpp"
-#include "StatefulController.hpp"
-#include "SailPlayerState.hpp"
+#include "State/StatefulController.hpp"
+#include "State/SailPlayerState.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
 using namespace Database;
 using namespace Playlists;
+using namespace State;
 
 class Registrator : public QObject
 {
