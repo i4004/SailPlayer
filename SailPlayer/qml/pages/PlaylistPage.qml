@@ -37,9 +37,16 @@ Page
 
 		ViewPlaceholder
 		{
-			enabled: listView.count == 0
+			enabled: listView.count == 0 && spState.isPlaylistActive
 			text: qsTr("No tracks in playlist")
 			hintText: qsTr("Pull down to add tracks")
+		}
+
+		ViewPlaceholder
+		{
+			enabled: !spState.isPlaylistActive
+			text: qsTr("No playlist selected")
+			hintText: qsTr("Pull down to go to playlist selection")
 		}
 	}
 }
