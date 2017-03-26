@@ -46,7 +46,7 @@ Page
 		{
 			enabled: !spState.isPlaylistActive
 			text: qsTr("No playlist selected")
-			hintText: qsTr("Pull down to go to playlist selection")
+			hintText: qsTr("Pull down to go to playlists management")
 		}
 	}
 }
