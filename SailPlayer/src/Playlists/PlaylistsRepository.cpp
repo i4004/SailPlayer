@@ -20,6 +20,21 @@ namespace Playlists
 			return -1;
 	}
 
+	Playlist* PlaylistsRepository::GetItem(int id)
+	{
+		if(!_connection->ExecuteQuery(QString("SELECT * FROM %1 WHERE ID = %2").arg(TableName).arg(id)))
+			return nullptr;
+
+		QSqlQuery query = _connection->GetLastQuery();
+
+		if(!query.first())
+			return nullptr;
+
+		QString name = query.value(1).toString();
+
+		return _factory->Create(id, name);
+	}
+
 	QList<Playlist*> PlaylistsRepository::GetItems()
 	{
 		QList<Playlist*> items;

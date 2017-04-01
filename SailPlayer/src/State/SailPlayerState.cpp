@@ -4,28 +4,33 @@ namespace State
 {
 	SailPlayerState::SailPlayerState()
 	{
-		_activePlaylist = nullptr;
 	}
 
-	void SailPlayerState::SetActivePlaylist(Playlist* playlist)
+	void SailPlayerState::SetActivePlaylist(Playlist playlist)
 	{
 		_activePlaylist = playlist;
 
 		emit ActivePlaylistChanged();
 	}
 
-	bool SailPlayerState::GetIsPlaylistActive()
+	void SailPlayerState::RemoveActivePlaylist()
 	{
-		return _activePlaylist;
+		Playlist item;
+		SetActivePlaylist(item);
+	}
+
+	bool SailPlayerState::IsPlaylistActive()
+	{
+		return _activePlaylist.GetID() != -1;
 	}
 
 	int SailPlayerState::GetActivePlaylistID()
 	{
-		return _activePlaylist ? _activePlaylist->GetID() : -1;
+		return _activePlaylist.GetID();
 	}
 
 	QString SailPlayerState::GetActivePlaylistName()
 	{
-		return _activePlaylist ? _activePlaylist->GetName() : QString();
+		return _activePlaylist.GetName();
 	}
 }

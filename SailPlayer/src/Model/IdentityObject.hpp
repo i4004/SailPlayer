@@ -10,7 +10,12 @@ namespace Model
 		{
 		}
 
+		IdentityObject(IdentityObject& object) : _id(object.GetID())
+		{
+		}
+
 		inline int GetID() { return _id; }
+		inline void SetID(int id) { _id = id; }
 
 	private:
 		int _id;

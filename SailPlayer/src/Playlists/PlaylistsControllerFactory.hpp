@@ -1,7 +1,13 @@
 #ifndef PLAYLISTSCONTROLLERFACTORY_H
 #define PLAYLISTSCONTROLLERFACTORY_H
 
-#include "PlaylistsController.hpp"
+#include <QObject>
+
+#include "../State/SailPlayerState.hpp"
+#include "PlaylistFactory.hpp"
+#include "PlaylistsRepository.hpp"
+
+using namespace State;
 
 namespace Playlists
 {
@@ -10,7 +16,7 @@ namespace Playlists
 		 Q_OBJECT
 
 	public:
-		PlaylistsControllerFactory(PlaylistsRepository* repository, PlaylistFactory* factory);
+		PlaylistsControllerFactory(PlaylistsRepository* repository, PlaylistFactory* factory, SailPlayerState* state);
 		~PlaylistsControllerFactory();
 
 		Q_INVOKABLE QObject* create();
@@ -18,6 +24,7 @@ namespace Playlists
 	private:
 		PlaylistsRepository* _repository;
 		PlaylistFactory* _factory;
+		SailPlayerState* _state;
 	};
 }
 

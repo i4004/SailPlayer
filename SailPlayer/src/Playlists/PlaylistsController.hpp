@@ -19,11 +19,10 @@ namespace Playlists
 		PlaylistsController(PlaylistsRepository* repository, PlaylistFactory* factory);
 		~PlaylistsController();
 
-		Q_INVOKABLE void createPlaylist(QString name);
-//		Playlist* GetPlaylist(int id);
-		Q_INVOKABLE void renamePlaylist(int id, QString name);
-		Q_INVOKABLE void deletePlaylist(int id);
-		Q_INVOKABLE virtual void activatePlaylist(int id) { Q_UNUSED(id);}
+		Q_INVOKABLE virtual void createPlaylist(QString name);
+		Q_INVOKABLE virtual void renamePlaylist(int id, QString name);
+		Q_INVOKABLE virtual void deletePlaylist(int id);
+		Q_INVOKABLE virtual void activatePlaylist(int id) { Q_UNUSED(id); }
 
 		Q_INVOKABLE QObject* getModel() { return _model; }
 

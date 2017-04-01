@@ -50,15 +50,17 @@ private:
 	// Database
 
 	SailPlayerConnectionManager* _dbConnectionManager;
+	PlaylistsRepository* _playlistsRepository;
+
+	// State
+	SailPlayerState* _state;
 
 	// Playlists
 
 	PlaylistFactory* _playlistFactory;
-	PlaylistsRepository* _playlistsRepository;
 	PlaylistsControllerFactory* _playlistsControllerFactory;
 
-	SailPlayerState _state;
-
+	// Settings
 	SailPlayerSettings _settings;
 };
 

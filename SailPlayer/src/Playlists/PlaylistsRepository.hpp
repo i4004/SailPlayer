@@ -18,6 +18,7 @@ namespace Playlists
 
 		int AddItem(QString name);
 
+		Playlist* GetItem(int id);
 		QList<Playlist*> GetItems();
 
 		bool UpdateItem(int id, QString name);

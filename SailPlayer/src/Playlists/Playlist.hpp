@@ -12,7 +12,9 @@ namespace Playlists
 	class Playlist : public IdentityObject
 	{
 	public:
+		Playlist();
 		Playlist(int id, QString name);
+		Playlist(Playlist& playlist);
 
 		inline QString GetName() { return _name; }
 		inline void SetName(QString name) { _name =  name; }

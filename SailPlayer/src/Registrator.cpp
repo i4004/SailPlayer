@@ -1,6 +1,7 @@
 #include <QQmlContext>
 
 #include "Registrator.hpp"
+#include "State/SailPlayerStateFactory.hpp"
 
 Registrator::Registrator()
 {
@@ -18,12 +19,15 @@ Registrator::Registrator()
 	// Database
 
 	_dbConnectionManager = new SailPlayerConnectionManager();
+	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection(), _playlistFactory);
+
+	// State
+	_state = SailPlayerStateFactory(_playlistsRepository, &_settings).Create();
 
 	// Playlists
 
 	_playlistFactory = new PlaylistFactory();
-	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection(), _playlistFactory);
-	_playlistsControllerFactory = new PlaylistsControllerFactory(_playlistsRepository, _playlistFactory);
+	_playlistsControllerFactory = new PlaylistsControllerFactory(_playlistsRepository, _playlistFactory, _state);
 }
 
 Registrator::~Registrator()
@@ -31,11 +35,14 @@ Registrator::~Registrator()
 	// Playlists
 
 	delete _playlistsControllerFactory;
-	delete _playlistsRepository;
 	delete _playlistFactory;
+
+	// State
+	delete _state;
 
 	// Database
 
+	delete _playlistsRepository;
 	delete _dbConnectionManager;
 
 	// Audio
@@ -57,6 +64,6 @@ void Registrator::RegisterQmlTypes()
 
 void Registrator::ExposeComponentsToQml(QQuickView* view)
 {
-	view->rootContext()->setContextProperty("spState", &_state);
+	view->rootContext()->setContextProperty("spState", _state);
 	view->rootContext()->setContextProperty("playlistsControllerFactory", _playlistsControllerFactory);
 }

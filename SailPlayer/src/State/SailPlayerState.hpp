@@ -13,7 +13,7 @@ namespace State
 	{
 		Q_OBJECT
 
-		Q_PROPERTY(bool isPlaylistActive READ GetIsPlaylistActive NOTIFY ActivePlaylistChanged)
+		Q_PROPERTY(bool isPlaylistActive READ IsPlaylistActive NOTIFY ActivePlaylistChanged)
 		Q_PROPERTY(int activePlaylistID READ GetActivePlaylistID NOTIFY ActivePlaylistChanged)
 		Q_PROPERTY(QString activePlaylistName READ GetActivePlaylistName NOTIFY ActivePlaylistChanged)
 
@@ -22,8 +22,9 @@ namespace State
 
 		// Active playlist
 
-		void SetActivePlaylist(Playlist* playlist = nullptr);
-		bool GetIsPlaylistActive();
+		void SetActivePlaylist(Playlist playlist);
+		void RemoveActivePlaylist();
+		bool IsPlaylistActive();
 		int GetActivePlaylistID();
 		QString GetActivePlaylistName();
 
@@ -31,7 +32,7 @@ namespace State
 		void ActivePlaylistChanged();
 
 	private:
-		Playlist* _activePlaylist;
+		Playlist _activePlaylist;
 	};
 }
 

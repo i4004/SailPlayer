@@ -1,9 +1,10 @@
 #include "PlaylistsControllerFactory.hpp"
+#include "StatefulPlaylistsController.hpp"
 
 namespace Playlists
 {
-	PlaylistsControllerFactory::PlaylistsControllerFactory(PlaylistsRepository* repository, PlaylistFactory* factory)
-		: _repository(repository), _factory(factory)
+	PlaylistsControllerFactory::PlaylistsControllerFactory(PlaylistsRepository* repository, PlaylistFactory* factory, SailPlayerState* state)
+		: _repository(repository), _factory(factory), _state(state)
 	{
 	}
 
@@ -13,9 +14,6 @@ namespace Playlists
 
 	QObject* PlaylistsControllerFactory::create()
 	{
-		return new PlaylistsController(_repository, _factory);
+		return new StatefulPlaylistsController(_repository, _factory, _state);
 	}
 }
-
-
-
