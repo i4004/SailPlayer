@@ -27,7 +27,7 @@ Registrator::Registrator()
 	// Playlists
 
 	_playlistFactory = new PlaylistFactory();
-	_playlistsControllerFactory = new PlaylistsControllerFactory(_playlistsRepository, _playlistFactory, _state);
+	_playlistsControllerFactory = new PlaylistsControllerFactory(_playlistsRepository, _playlistFactory, _state, &_settings);
 }
 
 Registrator::~Registrator()

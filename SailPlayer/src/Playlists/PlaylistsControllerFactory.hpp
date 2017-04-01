@@ -3,10 +3,12 @@
 
 #include <QObject>
 
+#include "../Settings/SailPlayerSettings.hpp"
 #include "../State/SailPlayerState.hpp"
 #include "PlaylistFactory.hpp"
 #include "PlaylistsRepository.hpp"
 
+using namespace Settings;
 using namespace State;
 
 namespace Playlists
@@ -16,7 +18,7 @@ namespace Playlists
 		 Q_OBJECT
 
 	public:
-		PlaylistsControllerFactory(PlaylistsRepository* repository, PlaylistFactory* factory, SailPlayerState* state);
+		PlaylistsControllerFactory(PlaylistsRepository* repository, PlaylistFactory* factory, SailPlayerState* state, SailPlayerSettings* settings);
 		~PlaylistsControllerFactory();
 
 		Q_INVOKABLE QObject* create();
@@ -25,6 +27,7 @@ namespace Playlists
 		PlaylistsRepository* _repository;
 		PlaylistFactory* _factory;
 		SailPlayerState* _state;
+		SailPlayerSettings* _settings;
 	};
 }
 
