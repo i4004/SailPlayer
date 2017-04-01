@@ -5,8 +5,6 @@ import "../controls"
 
 Page
 {
-	id: page
-
 	allowedOrientations: Orientation.All
 
 	SilicaListView
@@ -28,7 +26,7 @@ Page
 						title: qsTr("Create New Playlist")
 					});
 
-					dialog.accepted.connect(function() { spController.createPlaylist(dialog.value); })
+					dialog.accepted.connect(function() { list.controller.createPlaylist(dialog.value); })
 				}
 			}
 		}
@@ -38,10 +36,12 @@ Page
 			title: qsTr("Playlists")
 		}
 
-		model: playlistsModel
+		property QtObject controller: playlistsControllerFactory.create()
+		model: controller.getModel()
 
 		delegate: PlaylistsPlaylistItem
 		{
+			controller: list.controller
 			onClicked: pageStack.pop()
 		}
 

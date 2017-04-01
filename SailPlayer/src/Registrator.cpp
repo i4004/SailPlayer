@@ -1,6 +1,5 @@
 #include <QQmlContext>
 
-#include "Settings/SettingsController.hpp"
 #include "Registrator.hpp"
 
 Registrator::Registrator()
@@ -24,20 +23,14 @@ Registrator::Registrator()
 
 	_playlistFactory = new PlaylistFactory();
 	_playlistsRepository = new PlaylistsRepository(_dbConnectionManager->GetConnection(), _playlistFactory);
-	_playlistController = new PlaylistController(&_playlistModel);
-	_playlistsController = new PlaylistsController(&_playlistsModel, _playlistsRepository, _playlistFactory);
-
-	_sailPlayerController = new SettingsController(&_settings, &_state, _playlistsController);
+	_playlistsControllerFactory = new PlaylistsControllerFactory(_playlistsRepository, _playlistFactory);
 }
 
 Registrator::~Registrator()
 {
-	delete _sailPlayerController;
-
 	// Playlists
 
-	delete _playlistsController;
-	delete _playlistController;
+	delete _playlistsControllerFactory;
 	delete _playlistsRepository;
 	delete _playlistFactory;
 
@@ -57,13 +50,13 @@ Registrator::~Registrator()
 	delete _gstreamerInit;
 }
 
+void Registrator::RegisterQmlTypes()
+{
+	qmlRegisterUncreatableType<PlaylistsController>("harbour.sail.player.PlaylistsController", 1, 0, "PlaylistsController*", "PlaylistsController is uncreatable type");
+}
+
 void Registrator::ExposeComponentsToQml(QQuickView* view)
 {
 	view->rootContext()->setContextProperty("spState", &_state);
-	view->rootContext()->setContextProperty("playlistModel", &_playlistModel);
-	view->rootContext()->setContextProperty("playlistsModel", &_playlistsModel);
-	view->rootContext()->setContextProperty("spController", _sailPlayerController);
-
-//	_pipeline->SetFileToPlay("/home/nemo/Music/Ringtones/Biosfear.flac");
-//	_audioPlayer->Play();
+	view->rootContext()->setContextProperty("playlistsControllerFactory", _playlistsControllerFactory);
 }

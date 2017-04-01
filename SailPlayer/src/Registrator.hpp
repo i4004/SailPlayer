@@ -8,15 +8,13 @@
 #include "Audio/Gst/GInit.hpp"
 #include "Audio/Gst/GPlugins.hpp"
 #include "Database/SailPlayerConnectionManager.hpp"
-#include "Playlists/PlaylistController.hpp"
 #include "Playlists/PlaylistFactory.hpp"
-#include "Playlists/PlaylistModel.hpp"
 #include "Playlists/PlaylistsController.hpp"
+#include "Playlists/PlaylistsControllerFactory.hpp"
 #include "Playlists/PlaylistsModel.hpp"
 #include "Playlists/PlaylistsRepository.hpp"
 #include "Settings/SailPlayerSettings.hpp"
 #include "State/SailPlayerState.hpp"
-#include "SailPlayerController.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
@@ -32,6 +30,8 @@ class Registrator : public QObject
 public:
 	Registrator();
 	~Registrator();
+
+	static void RegisterQmlTypes();
 
 	void ExposeComponentsToQml(QQuickView* view);
 
@@ -53,17 +53,13 @@ private:
 
 	// Playlists
 
-	PlaylistsModel _playlistsModel;
-	PlaylistModel _playlistModel;
 	PlaylistFactory* _playlistFactory;
 	PlaylistsRepository* _playlistsRepository;
-	PlaylistController* _playlistController;
-	PlaylistsController* _playlistsController;
+	PlaylistsControllerFactory* _playlistsControllerFactory;
 
 	SailPlayerState _state;
-	SailPlayerSettings _settings;
 
-	SailPlayerController* _sailPlayerController;
+	SailPlayerSettings _settings;
 };
 
 #endif // REGISTRATOR_HPP

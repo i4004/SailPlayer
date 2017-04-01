@@ -39,7 +39,6 @@ SOURCES += \
     src/Cue/CueSheetParser.cpp \
     src/Cue/CueSheetReader.cpp \
     src/Playlists/Playlist.cpp \
-    src/Playlists/PlaylistModel.cpp \
     src/Playlists/PlaylistsModel.cpp \
     src/Playlists/PlaylistsController.cpp \
     src/Playlists/PlaylistFactory.cpp \
@@ -47,13 +46,10 @@ SOURCES += \
     src/Database/SqlConnection.cpp \
     src/Database/SailPlayerConnectionManager.cpp \
     src/Database/SailPlayerConnection.cpp \
-    src/Playlists/PlaylistController.cpp \
     src/Registrator.cpp \
     src/State/SailPlayerState.cpp \
-    src/SailPlayerController.cpp \
-    src/State/StatefulController.cpp \
     src/Settings/SailPlayerSettings.cpp \
-    src/Settings/SettingsController.cpp
+    src/Playlists/PlaylistsControllerFactory.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -90,22 +86,17 @@ HEADERS += \
     src/Cue/CueSheetReader.hpp \
     src/Cue/CueTrackDataType.hpp \
     src/Tracks/ITracksFactory.hpp \
-    src/IO/IFilesFactory.hpp \
     src/Model/ListModel.hpp \
-    src/Playlists/PlaylistModel.hpp \
     src/Playlists/PlaylistsModel.hpp \
     src/Playlists/Playlist.hpp \
     src/Playlists/PlaylistsController.hpp \
-    src/Playlists/PlaylistFactory.hpp \
     src/Playlists/PlaylistsRepository.hpp \
     src/Database/SqlConnection.hpp \
     src/Database/SailPlayerConnectionManager.hpp \
     src/Database/SailPlayerConnection.hpp \
     src/Model/IdentityObject.hpp \
-    src/Playlists/PlaylistController.hpp \
     src/Registrator.hpp \
     src/State/SailPlayerState.hpp \
-    src/SailPlayerController.hpp \
-    src/State/StatefulController.hpp \
     src/Settings/SailPlayerSettings.hpp \
-    src/Settings/SettingsController.hpp
+    src/Playlists/PlaylistsControllerFactory.hpp \
+    src/Playlists/PlaylistFactory.hpp

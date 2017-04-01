@@ -1,6 +1,8 @@
 #ifndef PLAYLISTSCONTROLLER_H
 #define PLAYLISTSCONTROLLER_H
 
+#include <QObject>
+
 #include "PlaylistFactory.hpp"
 #include "PlaylistsModel.hpp"
 #include "PlaylistsRepository.hpp"
@@ -9,15 +11,21 @@ using namespace Model;
 
 namespace Playlists
 {
-	class PlaylistsController
+	class PlaylistsController : public QObject
 	{
-	public:
-		PlaylistsController(PlaylistsModel* model, PlaylistsRepository* repository, PlaylistFactory* factory);
+		Q_OBJECT
 
-		void CreatePlaylist(QString name);
-		Playlist* GetPlaylist(int id);
-		void RenamePlaylist(int id, QString name);
-		void DeletePlaylist(int id);
+	public:
+		PlaylistsController(PlaylistsRepository* repository, PlaylistFactory* factory);
+		~PlaylistsController();
+
+		Q_INVOKABLE void createPlaylist(QString name);
+//		Playlist* GetPlaylist(int id);
+		Q_INVOKABLE void renamePlaylist(int id, QString name);
+		Q_INVOKABLE void deletePlaylist(int id);
+		Q_INVOKABLE virtual void activatePlaylist(int id) { Q_UNUSED(id);}
+
+		Q_INVOKABLE QObject* getModel() { return _model; }
 
 	private:
 		PlaylistsModel* _model;

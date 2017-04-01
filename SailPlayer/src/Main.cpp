@@ -19,9 +19,13 @@ int main(int argc, char *argv[])
 	QScopedPointer<QQuickView> view(SailfishApp::createView());
 	QScopedPointer<Registrator> registrator(new Registrator());
 
+	// C++ binding with QML
+
+	Registrator::RegisterQmlTypes();
+	registrator->ExposeComponentsToQml(&(*view));
+
 	// Run
 
-	registrator->ExposeComponentsToQml(&(*view));
 	view->setSource(SailfishApp::pathTo("qml/Main.qml"));
 	view->show();
 

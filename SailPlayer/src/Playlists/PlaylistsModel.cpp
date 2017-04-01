@@ -1,11 +1,30 @@
 #include "PlaylistsModel.hpp"
 
+#include <QQmlEngine>
+
+#ifdef QT_DEBUG
+#include <QDebug>
+#endif
+
 namespace Playlists
 {
 	PlaylistsModel::PlaylistsModel(QObject* parent) : ListModel<Playlist>(parent)
 	{
+		QQmlEngine::setObjectOwnership(this, QQmlEngine::JavaScriptOwnership);
+
+		#ifdef QT_DEBUG
+		qDebug() << "Construction";
+		#endif
+
 		AddRole(IdRole, QByteArray("id"));
 		AddRole(NameRole, QByteArray("name"));
+	}
+
+	PlaylistsModel::~PlaylistsModel()
+	{
+		#ifdef QT_DEBUG
+		qDebug() << "Destruction";
+		#endif
 	}
 
 	QVariant PlaylistsModel::GetItemData(int role, Playlist* item) const

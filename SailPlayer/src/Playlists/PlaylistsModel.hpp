@@ -20,6 +20,7 @@ namespace Playlists
 
 	public:
 		PlaylistsModel(QObject* parent = 0);
+		~PlaylistsModel();
 
 		// Item control
 
