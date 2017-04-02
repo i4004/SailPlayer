@@ -8,6 +8,12 @@
 
 namespace Playlists
 {
+	enum PlaylistsModelRoles
+	{
+		IdRole = Qt::UserRole + 1,
+		NameRole = Qt::UserRole + 2
+	};
+
 	PlaylistsModel::PlaylistsModel(QObject* parent) : ListModel<Playlist>(parent)
 	{
 		QQmlEngine::setObjectOwnership(this, QQmlEngine::JavaScriptOwnership);

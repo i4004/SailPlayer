@@ -8,18 +8,12 @@ using namespace Model;
 
 namespace Playlists
 {
-	enum PlaylistsModelRoles
-	{
-		IdRole = Qt::UserRole + 1,
-		NameRole = Qt::UserRole + 2
-	};
-
 	class PlaylistsModel : public ListModel<Playlist>
 	{
 		Q_OBJECT
 
 	public:
-		PlaylistsModel(QObject* parent = 0);
+		PlaylistsModel(QObject* parent = nullptr);
 		~PlaylistsModel();
 
 		// Item control

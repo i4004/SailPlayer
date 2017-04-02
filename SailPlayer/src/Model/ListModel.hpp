@@ -9,7 +9,7 @@ namespace Model
 	class ListModel : public QAbstractListModel
 	{
 	public:
-		explicit ListModel(QObject* parent = 0) : QAbstractListModel(parent)
+		explicit ListModel(QObject* parent = nullptr) : QAbstractListModel(parent)
 		{
 			_rolesNames = QAbstractListModel::roleNames();
 		}
