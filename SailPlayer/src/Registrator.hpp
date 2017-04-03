@@ -8,6 +8,8 @@
 #include "Audio/Gst/GInit.hpp"
 #include "Audio/Gst/GPlugins.hpp"
 #include "Database/SailPlayerConnectionManager.hpp"
+#include "IO/FsRecordInfoFactory.hpp"
+#include "IO/FsRecordsListControllerFactory.hpp"
 #include "Playlists/PlaylistFactory.hpp"
 #include "Playlists/PlaylistsController.hpp"
 #include "Playlists/PlaylistsControllerFactory.hpp"
@@ -19,6 +21,7 @@
 using namespace Audio;
 using namespace Audio::Gst;
 using namespace Database;
+using namespace IO;
 using namespace Playlists;
 using namespace Settings;
 using namespace State;
@@ -54,6 +57,11 @@ private:
 
 	// State
 	SailPlayerState* _state;
+
+	// IO
+
+	FsRecordInfoFactory* _fsRecordInfoFactory;
+	FsRecordsListControllerFactory*	_fsRecordsListControllerFactory;
 
 	// Playlists
 

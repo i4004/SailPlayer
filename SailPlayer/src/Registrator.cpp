@@ -24,6 +24,11 @@ Registrator::Registrator()
 	// State
 	_state = SailPlayerStateFactory(_playlistsRepository, &_settings).Create();
 
+	// IO
+
+	_fsRecordInfoFactory = new FsRecordInfoFactory();
+	_fsRecordsListControllerFactory = new FsRecordsListControllerFactory(_fsRecordInfoFactory, _state, &_settings);
+
 	// Playlists
 
 	_playlistFactory = new PlaylistFactory();
@@ -36,6 +41,11 @@ Registrator::~Registrator()
 
 	delete _playlistsControllerFactory;
 	delete _playlistFactory;
+
+	// IO
+
+	delete _fsRecordsListControllerFactory;
+	delete _fsRecordInfoFactory;
 
 	// State
 	delete _state;
@@ -59,11 +69,12 @@ Registrator::~Registrator()
 
 void Registrator::RegisterQmlTypes()
 {
-	qmlRegisterUncreatableType<PlaylistsController>("harbour.sail.player.PlaylistsController", 1, 0, "PlaylistsController*", "PlaylistsController is uncreatable type");
 }
 
 void Registrator::ExposeComponentsToQml(QQuickView* view)
 {
 	view->rootContext()->setContextProperty("spState", _state);
+
+	view->rootContext()->setContextProperty("fsRecordsListControllerFactory", _fsRecordsListControllerFactory);
 	view->rootContext()->setContextProperty("playlistsControllerFactory", _playlistsControllerFactory);
 }

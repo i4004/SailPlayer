@@ -52,7 +52,13 @@ SOURCES += \
     src/Playlists/PlaylistsControllerFactory.cpp \
     src/Playlists/StatefulPlaylistsController.cpp \
     src/State/SailPlayerStateFactory.cpp \
-    src/Playlists/SettingsPlaylistsController.cpp
+    src/Playlists/SettingsPlaylistsController.cpp \
+    src/IO/FsRecordsListModel.cpp \
+    src/IO/FsRecordInfo.cpp \
+    src/IO/FsRecordsListController.cpp \
+    src/IO/FsRecordsListControllerFactory.cpp \
+    src/IO/FsRecordInfoFactory.cpp \
+    src/IO/FileHelper.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -106,4 +112,11 @@ HEADERS += \
     src/Playlists/PlaylistFactory.hpp \
     src/Playlists/StatefulPlaylistsController.hpp \
     src/State/SailPlayerStateFactory.hpp \
-    src/Playlists/SettingsPlaylistsController.hpp
+    src/Playlists/SettingsPlaylistsController.hpp \
+    src/IO/FsRecordsListModel.hpp \
+    src/IO/FsRecordInfo.hpp \
+    src/IO/FileType.hpp \
+    src/IO/FsRecordsListController.hpp \
+    src/IO/FsRecordsListControllerFactory.hpp \
+    src/IO/FsRecordInfoFactory.hpp \
+    src/IO/FileHelper.hpp

@@ -27,11 +27,32 @@ Page
 		}
 
 		PullDownMenu
-		{		
+		{
 			MenuItem
 			{
 				text: qsTr("Playlists")
 				onClicked: pageStack.push(Qt.resolvedUrl("PlaylistsPage.qml"))
+			}
+
+			MenuItem
+			{
+				text: qsTr("Add Folder")
+				enabled: spState.isPlaylistActive
+
+				onClicked:
+				{
+					var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/AddFolderDialog.qml"),
+							{
+								//fsHelper.exists(settings.lastAddFilesDirectoryPath)
+								//? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
+							});
+
+//					dialog.accepted.connect(function()
+//					{
+//						settings.lastAddFilesDirectoryPath = dialog.directoryPath;
+//						playlistController.addTracksFromPath(dialog.directoryPath);
+//					});
+				}
 			}
 		}
 
