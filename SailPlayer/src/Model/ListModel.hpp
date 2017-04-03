@@ -56,8 +56,12 @@ namespace Model
 
 		void DeleteItems()
 		{
+			beginResetModel();
+
 			while (!_items.isEmpty())
 				delete _items.takeFirst();
+
+			endResetModel();
 		}
 
 		// List View service methods
