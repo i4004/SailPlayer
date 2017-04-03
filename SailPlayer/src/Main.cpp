@@ -3,6 +3,11 @@
 
 #include "Registrator.hpp"
 
+void SetGlobalApplicationEncoding()
+{
+	QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+}
+
 void SetApplicationDescription()
 {
 	QCoreApplication::setOrganizationName("Alexander Krylkov");
@@ -11,6 +16,7 @@ void SetApplicationDescription()
 
 int main(int argc, char *argv[])
 {
+	SetGlobalApplicationEncoding();
 	SetApplicationDescription();
 
 	// Init
