@@ -2,7 +2,7 @@
 
 namespace IO
 {
-	FileType FileHelper::GetFileType(QString fileNameSuffix)
+	FileType FileHelper::GetFileType(const QString& fileNameSuffix)
 	{
 		QString suffix = fileNameSuffix.toLower();
 
@@ -52,7 +52,7 @@ namespace IO
 		return GetFileIconName(item.GetFileType());
 	}
 
-	QString FileHelper::GetFileIconName(FileType fileType)
+	QString FileHelper::GetFileIconName(const FileType& fileType)
 	{
 		switch (fileType)
 		{
@@ -76,5 +76,10 @@ namespace IO
 		}
 
 		return "file";
+	}
+
+	bool FileHelper::Exists(const QString& filePath)
+	{
+		return QFileInfo(filePath).exists();
 	}
 }

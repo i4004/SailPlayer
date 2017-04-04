@@ -9,9 +9,10 @@ namespace IO
 	class FileHelper
 	{
 	public:
-		static FileType GetFileType(QString fileName);
+		static FileType GetFileType(const QString& fileName);
 		static QString GetFsRecordIconName(const FsRecordInfo& item);
-		static QString GetFileIconName(FileType fileType);
+		static QString GetFileIconName(const FileType& fileType);
+		static bool Exists(const QString& filePath);
 	};
 }
 
