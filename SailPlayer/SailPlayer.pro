@@ -69,7 +69,7 @@ DISTFILES += \
     qml/pages/TrackInfoPage.qml \
     qml/dialogs/TextItemDialog.qml \
     qml/components/PlaylistsPlaylistItem.qml \
-    qml/dialogs/AddFolderDialog.qml
+    qml/dialogs/DirectorySelectionDialog.qml
 
 HEADERS += \
     src/Audio/AudioResource.hpp \

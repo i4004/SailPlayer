@@ -41,17 +41,17 @@ Page
 
 				onClicked:
 				{
-					var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/AddFolderDialog.qml"),
+					var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/DirectorySelectionDialog.qml"),
 							{
-								//fsHelper.exists(settings.lastAddFilesDirectoryPath)
-								//? settings.lastAddFilesDirectoryPath : settings.defaultAddFilesDirectoryPath
+								directoryPath: "/home/nemo"
+//								settings.lastAddFilesDirectoryPath
 							});
 
-//					dialog.accepted.connect(function()
-//					{
+					dialog.accepted.connect(function()
+					{
 //						settings.lastAddFilesDirectoryPath = dialog.directoryPath;
 //						playlistController.addTracksFromPath(dialog.directoryPath);
-//					});
+					});
 				}
 			}
 		}

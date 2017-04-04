@@ -5,6 +5,8 @@ Dialog
 {
 	allowedOrientations: Orientation.All
 
+	property string directoryPath: "";
+
 	SilicaListView
 	{
 		id: list
@@ -14,11 +16,16 @@ Dialog
 		header: DialogHeader
 		{
 			title: list.controller.directoryPath
-			acceptText: qsTr("Add")
+			acceptText: qsTr("Select")
 		}
 
 		property QtObject controller: fsRecordsListControllerFactory.create()
 		model: controller.getModel()
+
+		Component.onCompleted:
+		{
+			controller.directoryPath = directoryPath;
+		}
 
 		delegate: ListItem
 		{
@@ -67,5 +74,5 @@ Dialog
 		VerticalScrollDecorator { flickable: list }
 	}
 
-//	onAccepted: directoryPath = fsRecordsListModel.directoryPath
+	onAccepted: directoryPath = list.controller.directoryPath
 }
