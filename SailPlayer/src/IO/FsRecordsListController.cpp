@@ -1,5 +1,6 @@
 #include <QQmlEngine>
 
+#include "FileHelper.hpp"
 #include "FsRecordsListController.hpp"
 
 namespace IO
@@ -11,12 +12,15 @@ namespace IO
 
 		_model = new FsRecordsListModel(this);
 
-		SetDirectoryPath("/home/nemo");
+		SetDirectoryPath("/");
 	}
 
 	void FsRecordsListController::SetDirectoryPath(QString directoryPath)
 	{
 		if (directoryPath == _directoryPath)
+			return;
+
+		if(!FileHelper::Exists(directoryPath))
 			return;
 
 		_directoryPath = PreprocessDirectoryPath(directoryPath);
