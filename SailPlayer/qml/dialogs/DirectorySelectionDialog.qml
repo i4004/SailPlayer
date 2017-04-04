@@ -62,6 +62,7 @@ Dialog
 
 				text: name
 				wrapMode: Text.WordWrap
+				truncationMode: TruncationMode.Fade
 			}
 
 			onClicked:
