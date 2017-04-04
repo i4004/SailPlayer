@@ -55,6 +55,9 @@ Page
 			}
 		}
 
+		property QtObject controller: playlistControllerFactory.create()
+		model: controller.getModel()
+
 		ViewPlaceholder
 		{
 			enabled: listView.count == 0 && spState.isPlaylistActive

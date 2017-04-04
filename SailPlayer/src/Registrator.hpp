@@ -10,6 +10,7 @@
 #include "Database/SailPlayerConnectionManager.hpp"
 #include "IO/DirectorySelectionControllerFactory.hpp"
 #include "IO/FsRecordInfoFactory.hpp"
+#include "Playlists/PlaylistControllerFactory.hpp"
 #include "Playlists/PlaylistFactory.hpp"
 #include "Playlists/PlaylistsController.hpp"
 #include "Playlists/PlaylistsControllerFactory.hpp"
@@ -65,6 +66,7 @@ private:
 
 	// Playlists
 
+	PlaylistControllerFactory* _playlistControllerFactory;
 	PlaylistFactory* _playlistFactory;
 	PlaylistsControllerFactory* _playlistsControllerFactory;
 
