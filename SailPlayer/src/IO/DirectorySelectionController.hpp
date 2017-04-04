@@ -1,18 +1,18 @@
-#ifndef FSRECORDSLISTCONTROLLER_H
-#define FSRECORDSLISTCONTROLLER_H
+#ifndef DIRECTORYSELECTIONCONTROLLER_HPP
+#define DIRECTORYSELECTIONCONTROLLER_HPP
 
 #include "FsRecordInfoFactory.hpp"
 #include "FsRecordsListModel.hpp"
 
 namespace IO
 {
-	class FsRecordsListController : public QObject
+	class DirectorySelectionController : public QObject
 	{
 		Q_OBJECT
 		Q_PROPERTY(QString directoryPath READ GetDirectoryPath() WRITE SetDirectoryPath(QString) NOTIFY DirectoryPathChanged())
 
 	public:
-		FsRecordsListController(FsRecordInfoFactory* recordFactory);
+		DirectorySelectionController(FsRecordInfoFactory* recordFactory);
 
 		inline QString GetDirectoryPath() const { return _directoryPath; }
 		virtual void SetDirectoryPath(QString directoryPath);
@@ -32,4 +32,4 @@ namespace IO
 
 	};
 }
-#endif // FSRECORDSLISTCONTROLLER_H
+#endif // DIRECTORYSELECTIONCONTROLLER_HPP

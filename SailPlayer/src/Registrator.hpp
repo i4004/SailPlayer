@@ -8,8 +8,8 @@
 #include "Audio/Gst/GInit.hpp"
 #include "Audio/Gst/GPlugins.hpp"
 #include "Database/SailPlayerConnectionManager.hpp"
+#include "IO/DirectorySelectionControllerFactory.hpp"
 #include "IO/FsRecordInfoFactory.hpp"
-#include "IO/FsRecordsListControllerFactory.hpp"
 #include "Playlists/PlaylistFactory.hpp"
 #include "Playlists/PlaylistsController.hpp"
 #include "Playlists/PlaylistsControllerFactory.hpp"
@@ -61,7 +61,7 @@ private:
 	// IO
 
 	FsRecordInfoFactory* _fsRecordInfoFactory;
-	FsRecordsListControllerFactory*	_fsRecordsListControllerFactory;
+	DirectorySelectionControllerFactory* _directorySelectionControllerFactory;
 
 	// Playlists
 

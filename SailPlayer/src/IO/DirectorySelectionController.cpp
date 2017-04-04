@@ -1,11 +1,11 @@
 #include <QQmlEngine>
 
 #include "FileHelper.hpp"
-#include "FsRecordsListController.hpp"
+#include "DirectorySelectionController.hpp"
 
 namespace IO
 {
-	FsRecordsListController::FsRecordsListController(FsRecordInfoFactory* recordFactory)
+	DirectorySelectionController::DirectorySelectionController(FsRecordInfoFactory* recordFactory)
 		: _recordFactory(recordFactory)
 	{
 		QQmlEngine::setObjectOwnership(this, QQmlEngine::JavaScriptOwnership);
@@ -15,7 +15,7 @@ namespace IO
 		SetDirectoryPath("/");
 	}
 
-	void FsRecordsListController::SetDirectoryPath(QString directoryPath)
+	void DirectorySelectionController::SetDirectoryPath(QString directoryPath)
 	{
 		if (directoryPath == _directoryPath)
 			return;
@@ -32,7 +32,7 @@ namespace IO
 		emit DirectoryPathChanged();
 	}
 
-	QString FsRecordsListController::PreprocessDirectoryPath(QString directoryPath)
+	QString DirectorySelectionController::PreprocessDirectoryPath(QString directoryPath)
 	{
 		// Processing ".." file name to correctly handle directory-up functionality
 		if(directoryPath.endsWith("/.."))

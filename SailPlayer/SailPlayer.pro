@@ -55,10 +55,10 @@ SOURCES += \
     src/Playlists/SettingsPlaylistsController.cpp \
     src/IO/FsRecordsListModel.cpp \
     src/IO/FsRecordInfo.cpp \
-    src/IO/FsRecordsListController.cpp \
-    src/IO/FsRecordsListControllerFactory.cpp \
     src/IO/FsRecordInfoFactory.cpp \
-    src/IO/FileHelper.cpp
+    src/IO/FileHelper.cpp \
+    src/IO/DirectorySelectionController.cpp \
+    src/IO/DirectorySelectionControllerFactory.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -116,7 +116,7 @@ HEADERS += \
     src/IO/FsRecordsListModel.hpp \
     src/IO/FsRecordInfo.hpp \
     src/IO/FileType.hpp \
-    src/IO/FsRecordsListController.hpp \
-    src/IO/FsRecordsListControllerFactory.hpp \
     src/IO/FsRecordInfoFactory.hpp \
-    src/IO/FileHelper.hpp
+    src/IO/FileHelper.hpp \
+    src/IO/DirectorySelectionController.hpp \
+    src/IO/DirectorySelectionControllerFactory.hpp

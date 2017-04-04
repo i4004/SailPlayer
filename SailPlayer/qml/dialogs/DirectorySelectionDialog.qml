@@ -19,7 +19,7 @@ Dialog
 			acceptText: qsTr("Select")
 		}
 
-		property QtObject controller: fsRecordsListControllerFactory.create()
+		property QtObject controller: directorySelectionControllerFactory.create()
 		model: controller.getModel()
 
 		Component.onCompleted:

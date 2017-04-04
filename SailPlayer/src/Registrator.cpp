@@ -27,7 +27,7 @@ Registrator::Registrator()
 	// IO
 
 	_fsRecordInfoFactory = new FsRecordInfoFactory();
-	_fsRecordsListControllerFactory = new FsRecordsListControllerFactory(_fsRecordInfoFactory, _state, &_settings);
+	_directorySelectionControllerFactory = new DirectorySelectionControllerFactory(_fsRecordInfoFactory, _state, &_settings);
 
 	// Playlists
 
@@ -44,7 +44,7 @@ Registrator::~Registrator()
 
 	// IO
 
-	delete _fsRecordsListControllerFactory;
+	delete _directorySelectionControllerFactory;
 	delete _fsRecordInfoFactory;
 
 	// State
@@ -75,6 +75,6 @@ void Registrator::ExposeComponentsToQml(QQuickView* view)
 {
 	view->rootContext()->setContextProperty("spState", _state);
 
-	view->rootContext()->setContextProperty("fsRecordsListControllerFactory", _fsRecordsListControllerFactory);
+	view->rootContext()->setContextProperty("directorySelectionControllerFactory", _directorySelectionControllerFactory);
 	view->rootContext()->setContextProperty("playlistsControllerFactory", _playlistsControllerFactory);
 }

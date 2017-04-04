@@ -1,5 +1,5 @@
-#ifndef FSRECORDSLISTCONTROLLERFACTORY_H
-#define FSRECORDSLISTCONTROLLERFACTORY_H
+#ifndef DIRECTORYSELECTIONCONTROLLERFACTORY_HPP
+#define DIRECTORYSELECTIONCONTROLLERFACTORY_HPP
 
 #include <QObject>
 
@@ -12,12 +12,12 @@ using namespace State;
 
 namespace IO
 {
-	class FsRecordsListControllerFactory : public QObject
+	class DirectorySelectionControllerFactory : public QObject
 	{
 		 Q_OBJECT
 
 	public:
-		FsRecordsListControllerFactory(FsRecordInfoFactory* recordFactory, SailPlayerState* state, SailPlayerSettings* settings);
+		DirectorySelectionControllerFactory(FsRecordInfoFactory* recordFactory, SailPlayerState* state, SailPlayerSettings* settings);
 
 		Q_INVOKABLE QObject* create();
 
@@ -27,4 +27,4 @@ namespace IO
 		SailPlayerSettings* _settings;
 	};
 }
-#endif // FSRECORDSLISTCONTROLLERFACTORY_H
+#endif // DIRECTORYSELECTIONCONTROLLERFACTORY_HPP
