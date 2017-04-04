@@ -13,11 +13,11 @@ namespace Playlists
 	{
 	public:
 		Playlist();
-		Playlist(int id, QString name);
+		Playlist(int id, const QString& name);
 		Playlist(Playlist& playlist);
 
 		inline QString GetName() { return _name; }
-		inline void SetName(QString name) { _name =  name; }
+		inline void SetName(const QString& name) { _name =  name; }
 
 	private:
 		QString _name;

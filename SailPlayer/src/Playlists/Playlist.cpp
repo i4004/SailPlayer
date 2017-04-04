@@ -7,7 +7,7 @@ namespace Playlists
 	{
 	}
 
-	Playlist::Playlist(int id, QString name)
+	Playlist::Playlist(int id, const QString& name)
 		: IdentityObject(id), _name(name)
 	{
 	}
