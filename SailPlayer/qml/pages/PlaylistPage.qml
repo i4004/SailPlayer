@@ -43,13 +43,12 @@ Page
 				{
 					var dialog = pageStack.push(Qt.resolvedUrl("../dialogs/DirectorySelectionDialog.qml"),
 							{
-								directoryPath: "/home/nemo"
-//								settings.lastAddFilesDirectoryPath
+								directoryPath: settings.lastDirectorySelectionPath
 							});
 
 					dialog.accepted.connect(function()
 					{
-//						settings.lastAddFilesDirectoryPath = dialog.directoryPath;
+						settings.lastDirectorySelectionPath = dialog.directoryPath;
 //						playlistController.addTracksFromPath(dialog.directoryPath);
 					});
 				}

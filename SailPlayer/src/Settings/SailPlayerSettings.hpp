@@ -5,15 +5,24 @@
 
 namespace Settings
 {
-	class SailPlayerSettings
+	class SailPlayerSettings : public QObject
 	{
-	public:
-		SailPlayerSettings();
+		Q_OBJECT
+		Q_PROPERTY(QString lastDirectorySelectionPath READ GetLastDirectorySelectionPath WRITE SetLastDirectorySelectionPath NOTIFY LastDirectorySelectionPathChanged)
 
+	public:
 		int GetActivePlaylistID();
 		void SetActivePlaylistID(int id = -1);
 
+		QString GetLastDirectorySelectionPath();
+		void SetLastDirectorySelectionPath(const QString& value);
+
+	signals:
+		void LastDirectorySelectionPathChanged();
+
 	private:
+		static QString DefaultLastDirectorySelectionPath;
+
 		QSettings settings;
 	};
 }

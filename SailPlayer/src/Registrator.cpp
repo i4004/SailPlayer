@@ -73,6 +73,7 @@ void Registrator::RegisterQmlTypes()
 
 void Registrator::ExposeComponentsToQml(QQuickView* view)
 {
+	view->rootContext()->setContextProperty("settings", &_settings);
 	view->rootContext()->setContextProperty("spState", _state);
 
 	view->rootContext()->setContextProperty("directorySelectionControllerFactory", _directorySelectionControllerFactory);
