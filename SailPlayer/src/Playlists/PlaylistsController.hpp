@@ -7,8 +7,6 @@
 #include "PlaylistsModel.hpp"
 #include "PlaylistsRepository.hpp"
 
-using namespace Model;
-
 namespace Playlists
 {
 	class PlaylistsController : public QObject
