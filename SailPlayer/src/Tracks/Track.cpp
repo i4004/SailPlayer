@@ -2,16 +2,18 @@
 
 namespace Tracks
 {
-	Track::Track(QString artistName,
-				 QString albumName,
+	Track::Track(int id,
+				 const QString& artistName,
+				 const QString& albumName,
 				 int albumYear,
 				 int number,
-				 QString name,
+				 const QString& name,
 				 int startPosition,
 				 int endPosition,
-				 QString fileName,
-				 QString fullFilePath)
-		: _artistName(artistName),
+				 const QString& fileName,
+				 const QString& fullFilePath)
+		: IdentityObject(id),
+		  _artistName(artistName),
 		  _albumName(albumName),
 		  _albumYear(albumYear),
 		  _number(number),
@@ -21,23 +23,19 @@ namespace Tracks
 		  _fileName(fileName),
 		  _fullFilePath(fullFilePath)
 	{
-//		_isTrackToPlay = false;
-//		_playing = false;
 	}
 
 	Track::Track(Track& track)
+		: IdentityObject(track),
+		  _artistName(track.GetArtistName()),
+		  _albumName(track.GetAlbumName()),
+		  _albumYear(track.GetAlbumYear()),
+		  _number(track.GetNumber()),
+		  _name(track.GetName()),
+		  _startPosition(track.GetStartPosition()),
+		  _endPosition(track.GetEndPosition()),
+		  _fileName(track.GetFileName()),
+		  _fullFilePath(track.GetFullFilePath())
 	{
-//		_isTrackToPlay = false;
-//		_playing = false;
-
-		_artistName = track.GetArtistName();
-		_albumName = track.GetAlbumName();
-		_albumYear = track.GetAlbumYear();
-		_number = track.GetNumber();
-		_name = track.GetName();
-		_startPosition = track.GetStartPosition();
-		_endPosition = track.GetEndPosition();
-		_fileName = track.GetFileName();
-		_fullFilePath = track.GetFullFilePath();
 	}
 }

@@ -3,20 +3,25 @@
 
 #include <QString>
 
+#include "../Model/IdentityObject.hpp"
+
+using namespace Model;
+
 namespace Tracks
 {
-	class Track
+	class Track : public IdentityObject
 	{
 	public:
-		Track(QString artistName,
-			  QString albumName,
+		Track(int id,
+			  const QString& artistName,
+			  const QString& albumName,
 			  int albumYear,
 			  int number,
-			  QString name,
+			  const QString& name,
 			  int startPosition /* msec */,
 			  int endPosition /* msec */,
-			  QString fileName,
-			  QString fullFilePath);
+			  const QString& fileName,
+			  const QString& fullFilePath);
 
 		Track(Track& track);
 
@@ -30,16 +35,8 @@ namespace Tracks
 		QString GetFileName() { return _fileName; }
 		QString GetFullFilePath() { return _fullFilePath; }
 
-//		void SetEndPosition(int endPosition) { _endPosition = endPosition; }
-
 		// Track duration in msec
 		int GetDuration() { return _endPosition - _startPosition; }
-
-//		bool IsTrackToPlay(){ return _isTrackToPlay; }
-//		void SetAsTrackToPlay(bool isTrackToPlay){ _isTrackToPlay = isTrackToPlay; }
-
-//		bool IsPlaying(){ return _playing; }
-//		void SetPlaying(bool playing){ _playing = playing; }
 
 	private:
 		QString _artistName;
@@ -51,9 +48,6 @@ namespace Tracks
 		int _endPosition;
 		QString _fileName;
 		QString _fullFilePath;
-
-//		bool _isTrackToPlay;
-//		bool _playing;
 	};
 }
 
