@@ -45,13 +45,14 @@ namespace Model
 		const QList<T*> GetItems() { return _items; }
 		virtual QVariant GetItemData(int role, T* item) const = 0;
 
-		void DeleteItem(int i)
+		void RefreshItem(T* item)
 		{
-			beginRemoveRows(QModelIndex(), i, i);
+			RefreshItem(GetItemIndex(item));
+		}
 
-			delete _items.takeAt(i);
-
-			endRemoveRows();
+		void DeleteItem(T* item)
+		{
+			DeleteItem(GetItemIndex(item));
 		}
 
 		void DeleteItems()
@@ -94,6 +95,15 @@ namespace Model
 		void RefreshItem(int itemIndex)
 		{
 			emit dataChanged(index(itemIndex) , index(itemIndex));
+		}
+
+		void DeleteItem(int itemIndex)
+		{
+			beginRemoveRows(QModelIndex(), itemIndex, itemIndex);
+
+			delete _items.takeAt(itemIndex);
+
+			endRemoveRows();
 		}
 
 		// Roles control
