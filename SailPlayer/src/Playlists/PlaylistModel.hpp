@@ -16,6 +16,7 @@ namespace Playlists
 	public:
 		PlaylistModel(QObject* parent = nullptr);
 
+		// Service methods
 		QVariant GetItemData(int role, Track* item) const;
 
 	private:
