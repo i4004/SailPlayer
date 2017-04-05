@@ -16,14 +16,14 @@ namespace Playlists
 	public:
 		PlaylistsRepository(SqlConnection* connection, PlaylistFactory* factory);
 
-		int AddItem(QString name);
+		int AddItem(Playlist* item);
 
 		Playlist* GetItem(int id);
 		QList<Playlist*> GetItems();
 
-		bool UpdateItem(int id, QString name);
+		bool UpdateItem(Playlist* item);
 
-		bool DeleteItem(int id);
+		bool DeleteItem(Playlist* item);
 
 	private:
 		static QString TableName;

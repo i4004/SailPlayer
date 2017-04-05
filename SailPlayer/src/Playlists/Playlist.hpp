@@ -13,7 +13,6 @@ namespace Playlists
 	{
 	public:
 		Playlist();
-		Playlist(int id, const QString& name);
 		Playlist(Playlist& playlist);
 
 		inline QString GetName() { return _name; }

@@ -7,11 +7,6 @@ namespace Playlists
 	{
 	}
 
-	Playlist::Playlist(int id, const QString& name)
-		: IdentityObject(id), _name(name)
-	{
-	}
-
 	Playlist::Playlist(Playlist& playlist)
 		: IdentityObject(playlist), _name(playlist.GetName())
 	{

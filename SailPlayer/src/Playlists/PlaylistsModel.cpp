@@ -50,30 +50,6 @@ namespace Playlists
 		}
 	}
 
-	void PlaylistsModel::RenameItem(int id, QString name)
-	{
-		Playlist* item = GetItem(id);
-
-		if (!item)
-			return;
-
-		item->SetName(name);
-
-		RefreshItem(GetItemIndex(item));
-	}
-
-	bool PlaylistsModel::DeleteItemByID(int id)
-	{
-		Playlist* item = GetItem(id);
-
-		if (!item)
-			return false;
-
-		DeleteItem(GetItemIndex(item));
-
-		return true;
-	}
-
 	Playlist* PlaylistsModel::GetItem(int id)
 	{
 		foreach (Playlist* item, GetItems())

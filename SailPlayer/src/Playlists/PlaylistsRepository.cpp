@@ -12,10 +12,16 @@ namespace Playlists
 	{
 	}
 
-	int PlaylistsRepository::AddItem(QString name)
+	int PlaylistsRepository::AddItem(Playlist* item)
 	{
-		if(_connection->ExecuteQuery(QString("INSERT INTO %1 VALUES(NULL,'%2')").arg(TableName).arg(name)))
-			return _connection->GetLastQuery().lastInsertId().toInt();
+		if(_connection->ExecuteQuery(QString("INSERT INTO %1 VALUES(NULL,'%2')").arg(TableName).arg(item->GetName())))
+		{
+			int id = _connection->GetLastQuery().lastInsertId().toInt();
+
+			item->SetID(id);
+
+			return id;
+		}
 		else
 			return -1;
 	}
@@ -54,14 +60,14 @@ namespace Playlists
 		return items;
 	}
 
-	bool PlaylistsRepository::UpdateItem(int id, QString name)
+	bool PlaylistsRepository::UpdateItem(Playlist* item)
 	{
-		return _connection->ExecuteQuery(QString("UPDATE %1 SET Name = '%3' WHERE ID = %2").arg(TableName).arg(id).arg(name));
+		return _connection->ExecuteQuery(QString("UPDATE %1 SET Name = '%3' WHERE ID = %2").arg(TableName).arg(item->GetID()).arg(item->GetName()));
 	}
 
-	bool PlaylistsRepository::DeleteItem(int id)
+	bool PlaylistsRepository::DeleteItem(Playlist* item)
 	{
-		return _connection->ExecuteQuery(QString("DELETE FROM %1 WHERE ID = %2").arg(TableName).arg(id));
+		return _connection->ExecuteQuery(QString("DELETE FROM %1 WHERE ID = %2").arg(TableName).arg(item->GetID()));
 	}
 }
 

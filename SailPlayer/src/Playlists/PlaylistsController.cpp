@@ -31,18 +31,28 @@ namespace Playlists
 
 	void PlaylistsController::createPlaylist(QString name)
 	{
-		_model->AddItem(_factory->Create(_repository->AddItem(name), name));
+		Playlist* item = _factory->Create(name);
+
+		_repository->AddItem(item);
+
+		_model->AddItem(item);
 	}
 
 	void PlaylistsController::renamePlaylist(int id, QString name)
 	{
-		_repository->UpdateItem(id, name);
-		_model->RenameItem(id, name);
+		Playlist* item = _model->GetItem(id);
+
+		item->SetName(name);
+
+		_repository->UpdateItem(item);
+		_model->RefreshItem(item);
 	}
 
 	void PlaylistsController::deletePlaylist(int id)
 	{
-		_repository->DeleteItem(id);
-		_model->DeleteItemByID(id);
+		Playlist* item = _model->GetItem(id);
+
+		_repository->DeleteItem(item);
+		_model->DeleteItem(item);
 	}
 }

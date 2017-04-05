@@ -20,8 +20,6 @@ namespace Playlists
 
 		Playlist* GetItem(int id);
 
-		void RenameItem(int id, QString name);
-
 		bool DeleteItemByID(int id);
 
 		// Service methods
