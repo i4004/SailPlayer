@@ -54,7 +54,15 @@ namespace Database
 			"("
 			"ID INTEGER PRIMARY KEY AUTOINCREMENT,"
 			"PlaylistID INTEGER,"\
+			"ArtistName TEXT,"
+			"AlbumName TEXT,"
+			"AlbumYear INTEGER,"
+			"Number INTEGER,"
 			"Name TEXT,"
+			"StartPosition INTEGER,"
+			"EndPosition INTEGER,"
+			"FileName TEXT,"
+			"FullFilePath TEXT,"
 			"FOREIGN KEY(PlaylistID) REFERENCES Playlists(ID)"
 			");";
 
