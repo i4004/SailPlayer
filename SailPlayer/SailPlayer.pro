@@ -61,7 +61,8 @@ SOURCES += \
     src/IO/DirectorySelectionControllerFactory.cpp \
     src/Playlists/PlaylistModel.cpp \
     src/Playlists/PlaylistController.cpp \
-    src/Playlists/PlaylistControllerFactory.cpp
+    src/Playlists/PlaylistControllerFactory.cpp \
+    src/Tracks/TrackFactory.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -125,4 +126,5 @@ HEADERS += \
     src/IO/DirectorySelectionControllerFactory.hpp \
     src/Playlists/PlaylistModel.hpp \
     src/Playlists/PlaylistController.hpp \
-    src/Playlists/PlaylistControllerFactory.hpp
+    src/Playlists/PlaylistControllerFactory.hpp \
+    src/Tracks/TrackFactory.hpp
