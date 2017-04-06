@@ -63,7 +63,8 @@ SOURCES += \
     src/Playlists/PlaylistController.cpp \
     src/Playlists/PlaylistControllerFactory.cpp \
     src/Tracks/TrackFactory.cpp \
-    src/Tracks/TracksRepository.cpp
+    src/Tracks/TracksRepository.cpp \
+    src/IO/AudioFsRecordInfoFactory.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -128,4 +129,5 @@ HEADERS += \
     src/Playlists/PlaylistController.hpp \
     src/Playlists/PlaylistControllerFactory.hpp \
     src/Tracks/TrackFactory.hpp \
-    src/Tracks/TracksRepository.hpp
+    src/Tracks/TracksRepository.hpp \
+    src/IO/AudioFsRecordInfoFactory.hpp
