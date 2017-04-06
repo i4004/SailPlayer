@@ -8,9 +8,7 @@ namespace IO
 		NameRole = Qt::UserRole + 1,
 		IsDirectoryRole = Qt::UserRole + 2,
 		FilePathRole = Qt::UserRole + 3,
-		IconNameRole = Qt::UserRole + 4,
-//		AbsolutePathRole = Qt::UserRole + 5,
-//		DirPathRole = Qt::UserRole + 6
+		IconNameRole = Qt::UserRole + 4
 	};
 
 	FsRecordsListModel::FsRecordsListModel(QObject *parent) : ListModel<FsRecordInfo>(parent)
@@ -19,9 +17,6 @@ namespace IO
 		AddRole(IsDirectoryRole, QByteArray("isDirectory"));
 		AddRole(FilePathRole, QByteArray("filePath"));
 		AddRole(IconNameRole, QByteArray("iconName"));
-
-//		_rolesNames.insert(AbsolutePathRole, QByteArray("absolutePath"));
-//		_rolesNames.insert(DirPathRole, QByteArray("dirPath"));
 	}
 
 	FsRecordsListModel::~FsRecordsListModel()
