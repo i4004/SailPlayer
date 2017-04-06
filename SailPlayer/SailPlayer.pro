@@ -64,7 +64,11 @@ SOURCES += \
     src/Playlists/PlaylistControllerFactory.cpp \
     src/Tracks/TrackFactory.cpp \
     src/Tracks/TracksRepository.cpp \
-    src/IO/AudioFsRecordInfoFactory.cpp
+    src/IO/AudioFsRecordInfoFactory.cpp \
+    src/Tracks/FsTracksLoader.cpp \
+    src/Tracks/CueTracksLoader.cpp \
+    src/Tracks/ITracksLoader.cpp \
+    src/Tracks/FsTracksLoaderFactory.cpp
 
 DISTFILES += \
     qml/pages/PlaylistPage.qml \
@@ -131,4 +135,7 @@ HEADERS += \
     src/Tracks/TrackFactory.hpp \
     src/Tracks/TracksRepository.hpp \
     src/IO/AudioFsRecordInfoFactory.hpp \
-    src/Tracks/ITracksLoader.hpp
+    src/Tracks/ITracksLoader.hpp \
+    src/Tracks/FsTracksLoader.hpp \
+    src/Tracks/CueTracksLoader.hpp \
+    src/Tracks/FsTracksLoaderFactory.hpp

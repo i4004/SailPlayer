@@ -18,6 +18,7 @@
 #include "Playlists/PlaylistsRepository.hpp"
 #include "Settings/SailPlayerSettings.hpp"
 #include "State/SailPlayerState.hpp"
+#include "Tracks/FsTracksLoaderFactory.hpp"
 
 using namespace Audio;
 using namespace Audio::Gst;
@@ -63,6 +64,9 @@ private:
 
 	FsRecordInfoFactory* _fsRecordInfoFactory;
 	DirectorySelectionControllerFactory* _directorySelectionControllerFactory;
+
+	// Tracks
+	FsTracksLoaderFactory* _fsTracksLoaderFactory;
 
 	// Playlists
 

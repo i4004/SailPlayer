@@ -48,8 +48,12 @@ Page
 
 					dialog.accepted.connect(function()
 					{
+						var loader = fsTracksLoaderFactory.create();
+						loader.setDirectoryPath(dialog.directoryPath);
+
+						listView.controller.loadTracks(loader);
+
 						settings.lastDirectorySelectionPath = dialog.directoryPath;
-//						playlistController.addTracksFromPath(dialog.directoryPath);
 					});
 				}
 			}

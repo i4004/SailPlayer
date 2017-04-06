@@ -1,6 +1,7 @@
 #ifndef PLAYLISTCONTROLLER_H
 #define PLAYLISTCONTROLLER_H
 
+#include "../Tracks/ITracksLoader.hpp"
 #include "PlaylistModel.hpp"
 
 namespace Playlists
@@ -12,6 +13,7 @@ namespace Playlists
 	public:
 		PlaylistController();
 
+		Q_INVOKABLE void loadTracks(ITracksLoader* loader);
 		Q_INVOKABLE QObject* getModel() { return _model; }
 
 	private:

@@ -10,4 +10,9 @@ namespace Playlists
 
 		_model = new PlaylistModel(this);
 	}
+
+	void PlaylistController::loadTracks(ITracksLoader* loader)
+	{
+		_model->AddItems(loader->Build());
+	}
 }
