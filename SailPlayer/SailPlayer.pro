@@ -130,4 +130,5 @@ HEADERS += \
     src/Playlists/PlaylistControllerFactory.hpp \
     src/Tracks/TrackFactory.hpp \
     src/Tracks/TracksRepository.hpp \
-    src/IO/AudioFsRecordInfoFactory.hpp
+    src/IO/AudioFsRecordInfoFactory.hpp \
+    src/Tracks/ITracksLoader.hpp
