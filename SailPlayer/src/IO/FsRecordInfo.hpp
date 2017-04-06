@@ -16,8 +16,6 @@ namespace IO
 		inline bool IsDirectory() const { return _fileInfo.isDir(); }
 		inline QString GetFilePath() const { return _fileInfo.filePath(); }
 		FileType GetFileType() const { return _fileType; }
-//		QString GetAbsolutePath() const { return _fileInfo.absolutePath(); }
-//		QString GetDirPath() const;
 
 	private:
 		QFileInfo _fileInfo;

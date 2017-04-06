@@ -7,14 +7,4 @@ namespace IO
 	{
 		_fileType = FileHelper::GetFileType(fileInfo.suffix());
 	}
-
-//	QString FsRecordInfo::GetDirPath() const
-//	{
-//		QString path = _fileInfo.absolutePath();
-
-//		if(!path.endsWith("/"))
-//			path += "/";
-
-//		return path + _fileInfo.fileName();
-//	}
 }
