@@ -100,7 +100,6 @@ HEADERS += \
     src/Cue/CueSheetParser.hpp \
     src/Cue/CueSheetReader.hpp \
     src/Cue/CueTrackDataType.hpp \
-    src/Tracks/ITracksFactory.hpp \
     src/Model/ListModel.hpp \
     src/Playlists/PlaylistsModel.hpp \
     src/Playlists/Playlist.hpp \
