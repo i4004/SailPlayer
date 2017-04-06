@@ -10,8 +10,9 @@ namespace IO
 	public:
 		virtual ~FsRecordInfoFactory() {}
 
-		virtual FsRecordInfo* Create(QString fileName);
-		virtual QList<FsRecordInfo*> CreateList(QString directoryPath);
+		virtual FsRecordInfo* Create(const QFileInfo& fileInfo);
+		virtual FsRecordInfo* Create(const QString& fileName);
+		virtual QList<FsRecordInfo*> CreateList(const QString& directoryPath);
 	};
 }
 

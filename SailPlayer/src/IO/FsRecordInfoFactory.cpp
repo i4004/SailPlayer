@@ -4,12 +4,17 @@
 
 namespace IO
 {
-	FsRecordInfo* FsRecordInfoFactory::Create(QString name)
+	FsRecordInfo* FsRecordInfoFactory::Create(const QFileInfo& fileInfo)
 	{
-		return new FsRecordInfo(QFileInfo(name));
+		return new FsRecordInfo(fileInfo);
 	}
 
-	QList<FsRecordInfo*> FsRecordInfoFactory::CreateList(QString directoryPath)
+	FsRecordInfo* FsRecordInfoFactory::Create(const QString& name)
+	{
+		return Create(QFileInfo(name));
+	}
+
+	QList<FsRecordInfo*> FsRecordInfoFactory::CreateList(const QString& directoryPath)
 	{
 		QList<FsRecordInfo*> items;
 		QDir directory(directoryPath);
