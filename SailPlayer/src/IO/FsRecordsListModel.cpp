@@ -19,10 +19,6 @@ namespace IO
 		AddRole(IconNameRole, QByteArray("iconName"));
 	}
 
-	FsRecordsListModel::~FsRecordsListModel()
-	{
-	}
-
 	QVariant FsRecordsListModel::GetItemData(int role, FsRecordInfo* item) const
 	{
 		switch (role)

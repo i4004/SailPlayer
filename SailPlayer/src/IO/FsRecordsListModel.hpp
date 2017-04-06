@@ -14,7 +14,6 @@ namespace IO
 
 	public:
 		explicit FsRecordsListModel(QObject *parent = nullptr);
-		~FsRecordsListModel();
 
 		// Service methods
 		QVariant GetItemData(int role, FsRecordInfo* item) const;
